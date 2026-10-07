@@ -1,0 +1,7 @@
+# Tài liệu nội bộ (bản nháp gốc, MasterPlan): không đưa lên repo công khai
+ai-advanced/document/
+
+# File hệ thống
+Thumbs.db
+desktop.ini
+.DS_Store

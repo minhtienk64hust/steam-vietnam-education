@@ -1,0 +1,9 @@
+{
+  "name": "khao-thi-ngu-van-9",
+  "displayName": "Khảo thí Ngữ văn 9",
+  "version": "2.0.0",
+  "description": "Agent Trợ lý Khảo thí của Tổ Ngữ văn 9 điều phối soạn đề: chia đề cho Sub-agent soan-phan-de soạn song song, giao Sub-agent tham-dinh-de-kiem-tra thẩm định độc lập, soạn hướng dẫn chấm; kèm Skill thẩm định câu hỏi. Mọi kết quả là bản nháp để giáo viên duyệt.",
+  "author": {
+    "name": "Tổ chuyên môn Ngữ văn 9"
+  }
+}
