@@ -1,0 +1,427 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LO 5.1 · Biến giáo án thành bài giảng điện tử có trắc nghiệm</title>
+<link rel="stylesheet" href="assets/css/deck.css">
+<link rel="stylesheet" href="assets/css/story.css">
+<link rel="stylesheet" href="assets/css/v3.css">
+<link rel="stylesheet" href="assets/css/v3-m6.css">
+<link rel="stylesheet" href="assets/css/v4.css">
+</head>
+<body class="v3 v4" data-deck="LO 5.1" data-deck-title="Biến giáo án thành bài giảng điện tử có trắc nghiệm" data-home="index.html">
+<main class="deck"><div class="stage">
+
+<section class="slide s-cover" data-sec="Mở đầu" data-title="Bìa: LO 5.1">
+  <div class="brand"><span class="chip"><i class="ph-fill ph-sparkle"></i>AI Fluency nâng cao</span><span>Module 5 · Đóng gói kỹ năng và thiết kế quy trình AI nhiều tác vụ</span></div>
+  <div>
+    <div class="lo">LO 5.1</div>
+    <h1>Biến giáo án thành bài giảng điện tử có trắc nghiệm</h1>
+    <p class="sub">Tạo kỹ năng bằng trò chuyện, soát trang như học sinh, sửa cho đúng ý, dùng cho mọi tiết</p>
+  </div>
+  <div class="meta"><span><b>Thời lượng:</b> khoảng 90 phút</span><span><b>Sản phẩm:</b> 1 kỹ năng làm bài giảng có trắc nghiệm</span><span><b>Công cụ:</b> Claude, Google Forms, Google Sheets</span></div>
+  <aside class="notes"><p>Giới thiệu bài: Biến giáo án thành bài giảng điện tử có trắc nghiệm. Sản phẩm thầy cô làm ra ngay trong buổi học.</p></aside>
+</section>
+
+<section class="slide lo-title" data-sec="Mở đầu" data-title="Mục tiêu bài học">
+<div class="s-body" style="justify-content:center"><span class="lo4k">LO 5.1</span><h2 class="ht">Biến giáo án thành bài giảng điện tử có trắc nghiệm</h2><div class="objs3"><div class="o3"><b>01</b><span>Tạo một kỹ năng AI biến giáo án thành trang bài giảng có trắc nghiệm</span></div><div class="o3"><b>02</b><span>Hiểu kỹ năng AI là gì và sửa để lần nào cũng đúng ý</span></div><div class="o3"><b>03</b><span>Dùng lại cho mọi tiết và chia sẻ cho cả tổ</span></div></div></div>
+
+<aside class="notes"><p>Ba mục tiêu. Cả Module 5 đi theo một chuỗi việc của một tiết học: tạo bài giảng có trắc nghiệm (5.1), chấm và nhận xét (5.2), tự gửi bài, nhắc nộp, gửi điểm (5.3).</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="Mở đầu" data-title="Hội thoại mở đầu" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hoc.webp')">
+  <span class="scene-tag"><span class="pt">Mở đầu</span>Thầy Rùa và Octo</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-cang-thang.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-giang-giai.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:218.40684793554885px;--tl:92px">Thầy Rùa ơi! Mỗi tiết Toán con phải làm slide, làm phiếu bài tập, rồi ngồi chấm từng phiếu. Không xuể!</p>
+  <p class="bub t-r" style="left:665px;top:118px;width:500px;--t:58px">Hôm nay con làm một trợ thủ: <b>đưa giáo án vào, AI làm ra trang bài giảng có trắc nghiệm</b>. Học sinh mở link là học và làm bài được.</p>
+  <aside class="notes"><p>Đặt vấn đề quen thuộc. Giới thiệu chuỗi việc của cả module.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="Mở đầu" data-title="Sản phẩm hôm nay">
+<div class="s-head"><h2 class="ht"><span class="em">🎁</span> Hết buổi, thầy cô có cả chuỗi này</h2></div>
+<div class="s-body"><div class="flow4" style="grid-template-columns:250px 46px minmax(0,1fr) 46px 400px">
+  <div><p class="cap">Thầy cô đưa vào</p><div class="docm c"><span class="em">📄</span><br><b>Giáo án một tiết</b><p class="sm" style="margin-top:6px"><span class="fchip doc"><i class="ph ph-file-doc"></i>Giao_an_Phan_so_bang_nhau.docx</span></p></div></div>
+  <span class="ar">→</span>
+  <div><p class="cap">AI làm ra trang bài giảng</p><div class="lp4 "><div class="top"><b><span class="em">📐</span> Phân số bằng nhau</b><span>Toán 6 · Bài giảng điện tử</span></div><div class="tabs"><i class="">Lý thuyết</i><i class="on">Luyện tập</i><i class="">Nộp bài</i></div><div class="bd"><div class="inp"><span>Nguyễn Văn An</span><span>6A</span></div><div class="foot"><span class="qn">Câu 3/10 · Thông hiểu</span><span>Đã làm 3/10 câu</span></div><p class="qn" style="font-size:1.08em">Phân số nào bằng 3/4?</p><div class="ops"><span class="ok">A. 6/8</span><span class="">B. 4/5</span><span class="">C. 9/16</span><span class="">D. 3/8</span></div><div class="fb">Đúng! 3 × 8 = 4 × 6 = 24.</div></div></div></div>
+  <span class="ar">→</span>
+  <div><p class="cap">Kết quả về Google Sheets</p><div class="mock " style=""><div class="bar"><span class="dot sh">▦</span>Google Sheets<span class="sp2"></span></div><div class="sht"><table><tr><th>Họ tên</th><th>Lớp</th><th>Điểm</th></tr><tr><td>Nguyễn Văn An</td><td>6A</td><td>9</td></tr><tr><td>Lê Minh Anh</td><td>6A</td><td>7</td></tr><tr><td>Trần Gia Bảo</td><td>6A</td><td>6</td></tr><tr><td>Phạm Thu Hà</td><td>6A</td><td>10</td></tr></table></div></div></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-ngac-nhien.webp" alt="Octo"><p class="sp oo">Học sinh không cần tài khoản AI ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Không cần. Các em chỉ mở link. Ta làm từng bước nhé!</p></div>
+<aside class="notes"><p>Cho lớp xem cả chuỗi trước. Học sinh không cần tài khoản AI: chỉ mở link trang bài giảng, làm bài, bấm Nộp bài. Kết quả đi vào Google Form của giáo viên và hiện trong Google Sheets.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Làm ngay" data-title="Chuẩn bị">
+<div class="s-head"><h2 class="ht"><span class="em">🧺</span> Chuẩn bị: 3 thứ, 10 phút</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s">
+  <div class="pp p-blue"><h3><span class="em">💻</span> Tài khoản Claude</h3><p>Vào <b>Settings &gt; Capabilities</b>, bật <b>Code execution and file creation</b>.</p><p class="sm" style="margin-top:8px">Chỉ thầy cô cần tài khoản; học sinh thì không.</p></div>
+  <div class="pp p-blue"><h3><span class="em">📄</span> Một giáo án</h3><p>File Word của một tiết bất kỳ.</p><p style="margin-top:8px"><span class="fchip doc"><i class="ph ph-file-doc"></i>Giao_an_Phan_so_bang_nhau.docx</span></p></div>
+  <div class="stack"><div class="pp p-blue"><h3><span class="em">🗳️</span> Một Google Form nộp bài</h3><p>5 câu trả lời ngắn: Họ tên, Lớp, Bài, Đáp án, Điểm. Tạo một lần, dùng cho mọi bài.</p></div>
+    <div class="pp p-yellow"><h3 style="font-size:19px"><span class="em">🔗</span> Lấy link điền sẵn</h3><p class="sm">Trong Form, bấm dấu ba chấm, chọn <b>Lấy đường liên kết điền sẵn</b>, gõ chữ mẫu vào từng ô rồi sao chép link.</p></div></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Sao phải có Google Form ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Để bài nộp của cả lớp về một bảng của con. Trang bài giảng không tự giữ bài nộp.</p></div>
+<aside class="notes"><p>Link điền sẵn giúp trang bài giảng mở Form với họ tên, đáp án, điểm đã điền; học sinh chỉ bấm Gửi. Câu trả lời của Form tự vào Google Sheets (tab Câu trả lời, bấm Liên kết với Trang tính).</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Làm ngay" data-title="Bước 1: Gõ yêu cầu tạo kỹ năng">
+<div class="s-head"><h2 class="ht">Bước 1: Gõ yêu cầu tạo kỹ năng</h2></div><div class="prog4"><span class="on"><b>1</b>Gõ yêu cầu</span><span class=""><b>2</b>Trả lời AI</span><span class=""><b>3</b>Lưu kỹ năng</span><span class=""><b>4</b>Tạo bài giảng</span><span class=""><b>5</b>Soát trang</span><span class=""><b>6</b>Gửi link</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2">cuộc trò chuyện mới</span></div><div class="msgs"><div class="u"><span class="fchip doc"><i class="ph ph-file-doc"></i>Giao_an_Phan_so_bang_nhau.docx</span> <span class="dotn">1</span><br>Hãy tạo cho tôi một Skill biến giáo án Toán thành <span class="k1">bài giảng điện tử dạng trang web</span>. Trang gồm <span class="k2">mục tiêu, lý thuyết ngắn, 2 ví dụ có lời giải, 10 câu trắc nghiệm bốn lựa chọn (4 nhận biết, 4 thông hiểu, 2 vận dụng)</span>. <span class="k3">Học sinh nhập họ tên, lớp, bấm chọn thì biết đúng sai, bấm Nộp bài thì thấy điểm</span>. <span class="k4">Kết quả gửi về Google Form của tôi để tôi xem trong Google Sheets</span>. <span class="dotn">2</span></div><div class="use"><i class="ph ph-sparkle"></i>Using skill-creator</div><div class="a">Em sẽ giúp cô tạo kỹ năng này. Trước hết cô cho em hỏi vài câu…</div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Mở cuộc trò chuyện mới, đính kèm một giáo án làm mẫu</span></div><div class="ri"><span class="dotn">2</span><span>Gõ trang cần có gì, học sinh làm gì, kết quả về đâu, rồi gửi</span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>AI dùng công cụ tạo kỹ năng có sẵn (dòng <b>Using skill-creator</b>) và hỏi lại vài câu.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Bốn màu là bốn ý của câu lệnh. Lát nữa thầy cô sẽ thấy chúng nằm trong kỹ năng.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Trả lời câu hỏi của AI</span></div></div></div></div>
+
+<aside class="notes"><p>Câu lệnh viết liền, nói như dặn một đồng nghiệp: trang cần gì, học sinh làm gì, giáo viên cần gì, kết quả về đâu. skill-creator là công cụ có sẵn trên Claude, giúp tạo kỹ năng bằng trò chuyện.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Làm ngay" data-title="Bước 2: Trả lời câu hỏi của AI">
+<div class="s-head"><h2 class="ht">Bước 2: Trả lời câu hỏi của AI</h2></div><div class="prog4"><span class="done"><b>✓</b>Gõ yêu cầu</span><span class="on"><b>2</b>Trả lời AI</span><span class=""><b>3</b>Lưu kỹ năng</span><span class=""><b>4</b>Tạo bài giảng</span><span class=""><b>5</b>Soát trang</span><span class=""><b>6</b>Gửi link</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2">AI hỏi lại</span></div><div class="msgs"><div class="u past"><span class="fchip doc"><i class="ph ph-file-doc"></i>Giao_an_Phan_so_bang_nhau.docx</span> Hãy tạo cho tôi một Skill biến giáo án Toán thành bài giảng điện tử dạng trang web…</div><div class="a"><p>Cô cho em biết thêm <span class="dotn">1</span><br><b>1.</b> Cô dạy lớp mấy?<br><b>2.</b> Mỗi em được nộp mấy lần?<br><b>3.</b> Cô gửi em link điền sẵn của Google Form để em nối vào nút Nộp bài.</p></div><div class="u">Lớp 6 đến 9. Mỗi em nộp một lần. Link điền sẵn: forms.gle/… <span class="dotn">2</span></div><div class="a"><p><span class="em">✅</span> Đã viết xong kỹ năng <b>bai-giang-toan-trac-nghiem</b>.</p><div class="row-i"><div><div class="rt"><span class="em">🧰</span> bai-giang-toan-trac-nghiem</div><div class="d">SKILL.md · 2 file mẫu</div></div><span class="btn3 pri">Save skill</span></div></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Đọc câu AI hỏi</span></div><div class="ri"><span class="dotn">2</span><span>Trả lời ngắn; dán link điền sẵn của Google Form</span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>AI báo đã viết xong kỹ năng và hiện thẻ kỹ năng có nút <b>Save skill</b>.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Mỗi câu trả lời lúc này sẽ thành một <b>quy tắc</b> trong kỹ năng.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Lưu kỹ năng để dùng cho mọi tiết</span></div></div></div></div>
+
+<aside class="notes"><p>AI hỏi lại để kỹ năng đúng ý ngay từ đầu. Câu hỏi có thể khác nhau mỗi lần; trả lời ngắn, đúng quy định của tổ.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Làm ngay" data-title="Bước 3: Lưu và bật kỹ năng">
+<div class="s-head"><h2 class="ht">Bước 3: Lưu và bật kỹ năng</h2></div><div class="prog4"><span class="done"><b>✓</b>Gõ yêu cầu</span><span class="done"><b>✓</b>Trả lời AI</span><span class="on"><b>3</b>Lưu kỹ năng</span><span class=""><b>4</b>Tạo bài giảng</span><span class=""><b>5</b>Soát trang</span><span class=""><b>6</b>Gửi link</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2">claude.ai</span></div><div class="side" style="min-height:380px"><div class="nav"><div><span class="em">💬</span> Chats</div><div class="on mark"><span class="em">⚙️</span> Customize <span class="dotn">2</span></div></div>
+  <div class="pane"><div class="row-i"><div><div class="rt">bai-giang-toan-trac-nghiem</div><div class="d">Thẻ kỹ năng trong cuộc trò chuyện</div></div><span class="btn3 pri mark">Save skill <span class="dotn">1</span></span></div>
+  <b style="font-size:19px;margin-top:10px">Skills</b>
+  <div class="row-i"><div><div class="rt">bai-giang-toan-trac-nghiem</div><div class="d">Biến giáo án Toán thành bài giảng điện tử có trắc nghiệm…</div></div><span class="row" style="gap:8px"><span class="dotn">3</span><span class="tog on"></span></span></div>
+  <div class="row-i"><div><div class="rt">skill-creator</div><div class="d">Có sẵn của Anthropic</div></div><span class="tog on"></span></div></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Bấm <b>Save skill</b> trên thẻ kỹ năng</span></div><div class="ri"><span class="dotn">2</span><span>Mở <b>Customize &gt; Skills</b></span></div><div class="ri"><span class="dotn">3</span><span>Kiểm tra công tắc đã bật</span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>Kỹ năng nằm trong danh sách, công tắc màu xanh. Từ giờ cuộc trò chuyện nào cũng dùng được.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Dùng kỹ năng cho một tiết thật</span></div></div></div></div>
+
+<aside class="notes"><p>Tên nút có thể khác theo phiên bản giao diện; kiểm tra trước buổi dạy. Không thấy nút lưu: tải file kỹ năng về, vào Customize > Skills, bấm + để tải lên.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Làm ngay" data-title="Bước 4: Tạo bài giảng cho một tiết">
+<div class="s-head"><h2 class="ht">Bước 4: Tạo bài giảng cho một tiết</h2></div><div class="prog4"><span class="done"><b>✓</b>Gõ yêu cầu</span><span class="done"><b>✓</b>Trả lời AI</span><span class="done"><b>✓</b>Lưu kỹ năng</span><span class="on"><b>4</b>Tạo bài giảng</span><span class=""><b>5</b>Soát trang</span><span class=""><b>6</b>Gửi link</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2">cuộc trò chuyện mới</span></div><div class="msgs"><div class="u"><span class="fchip doc"><i class="ph ph-file-doc"></i>Giao_an_Phan_so_bang_nhau.docx</span><br>Tạo bài giảng cho giáo án này. <span class="dotn">1</span></div><div class="use mark"><i class="ph ph-sparkle"></i>Using bai-giang-toan-trac-nghiem <span class="dotn">2</span></div><div class="a"><p>Em đã đọc giáo án và làm trang gồm mục tiêu, lý thuyết, 2 ví dụ, 10 câu (4 nhận biết, 4 thông hiểu, 2 vận dụng). Nút Nộp bài mở phiếu nộp của cô.</p><div class="row-i mark"><div><div class="rt"><span class="em">📐</span> Phân số bằng nhau</div><div class="d">Bài giảng điện tử · trang web</div></div><span class="btn3">Mở</span><span class="dotn">3</span></div></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Mở cuộc trò chuyện <b>mới</b>, đính kèm giáo án, gõ một câu ngắn</span></div><div class="ri"><span class="dotn">2</span><span>Nhìn dòng <b>Using</b>: kỹ năng đã được dùng</span></div><div class="ri"><span class="dotn">3</span><span>Bấm mở trang AI vừa làm</span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>Một câu ngắn là đủ, không phải gõ lại yêu cầu dài ở Bước 1.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Câu ngắn mà ra đủ phần, vì cách làm đã nằm trong kỹ năng.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Soát trang như một học sinh</span></div></div></div></div>
+
+<aside class="notes"><p>Dòng Using cho biết AI đang làm theo kỹ năng nào. Không thấy dòng này nghĩa là AI chưa nhận ra kỹ năng; cách sửa ở Phần 3.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Làm ngay" data-title="Bước 5: Soát trang AI làm ra">
+<div class="s-head"><h2 class="ht">Bước 5: Soát trang AI làm ra</h2></div><div class="prog4"><span class="done"><b>✓</b>Gõ yêu cầu</span><span class="done"><b>✓</b>Trả lời AI</span><span class="done"><b>✓</b>Lưu kỹ năng</span><span class="done"><b>✓</b>Tạo bài giảng</span><span class="on"><b>5</b>Soát trang</span><span class=""><b>6</b>Gửi link</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="cols cols-2 gap-s ai-s"><div class="stack"><div class="lp4 "><div class="top"><b><span class="em">📐</span> Phân số bằng nhau</b><span>Toán 6 · Bài giảng điện tử</span></div><div class="tabs"><i class="on">Lý thuyết</i><i class="">Luyện tập</i><i class="">Nộp bài</i></div><div class="bd"><p class="lbl4">Mục tiêu</p><p>Nhận biết hai phân số bằng nhau; tìm số chưa biết trong hai phân số bằng nhau.</p><div class="th"><b>Ghi nhớ:</b> a/b = c/d khi a × d = b × c.</div><div class="ex"><b>Ví dụ 1:</b> 2/3 = 4/6 vì 2 × 6 = 3 × 4 = 12.</div><div class="ex"><b>Ví dụ 2:</b> Tìm x biết x/8 = 3/4. Ta có x × 4 = 8 × 3 = 24 nên x = 6.</div><div class="foot"><span>Đọc xong, sang Luyện tập</span><span class="btn3 pri">Luyện tập →</span></div></div></div><span class="row" style="justify-content:center"><span class="dotn">1</span><span class="sm">Lý thuyết, ví dụ</span></span></div>
+  <div class="stack"><div class="lp4 "><div class="top"><b><span class="em">📐</span> Phân số bằng nhau</b><span>Toán 6 · Bài giảng điện tử</span></div><div class="tabs"><i class="">Lý thuyết</i><i class="on">Luyện tập</i><i class="">Nộp bài</i></div><div class="bd"><div class="inp"><span>Nguyễn Văn An</span><span>6A</span></div><div class="foot"><span class="qn">Câu 3/10 · Thông hiểu</span><span>Đã làm 3/10 câu</span></div><p class="qn" style="font-size:1.08em">Phân số nào bằng 3/4?</p><div class="ops"><span class="ok">A. 6/8</span><span class="">B. 4/5</span><span class="">C. 9/16</span><span class="">D. 3/8</span></div><div class="fb">Đúng! 3 × 8 = 4 × 6 = 24.</div></div></div><div class="lp4 "><div class="top"><b><span class="em">📐</span> Phân số bằng nhau</b><span>Toán 6 · Bài giảng điện tử</span></div><div class="tabs"><i class="">Lý thuyết</i><i class="">Luyện tập</i><i class="on">Nộp bài</i></div><div class="bd"><div class="score">Nguyễn Văn An · 6A<b>9/10</b>Em sai câu 7. Xem lại Ví dụ 2 nhé!</div><div class="foot"><span>Bấm để gửi kết quả cho cô</span><span class="btn3 pri">Gửi phiếu nộp</span></div></div></div><span class="row" style="justify-content:center"><span class="dotn">2</span><span class="sm">Luyện tập</span><span class="dotn">3</span><span class="sm">Nộp bài</span></span></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Đọc lý thuyết, ví dụ: có đúng giáo án không</span></div><div class="ri"><span class="dotn">2</span><span>Tự làm 10 câu, đối chiếu từng đáp án</span></div><div class="ri"><span class="dotn">3</span><span>Bấm Nộp bài thử: xem điểm và phiếu nộp</span></div></div><div class="blk see"><h3><span class="em">✅</span> Cần thấy</h3><ul><li>Lý thuyết, ví dụ lấy đúng từ giáo án</li><li>Bấm chọn là biết đúng sai, có lời giải ngắn</li><li>Nộp bài thấy điểm, có nút gửi phiếu</li></ul></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Soát kỹ phần đáp án nhé. AI vẫn có thể nhầm!</p></div><div class="nx4"><b>Tiếp theo →</b><span>Xuất bản trang, gửi link cho học sinh</span></div></div></div></div>
+
+<aside class="notes"><p>Giáo viên tự làm một lượt như học sinh trước khi gửi. Đây là lúc phát hiện đáp án sai (Phần 3).</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Làm ngay" data-title="Bước 6: Gửi link, xem kết quả">
+<div class="s-head"><h2 class="ht">Bước 6: Gửi link, xem kết quả</h2></div><div class="prog4"><span class="done"><b>✓</b>Gõ yêu cầu</span><span class="done"><b>✓</b>Trả lời AI</span><span class="done"><b>✓</b>Lưu kỹ năng</span><span class="done"><b>✓</b>Tạo bài giảng</span><span class="done"><b>✓</b>Soát trang</span><span class="on"><b>6</b>Gửi link</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="cols cols-2 gap-s ai-s">
+  <div class="stack"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2">Phân số bằng nhau</span></div><div class="pane" style="padding:14px 18px;display:grid;gap:8px"><b style="font-size:18px">Publish artifact</b><p class="sm">Ai có link đều xem được trang.</p><div class="row-i"><div class="d">claude.ai/public/artifacts/…</div><span class="btn3 pri mark">Copy link</span><span class="dotn">1</span></div></div></div>
+  <div class="mock " style=""><div class="bar"><span class="dot fm">☰</span>Google Forms<span class="sp2">điền sẵn</span></div><div class="form4"><div class="fh">Phiếu nộp bài Toán 6</div><div class="fq">Họ tên<span>Nguyễn Văn An</span></div><div class="fq">Lớp<span>6A</span></div><div class="fq">Bài<span>Phân số bằng nhau</span></div><div class="fq">Đáp án<span>1A 2C 3A 4D 5B 6A 7B 8C 9D 10A</span></div><div class="fq">Điểm<span>9</span></div><span class="btn3">Gửi</span></div></div><span class="row" style="justify-content:center"><span class="dotn">2</span><span class="sm">Phiếu học sinh nhận sau khi bấm Nộp bài</span></span></div>
+  <div class="stack"><div class="mock " style=""><div class="bar"><span class="dot sh">▦</span>Google Sheets<span class="sp2">Phiếu nộp bài Toán 6 (câu trả lời)</span></div><div class="sht"><table><tr><th>Họ tên</th><th>Lớp</th><th>Đáp án</th><th>Điểm</th></tr><tr><td>Nguyễn Văn An</td><td>6A</td><td><span class="ans">1A 2C 3A 4D 5B 6A 7B…</span></td><td>9</td></tr><tr><td>Lê Minh Anh</td><td>6A</td><td><span class="ans">1A 2C 3B 4D 5B 6A 7B…</span></td><td>7</td></tr><tr><td>Trần Gia Bảo</td><td>6A</td><td><span class="ans">1A 2B 3A 4D 5C 6B 7B…</span></td><td>6</td></tr><tr><td>Phạm Thu Hà</td><td>6A</td><td><span class="ans">1A 2C 3A 4D 5B 6A 7C…</span></td><td>10</td></tr></table></div></div>
+  <span class="row" style="justify-content:center"><span class="dotn">3</span><span class="sm">Mỗi em một dòng, tự cập nhật</span></span>
+  <div class="docm"><span class="em">📊</span> <b>Đã nộp 32/35 em.</b> Tải về: Tệp &gt; Tải xuống &gt; .csv <span class="fchip"><i class="ph ph-file-xls"></i>Phieu_nop_6A.csv</span></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Bấm <b>Publish</b>, sao chép link, gửi vào nhóm lớp</span></div><div class="ri"><span class="dotn">2</span><span>Học sinh làm bài, bấm Nộp bài, rồi bấm Gửi trên phiếu đã điền sẵn</span></div><div class="ri"><span class="dotn">3</span><span>Mở Google Sheets của Form: mỗi em một dòng</span></div></div><div class="blk see"><h3><span class="em">✅</span> Thầy cô nhận được</h3><p>Bảng nộp bài của cả lớp. File .csv tải về là đầu vào cho trợ lý chấm bài ở LO 5.2.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Thầy cô tự làm với giáo án của mình</span></div></div></div></div>
+
+<aside class="notes"><p>Trang đã xuất bản là trang công khai: không đưa họ tên, điểm của học sinh vào trang. Bài nộp chỉ nằm trong Google Form, Google Sheets của giáo viên.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Làm ngay" data-title="Thực hành 1: bài giảng của mình">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 1: bài giảng điện tử cho một tiết của thầy cô</h2></div>
+<div class="s-body"><div class="mis4"><span class="tg">NHIỆM VỤ</span><p>Làm theo 6 bước vừa xem với <b>một giáo án của thầy cô</b> và Google Form nộp bài của mình. Tự làm thử, nộp thử một lần, mở Google Sheets xem dòng vừa nộp.</p><span class="tm">⏱ 25 phút</span></div>
+<div class="cols cols-6-6 ai-s">
+  <div class="code lt" data-file="Câu lệnh mẫu (điền chỗ trống)" style=""><pre>Hãy tạo cho tôi một Skill biến giáo án [môn, lớp] thành bài giảng điện tử dạng trang web. Trang gồm [các phần], [số câu] câu trắc nghiệm ([mức độ]). Học sinh nhập họ tên, lớp, bấm chọn thì biết đúng sai, bấm Nộp bài thì thấy điểm. Kết quả gửi về Google Form của tôi để tôi xem trong Google Sheets.</pre></div>
+  <div class="stack">
+    <div class="pp p-yellow"><h3 style="font-size:21px"><span class="em">💡</span> Không dạy Toán?</h3><p class="sm">Thay bằng môn của mình: câu hỏi đọc hiểu, từ vựng, câu hỏi tình huống.</p></div>
+    <div class="check-i"><span class="em">☑️</span><span>Có dòng Using khi tạo bài giảng mới</span></div>
+    <div class="check-i"><span class="em">☑️</span><span>Nộp thử, thấy dòng mới trong Google Sheets</span></div>
+  </div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Học đi đôi với hành! Thầy cô làm bài giảng đầu tiên nhé!</p></div>
+<aside class="notes"><p>Đi quanh lớp, giúp thầy cô lấy link điền sẵn của Google Form và viết phần yêu cầu thật cụ thể.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="2. Nhìn lại: kỹ năng AI là gì" data-title="Hội thoại: vừa lưu cái gì" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-phong-giao-vien.webp')">
+  <span class="scene-tag"><span class="pt">Phần 2</span>Nhìn lại: kỹ năng AI là gì</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-gioi-thieu.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:216.38px;--tl:92px">Thầy ơi, cái con vừa lưu ở Bước 3 là gì mà sang cuộc trò chuyện mới AI vẫn nhớ cách làm ạ?</p>
+  <p class="bub t-r" style="left:636px;top:118px;width:500px;--t:58px">Đó là một <b>kỹ năng AI</b> (<span class="en">Skill</span>). Mình mở nó ra xem. Hiểu nó, con sẽ biết sửa khi AI làm chưa đúng.</p>
+  <aside class="notes"><p>Chuyển sang phần hiểu, luôn chỉ vào thứ vừa làm ở Phần 1.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Nhìn lại: kỹ năng AI là gì" data-title="Kỹ năng AI là gì?">
+<div class="s-head"><h2 class="ht">Kỹ năng AI (<span class="en">Skill</span>) là gì?</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="stack">
+    <div class="pp out"><h3>Kỹ năng AI (<span class="en">Skill</span>)</h3><p class="c">là một bộ hướng dẫn được đóng gói dưới dạng thư mục, giúp AI xử lý các tác vụ hoặc quy trình cụ thể.</p></div>
+    <div class="cols cols-2 gap-s">
+      <div class="pp p-peach"><h3><span class="em">💬</span> Câu lệnh</h3><p>Giống <b>giao việc từng lần</b>. Lần sau lại phải viết, dán lại.</p></div>
+      <div class="pp p-green"><h3><span class="em">🎓</span> Kỹ năng</h3><p>Giống <b>đào tạo một nhân sự</b> đã biết làm một nhóm việc.</p></div>
+    </div>
+  </div>
+  <div class="stack"><p class="cap" style="font-size:18px;font-weight:700;color:var(--b-ink)">Ngay trong bài hôm nay</p>
+    <div class="docm"><p><span class="back4">↩ Bước 1</span> <b>Không có kỹ năng</b>: tiết nào cũng dán lại câu dài này</p>
+      <div class="msgs" style="padding:8px 0 0"><div class="u" style="max-width:100%;font-size:16px">Hãy tạo cho tôi một Skill biến giáo án Toán thành <span class="k1">bài giảng điện tử dạng trang web</span>. Trang gồm <span class="k2">mục tiêu, lý thuyết ngắn, 2 ví dụ có lời giải, 10 câu trắc nghiệm bốn lựa chọn (4 nhận biết, 4 thông hiểu, 2 vận dụng)</span>. <span class="k3">Học sinh nhập họ tên, lớp, bấm chọn thì biết đúng sai, bấm Nộp bài thì thấy điểm</span>. <span class="k4">Kết quả gửi về Google Form của tôi để tôi xem trong Google Sheets</span>.</div></div></div>
+    <div class="docm"><p><span class="back4">↩ Bước 4</span> <b>Có kỹ năng</b>: một câu ngắn</p>
+      <div class="msgs" style="padding:8px 0 0"><div class="u" style="font-size:16px">Tạo bài giảng cho giáo án này.</div></div></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Vậy kỹ năng khác gì câu lệnh hay con lưu trong sổ ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Câu lệnh trong sổ thì con tự tìm và dán. Kỹ năng được lưu thành file, AI tự mở khi việc khớp với mô tả.</p></div>
+<aside class="notes"><p>Định nghĩa của khóa học. Kỹ năng không thay thế câu lệnh: câu lệnh tốt ở Bước 1 chính là điểm xuất phát để có kỹ năng.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Nhìn lại: kỹ năng AI là gì" data-title="Câu lệnh đã thành SKILL.md">
+<div class="s-head"><h2 class="ht">Câu thầy cô gõ ở Bước 1, 2 đã thành file SKILL.md</h2></div>
+<div class="s-body"><div class="map4" style="grid-template-columns:minmax(0,.9fr) 54px minmax(0,1.1fr)">
+  <div class="stack">
+    <div class="docm"><p><span class="back4">↩ Bước 1: câu yêu cầu</span></p><p style="margin-top:8px;line-height:1.7">Hãy tạo cho tôi một kỹ năng biến giáo án Toán thành <span class="k1">bài giảng điện tử dạng trang web</span>. Trang gồm <span class="k2">mục tiêu, lý thuyết ngắn, 2 ví dụ có lời giải, 10 câu trắc nghiệm bốn lựa chọn (4 nhận biết, 4 thông hiểu, 2 vận dụng)</span>. <span class="k3">Học sinh nhập họ tên, lớp, bấm chọn thì biết đúng sai, bấm Nộp bài thì thấy điểm</span>. <span class="k4">Kết quả gửi về Google Form của tôi để tôi xem trong Google Sheets</span>.</p></div>
+    <div class="docm"><p><span class="back4">↩ Bước 2: câu trả lời</span></p><p style="margin-top:8px">Lớp 6 đến 9. <b>Mỗi em nộp một lần.</b> Link điền sẵn: forms.gle/…</p></div>
+  </div>
+  <span class="ar">→</span>
+  <div class="fileview"><div class="fh"><span class="em">📄</span> bai-giang-toan-trac-nghiem/SKILL.md</div><div class="fb4">
+    <span class="sep">---</span>
+    <span>name: bai-giang-toan-trac-nghiem</span>
+    <span>description: Biến giáo án Toán thành <span class="k1">bài giảng điện tử dạng trang web</span> có trắc nghiệm. Dùng khi cần bài giảng điện tử cho một tiết.</span>
+    <span class="sep">---</span>
+    <span class="h"># Các bước</span>
+    <span>1. Đọc giáo án: mục tiêu, kiến thức trọng tâm, ví dụ.</span>
+    <span>2. <span class="k2">Viết mục tiêu, lý thuyết ngắn, 2 ví dụ có lời giải.</span></span>
+    <span>3. <span class="k2">Soạn 10 câu: 4 nhận biết, 4 thông hiểu, 2 vận dụng.</span></span>
+    <span>4. <span class="k3">Làm trang: nhập họ tên, lớp; bấm chọn biết đúng sai; Nộp bài thấy điểm.</span></span>
+    <span>5. <span class="k4">Nút Gửi phiếu nộp mở Google Form điền sẵn.</span></span>
+    <span class="h"># Quy tắc</span>
+    <span>Dùng cho lớp 6 đến 9 · <b>mỗi em nộp một lần</b> · link Form: forms.gle/…</span>
+  </div></div>
+</div>
+<div class="cols cols-3 gap-s">
+  <div class="pp p-blue"><h3 style="font-size:20px"><span class="em">🏷️</span> Phần đầu: thẻ tên</h3><p class="sm"><b>name</b> và <b>description</b>. AI đọc phần này để biết khi nào mở kỹ năng.</p></div>
+  <div class="pp p-green"><h3 style="font-size:20px"><span class="em">📝</span> Phần thân: cách làm</h3><p class="sm">Các bước, quy tắc. AI chỉ đọc khi kỹ năng được dùng.</p></div>
+  <div class="pp p-gray"><h3 style="font-size:20px"><span class="em">📄</span> File .md</h3><p class="sm">File chữ thuần: # là tiêu đề. Không cần biết lập trình.</p></div>
+</div></div>
+
+<aside class="notes"><p>Đây là file skill-creator viết từ Bước 1, 2 (rút gọn để đọc trên slide). Mỗi màu ở câu yêu cầu thành một phần của file; câu trả lời ở Bước 2 thành quy tắc. Xem file thật: Customize > Skills, bấm vào kỹ năng.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Nhìn lại: kỹ năng AI là gì" data-title="Vì sao AI tự dùng kỹ năng?">
+<div class="s-head"><h2 class="ht">Vì sao ở Bước 4 AI tự dùng kỹ năng?</h2></div>
+<div class="s-body">
+<div class="loop3 noback" style="--n:3"><div class="lp"><span class="em">👀</span><h4>Đọc lướt “mục lục”</h4><p>Tên, mô tả của mọi kỹ năng đang bật</p></div><div class="lp"><span class="em">🔍</span><h4>So với yêu cầu</h4><p>Mô tả nào khớp với việc đang làm?</p></div><div class="lp"><span class="em">📖</span><h4>Mở đúng kỹ năng</h4><p>Đọc phần cách làm rồi làm theo</p></div></div>
+<div class="task"><i class="ph ph-chat-text"></i><div><span class="back4">↩ Bước 4</span> Cô gõ: <b>“Tạo bài giảng cho giáo án này.”</b></div></div>
+<table class="t3"><thead><tr><th style="width:28%">Kỹ năng đang bật</th><th>Mô tả</th><th class="c" style="width:18%">AI làm gì</th></tr></thead><tbody>
+<tr><td>bai-giang-toan-trac-nghiem</td><td>Biến giáo án Toán thành <b>bài giảng điện tử</b>… Dùng khi cần bài giảng điện tử cho một tiết.</td><td class="c"><span class="tag3 ok"><span class="em">✅</span> Mở</span></td></tr>
+<tr><td>de-kiem-tra-15-phut</td><td>Soạn đề kiểm tra 15 phút theo cấu trúc của tổ.</td><td class="c"><span class="tag3 warm">Bỏ qua</span></td></tr>
+<tr><td>thong-bao-phu-huynh</td><td>Soạn thông báo gửi phụ huynh theo mẫu trường.</td><td class="c"><span class="tag3 warm">Bỏ qua</span></td></tr>
+</tbody></table></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Vậy nếu con gõ “soạn phiếu luyện tập” thì sao ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Mô tả chưa có cách gọi đó thì AI dễ bỏ qua. Đó chính là lỗi 1 ở Phần 3!</p></div>
+<aside class="notes"><p>AI luôn nạp tên và mô tả của mọi kỹ năng đang bật; phần cách làm chỉ mở khi khớp. AI so theo ý chứ không chỉ đếm từ, nhưng mô tả thiếu cách gọi quen thuộc thì vẫn dễ bỏ lỡ.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Nhìn lại: kỹ năng AI là gì" data-title="Khi nào nên đóng gói thành kỹ năng?">
+<div class="s-head"><h2 class="ht">Khi nào nên đóng gói thành kỹ năng?</h2><p class="hs">Có từ 2 dấu hiệu trở lên: nên làm thành kỹ năng</p></div>
+<div class="s-body"><div class="cols cols-5 gap-s">
+  <div class="pp p-blue c"><h3 style="justify-content:center"><span class="em">🔁</span></h3><b>Gõ lại cùng một hướng dẫn</b><p class="sm">Tiết nào cũng dán câu ở Bước 1</p></div>
+  <div class="pp p-green c"><h3 style="justify-content:center"><span class="em">📐</span></h3><b>Theo một mẫu</b><p class="sm">Trang nào cũng đủ các phần</p></div>
+  <div class="pp p-yellow c"><h3 style="justify-content:center"><span class="em">🪜</span></h3><b>Nhiều bước cố định</b><p class="sm">Đọc giáo án, soạn, làm trang</p></div>
+  <div class="pp p-peach c"><h3 style="justify-content:center"><span class="em">🏫</span></h3><b>Quy định của tổ</b><p class="sm">10 câu, ba mức độ, nộp một lần</p></div>
+  <div class="pp p-lav c"><h3 style="justify-content:center"><span class="em">👥</span></h3><b>Cả tổ cùng dùng</b><p class="sm">Bài giảng đồng bộ cả khối</p></div>
+</div>
+<p class="sm c" style="color:var(--ok);font-weight:700"><span class="em">✅</span> Bài giảng có trắc nghiệm mỗi tiết có đủ cả 5 dấu hiệu</p>
+<table class="t3 ans-t"><thead><tr><th style="width:44%">Việc khác của giáo viên</th><th class="c" style="width:16%">Chọn</th><th>Vì sao</th></tr></thead><tbody>
+<tr><td>Lời dẫn cho một tiết thao giảng</td><td class="c"><span class="tag3 warm">Câu lệnh</span></td><td>Làm một lần, nội dung riêng</td></tr>
+<tr><td>Bản tin tuần gửi phụ huynh</td><td class="c"><span class="tag3 ok">Kỹ năng</span></td><td>Tuần nào cũng làm, bố cục cố định</td></tr>
+<tr><td>Đề kiểm tra 15 phút theo cấu trúc của tổ</td><td class="c"><span class="tag3 ok">Kỹ năng</span></td><td>Lặp lại, theo quy định của tổ</td></tr>
+</tbody></table></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Mẹo nhỏ: thấy mình <b>gõ lại cùng một hướng dẫn từ lần thứ ba</b> là lúc nên làm kỹ năng!</p></div>
+<aside class="notes"><p>Năm dấu hiệu rút từ hướng dẫn của Anthropic (The Complete Guide to Building Skills for Claude). Hỏi lớp trước khi đọc cột Chọn.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="3. Sửa cho đúng ý" data-title="Hội thoại: bài giảng chưa như ý" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-phong-giao-vien.webp')">
+  <span class="scene-tag"><span class="pt">Phần 3</span>Sửa cho đúng ý</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-buon.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-vui.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:228.42990654205607px;--tl:92px">Hôm qua con gõ “soạn phiếu luyện tập”, AI không dùng kỹ năng. Bài khác thì con soát thấy một câu đáp án sai…</p>
+  <p class="bub t-r" style="left:657px;top:118px;width:500px;--t:58px">Chuyện thường! Con biết kỹ năng gồm những phần nào rồi. Giờ chỉ cần <b>nói với AI một câu</b> để sửa đúng phần đó, rồi lưu bản mới.</p>
+  <aside class="notes"><p>Đồng cảm với lỗi thật. Nối với Phần 2: thẻ tên quyết định AI có dùng kỹ năng không; phần thân quyết định AI làm thế nào.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Sửa cho đúng ý" data-title="Ba lỗi hay gặp">
+<div class="s-head"><h2 class="ht"><span class="em">🔍</span> Ba lỗi hay gặp, mỗi lỗi nằm ở một phần của kỹ năng</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s">
+  <div class="pp p-pink"><h3><span class="em">🙈</span> AI không dùng kỹ năng</h3><p>Gõ <i>“Soạn phiếu luyện tập cho bài này”</i>, không thấy dòng Using.</p><p class="eg">Sửa thẻ tên: phần mô tả</p></div>
+  <div class="pp p-pink"><h3><span class="em">❌</span> Đáp án sai</h3><p>Soát ở Bước 5 thấy câu 7 chấm sai đáp án.</p><p class="eg">Sửa phần thân: thêm bước duyệt đáp án</p></div>
+  <div class="pp p-pink"><h3><span class="em">📉</span> Sai mức độ</h3><p>Dặn 2 câu vận dụng, trang ra toàn câu nhận biết.</p><p class="eg">Sửa phần thân: thêm câu mẫu từng mức độ</p></div>
+</div>
+<div class="fl3">
+  <div class="st"><span class="n3">1</span><h4><span class="em">👀</span> Thấy lỗi</h4><p>Khi soát trang, khi thử yêu cầu.</p></div>
+  <div class="st"><span class="n3">2</span><h4><span class="em">⌨️</span> Gõ câu sửa</h4><p>“Sửa kỹ năng bai-giang-toan-trac-nghiem: …”</p></div>
+  <div class="st"><span class="n3">3</span><h4><span class="em">📝</span> AI viết bản mới</h4><p>Nói rõ đã đổi chỗ nào.</p></div>
+  <div class="st gate"><span class="n3">4</span><h4><span class="em">💾</span> Lưu, thay bản cũ</h4><p>Save skill, chọn thay bản cũ.</p></div>
+  <div class="st"><span class="n3">5</span><h4><span class="em">🧪</span> Thử lại</h4><p>Cuộc trò chuyện mới.</p></div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Ba lỗi, cùng một cách sửa: <b>gõ câu sửa, lưu bản mới, thử lại</b>.</p></div>
+<aside class="notes"><p>Cách sửa một kỹ năng đã lưu trên Claude: gõ câu sửa trong cuộc trò chuyện, AI cập nhật file, bấm Save skill rồi chọn thay bản cũ (Upload and replace). Luôn thử lại ở cuộc trò chuyện mới.</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Sửa cho đúng ý" data-title="Lỗi 1: AI không dùng kỹ năng">
+<div class="s-head"><h2 class="ht">Lỗi 1: AI không nhận ra lúc cần dùng kỹ năng</h2></div>
+<div class="s-body"><div class="why4">
+  <div class="w1"><h4><span class="em">😕</span> Chuyện xảy ra</h4>Gõ “Soạn phiếu luyện tập cho bài này”: AI tự viết một danh sách câu hỏi, không có dòng Using.</div>
+  <div class="w2"><h4><span class="em">🔎</span> Lỗi nằm ở đâu</h4>Mô tả chỉ có chữ “bài giảng điện tử”, chưa có cách gọi “phiếu luyện tập”.</div>
+  <div class="w3"><h4><span class="em">⌨️</span> Câu sửa</h4><b>“Sửa kỹ năng bai-giang-toan-trac-nghiem: thêm vào mô tả các cách gọi ‘phiếu luyện tập’, ‘bài trắc nghiệm’, ‘bài ôn tập’.”</b></div>
+</div>
+<div class="ba4">
+  <div><p class="cap bad">TRƯỚC KHI SỬA</p><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2"></span></div><div class="msgs"><div class="u"><span class="fchip doc"><i class="ph ph-file-doc"></i>Giao_an_Phan_so_bang_nhau.docx</span> Soạn phiếu luyện tập cho bài này.</div><div class="a"><p>Phiếu luyện tập: Phân số bằng nhau<br>Câu 1. Phân số nào bằng 3/4? …<br>Câu 2. Tìm x biết x/8 = 3/4 …</p></div></div></div></div>
+  <span class="ar">→</span>
+  <div><p class="cap good">SAU KHI SỬA</p><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2"></span></div><div class="msgs"><div class="u"><span class="fchip doc"><i class="ph ph-file-doc"></i>Giao_an_Phan_so_bang_nhau.docx</span> Soạn phiếu luyện tập cho bài này.</div><div class="use"><i class="ph ph-sparkle"></i>Using bai-giang-toan-trac-nghiem</div><div class="a"><div class="row-i"><div><div class="rt"><span class="em">📐</span> Phân số bằng nhau</div><div class="d">Bài giảng điện tử · trang web</div></div><span class="btn3">Mở</span></div></div></div></div></div>
+</div></div>
+
+<aside class="notes"><p>AI so theo ý, nhưng mô tả càng có đúng những từ giáo viên hay gõ thì càng ít bị bỏ lỡ. Sửa xong bấm Save skill, chọn thay bản cũ, rồi thử lại ở cuộc trò chuyện mới.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Sửa cho đúng ý" data-title="Viết mô tả cho đúng">
+<div class="s-head"><h2 class="ht">Mô tả tốt có ba ý: làm gì, năng lực chính, khi nào dùng</h2></div>
+<div class="s-body">
+<div class="ann"><span class="a" style="--c:#2456d6"><span class="tx">Biến giáo án Toán thành bài giảng điện tử có trắc nghiệm.</span><em>Làm gì</em></span> <span class="a" style="--c:#0e8a5f"><span class="tx">Có lý thuyết, ví dụ, 10 câu ba mức độ, phiếu nộp.</span><em>Năng lực chính</em></span> <span class="a" style="--c:#b8650a"><span class="tx">Dùng khi cần bài giảng điện tử, phiếu luyện tập, bài trắc nghiệm, bài ôn tập.</span><em>Khi nào dùng</em></span></div>
+<p class="sm muted c">Ba kiểu mô tả nên tránh</p>
+<div class="cols cols-3 gap-s">
+  <div class="pp p-pink"><h3><span class="em">🌫️</span> Quá mơ hồ</h3><p>“Hỗ trợ giáo viên dạy Toán.”</p><p class="eg">Việc gì cũng có vẻ khớp</p></div>
+  <div class="pp p-peach"><h3><span class="em">🕳️</span> Thiếu lúc dùng</h3><p>“Tạo trang web đẹp có câu hỏi.”</p><p class="eg">AI không biết khi nào mở</p></div>
+  <div class="pp p-lav"><h3><span class="em">🧪</span> Quá kỹ thuật</h3><p>“Sinh HTML tương tác có chấm điểm.”</p><p class="eg">Không giống lời giáo viên gõ</p></div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Viết mô tả bằng chính <b>những từ thầy cô hay gõ</b>: “bài giảng điện tử”, “phiếu luyện tập”.</p></div>
+<aside class="notes"><p>Cấu trúc mô tả theo hướng dẫn của Anthropic: làm gì, khi nào dùng, năng lực chính. Đây là mô tả sau khi sửa lỗi 1.</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Sửa cho đúng ý" data-title="Lỗi 2: đáp án sai">
+<div class="s-head"><h2 class="ht">Lỗi 2: đáp án sai, thêm bước để thầy cô duyệt đáp án</h2></div>
+<div class="s-body"><div class="why4">
+  <div class="w1"><h4><span class="em">😕</span> Chuyện xảy ra</h4>Soát ở Bước 5: câu 7 tìm x biết x/12 = 3/4, trang chấm <b>x = 8</b> là đúng. Đáp án đúng là 9.</div>
+  <div class="w2"><h4><span class="em">🔎</span> Lỗi nằm ở đâu</h4>Phần các bước cho AI làm thẳng ra trang; không có chỗ để giáo viên xem đáp án trước.</div>
+  <div class="w3"><h4><span class="em">⌨️</span> Hai câu sửa</h4><b>Sửa ngay:</b> “Câu 7 đáp án đúng là x = 9, sửa lại trang.”<br><b>Sửa lâu dài:</b> “Sửa kỹ năng: trước khi làm trang, đưa tôi bảng đáp án kèm lời giải từng câu để duyệt.”</div>
+</div>
+<div class="ba4">
+  <div><p class="cap bad">TRANG LÚC SOÁT</p><div class="lp4 "><div class="top"><b><span class="em">📐</span> Phân số bằng nhau</b><span>Toán 6 · Bài giảng điện tử</span></div><div class="tabs"><i class="">Lý thuyết</i><i class="on">Luyện tập</i><i class="">Nộp bài</i></div><div class="bd"><div class="foot"><span class="qn">Câu 7/10 · Vận dụng</span><span>Đã làm 3/10 câu</span></div><p class="qn" style="font-size:1.08em">Tìm x biết x/12 = 3/4.</p><div class="ops"><span class="no">A. x = 8</span><span class="">B. x = 9</span><span class="">C. x = 4</span><span class="">D. x = 16</span></div><div class="fb bad">Trang báo “Đúng!” khi chọn x = 8</div></div></div></div>
+  <span class="ar">→</span>
+  <div><p class="cap good">TIẾT SAU: AI ĐƯA BẢNG ĐÁP ÁN TRƯỚC</p><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2"></span></div><div class="msgs"><div class="use"><i class="ph ph-sparkle"></i>Using bai-giang-toan-trac-nghiem</div><div class="a"><p>Bảng đáp án để cô duyệt trước khi em làm trang:</p><table class='mini'><tr><th>Câu</th><th>Đáp án</th><th>Lời giải</th></tr><tr><td>6</td><td>C</td><td>2/5 = 6/15 vì 2 × 15 = 5 × 6</td></tr><tr><td>7</td><td>B. x = 9</td><td>x × 4 = 12 × 3 = 36</td></tr><tr><td>8</td><td>A</td><td>…</td></tr></table><p>Cô đồng ý thì em làm trang.</p></div></div></div></div>
+</div></div>
+
+<aside class="notes"><p>AI có thể nhầm khi tính. Câu sửa lâu dài đặt một điểm duyệt vào kỹ năng: bảng đáp án có lời giải giúp giáo viên soát nhanh hơn làm lại cả bài. Bảng này cũng dùng lại để chấm ở LO 5.2.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Sửa cho đúng ý" data-title="Lỗi 3: nhờ AI góp ý">
+<div class="s-head"><h2 class="ht">Lỗi 3 và hơn thế: nhờ AI góp ý cho cả kỹ năng, thầy cô quyết định</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2"></span></div><div class="msgs"><div class="u">Góp ý cho Skill bai-giang-toan-trac-nghiem: chỗ nào dễ làm AI hiểu sai, thiếu gì so với yêu cầu của tổ (10 câu, ba mức độ, mỗi em nộp một lần). Chưa sửa gì, trả về danh sách góp ý theo mức độ quan trọng.</div><div class="a"><table class='mini'><tr><th>#</th><th>Góp ý</th></tr><tr><td>1</td><td>Thêm một câu mẫu cho mỗi mức độ, tránh ra toàn câu nhận biết</td></tr><tr><td>2</td><td>Cho học sinh làm lại nhiều lần</td></tr><tr><td>3</td><td>Ghi rõ: trang không chứa họ tên, điểm của học sinh</td></tr><tr><td>4</td><td>Ghi rõ cách đặt tên bài trong phiếu nộp</td></tr></table></div></div></div>
+  <div class="stack">
+    <div class="pp p-green"><h3><span class="em">✅</span> Nhận góp ý 1, 3, 4</h3><p>Đúng mức độ, giữ an toàn dữ liệu, phiếu nộp dễ lọc.</p></div>
+    <div class="pp p-pink"><h3><span class="em">🚫</span> Bỏ góp ý 2</h3><p>Tổ đã thống nhất mỗi em nộp một lần để tính điểm.</p></div>
+    <div class="code lt" data-file="Câu sửa" style=""><pre>Sửa Skill theo góp ý số 1, 3, 4. Giữ nguyên tên và những phần tôi không yêu cầu sửa. Ghi phiên bản 1.1 và các thay đổi vào cuối file.</pre></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-suy-nghi.webp" alt="Octo"><p class="sp oo">Góp ý nào cũng hợp lý, sao con bỏ góp ý số 2 ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Vì con hiểu quy định của tổ hơn AI. AI đề xuất, con quyết định.</p></div>
+<aside class="notes"><p>Góp ý trước, sửa sau. Câu sửa chỉ rõ phần được sửa để AI không tự ý viết lại toàn bộ kỹ năng. Sửa xong: Save skill, thay bản cũ.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Sửa cho đúng ý" data-title="Thử lại bằng 3 yêu cầu">
+<div class="s-head"><h2 class="ht"><span class="em">🧪</span> Sửa xong, thử lại bằng 3 yêu cầu ở cuộc trò chuyện mới</h2></div>
+<div class="s-body">
+<table class="t3"><thead><tr><th style="width:36%">Thầy cô gõ</th><th style="width:34%">Đạt khi</th><th>Bản 1.1 cho ra</th></tr></thead><tbody>
+<tr><td><span class="em">📄</span> “Tạo bài giảng cho giáo án này” + giáo án mới</td><td>Dùng kỹ năng, đưa bảng đáp án trước, đúng mức độ</td><td><span class="tag3 ok">Đạt</span> 4, 4, 2 câu; đáp án đã duyệt</td></tr>
+<tr><td><span class="em">🔄</span> “Soạn phiếu luyện tập cho bài này”</td><td>Vẫn dùng kỹ năng dù nói khác đi</td><td><span class="tag3 ok">Đạt</span> có dòng Using</td></tr>
+<tr><td><span class="em">🚫</span> “Tóm tắt bài báo này”</td><td>Không dùng kỹ năng, vì là việc khác</td><td><span class="tag3 ok">Đạt</span> trả lời bình thường</td></tr>
+</tbody></table>
+<div class="pp p-yellow"><h3 style="font-size:20px"><span class="em">💡</span> Một lần thử chưa đạt?</h3><p class="sm">Lần 3 mà AI vẫn dùng kỹ năng: mô tả đang quá rộng. Viết “Dùng khi cần bài giảng, phiếu luyện tập cho một tiết học”.</p></div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-suy-nghi.webp" alt="Octo"><p class="sp oo">Thử ở cuộc trò chuyện mới để làm gì ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Để chắc AI làm theo kỹ năng, chứ không nhớ lời con vừa dặn.</p></div>
+<aside class="notes"><p>Ba lần thử: đúng việc, nói khác đi, việc khác. Đạt cả ba là kỹ năng dùng được. Thử ở cuộc trò chuyện mới để AI không dựa vào trao đổi cũ.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Sửa cho đúng ý" data-title="Thực hành 2: sửa kỹ năng của mình">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 2: góp ý và sửa kỹ năng đến khi đúng ý</h2></div>
+<div class="s-body"><div class="mis4"><span class="tg">NHIỆM VỤ</span><p>Thử kỹ năng bằng <b>3 yêu cầu</b>, nhờ AI góp ý, chọn góp ý, gõ <b>câu sửa</b>, lưu bản 1.1 thay bản cũ và thử lại.</p><span class="tm">⏱ 15 phút</span></div>
+<div class="fl3">
+  <div class="st"><span class="n3">1</span><h4><span class="em">🧪</span> Thử 3 yêu cầu</h4><p>Đúng việc, nói khác, việc khác.</p></div>
+  <div class="st"><span class="n3">2</span><h4><span class="em">🔍</span> Nhờ AI góp ý</h4><p>Chọn góp ý hợp với tổ.</p></div>
+  <div class="st"><span class="n3">3</span><h4><span class="em">🔧</span> Gõ câu sửa</h4><p>Đúng phần: mô tả hay các bước.</p></div>
+  <div class="st"><span class="n3">4</span><h4><span class="em">💾</span> Lưu bản mới</h4><p>Save skill, thay bản cũ.</p></div>
+  <div class="st gate"><span class="n3">5</span><h4><span class="em">👀</span> Duyệt đáp án</h4><p>Đọc bảng đáp án trước khi gửi học sinh.</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-dong-y.webp" alt="Octo"><p class="sp oo">Con sửa hai lần là ưng rồi!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Tốt lắm! Giờ đem kỹ năng này chia sẻ cho cả tổ.</p></div>
+<aside class="notes"><p>Ghi lại lỗi đã gặp và câu sửa đã dùng để chia sẻ với cả lớp.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="4. Dùng lại và chia sẻ" data-title="Hội thoại: cả tổ cùng dùng" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-bang-xanh.webp')">
+  <span class="scene-tag"><span class="pt">Phần 4</span>Dùng lại và chia sẻ</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-vui.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-chi-dan.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:231.11307767944936px;--tl:92px">Cả tổ Toán muốn dùng chung kỹ năng làm bài giảng của con. Con gửi thế nào ạ?</p>
+  <p class="bub t-r" style="left:665px;top:118px;width:500px;--t:58px">Gửi file kỹ năng là được. Tổ nên có một <b>thư viện kỹ năng</b> chung, dùng cùng <b>dự án</b> của tổ.</p>
+  <aside class="notes"><p>Chuyển sang phần chia sẻ.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Dùng lại và chia sẻ" data-title="Kỹ năng, dự án và thư viện của tổ">
+<div class="s-head"><h2 class="ht">Kỹ năng, dự án và thư viện kỹ năng của tổ</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="stack">
+    <div class="cols cols-2 gap-s">
+      <div class="pp p-blue"><h3><span class="em">🏠</span> <span>Dự án (<span class="en">Project</span>)</span></h3><p>Giữ <b>bối cảnh</b> cho một nhóm việc: chương trình, kế hoạch dạy học của tổ.</p></div>
+      <div class="pp p-green"><h3><span class="em">🧰</span> Kỹ năng</h3><p>Giữ <b>cách làm</b> cho một việc. Bật một lần, dùng được ở mọi dự án.</p></div>
+    </div>
+    <div class="pp p-gray"><h3><span class="em">🤝</span> Dùng cả hai</h3><p>Dự án “Tổ Toán 6” có chương trình và kế hoạch; kỹ năng làm bài giảng đúng mẫu. Giáo viên chỉ gõ câu ngắn như Bước 4.</p></div>
+  </div>
+  <div class="stack">
+    <div class="docm"><h4><span class="em">📁</span> Thu_vien_ky_nang_To_Toan/</h4>
+      <table class="mini"><tr><th>Kỹ năng</th><th>Phụ trách</th><th>Bản</th><th>Trạng thái</th></tr>
+      <tr><td>bai-giang-toan-trac-nghiem</td><td>Cô Linh</td><td>1.1</td><td>Đang dùng</td></tr>
+      <tr><td>de-kiem-tra-15-phut</td><td>Thầy Nam</td><td>1.0</td><td>Đang dùng</td></tr>
+      <tr><td>phieu-on-tap-cuoi-tuan</td><td>Cô Mai</td><td>0.9</td><td>Thử nghiệm</td></tr></table></div>
+    <div class="pp p-yellow"><h3 style="font-size:19px"><span class="em">📤</span> Chia sẻ</h3><p class="sm">Customize &gt; Skills, tải kỹ năng về (file .zip), xóa link Form riêng của mình, ghi phiên bản; đồng nghiệp bấm + để tải lên và dán link Form của họ.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Sao phải ghi phiên bản và người phụ trách ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Để cả tổ biết đang dùng bản nào, cần hỏi ai. Thiếu những dòng ấy, mỗi người giữ một bản khác nhau.</p></div>
+<aside class="notes"><p>Dự án đã học ở Module 3. Dự án giữ kiến thức nền luôn được nạp; kỹ năng là cách làm chỉ mở khi cần và dùng được ở mọi nơi. Thư viện trên Drive là bản gốc; sửa thì tăng phiên bản.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Dùng lại và chia sẻ" data-title="Kỹ năng từ bên ngoài và nền tảng khác">
+<div class="s-head"><h2 class="ht">Dùng kỹ năng từ bên ngoài và trên nền tảng khác</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s">
+  <div class="pp p-pink"><h3><span class="em">🛡️</span> Kỹ năng từ bên ngoài</h3><p>Ưu tiên nguồn chính thức. Đọc toàn bộ file, thử với một giáo án rồi mới dùng cho lớp.</p></div>
+  <div class="pp p-blue"><h3><span class="em">📄</span> Một file, nhiều nơi dùng</h3><p>SKILL.md là file chữ thuần theo chuẩn mở; nhiều công cụ AI khác đọc được cùng định dạng này.</p></div>
+  <div class="pp p-blue"><h3><span class="em">📎</span> Nơi chưa có mục kỹ năng</h3><p>Đính kèm SKILL.md và gõ: <i>“Làm theo file hướng dẫn đính kèm.”</i></p></div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Nền tảng nào cũng làm được, chỉ khác chỗ bấm thôi.</p></div>
+<aside class="notes"><p>Mục kỹ năng trên ChatGPT, Gemini thay đổi theo loại tài khoản và thời điểm; kiểm tra trước buổi dạy. Cách đính kèm file luôn dùng được.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="5. Tổng kết" data-title="Hội thoại: vai trò của giáo viên" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hoc.webp')">
+  <span class="scene-tag"><span class="pt">Tổng kết</span>Thầy Rùa và Octo</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-an-mung.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-khen.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:254.97916666666669px;--tl:92px">Giờ mỗi tiết con chỉ đưa giáo án, AI làm ra bài giảng có trắc nghiệm luôn!</p>
+  <p class="bub t-r" style="left:636px;top:118px;width:500px;--t:58px">AI làm theo cách con đã dạy. Nhưng <b>duyệt đáp án và soát trang</b> trước khi gửi học sinh vẫn là việc của con.</p>
+  <p class="bub t-l" style="left:676px;top:456px;width:460px;--t:64px">Con hiểu rồi! AI làm nhanh, con quyết định cuối cùng.</p>
+  <aside class="notes"><p>Khẳng định vai trò giáo viên.</p></aside>
+</section>
+
+<section class="slide" data-sec="5. Tổng kết" data-title="Tổng kết LO 5.1">
+<div class="s-head"><h2 class="ht">Tổng kết LO 5.1</h2><p class="hs">Biến giáo án thành bài giảng điện tử có trắc nghiệm.</p></div><div class="s-body"><div class="cols cols-4 gap-s" style="align-items:stretch"><div class="pp p-blue sm4"><span class="d4l">PHẦN 1</span><h3><span class="em">⚡</span> Làm ngay</h3><ul class="sm4l"><li><span class="em">✅</span><span>Gõ yêu cầu kèm giáo án mẫu, trả lời AI</span></li><li><span class="em">✅</span><span>Lưu, bật kỹ năng; câu ngắn ra trang</span></li><li><span class="em">✅</span><span>Soát như học sinh, gửi link, xem Google Sheets</span></li></ul></div><div class="pp p-green sm4"><span class="d4l">PHẦN 2</span><h3><span class="em">🧰</span> Nhìn lại</h3><ul class="sm4l"><li><span class="em">✅</span><span>Kỹ năng: bộ hướng dẫn đóng gói</span></li><li><span class="em">✅</span><span>Thẻ tên để AI chọn, phần thân là cách làm</span></li><li><span class="em">✅</span><span>Từ 2 dấu hiệu trở lên: nên làm kỹ năng</span></li></ul></div><div class="pp p-yellow sm4"><span class="d4l">PHẦN 3</span><h3><span class="em">🔧</span> Sửa cho đúng ý</h3><ul class="sm4l"><li><span class="em">✅</span><span>Gõ câu sửa, lưu thay bản cũ, thử lại</span></li><li><span class="em">✅</span><span>Mô tả: làm gì, năng lực chính, khi nào dùng</span></li><li><span class="em">✅</span><span>Duyệt bảng đáp án trước khi làm trang</span></li></ul></div><div class="pp p-lav sm4"><span class="d4l">PHẦN 4</span><h3><span class="em">🤝</span> Chia sẻ</h3><ul class="sm4l"><li><span class="em">✅</span><span>Dự án giữ bối cảnh, kỹ năng giữ cách làm</span></li><li><span class="em">✅</span><span>Thư viện của tổ: phụ trách, phiên bản</span></li><li><span class="em">✅</span><span>Kỹ năng bên ngoài: kiểm tra kỹ trước</span></li></ul></div></div><div class="pp p-gray nxt"><p><span class="em">➡️</span> <b>Tiếp theo, LO 5.2:</b> tạo trợ lý AI chấm bài và nhận xét từng em từ bảng nộp bài trong Google Sheets.</p></div></div>
+
+<aside class="notes"><p>Tổng kết theo các phần.</p></aside>
+</section>
+
+<section class="slide cg has-talk" data-sec="5. Tổng kết" data-title="Chúc mừng">
+<div class="s-head"><h2 class="ht"><span class="em">🎉</span> Chúc mừng thầy cô đã hoàn thành bài học số 5.1!</h2></div><div class="s-body"><div class="cg-card"><p class="k">Sau bài học, thầy cô đã có thể:</p><ul><li><i class="ph ph-check"></i><span>Tạo kỹ năng biến giáo án thành bài giảng có trắc nghiệm</span></li><li><i class="ph ph-check"></i><span>Hiểu kỹ năng gồm những phần nào và sửa đúng phần khi chưa như ý</span></li><li><i class="ph ph-check"></i><span>Chia sẻ kỹ năng an toàn cho cả tổ</span></li></ul></div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-vui.webp" alt="Octo"><p class="sp oo">Bài nộp về Google Sheets rồi, nhưng chấm lại, nhận xét từng em, tìm câu cả lớp sai nhiều thì vẫn lâu thầy ạ.</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Bài sau con sẽ tạo một <b>trợ lý AI</b> làm hết việc đó từ một yêu cầu.</p></div>
+<aside class="notes"><p>Cầu nối sang LO 5.2.</p></aside>
+</section>
+
+<section class="slide s-end" data-sec="5. Tổng kết" data-title="Hẹn gặp lại" data-nofoot>
+  <h2>Hẹn gặp lại các thầy cô!</h2>
+  <aside class="notes"><p>Kết thúc.</p></aside>
+</section>
+
+<section class="slide" data-sec="5. Tổng kết" data-title="Câu hỏi ôn tập">
+<div class="s-head"><h2 class="ht"><span class="em">❓</span> Câu hỏi ôn tập</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s">
+<div class="quiz" data-answer="a"><p class="q">1. Gõ “Soạn phiếu luyện tập” nhưng AI không dùng kỹ năng. Sửa phần nào?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Phần mô tả</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Phiên bản</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Link Google Form</span></button></div><p class="fb" data-ok="Đúng. AI đọc mô tả để quyết định dùng kỹ năng." data-no="Chưa đúng. Đáp án A: phần mô tả."></p></div>
+<div class="quiz" data-answer="b"><p class="q">2. Soát trang thấy một câu đáp án sai. Làm gì để tiết sau không lặp lại?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Sửa tay câu đó mỗi lần</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Sửa kỹ năng: đưa bảng đáp án cho tôi duyệt trước khi làm trang</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Bỏ phần trắc nghiệm</span></button></div><p class="fb" data-ok="Đúng. Sửa vào kỹ năng thì mọi bài sau đều có bước duyệt." data-no="Chưa đúng. Đáp án B."></p></div>
+<div class="quiz" data-answer="b"><p class="q">3. Học sinh lớp 6 làm bài trên trang bài giảng cần gì?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Tài khoản Claude</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Chỉ cần link trang</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Cài ứng dụng Claude</span></button></div><p class="fb" data-ok="Đúng. Trang đã xuất bản, ai có link đều mở được." data-no="Chưa đúng. Đáp án B."></p></div>
+</div></div>
+
+<aside class="notes"><p>Ba tình huống thầy cô sẽ gặp.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="5. Tổng kết" data-title="Khung 4D">
+<div class="s-head"><h2 class="ht">Khung 4D khi làm bài giảng bằng kỹ năng</h2></div><div class="s-body"><div class="d4row"><div class="pp p-blue d4"><span class="d4l">D1 · DELEGATION</span><h3><span class="em">🎯</span> Giao việc</h3><p>Chọn việc lặp lại đáng làm kỹ năng; giữ lại việc duyệt đáp án.</p><div class="d4ss"><span class="d4s">Nhận thức vấn đề</span><span class="d4s">Nhận thức nền tảng AI</span><span class="d4s">Phân công nhiệm vụ</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 2</p></div><div class="pp p-green d4"><span class="d4l">D2 · DESCRIPTION</span><h3><span class="em">📝</span> Mô tả</h3><p>Nói rõ trang cần gì, học sinh làm gì, kết quả về đâu; mô tả đúng cách gọi.</p><div class="d4ss"><span class="d4s">Mô tả sản phẩm</span><span class="d4s">Mô tả quy trình</span><span class="d4s">Mô tả cách ứng xử</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 3</p></div><div class="pp p-yellow d4"><span class="d4l">D3 · DISCERNMENT</span><h3><span class="em">🔍</span> Phân định</h3><p>Soát trang như học sinh, duyệt bảng đáp án, thử 3 yêu cầu.</p><div class="d4ss"><span class="d4s">Phân định sản phẩm</span><span class="d4s">Phân định quy trình</span><span class="d4s">Phân định cách ứng xử</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 3</p></div><div class="pp p-lav d4"><span class="d4l">D4 · DILIGENCE</span><h3><span class="em">🛡️</span> Cẩn trọng</h3><p>Trang công khai không chứa thông tin học sinh; kiểm tra kỹ năng bên ngoài.</p><div class="d4ss"><span class="d4s">Cẩn trọng khi tạo</span><span class="d4s">Minh bạch</span><span class="d4s">Chịu trách nhiệm khi dùng</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 4</p></div></div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Bốn năng lực giúp thầy cô dùng AI <b>hiệu quả và có trách nhiệm</b>.</p></div>
+<aside class="notes"><p>Thứ tự chuẩn: Delegation, Description, Discernment, Diligence.</p></aside>
+</section>
+
+</div></main>
+<script src="assets/js/deck.js"></script>
+</body>
+</html>

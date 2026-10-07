@@ -1,0 +1,362 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LO 5.2 · Tạo trợ lý AI chấm bài và nhận xét cho cả lớp</title>
+<link rel="stylesheet" href="assets/css/deck.css">
+<link rel="stylesheet" href="assets/css/story.css">
+<link rel="stylesheet" href="assets/css/v3.css">
+<link rel="stylesheet" href="assets/css/v3-m6.css">
+<link rel="stylesheet" href="assets/css/v4.css">
+</head>
+<body class="v3 v4" data-deck="LO 5.2" data-deck-title="Tạo trợ lý AI chấm bài và nhận xét cho cả lớp" data-home="index.html">
+<main class="deck"><div class="stage">
+
+<section class="slide s-cover" data-sec="Mở đầu" data-title="Bìa: LO 5.2">
+  <div class="brand"><span class="chip"><i class="ph-fill ph-sparkle"></i>AI Fluency nâng cao</span><span>Module 5 · Đóng gói kỹ năng và thiết kế quy trình AI nhiều tác vụ</span></div>
+  <div>
+    <div class="lo">LO 5.2</div>
+    <h1>Tạo trợ lý AI chấm bài và nhận xét cho cả lớp</h1>
+    <p class="sub">Một câu giao việc, trợ lý chấm theo đáp án đã duyệt, nhận xét từng em, báo cáo cả lớp; thầy cô duyệt</p>
+  </div>
+  <div class="meta"><span><b>Thời lượng:</b> khoảng 90 phút</span><span><b>Sản phẩm:</b> 1 trợ lý AI chấm bài và nhận xét</span><span><b>Công cụ:</b> Claude Code, Google Sheets</span></div>
+  <aside class="notes"><p>Giới thiệu bài: Tạo trợ lý AI chấm bài và nhận xét cho cả lớp. Sản phẩm thầy cô làm ra ngay trong buổi học.</p></aside>
+</section>
+
+<section class="slide lo-title" data-sec="Mở đầu" data-title="Mục tiêu bài học">
+<div class="s-body" style="justify-content:center"><span class="lo4k">LO 5.2</span><h2 class="ht">Tạo trợ lý AI chấm bài và nhận xét cho cả lớp</h2><div class="objs3"><div class="o3"><b>01</b><span>Tạo một trợ lý AI chấm bài, nhận xét từng em, tìm câu cả lớp sai nhiều</span></div><div class="o3"><b>02</b><span>Hiểu trợ lý AI là gì, khi nào cần, và sửa khi nó làm sai</span></div><div class="o3"><b>03</b><span>Chia việc cho trợ lý con và đặt trợ lý vào quy trình của tổ</span></div></div></div>
+
+<aside class="notes"><p>Ba mục tiêu. Đầu vào là phiếu nộp của học sinh từ bài giảng ở LO 5.1 (Google Sheets) và bảng đáp án giáo viên đã duyệt.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="Mở đầu" data-title="Hội thoại mở đầu" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-phong-giao-vien.webp')">
+  <span class="scene-tag"><span class="pt">Mở đầu</span>Thầy Rùa và Octo</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-cang-thang.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-giang-giai.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:218.40684793554885px;--tl:92px">Thầy Rùa ơi! Phiếu nộp về Google Sheets rồi, nhưng con vẫn phải soát lại điểm, viết nhận xét từng em, đếm câu nào cả lớp sai nhiều…</p>
+  <p class="bub t-r" style="left:665px;top:118px;width:500px;--t:58px">Hôm nay con tạo một <b>trợ lý AI</b>: đưa phiếu nộp vào, nó chấm theo đáp án con đã duyệt, nhận xét từng em và báo cáo cả lớp. Con chỉ việc duyệt.</p>
+  <aside class="notes"><p>Nối với LO 5.1: bài giảng đã cho ra phiếu nộp; hôm nay biến phiếu nộp thành điểm và nhận xét.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="Mở đầu" data-title="Sản phẩm hôm nay">
+<div class="s-head"><h2 class="ht"><span class="em">🎁</span> Một câu giao việc, ba bản nháp</h2></div>
+<div class="s-body"><div class="flow4" style="grid-template-columns:330px 46px minmax(0,1fr)">
+  <div><p class="cap">Đầu vào: phiếu nộp</p><div class="mock " style=""><div class="bar"><span class="dot sh">▦</span>Google Sheets<span class="sp2">Phieu_nop_6A.csv</span></div><div class="sht"><table><tr><th>Họ tên</th><th>Đáp án</th></tr><tr><td>Nguyễn Văn An</td><td><span class="ans">1A 2C 3A 4D…</span></td></tr><tr><td>Lê Minh Anh</td><td><span class="ans">1A 2C 3B 4D…</span></td></tr><tr><td>Trần Gia Bảo</td><td><span class="ans">1A 2B 3A 4D…</span></td></tr></table></div></div></div>
+  <span class="ar">→</span>
+  <div><p class="cap">Trợ lý làm ra</p><div class="cols cols-3 gap-s ai-s"><div class="lp4 "><div class="top"><b>📊 bang-diem-6A.csv</b><span>bản nháp</span></div><div class="bd"><table><tr><th>Họ tên</th><th>Điểm</th><th>Câu sai</th></tr><tr><td>Nguyễn Văn An</td><td><b>9</b></td><td>7</td></tr><tr><td>Lê Minh Anh</td><td><b>7</b></td><td>3, 7, 9</td></tr><tr><td>Trần Gia Bảo</td><td><b>6</b></td><td>2, 5, 6, 7</td></tr><tr><td>Phạm Thu Hà</td><td><b>10</b></td><td>không</td></tr></table></div></div><div class="lp4 "><div class="top"><b>💬 nhan-xet-6A.md</b><span>bản nháp</span></div><div class="bd"><p><b>Nguyễn Văn An (9 điểm):</b> Em nắm chắc cách nhận biết phân số bằng nhau. Em xem lại câu 7: tìm x bằng cách nhân chéo.</p><p><b>Trần Gia Bảo (6 điểm):</b> Em làm tốt các câu nhận biết. Em ôn lại Ví dụ 2 để làm được dạng tìm x.</p></div></div><div class="lp4 "><div class="top"><b>📈 bao-cao-6A.md</b><span>bản nháp</span></div><div class="bd"><p>32/35 em nộp · trung bình <b>7,8</b> · 3 em chưa nộp</p><div class="bars4"><span>Câu 7</span><span class="bar" style="width:150px"></span><span>18 em sai</span><span>Câu 9</span><span class="bar" style="width:80px"></span><span>9 em sai</span><span>Câu 3</span><span class="bar" style="width:45px"></span><span>5 em sai</span></div><p><b>Gợi ý tiết sau:</b> 10 phút ôn dạng tìm x bằng nhân chéo.</p></div></div></div></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-ngac-nhien.webp" alt="Octo"><p class="sp oo">Có cả gợi ý ôn tập cho tiết sau luôn ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng vậy. Ta làm từng bước nhé!</p></div>
+<aside class="notes"><p>Cho lớp xem sản phẩm trước: bảng điểm, nhận xét từng em, báo cáo cả lớp. Tất cả là bản nháp để giáo viên duyệt.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Làm ngay" data-title="Chuẩn bị">
+<div class="s-head"><h2 class="ht"><span class="em">🧺</span> Chuẩn bị: một thư mục, bốn file</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot vs">{ }</span>Claude Code<span class="sp2">Thư mục trên máy</span></div><div class="pane" style="padding:14px 18px;display:grid;gap:8px"><b style="font-size:19px"><span class="em">📁</span> Cham_bai</b>
+  <div class="row-i"><div><div class="rt"><span class="fchip"><i class="ph ph-file-xls"></i>Phieu_nop_6A.csv</span></div><div class="d">Trong Google Sheets: Tệp &gt; Tải xuống &gt; .csv</div></div></div>
+  <div class="row-i"><div><div class="rt"><span class="fchip"><i class="ph ph-file-xls"></i>Danh_sach_6A.csv</span></div><div class="d">Họ tên, email của lớp</div></div></div>
+  <div class="row-i"><div><div class="rt"><span class="fchip md"><i class="ph ph-file-text"></i>Dap_an_Phan_so.md</span></div><div class="d">Bảng đáp án thầy cô đã duyệt ở LO 5.1</div></div></div>
+  <div class="row-i"><div><div class="rt"><span class="fchip md"><i class="ph ph-file-text"></i>Mau_nhan_xet.md</span></div><div class="d">Một nhận xét thầy cô thấy tốt</div></div></div></div></div>
+  <div class="stack">
+    <div class="pp p-blue"><h3><span class="em">💻</span> Ứng dụng Claude trên máy tính</h3><p>Mở tab <b>Code</b> (Claude Code). Không cần biết lập trình.</p></div>
+    <div class="pp p-blue"><h3><span class="em">📄</span> Vì sao dùng .csv?</h3><p class="sm">File chữ thuần, trợ lý đọc thẳng được; mở bằng Excel vẫn ra bảng.</p></div>
+    <div class="pp p-yellow"><h3><span class="em">🔒</span> Dữ liệu học sinh</h3><p class="sm">Chỉ để trong thư mục những gì cần cho việc chấm: họ tên, lớp, đáp án, email.</p></div>
+  </div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Chuẩn bị xong là bắt đầu được!</p></div>
+<aside class="notes"><p>Có thể dùng Claude Code trong VS Code thay cho ứng dụng máy tính. Codex, Gemini CLI cũng tạo được trợ lý theo cách tương tự.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Làm ngay" data-title="Bước 1: Mở thư mục trong Claude Code">
+<div class="s-head"><h2 class="ht">Bước 1: Mở thư mục trong Claude Code</h2></div><div class="prog4"><span class="on"><b>1</b>Mở thư mục</span><span class=""><b>2</b>Tạo trợ lý</span><span class=""><b>3</b>Đọc lại</span><span class=""><b>4</b>Giao việc</span><span class=""><b>5</b>Duyệt kết quả</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot vs">{ }</span>Claude Code<span class="sp2">Claude Code</span></div><div class="side" style="min-height:330px"><div class="nav"><div class="on mark"><span class="em">📂</span> Open folder <span class="dotn">1</span></div><div><span class="em">💬</span> Chats</div></div><div class="pane">
+  <div class="row-i mark"><div><div class="rt"><span class="em">📁</span> Cham_bai</div><div class="d">Documents › Cham_bai · 4 file</div></div><span class="dotn">2</span></div>
+  <div class="docm" style="font-size:16px"><span class="fchip"><i class="ph ph-file-xls"></i>Phieu_nop_6A.csv</span> <span class="fchip"><i class="ph ph-file-xls"></i>Danh_sach_6A.csv</span> <span class="fchip md"><i class="ph ph-file-text"></i>Dap_an_Phan_so.md</span> <span class="fchip md"><i class="ph ph-file-text"></i>Mau_nhan_xet.md</span></div>
+  <p class="xs">Claude chỉ làm việc với file trong thư mục này.</p></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Mở ứng dụng Claude, chọn tab <b>Code</b>, bấm chọn thư mục</span></div><div class="ri"><span class="dotn">2</span><span>Chọn <b>Cham_bai</b></span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>Tên thư mục hiện ở đầu khung trò chuyện; Claude thấy đủ 4 file.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Chọn đúng thư mục là xong phần khó nhất rồi!</p></div><div class="nx4"><b>Tiếp theo →</b><span>Gõ một câu để tạo trợ lý</span></div></div></div></div>
+
+<aside class="notes"><p>Claude chỉ đọc, ghi file trong thư mục đã chọn; nhờ vậy an toàn hơn.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Làm ngay" data-title="Bước 2: Gõ một câu để tạo trợ lý">
+<div class="s-head"><h2 class="ht">Bước 2: Gõ một câu để tạo trợ lý</h2></div><div class="prog4"><span class="done"><b>✓</b>Mở thư mục</span><span class="on"><b>2</b>Tạo trợ lý</span><span class=""><b>3</b>Đọc lại</span><span class=""><b>4</b>Giao việc</span><span class=""><b>5</b>Duyệt kết quả</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot vs">{ }</span>Claude Code<span class="sp2">Cham_bai</span></div><div class="msgs"><div class="u">Tạo một agent tên tro-ly-cham-bai: <span class="k1">chấm phiếu nộp theo Dap_an_Phan_so.md, đối chiếu với danh sách lớp</span>, <span class="k2">viết nhận xét 2 câu cho từng em theo Mau_nhan_xet.md, thống kê câu cả lớp sai nhiều và gợi ý ôn tập</span>. <span class="k3">Agent chỉ đọc file và tạo file mới, không sửa file gốc</span>; <span class="k4">trình bày kế hoạch trước khi làm</span>. <span class="dotn">1</span></div><div class="use"><i class="ph ph-sparkle"></i>Write .claude/agents/tro-ly-cham-bai.md</div><div class="a"><span class="em">✅</span> Đã tạo trợ lý tro-ly-cham-bai. <span class="fchip md"><i class="ph ph-file-text"></i>.claude/agents/tro-ly-cham-bai.md</span> <span class="dotn">2</span></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Gõ trợ lý làm việc gì, theo file nào, điều <b>không được làm</b></span></div><div class="ri"><span class="dotn">2</span><span>Gửi, chờ Claude tạo file trợ lý</span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>Một file mới tên <b>tro-ly-cham-bai.md</b> trong thư mục .claude/agents.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Bốn màu là bốn ý. Sang bước sau, thầy cô sẽ thấy chúng trong file trợ lý.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Đọc lại file trợ lý trước khi dùng</span></div></div></div></div>
+
+<aside class="notes"><p>Câu lệnh viết liền. Luôn nêu điều trợ lý không được làm.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Làm ngay" data-title="Bước 3: Đọc lại file trợ lý">
+<div class="s-head"><h2 class="ht">Bước 3: Đọc lại file trợ lý</h2></div><div class="prog4"><span class="done"><b>✓</b>Mở thư mục</span><span class="done"><b>✓</b>Tạo trợ lý</span><span class="on"><b>3</b>Đọc lại</span><span class=""><b>4</b>Giao việc</span><span class=""><b>5</b>Duyệt kết quả</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="fileview"><div class="fh"><span class="em">📄</span> .claude/agents/tro-ly-cham-bai.md</div><div class="fb4">
+    <span class="sep">---</span>
+    <span>name: tro-ly-cham-bai</span>
+    <span>description: <span class="k1">Chấm phiếu nộp trắc nghiệm theo bảng đáp án</span>, <span class="k2">nhận xét từng em, báo cáo cả lớp</span>.</span>
+    <span>tools: <span class="k3">Read, Write</span> <span class="dotn">1</span></span>
+    <span class="sep">---</span>
+    <span>Bạn là trợ lý chấm bài cho giáo viên Toán.</span>
+    <span class="h">Cách làm <span class="dotn">2</span></span>
+    <span>1. <span class="k4">Trình bày kế hoạch, chờ giáo viên đồng ý.</span></span>
+    <span>2. <span class="k1">Đối chiếu phiếu nộp với danh sách lớp; chấm theo bảng đáp án.</span></span>
+    <span>3. <span class="k2">Viết nhận xét 2 câu theo Mau_nhan_xet.md.</span></span>
+    <span>4. <span class="k2">Thống kê câu sai nhiều, gợi ý ôn tập.</span></span>
+    <span class="h">Không làm <span class="dotn">3</span></span>
+    <span><span class="k3">Sửa file gốc trong thư mục Cham_bai.</span></span></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Xem <b>tools</b>: chỉ có Read, Write</span></div><div class="ri"><span class="dotn">2</span><span>Đọc phần <b>Cách làm</b>: đủ bước chưa</span></div><div class="ri"><span class="dotn">3</span><span>Đọc phần <b>Không làm</b></span></div></div><div class="blk see"><h3><span class="em">✅</span> Thầy cô biết được</h3><p>Thầy cô biết chắc trợ lý làm gì và không làm gì. Thấy chưa đúng: nhờ Claude sửa bằng một câu.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Công cụ càng ít càng an toàn. Chấm bài chỉ cần đọc và ghi file.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Giao việc cho trợ lý</span></div></div></div></div>
+
+<aside class="notes"><p>Phần đầu (giữa hai dòng ---) giúp Claude nhận ra trợ lý; phần thân là hướng dẫn. Luôn đọc lại tools vì Claude có thể thêm công cụ không cần thiết.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Làm ngay" data-title="Bước 4: Giao việc, xem trợ lý làm">
+<div class="s-head"><h2 class="ht">Bước 4: Giao việc, xem trợ lý làm</h2></div><div class="prog4"><span class="done"><b>✓</b>Mở thư mục</span><span class="done"><b>✓</b>Tạo trợ lý</span><span class="done"><b>✓</b>Đọc lại</span><span class="on"><b>4</b>Giao việc</span><span class=""><b>5</b>Duyệt kết quả</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot vs">{ }</span>Claude Code<span class="sp2">Cham_bai</span></div><div class="msgs"><div class="u">Dùng agent tro-ly-cham-bai chấm bài lớp 6A, bài Phân số bằng nhau. <span class="dotn">1</span></div><div class="a"><p><b>Kế hoạch:</b> 1. Đọc phiếu nộp, đáp án, danh sách · 2. Chấm từng em · 3. Viết nhận xét · 4. Thống kê, gợi ý ôn tập. Cô đồng ý không? <span class="dotn">2</span></p></div><div class="u">Đồng ý.</div><div class="use"><i class="ph ph-sparkle"></i>Read Phieu_nop_6A.csv · 32 dòng</div><div class="use"><i class="ph ph-sparkle"></i>Read Danh_sach_6A.csv · 35 em, 3 em chưa nộp</div><div class="use"><i class="ph ph-sparkle"></i>Read Dap_an_Phan_so.md · 10 câu</div><div class="use"><i class="ph ph-sparkle"></i>Write bang-diem-6A.csv · nhan-xet-6A.md · bao-cao-6A.md</div><div class="a">Đã tạo 3 bản nháp: <span class="fchip"><i class="ph ph-file-xls"></i>bang-diem-6A.csv</span> <span class="fchip md"><i class="ph ph-file-text"></i>nhan-xet-6A.md</span> <span class="fchip md"><i class="ph ph-file-text"></i>bao-cao-6A.md</span> <span class="dotn">3</span></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Gõ “Dùng agent …” và việc cần làm</span></div><div class="ri"><span class="dotn">2</span><span>Đọc kế hoạch trợ lý đưa ra, đồng ý</span></div><div class="ri"><span class="dotn">3</span><span>Theo dõi từng dòng trợ lý đọc, ghi, đến khi báo xong</span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>Trợ lý tự đọc 3 file, tự chấm, tự viết 3 bản nháp; thầy cô không phải nhắn thêm.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Nó tự thấy 3 em chưa nộp, vì đã đối chiếu với danh sách lớp.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Mở 3 bản nháp ra duyệt</span></div></div></div></div>
+
+<aside class="notes"><p>Nhìn các dòng Read, Write: trợ lý đang đọc file nào, ghi file nào. Ba em chưa nộp được phát hiện nhờ đối chiếu danh sách lớp.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Làm ngay" data-title="Bước 5: Duyệt kết quả">
+<div class="s-head"><h2 class="ht">Bước 5: Mở 3 bản nháp trợ lý tạo ra để duyệt</h2></div><div class="prog4"><span class="done"><b>✓</b>Mở thư mục</span><span class="done"><b>✓</b>Tạo trợ lý</span><span class="done"><b>✓</b>Đọc lại</span><span class="done"><b>✓</b>Giao việc</span><span class="on"><b>5</b>Duyệt kết quả</span></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s"><div class="lp4 big"><div class="top"><b>📊 bang-diem-6A.csv</b><span>bản nháp</span></div><div class="bd"><table><tr><th>Họ tên</th><th>Điểm</th><th>Câu sai</th></tr><tr><td>Nguyễn Văn An</td><td><b>9</b></td><td>7</td></tr><tr><td>Lê Minh Anh</td><td><b>7</b></td><td>3, 7, 9</td></tr><tr><td>Trần Gia Bảo</td><td><b>6</b></td><td>2, 5, 6, 7</td></tr><tr><td>Phạm Thu Hà</td><td><b>10</b></td><td>không</td></tr></table></div></div><div class="lp4 big"><div class="top"><b>💬 nhan-xet-6A.md</b><span>bản nháp</span></div><div class="bd"><p><b>Nguyễn Văn An (9 điểm):</b> Em nắm chắc cách nhận biết phân số bằng nhau. Em xem lại câu 7: tìm x bằng cách nhân chéo.</p><p><b>Trần Gia Bảo (6 điểm):</b> Em làm tốt các câu nhận biết. Em ôn lại Ví dụ 2 để làm được dạng tìm x.</p></div></div><div class="lp4 big"><div class="top"><b>📈 bao-cao-6A.md</b><span>bản nháp</span></div><div class="bd"><p>32/35 em nộp · trung bình <b>7,8</b> · 3 em chưa nộp</p><div class="bars4"><span>Câu 7</span><span class="bar" style="width:150px"></span><span>18 em sai</span><span>Câu 9</span><span class="bar" style="width:80px"></span><span>9 em sai</span><span>Câu 3</span><span class="bar" style="width:45px"></span><span>5 em sai</span></div><p><b>Gợi ý tiết sau:</b> 10 phút ôn dạng tìm x bằng nhân chéo.</p></div></div></div>
+<div class="cols cols-3 gap-s">
+  <div class="check-i"><span class="em">☑️</span><span>Điểm khớp đáp án: soát vài em bất kỳ</span></div>
+  <div class="check-i"><span class="em">☑️</span><span>Nhận xét đúng câu em làm sai</span></div>
+  <div class="check-i"><span class="em">☑️</span><span>Báo cáo nêu câu cả lớp sai nhiều</span></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-hao-hung.webp" alt="Octo"><p class="sp oo">Câu 7 sai nhiều thật, tiết sau con ôn lại!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Giỏi lắm. Giờ thầy cô tự tạo trợ lý cho lớp mình nhé.</p></div>
+<aside class="notes"><p>Giáo viên đọc và duyệt cả ba file trước khi gửi kết quả cho học sinh. Câu 7 sai nhiều trùng với câu đáp án đã phải sửa ở LO 5.1: dạng tìm x là chỗ học sinh còn yếu.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Làm ngay" data-title="Thực hành 1: tạo trợ lý của mình">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 1: tạo trợ lý chấm bài cho lớp của thầy cô</h2></div>
+<div class="s-body"><div class="mis4"><span class="tg">NHIỆM VỤ</span><p>Dùng phiếu nộp từ bài giảng của thầy cô ở LO 5.1 (tải .csv) và bảng đáp án đã duyệt. Tạo trợ lý theo 5 bước vừa xem, rồi thử bằng 3 câu.</p><span class="tm">⏱ 15 phút</span></div>
+<div class="cols cols-6-6 ai-s">
+  <div class="code lt" data-file="Câu lệnh mẫu (điền chỗ trống)" style=""><pre>Tạo một agent tên [ten-tro-ly]: chấm [file phiếu nộp] theo [file đáp án], đối chiếu với [danh sách lớp], viết nhận xét [số câu] câu cho từng em theo [file mẫu], thống kê câu cả lớp sai nhiều. Agent chỉ đọc file và tạo file mới, không sửa file gốc; trình bày kế hoạch trước khi làm.</pre></div>
+  <table class="t3"><thead><tr><th>Thử với</th><th>Đạt khi</th></tr></thead><tbody>
+  <tr><td><span class="em">🎯</span> “Chấm bài lớp 6A”</td><td>Có kế hoạch, tạo đúng 3 file</td></tr>
+  <tr><td><span class="em">🔄</span> “Xem lớp 6B làm bài thế nào”</td><td>Vẫn hiểu; thiếu file thì hỏi lại</td></tr>
+  <tr><td><span class="em">🚫</span> “Sửa điểm trong file phiếu nộp”</td><td>Từ chối, nói lý do</td></tr></tbody></table>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Học đi đôi với hành! Thầy cô tạo trợ lý đầu tiên nhé!</p></div>
+<aside class="notes"><p>Mỗi câu thử kiểm tra một phần của file: đúng việc kiểm tra Cách làm; nói khác kiểm tra mô tả; ngoài phạm vi kiểm tra Không làm và tools.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="2. Nhìn lại: trợ lý AI là gì" data-title="Hội thoại: vừa tạo ra cái gì" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hong.webp')">
+  <span class="scene-tag"><span class="pt">Phần 2</span>Nhìn lại: trợ lý AI là gì</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-gioi-thieu.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:216.38px;--tl:92px">Trợ lý này khác kỹ năng ở bài trước thế nào hả thầy? Con thấy ở Bước 4 nó tự làm nhiều bước quá!</p>
+  <p class="bub t-r" style="left:636px;top:118px;width:500px;--t:58px">Đó là một <b>trợ lý AI</b> (<span class="en">Agent</span>), tự điều khiển cả một việc. Nhìn lại Bước 4, con sẽ thấy nó làm thế nào.</p>
+  <aside class="notes"><p>Chuyển sang phần hiểu, luôn chỉ vào thứ vừa làm ở Phần 1.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Nhìn lại: trợ lý AI là gì" data-title="Trợ lý AI là gì?">
+<div class="s-head"><h2 class="ht">Trợ lý AI (<span class="en">Agent</span>) là gì?</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="stack">
+    <div class="pp out"><h3>Trợ lý AI (<span class="en">Agent</span>)</h3><p class="c">là AI tự điều khiển cách làm việc để hoàn thành nhiệm vụ: tự lập kế hoạch, chọn bước, dùng công cụ, xem kết quả rồi làm tiếp đến khi xong.</p></div>
+    <div class="cols cols-2 gap-s">
+      <div class="pp p-peach"><h3><span class="em">📄</span> Kỹ năng</h3><p>Giống <b>quy trình mẫu</b> cho một việc. Ví dụ: kỹ năng làm bài giảng ở LO 5.1.</p></div>
+      <div class="pp p-lav"><h3><span class="em">🧑‍💼</span> Trợ lý</h3><p>Giống <b>cán bộ chuyên trách</b> một vai trò, tự sắp xếp các bước. Ví dụ: trợ lý chấm bài.</p></div>
+    </div>
+  </div>
+  <div class="docm"><h4><span class="back4">↩ Bước 4</span> Trợ lý đã tự đi một vòng</h4>
+    <table class="mini"><tr><th>Trợ lý</th><th>Thầy cô thấy trên màn hình</th></tr>
+    <tr><td><span class="em">🗺️</span> Lập kế hoạch</td><td>“Kế hoạch: 1. Đọc… 2. Chấm… 3. Viết… 4. Thống kê”</td></tr>
+    <tr><td><span class="em">🧰</span> Dùng công cụ</td><td>Read Phieu_nop_6A.csv</td></tr>
+    <tr><td><span class="em">👀</span> Xem kết quả</td><td>“35 em, 3 em chưa nộp”</td></tr>
+    <tr><td><span class="em">🔁</span> Làm tiếp</td><td>Read Dap_an_Phan_so.md, rồi Write 3 file</td></tr>
+    <tr><td><span class="em">🏁</span> Báo xong</td><td>“Đã tạo 3 bản nháp”</td></tr></table></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Vậy trợ lý chỉ là chạy lần lượt từng kỹ năng thay con ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Chưa đúng con ạ. Trợ lý tự quyết bước tiếp theo dựa trên kết quả vừa thấy, như lúc nó phát hiện 3 em chưa nộp.</p></div>
+<aside class="notes"><p>Định nghĩa theo Anthropic, Building effective agents: AI tự điều khiển quá trình và cách dùng công cụ, làm việc theo vòng lặp dựa trên kết quả. Bảng bên phải là đúng các dòng thầy cô đã thấy ở Bước 4.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Nhìn lại: trợ lý AI là gì" data-title="Không phải việc gì cũng cần trợ lý">
+<div class="s-head"><h2 class="ht">Không phải việc gì cũng cần trợ lý</h2><p class="hs">"Tìm giải pháp đơn giản nhất có thể, chỉ tăng độ phức tạp khi cần." (Anthropic)</p></div>
+<div class="s-body"><div class="stairs">
+  <div class="s p-gray" style="min-height:220px"><span class="em">💬</span><h3>Câu lệnh</h3><p>Việc làm một lần, mỗi lần một khác</p><p class="eg">Hỏi cách giải một bài</p></div>
+  <div class="s p-green" style="min-height:270px"><span class="em">🧰</span><h3>Kỹ năng</h3><p>Một việc lặp lại theo một quy trình</p><p class="eg">Làm bài giảng mỗi tiết (LO 5.1)</p></div>
+  <div class="s p-blue" style="min-height:320px"><span class="em">🏠</span><h3>Dự án</h3><p>Nhiều việc cần chung một bộ tài liệu</p><p class="eg">Hỏi đáp kế hoạch dạy học</p></div>
+  <div class="s p-lav" style="min-height:370px"><span class="em">🤖</span><h3>Trợ lý</h3><p>Một vai trò nhiều bước, nhiều công cụ, ranh giới rõ</p><p class="eg">Chấm, nhận xét, báo cáo (hôm nay)</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-suy-nghi.webp" alt="Octo"><p class="sp oo">Thế con tạo trợ lý cho mọi việc luôn cho tiện được không thầy?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Không nên con. Bậc dưới đủ dùng thì chưa cần lên bậc trên.</p></div>
+<aside class="notes"><p>Đi lên bậc trên khi bậc dưới không còn đủ. Chấm bài cần trợ lý vì phải đọc nhiều file, đối chiếu, tự phát hiện ngoại lệ (em chưa nộp), ghi nhiều file, và cần giới hạn rõ (không sửa file gốc).</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Nhìn lại: trợ lý AI là gì" data-title="Ba thành phần của một trợ lý">
+<div class="s-head"><h2 class="ht">Ba thành phần của một trợ lý, ngay trong file vừa tạo</h2><p class="hs">Theo OpenAI, Google và Anthropic</p></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s">
+  <div class="pp p-gray"><h3><span class="em">🧠</span> Mô hình</h3><p>Bộ não suy luận: hiểu yêu cầu, lập kế hoạch, quyết định bước tiếp theo.</p><p class="eg">Trong file: không ghi, tức là dùng mặc định.</p></div>
+  <div class="pp p-blue"><h3><span class="em">📜</span> Hướng dẫn</h3><p>Đóng vai gì, làm theo trình tự nào, không được làm gì.</p><p class="eg">Trong file: phần Cách làm, Không làm.</p></div>
+  <div class="pp p-green"><h3><span class="em">🧰</span> Công cụ</h3><p>Những gì được dùng để hành động: đọc, tạo file, dùng kỹ năng.</p><p class="eg">Trong file: dòng tools: Read, Write.</p></div>
+</div>
+<p class="sm muted c">Bốn cách viết hướng dẫn tốt (OpenAI), soi vào file của mình</p>
+<div class="cols cols-4 gap-s">
+  <div class="pp p-green"><h3 style="font-size:19px"><span class="em">✅</span> Dùng tài liệu sẵn có</h3><p class="sm">Đã dùng: Mau_nhan_xet.md</p></div>
+  <div class="pp p-green"><h3 style="font-size:19px"><span class="em">✅</span> Chia nhỏ nhiệm vụ</h3><p class="sm">Đã có: 4 bước</p></div>
+  <div class="pp p-green"><h3 style="font-size:19px"><span class="em">✅</span> Hành động rõ ràng</h3><p class="sm">Mỗi bước một việc</p></div>
+  <div class="pp p-pink"><h3 style="font-size:19px"><span class="em">⚠️</span> Lường trước ngoại lệ</h3><p class="sm">Còn thiếu: nộp hai lần, tên gõ tắt?</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-y-tuong.webp" alt="Octo"><p class="sp oo">Ô hồng kia là file của con còn thiếu ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng. Và Phần 3 sẽ cho con thấy nó gây lỗi thế nào.</p></div>
+<aside class="notes"><p>Theo OpenAI, A practical guide to building agents: Model, Tools, Instructions. Ô màu hồng là chỗ file còn thiếu, dẫn thẳng sang Phần 3.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="3. Khi trợ lý làm sai" data-title="Hội thoại: trợ lý làm sai" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hong.webp')">
+  <span class="scene-tag"><span class="pt">Phần 3</span>Khi trợ lý làm sai</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-buon.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-vui.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:228.42990654205607px;--tl:92px">Bảng điểm lớp 6B của con có em bị chấm hai lần, em khác gõ tắt tên nên bị coi là chưa nộp…</p>
+  <p class="bub t-r" style="left:657px;top:118px;width:500px;--t:58px">Đúng ô hồng lúc nãy: <b>chưa lường trước ngoại lệ</b>. Con xem trợ lý đã làm gì ở từng bước, rồi sửa đúng phần hướng dẫn bằng một câu.</p>
+  <aside class="notes"><p>Đồng cảm với lỗi thật; nối với phần Ba thành phần.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Khi trợ lý làm sai" data-title="Xem trợ lý đã làm gì">
+<div class="s-head"><h2 class="ht"><span class="em">🔎</span> Xem trợ lý đã làm gì ở từng bước</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot vs">{ }</span>Claude Code<span class="sp2">Cham_bai</span></div><div class="msgs"><div class="u">Dùng agent tro-ly-cham-bai chấm bài lớp 6B, bài Phân số bằng nhau.</div><div class="use"><i class="ph ph-sparkle"></i>Read Phieu_nop_6B.csv · <span class='hl-bad'>36 dòng</span></div><div class="use"><i class="ph ph-sparkle"></i>Read Danh_sach_6B.csv · 34 em</div><div class="a">Đã chấm <span class='hl-bad'>36 bài</span>. Chưa nộp: <span class='hl-bad'>Nguyễn Văn Nam</span>, …</div></div></div>
+  <div class="stack">
+    <div class="pp p-pink"><h3><span class="em">😓</span> Thấy gì?</h3><p>Lớp 34 em mà có 36 bài: hai em bấm Gửi hai lần trên Google Form. Em Nam gõ tên “Ng Van Nam” nên không khớp danh sách.</p></div>
+    <div class="pp p-blue"><h3><span class="em">👀</span> Xem ở đâu?</h3><p class="sm">Mỗi dòng Read, Write đều mở ra xem được trợ lý đã đọc gì. Con số lạ (36 &gt; 34) là dấu hiệu đầu tiên.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Sao con không sửa tay bảng điểm cho nhanh ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Sửa tay thì tuần sau lại sai. Sửa đúng chỗ trong trợ lý thì mọi lần sau đều đúng.</p></div>
+<aside class="notes"><p>Lỗi thật hay gặp: Google Form cho nộp nhiều lần nếu không bật giới hạn; học sinh gõ tên không đúng danh sách. Trợ lý làm đúng hướng dẫn, chỉ là hướng dẫn chưa nói gặp ngoại lệ thì làm gì.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Khi trợ lý làm sai" data-title="Sửa bằng một câu">
+<div class="s-head"><h2 class="ht">Sửa đúng phần hướng dẫn bằng một câu, chạy lại</h2></div>
+<div class="s-body"><div class="mis4"><span class="tg">CÂU SỬA</span><p>Gõ: <b>“Sửa agent tro-ly-cham-bai: em nộp nhiều lần thì lấy lần nộp đầu; tên không khớp danh sách thì ghi vào mục Cần giáo viên xem, không tự coi là chưa nộp.”</b></p><span></span></div>
+<div class="ba4">
+  <div class="docm"><p class="cap bad" style="font-size:16px;font-weight:700">TRƯỚC KHI SỬA</p><p><span class="hl-bad">36 bài</span> · Nguyễn Văn Nam: <span class="hl-bad">chưa nộp</span></p></div>
+  <span class="ar">→</span>
+  <div class="docm"><p class="cap good" style="font-size:16px;font-weight:700">SAU KHI SỬA</p><p><span class="hl-ok">34 bài</span> · <b>Cần giáo viên xem:</b> “Ng Van Nam” có phải Nguyễn Văn Nam?</p></div>
+</div>
+<table class="t3"><thead><tr><th style="width:44%">Trợ lý sai kiểu này</th><th>Sửa ở đâu</th></tr></thead><tbody>
+<tr><td>Hiểu sai việc, đọc nhầm file</td><td>Câu giao việc: nêu rõ file, lớp, bài</td></tr>
+<tr><td>Bỏ bước, xử lý sai ngoại lệ</td><td>Phần Cách làm của trợ lý</td></tr>
+<tr><td>Đụng vào file gốc</td><td>Dòng tools và phần Không làm</td></tr></tbody></table></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-dong-y.webp" alt="Octo"><p class="sp oo">Sửa trợ lý thì lần sau khỏi lo nữa ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng thế. Nhớ chạy lại để kiểm tra nhé.</p></div>
+<aside class="notes"><p>Sửa vào trợ lý, không sửa tay kết quả. Sau khi sửa, chạy lại 3 câu thử ở Thực hành 1. Có thể chặn từ gốc: trong Google Form bật giới hạn một lần trả lời (học sinh cần đăng nhập Google).</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Khi trợ lý làm sai" data-title="Thực hành 2: sửa trợ lý của mình">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 2: chạy, xem từng bước, sửa một chỗ</h2></div>
+<div class="s-body"><div class="mis4"><span class="tg">NHIỆM VỤ</span><p>Chạy trợ lý của mình một lần, <b>đọc các dòng trợ lý đã làm</b>, tìm một chỗ chưa ổn, gõ <b>một câu sửa</b> và chạy lại.</p><span class="tm">⏱ 10 phút</span></div>
+<div class="fl3">
+  <div class="st"><span class="n3">1</span><h4><span class="em">▶️</span> Chạy</h4><p>Chấm một lớp thật.</p></div>
+  <div class="st"><span class="n3">2</span><h4><span class="em">🔎</span> Xem từng bước</h4><p>Con số nào lạ? Bước nào khác ý mình?</p></div>
+  <div class="st"><span class="n3">3</span><h4><span class="em">🔧</span> Gõ câu sửa</h4><p>Đúng phần: hướng dẫn hay công cụ.</p></div>
+  <div class="st gate"><span class="n3">4</span><h4><span class="em">👀</span> Duyệt kết quả</h4><p>Đọc bảng điểm, nhận xét trước khi dùng.</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-cang-thang.webp" alt="Octo"><p class="sp oo">Ba lớp một lúc, con muốn có người soát lại trước khi gửi…</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Vậy thì chia việc cho trợ lý con. Phần tiếp theo nhé!</p></div>
+<aside class="notes"><p>Mời một vài thầy cô chia sẻ lỗi đã gặp và câu sửa đã dùng.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="4. Chia việc, đặt vào quy trình" data-title="Hội thoại: chia việc" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-bang-xanh.webp')">
+  <span class="scene-tag"><span class="pt">Phần 4</span>Chia việc, đặt vào quy trình</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-gioi-thieu.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:216.38px;--tl:92px">Con dạy ba lớp, chấm xong rồi nhưng con muốn ai đó soát lại bảng điểm trước khi gửi…</p>
+  <p class="bub t-r" style="left:636px;top:118px;width:500px;--t:58px">Giao cho ba <b>trợ lý con</b> (<span class="en">Sub-agent</span>), mỗi bạn soát một việc rồi gửi báo cáo về. Rồi ta đặt trợ lý vào quy trình của cả tổ.</p>
+  <aside class="notes"><p>Chuyển sang phần chia việc và quy trình.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Chia việc, đặt vào quy trình" data-title="Trợ lý con là gì">
+<div class="s-head"><h2 class="ht">Trợ lý con (<span class="en">Sub-agent</span>): trợ lý chính chia việc, nhận lại bản tóm tắt</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <svg viewBox="0 0 640 262" width="100%" style="display:block;max-height:260px">
+<defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2456d6"/></marker>
+<marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0e8a5f"/></marker></defs>
+<rect x="220" y="8" width="200" height="56" rx="16" fill="#2456d6"/><text x="320" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">🤖 Trợ lý chính</text>
+<g font-size="17" font-weight="500">
+<path d="M285 66 L120 158" stroke="#2456d6" stroke-width="3" marker-end="url(#ah1)" fill="none"/><path d="M320 66 L320 158" stroke="#2456d6" stroke-width="3" marker-end="url(#ah1)"/><path d="M355 66 L520 158" stroke="#2456d6" stroke-width="3" marker-end="url(#ah1)" fill="none"/>
+<path d="M150 160 L300 72" stroke="#0e8a5f" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah2)" fill="none"/><path d="M490 160 L340 72" stroke="#0e8a5f" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah2)" fill="none"/>
+<text x="118" y="104" fill="#2456d6">giao việc</text><text x="452" y="104" fill="#0e8a5f">báo cáo tóm tắt</text></g>
+<g font-size="18" font-weight="700" fill="#1f4fa8">
+<rect x="40" y="162" width="160" height="76" rx="14" fill="#fff" stroke="#2456d6" stroke-width="2"/><text x="120" y="194" text-anchor="middle">Trợ lý con 1</text><text x="120" y="222" text-anchor="middle" font-size="14" font-weight="400" fill="#5a6b85">ngữ cảnh riêng</text>
+<rect x="240" y="162" width="160" height="76" rx="14" fill="#fff" stroke="#2456d6" stroke-width="2"/><text x="320" y="194" text-anchor="middle">Trợ lý con 2</text><text x="320" y="222" text-anchor="middle" font-size="14" font-weight="400" fill="#5a6b85">ngữ cảnh riêng</text>
+<rect x="440" y="162" width="160" height="76" rx="14" fill="#fff" stroke="#2456d6" stroke-width="2"/><text x="520" y="194" text-anchor="middle">Trợ lý con 3</text><text x="520" y="222" text-anchor="middle" font-size="14" font-weight="400" fill="#5a6b85">ngữ cảnh riêng</text></g></svg>
+  <div class="stack">
+    <div class="pp p-blue"><h3><span class="em">🔹</span> Làm riêng, báo cáo gọn</h3><p>Mỗi trợ lý con làm trong <b>ngữ cảnh riêng</b>, chỉ gửi lại bản tóm tắt, nên cuộc trò chuyện chính luôn gọn.</p></div>
+    <div class="pp p-green"><h3><span class="em">✅</span> Nên dùng khi</h3><p class="sm">Cần soát độc lập; đọc nhiều nhưng chỉ cần kết luận; các phần việc tách rời nhau.</p></div>
+    <div class="pp p-gray"><h3><span class="em">✌️</span> Hai cách tạo</h3><p class="sm">Nêu thẳng trong câu lệnh (“Dùng 3 trợ lý con…”), hoặc tạo file trong .claude/agents/ như Bước 2 để dùng lại.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Vậy soát bảng điểm thì con dùng trợ lý con ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng rồi. Xem làm mẫu ngay nhé.</p></div>
+<aside class="notes"><p>Theo tài liệu Claude Code: trợ lý con chạy trong ngữ cảnh riêng và chỉ trả về bản tóm tắt. Trợ lý chấm bài ở Bước 2 cũng chính là một trợ lý con dùng lại được.</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Chia việc, đặt vào quy trình" data-title="Làm mẫu: 3 trợ lý con soát bảng điểm">
+<div class="s-head"><h2 class="ht">Làm mẫu: 3 trợ lý con soát bảng điểm</h2></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot vs">{ }</span>Claude Code<span class="sp2">Cham_bai</span></div><div class="msgs"><div class="u">Dùng 3 Sub-agent soát bang-diem-6A.csv và nhan-xet-6A.md, không sửa file. Sub-agent 1 đối chiếu với Danh_sach_6A.csv; Sub-agent 2 chấm lại 5 em bất kỳ theo Dap_an_Phan_so.md; Sub-agent 3 rà nhận xét có thông tin không nên gửi. Mỗi báo cáo gồm: ổn hay cần sửa, chỗ cần sửa. Tổng hợp thành một bản cho tôi. <span class="dotn">1</span></div><div class="use"><i class="ph ph-sparkle"></i>Trợ lý con 1 · đối chiếu danh sách · xong</div><div class="use"><i class="ph ph-sparkle"></i>Trợ lý con 2 · chấm lại 5 em · xong</div><div class="use"><i class="ph ph-sparkle"></i>Trợ lý con 3 · rà nhận xét · xong</div><div class="a"><p><b>Kết luận: <span style='color:#c8363d'>cần sửa 2 chỗ</span></b> <span class="dotn">2</span><br>· Lê Minh Anh: bảng ghi 7 điểm, chấm lại được 8 (câu 3 đúng)<br>· Một nhận xét nhắc chuyện em nghỉ học, nên bỏ<br>Còn lại: 32/32 em khớp danh sách.</p></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Gõ câu giao việc: mỗi trợ lý con một phần việc, cách báo cáo</span></div><div class="ri"><span class="dotn">2</span><span>Đọc một bản tổng hợp, sửa 2 chỗ trước khi dùng</span></div></div><div class="blk see"><h3><span class="em">✅</span> Thầy cô nhận được</h3><p>Ba báo cáo chạy song song, gộp thành một bản gọn.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Trợ lý con không thấy cuộc trò chuyện, nên câu giao việc phải đủ ý.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Đặt trợ lý vào quy trình của tổ</span></div></div></div></div>
+
+<aside class="notes"><p>Câu giao việc phải nêu đủ file, phần việc, cách báo cáo vì trợ lý con không thấy cuộc trò chuyện của thầy cô. Nhận xét chỉ nói về bài làm; không nhắc sức khỏe, gia đình, kỷ luật.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Chia việc, đặt vào quy trình" data-title="Trợ lý trong quy trình">
+<div class="s-head"><h2 class="ht">Quy trình định các bước, trợ lý lo phần việc cần suy nghĩ</h2></div>
+<div class="s-body">
+<div class="quote3">"Quy trình (<span class="en">Workflow</span>) là hệ thống trong đó AI và công cụ được điều phối theo những đường đi định sẵn.<br>Tác nhân AI (<span class="en">Agent</span>) là hệ thống trong đó AI tự điều khiển quá trình và cách dùng công cụ của mình."<cite>Anthropic, Building effective agents</cite></div>
+<div class="fl3">
+  <div class="st"><span class="n3">1</span><h4><span class="em">📐</span> Bài giảng</h4><p>Kỹ năng LO 5.1 làm trang có trắc nghiệm.</p></div>
+  <div class="st"><span class="n3">2</span><h4><span class="em">🧑‍🎓</span> Học sinh nộp</h4><p>Phiếu nộp về Google Sheets.</p></div>
+  <div class="st" style="border-color:#2456d6;border-width:2px"><span class="n3">3</span><h4><span class="em">🤖</span> Trợ lý chấm</h4><p>Chấm, nhận xét; trợ lý con soát lại.</p></div>
+  <div class="st gate"><span class="n3">4</span><h4><span class="em">✅</span> Giáo viên duyệt</h4><p>Đọc, sửa, chốt điểm.</p></div>
+  <div class="st"><span class="n3">5</span><h4><span class="em">✉️</span> Gửi từng em</h4><p>Học ở LO 5.3.</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-y-tuong.webp" alt="Octo"><p class="sp oo">Vậy quy trình là cái khung, còn trợ lý làm việc ở từng ô ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Chính xác! Bước nào gửi đi thì luôn có con người duyệt.</p></div>
+<aside class="notes"><p>Quy trình giữ các bước cố định của cả chuỗi; ở bước 3, trợ lý tự quyết cách làm; bước 4 là người duyệt. Cách cho cả quy trình tự chạy học ở LO 5.3.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Chia việc, đặt vào quy trình" data-title="Gọi trợ lý trong một bước">
+<div class="s-head"><h2 class="ht">Gọi trợ lý trong một bước: 3 cách trên Claude Code</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s">
+  <div class="pp p-blue"><h3><span class="em">🗣️</span> Gọi theo tên</h3><p>Nêu tên, việc, đầu vào, nơi lưu cho bước sau.</p><div class="docm" style="margin-top:8px">Dùng agent tro-ly-cham-bai chấm bài lớp 6A, lưu bảng điểm vào bang-diem-6A.csv cho bước giáo viên duyệt.</div></div>
+  <div class="pp p-green"><h3><span class="em">＠</span> Gõ @ để chọn</h3><p>Gõ @ trong ô chat, chọn trợ lý trong danh sách, rồi gõ việc cần làm.</p><div class="docm" style="margin-top:8px">@tro-ly-cham-bai chấm bài lớp 6B</div></div>
+  <div class="pp p-lav"><h3><span class="em">🪄</span> Để Claude tự gọi</h3><p>Yêu cầu khớp mô tả của trợ lý thì Claude tự giao việc. Vì vậy mô tả cần nêu rõ làm gì, khi nào dùng, như kỹ năng ở LO 5.1.</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-suy-nghi.webp" alt="Octo"><p class="sp oo">Con mới dùng thì nên gọi cách nào ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Gọi theo tên cho chắc con ạ.</p></div>
+<aside class="notes"><p>Ba cách gọi theo tài liệu Subagents của Claude Code. Mới dùng nên gọi theo tên cho chắc.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="5. Tổng kết" data-title="Hội thoại: vai trò của giáo viên" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-phong-giao-vien.webp')">
+  <span class="scene-tag"><span class="pt">Tổng kết</span>Thầy Rùa và Octo</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-an-mung.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-khen.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:254.97916666666669px;--tl:92px">Giờ con chỉ gõ một câu, trợ lý chấm, nhận xét, có cả trợ lý con soát lại!</p>
+  <p class="bub t-r" style="left:636px;top:118px;width:500px;--t:58px">Trợ lý làm nhanh, nhưng mọi thứ nó tạo là <b>bản nháp</b>. Điểm của học sinh chỉ chốt khi <b>con đã duyệt</b>.</p>
+  <p class="bub t-l" style="left:676px;top:456px;width:460px;--t:64px">Con hiểu rồi! Trợ lý làm thay nhiều bước, con vẫn là người chốt.</p>
+  <aside class="notes"><p>Khẳng định vai trò giáo viên.</p></aside>
+</section>
+
+<section class="slide" data-sec="5. Tổng kết" data-title="Tổng kết LO 5.2">
+<div class="s-head"><h2 class="ht">Tổng kết LO 5.2</h2><p class="hs">Tạo trợ lý AI chấm bài và nhận xét cho cả lớp.</p></div><div class="s-body"><div class="cols cols-4 gap-s" style="align-items:stretch"><div class="pp p-blue sm4"><span class="d4l">PHẦN 1</span><h3><span class="em">⚡</span> Làm ngay</h3><ul class="sm4l"><li><span class="em">✅</span><span>Chọn thư mục, gõ một câu tạo trợ lý</span></li><li><span class="em">✅</span><span>Đọc lại tools, Cách làm, Không làm</span></li><li><span class="em">✅</span><span>Giao việc, duyệt 3 bản nháp</span></li></ul></div><div class="pp p-green sm4"><span class="d4l">PHẦN 2</span><h3><span class="em">🤖</span> Nhìn lại</h3><ul class="sm4l"><li><span class="em">✅</span><span>Trợ lý tự lập kế hoạch, làm theo vòng lặp</span></li><li><span class="em">✅</span><span>Chọn giải pháp đơn giản nhất đủ dùng</span></li><li><span class="em">✅</span><span>Mô hình, hướng dẫn, công cụ</span></li></ul></div><div class="pp p-yellow sm4"><span class="d4l">PHẦN 3</span><h3><span class="em">🔧</span> Khi trợ lý làm sai</h3><ul class="sm4l"><li><span class="em">✅</span><span>Xem từng bước, để ý con số lạ</span></li><li><span class="em">✅</span><span>Sửa đúng phần bằng một câu, chạy lại</span></li></ul></div><div class="pp p-lav sm4"><span class="d4l">PHẦN 4</span><h3><span class="em">🔹</span> Chia việc, quy trình</h3><ul class="sm4l"><li><span class="em">✅</span><span>Trợ lý con làm riêng, báo cáo gọn</span></li><li><span class="em">✅</span><span>Quy trình định bước, trợ lý làm trong bước</span></li><li><span class="em">✅</span><span>Gọi theo tên, gõ @, để Claude tự gọi</span></li></ul></div></div><div class="pp p-gray nxt"><p><span class="em">➡️</span> <b>Tiếp theo, LO 5.3:</b> kết nối Gmail, Drive; cho cả chuỗi tự chạy: gửi bài, nhắc nộp, gửi điểm cho từng em.</p></div></div>
+
+<aside class="notes"><p>Tổng kết theo các phần.</p></aside>
+</section>
+
+<section class="slide cg has-talk" data-sec="5. Tổng kết" data-title="Chúc mừng">
+<div class="s-head"><h2 class="ht"><span class="em">🎉</span> Chúc mừng thầy cô đã hoàn thành bài học số 5.2!</h2></div><div class="s-body"><div class="cg-card"><p class="k">Sau bài học, thầy cô đã có thể:</p><ul><li><i class="ph ph-check"></i><span>Tạo trợ lý AI chấm bài và nhận xét từ một câu</span></li><li><i class="ph ph-check"></i><span>Hiểu trợ lý AI và sửa đúng chỗ khi nó làm sai</span></li><li><i class="ph ph-check"></i><span>Giao việc cho trợ lý con và đặt trợ lý vào quy trình</span></li></ul></div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-vui.webp" alt="Octo"><p class="sp oo">Có điểm và nhận xét rồi, giờ con phải gửi cho từng em nữa. Có cách nào tự gửi không ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Bài sau con sẽ <b>kết nối</b> AI với Gmail, Drive và cho cả chuỗi việc tự chạy.</p></div>
+<aside class="notes"><p>Cầu nối sang LO 5.3.</p></aside>
+</section>
+
+<section class="slide s-end" data-sec="5. Tổng kết" data-title="Hẹn gặp lại" data-nofoot>
+  <h2>Hẹn gặp lại các thầy cô!</h2>
+  <aside class="notes"><p>Kết thúc.</p></aside>
+</section>
+
+<section class="slide" data-sec="5. Tổng kết" data-title="Câu hỏi ôn tập">
+<div class="s-head"><h2 class="ht"><span class="em">❓</span> Câu hỏi ôn tập</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s">
+<div class="quiz" data-answer="b"><p class="q">1. Muốn trợ lý không bao giờ sửa file phiếu nộp gốc. Cách chắc nhất?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Dặn lại mỗi lần</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Chỉ cho đọc và tạo file mới, ghi rõ điều không làm</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Viết “hãy cẩn thận”</span></button></div><p class="fb" data-ok="Đúng. Công cụ ít và giới hạn rõ." data-no="Chưa đúng. Đáp án B."></p></div>
+<div class="quiz" data-answer="b"><p class="q">2. Lớp 34 em mà trợ lý báo chấm 36 bài. Nên làm gì?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Xóa tay 2 dòng</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Sửa phần Cách làm: nộp nhiều lần thì lấy lần đầu</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Bỏ qua</span></button></div><p class="fb" data-ok="Đúng. Sửa từ hướng dẫn thì lần sau đúng." data-no="Chưa đúng. Đáp án B."></p></div>
+<div class="quiz" data-answer="b"><p class="q">3. Giao việc cho trợ lý con cần nêu gì?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Chỉ cần nói “như đã nói ở trên”</span></button><button class="opt" data-k="b"><span class="k">B</span><span>File, phần việc, cách báo cáo</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Không cần gì</span></button></div><p class="fb" data-ok="Đúng. Trợ lý con không thấy cuộc trò chuyện." data-no="Chưa đúng. Đáp án B."></p></div>
+</div></div>
+
+<aside class="notes"><p>Ba tình huống thầy cô sẽ gặp.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="5. Tổng kết" data-title="Khung 4D">
+<div class="s-head"><h2 class="ht">Khung 4D khi tạo trợ lý chấm bài</h2></div><div class="s-body"><div class="d4row"><div class="pp p-blue d4"><span class="d4l">D1 · DELEGATION</span><h3><span class="em">🎯</span> Giao việc</h3><p>Chọn giải pháp đơn giản nhất đủ dùng; giao chấm, nhận xét; giữ lại việc chốt điểm.</p><div class="d4ss"><span class="d4s">Nhận thức vấn đề</span><span class="d4s">Nhận thức nền tảng AI</span><span class="d4s">Phân công nhiệm vụ</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 2</p></div><div class="pp p-green d4"><span class="d4l">D2 · DESCRIPTION</span><h3><span class="em">📝</span> Mô tả</h3><p>Hướng dẫn rõ các bước, ngoại lệ; câu giao việc cho trợ lý con đủ ý.</p><div class="d4ss"><span class="d4s">Mô tả sản phẩm</span><span class="d4s">Mô tả quy trình</span><span class="d4s">Mô tả cách ứng xử</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 3, 4</p></div><div class="pp p-yellow d4"><span class="d4l">D3 · DISCERNMENT</span><h3><span class="em">🔍</span> Phân định</h3><p>Đọc kế hoạch, từng bước trợ lý làm, bảng điểm trước khi dùng.</p><div class="d4ss"><span class="d4s">Phân định sản phẩm</span><span class="d4s">Phân định quy trình</span><span class="d4s">Phân định cách ứng xử</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 3</p></div><div class="pp p-lav d4"><span class="d4l">D4 · DILIGENCE</span><h3><span class="em">🛡️</span> Cẩn trọng</h3><p>Công cụ tối thiểu, chỉ dữ liệu cần cho việc chấm; giáo viên chịu trách nhiệm.</p><div class="d4ss"><span class="d4s">Cẩn trọng khi tạo</span><span class="d4s">Minh bạch</span><span class="d4s">Chịu trách nhiệm khi dùng</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 4</p></div></div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Khi giao việc chấm bài, <b>Phân định</b> và <b>Cẩn trọng</b> quan trọng nhất.</p></div>
+<aside class="notes"><p>Thứ tự chuẩn: Delegation, Description, Discernment, Diligence.</p></aside>
+</section>
+
+</div></main>
+<script src="assets/js/deck.js"></script>
+</body>
+</html>

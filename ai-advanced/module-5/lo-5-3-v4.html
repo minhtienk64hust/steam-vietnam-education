@@ -1,0 +1,386 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LO 5.3 · Tự động gửi bài, nhắc nộp và gửi điểm cho từng học sinh</title>
+<link rel="stylesheet" href="assets/css/deck.css">
+<link rel="stylesheet" href="assets/css/story.css">
+<link rel="stylesheet" href="assets/css/v3.css">
+<link rel="stylesheet" href="assets/css/v3-m6.css">
+<link rel="stylesheet" href="assets/css/v4.css">
+</head>
+<body class="v3 v4" data-deck="LO 5.3" data-deck-title="Tự động gửi bài, nhắc nộp và gửi điểm cho từng học sinh" data-home="index.html">
+<main class="deck"><div class="stage">
+
+<section class="slide s-cover" data-sec="Mở đầu" data-title="Bìa: LO 5.3">
+        <div class="brand"><span class="chip"><i class="ph-fill ph-sparkle"></i>AI Fluency nâng cao</span><span>Module 5
+            · Đóng gói kỹ năng và thiết kế quy trình AI nhiều tác vụ</span></div>
+        <div>
+          <div class="lo">LO 5.3</div>
+          <h1>Tự động gửi bài, nhắc nộp và gửi điểm cho từng học sinh</h1>
+          <p class="sub">Kết nối Gmail, Drive; giao cho AI gửi điểm riêng từng em sau khi duyệt; cho cả chuỗi tự chạy</p>
+        </div>
+        <div class="meta"><span><b>Thời lượng:</b> khoảng 80 phút</span><span><b>Sản phẩm:</b> 1 chuỗi việc tự chạy hằng tuần</span><span><b>Công cụ:</b> Claude Cowork, Gmail, Google Drive</span></div>
+        <aside class="notes"><p>Giới thiệu bài: Tự động gửi bài, nhắc nộp và gửi điểm cho từng học sinh. Sản phẩm thầy cô làm ra ngay trong buổi học.</p></aside>
+      </section>
+
+<section class="slide lo-title" data-sec="Mở đầu" data-title="Mục tiêu bài học">
+<div class="s-body" style="justify-content:center"><span class="lo4k">LO 5.3</span><h2 class="ht">Tự động gửi bài, nhắc nộp và gửi điểm cho từng học sinh</h2><div class="objs3"><div class="o3"><b>01</b><span>Kết nối AI với Gmail và Google Drive</span></div><div class="o3"><b>02</b><span>Giao cho AI gửi điểm, nhận xét riêng từng em, duyệt trước khi gửi</span></div><div class="o3"><b>03</b><span>Cho cả chuỗi việc của một tiết tự chạy theo lịch</span></div></div></div>
+
+<aside class="notes"><p>Ba mục tiêu, ba phần. Nối LO 5.1 (bài giảng, phiếu nộp) và LO 5.2 (bảng điểm, nhận xét) thành một chuỗi tự chạy hằng tuần.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="Mở đầu" data-title="Hội thoại mở đầu" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hoc.webp')">
+  <span class="scene-tag"><span class="pt">Mở đầu</span>Thầy Rùa và Octo</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-cang-thang.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-giang-giai.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:218.40684793554885px;--tl:92px">Có điểm, có nhận xét rồi, nhưng gửi cho 35 em, mỗi em một thư riêng, con phải ngồi gõ cả buổi!</p>
+  <p class="bub t-r" style="left:665px;top:118px;width:500px;--t:58px">Hôm nay con <b>giao việc</b> cho AI: nó soạn và gửi thư riêng cho từng em. Con chỉ xem thư mẫu và cho phép gửi. Sau đó ta cho cả chuỗi việc tự chạy mỗi tuần.</p>
+  <aside class="notes"><p>Nối với LO 5.2: đã có bảng điểm, nhận xét; hôm nay gửi đến từng học sinh.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="Mở đầu" data-title="Sản phẩm hôm nay">
+<div class="s-head"><h2 class="ht"><span class="em">🎁</span> Một tuần của lớp 6A, AI gửi thay cô</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot gml">✉</span>Gmail<span class="sp2">Đã gửi</span></div><div class="inbox4"><div class="r"><b>Cả lớp 6A</b><span class="s">Bài giảng Phân số bằng nhau: làm và nộp trước 20:00 thứ Tư</span><span class="t">T2 7:00</span></div><div class="r"><b>3 em chưa nộp</b><span class="s">Nhắc nộp bài: còn 2 tiếng nữa là hết hạn</span><span class="t">T4 18:00</span></div><div class="r on"><b>Nguyễn Văn An</b><span class="s">Kết quả bài Phân số bằng nhau · Toán 6A</span><span class="t">T5 7:40</span></div><div class="r"><b>Lê Minh Anh</b><span class="s">Kết quả bài Phân số bằng nhau · Toán 6A</span><span class="t">T5 7:40</span></div><div class="r"><b>… 30 thư khác</b><span class="s">Mỗi em một thư riêng</span><span class="t">T5 7:41</span></div><div class="r"><b>Tổ trưởng</b><span class="s">Báo cáo lớp 6A tuần 6: 32/35 em nộp, câu 7 sai nhiều</span><span class="t">T5 7:45</span></div></div></div>
+  <div class="mock " style=""><div class="bar"><span class="dot gml">✉</span>Gmail<span class="sp2">thư đã gửi</span></div><div class="mail4"><p class="mh">Tới: an.nguyen@truong.edu.vn</p><p class="ms">Kết quả bài Phân số bằng nhau · Toán 6A</p><div><p>Chào em An,<br>Em đạt <b>9/10</b> điểm. Em nắm chắc cách nhận biết phân số bằng nhau. Câu 7 em xem lại cách tìm x bằng nhân chéo ở Ví dụ 2 nhé.<br>Cô Linh</p></div></div></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-ngac-nhien.webp" alt="Octo"><p class="sp oo">AI tự gửi thư cho từng em luôn ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Chỉ khi con cho phép. Ta làm từng bước nhé!</p></div>
+<aside class="notes"><p>Cho lớp xem sản phẩm trước: thư gửi bài, thư nhắc, thư điểm riêng từng em, báo cáo tổ trưởng. Thư điểm chỉ đi sau khi giáo viên xem mẫu và cho phép.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Kết nối" data-title="Bước 1: Kết nối Gmail">
+<div class="s-head"><h2 class="ht">Bước 1: Kết nối Gmail</h2></div><div class="prog4"><span class="on"><b>1</b>Kết nối Gmail</span><span class=""><b>2</b>Kết nối Drive</span><span class=""><b>3</b>Kiểm tra</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude Cowork<span class="sp2">Claude Cowork</span></div><div class="side" style="min-height:340px"><div class="nav"><div><span class="em">💬</span> Tasks</div><div class="on mark"><span class="em">⚙️</span> Settings <span class="dotn">1</span></div></div>
+  <div class="pane"><b style="font-size:19px">Connectors</b>
+  <div class="row-i"><div><div class="rt">Gmail</div><div class="d">Đọc, soạn thư; gửi khi được cho phép</div></div><span class="btn3 pri mark">Connect <span class="dotn">2</span></span></div>
+  <div class="row-i"><div><div class="rt">Google Drive</div><div class="d">Đọc file, trang tính trong Drive</div></div><span class="btn3">Connect</span></div></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Mở <b>Settings &gt; Connectors</b></span></div><div class="ri"><span class="dotn">2</span><span>Bấm <b>Connect</b> ở Gmail, đăng nhập <b>tài khoản trường</b></span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>Gmail hiện chữ <b>Connected</b>.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Bấm kết nối, đăng nhập là xong. Không cần cài gì phức tạp.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Kết nối Google Drive</span></div></div></div></div>
+
+<aside class="notes"><p>Claude Cowork chạy trong ứng dụng Claude trên máy tính. Dùng tài khoản trường, không dùng tài khoản cá nhân. Có tài khoản kết nối Gmail chỉ tạo được thư nháp; khi đó thầy cô gửi từ mục Thư nháp.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Kết nối" data-title="Bước 2: Kết nối Google Drive">
+<div class="s-head"><h2 class="ht">Bước 2: Kết nối Google Drive</h2></div><div class="prog4"><span class="done"><b>✓</b>Kết nối Gmail</span><span class="on"><b>2</b>Kết nối Drive</span><span class=""><b>3</b>Kiểm tra</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude Cowork<span class="sp2">Claude Cowork</span></div><div class="side" style="min-height:340px"><div class="nav"><div><span class="em">💬</span> Tasks</div><div class="on"><span class="em">⚙️</span> Settings</div></div>
+  <div class="pane"><b style="font-size:19px">Connectors</b>
+  <div class="row-i"><div><div class="rt">Gmail</div><div class="d">Tài khoản trường</div></div><span class="btn3 okb">Connected</span></div>
+  <div class="row-i"><div><div class="rt">Google Drive</div><div class="d">Đọc file, trang tính trong Drive</div></div><span class="btn3 pri mark">Connect <span class="dotn">1</span></span></div>
+  <div class="row-i"><div><div class="rt"><span class="em">📁</span> Thư mục trên máy</div><div class="d">Cham_bai (bảng điểm, nhận xét từ LO 5.2)</div></div><span class="btn3 mark">Chọn <span class="dotn">2</span></span></div></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Bấm <b>Connect</b> ở Google Drive</span></div><div class="ri"><span class="dotn">2</span><span>Chọn thư mục <b>Cham_bai</b> trên máy để AI đọc bảng điểm, nhận xét</span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>AI đọc được trang tính phiếu nộp trên Drive và file trong Cham_bai.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Có kết nối thì dùng kết nối; file trên máy thì mở thư mục.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Kiểm tra bằng 2 câu ngắn</span></div></div></div></div>
+
+<aside class="notes"><p>Phiếu nộp (Google Sheets của Form ở LO 5.1) nằm trên Drive; bảng điểm, nhận xét ở LO 5.2 nằm trong thư mục trên máy.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Kết nối" data-title="Bước 3: Kiểm tra bằng 2 câu ngắn">
+<div class="s-head"><h2 class="ht">Bước 3: Kiểm tra bằng 2 câu ngắn</h2></div><div class="prog4"><span class="done"><b>✓</b>Kết nối Gmail</span><span class="done"><b>✓</b>Kết nối Drive</span><span class="on"><b>3</b>Kiểm tra</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude Cowork<span class="sp2">kiểm tra</span></div><div class="msgs"><div class="u">Trong Drive, mở trang tính Phiếu nộp bài Toán 6: lớp 6A có bao nhiêu em đã nộp bài Phân số bằng nhau? <span class="dotn">1</span></div><div class="use"><i class="ph ph-sparkle"></i>Google Drive · đọc trang tính</div><div class="a">32 em đã nộp. 3 em chưa nộp: Đỗ Minh Khang, Vũ Thảo, Hoàng Long.</div><div class="u">Gmail của tôi có thư nào từ học sinh lớp 6A tuần này? <span class="dotn">2</span></div><div class="use"><i class="ph ph-sparkle"></i>Gmail · tìm thư</div><div class="a">2 thư: em Thảo hỏi hạn nộp, em Long xin nộp muộn.</div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Hỏi một câu về Drive</span></div><div class="ri"><span class="dotn">2</span><span>Hỏi một câu về Gmail</span></div></div><div class="blk see"><h3><span class="em">✅</span> Thấy được</h3><p>Hai câu đều có câu trả lời đúng với tài khoản trường.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Hỏi câu đọc trước. Đúng rồi mới giao việc gửi.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Xem AI làm việc qua những đường nào</span></div></div></div></div>
+
+<aside class="notes"><p>Chỉ hỏi những câu đọc, chưa giao việc gửi. Chạy được mới giao việc thật.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Kết nối" data-title="Ba đường kết nối">
+<div class="s-head"><h2 class="ht">AI làm việc qua ba đường kết nối</h2></div>
+<div class="s-body"><div class="hub3">
+  <div class="pp p-blue"><h3><span class="em">🔌</span> Kết nối ứng dụng</h3><p>Gmail, Drive, lịch, Sheets. <span class="back4">↩ Bước 1, 2</span> Bật một lần; nhanh, ổn định.</p></div>
+  <div class="core"><span class="em">🤖</span><b>AI</b><span>Claude, ChatGPT, Gemini</span></div>
+  <div class="pp p-green"><h3><span class="em">🌐</span> Trình duyệt</h3><p>Trang chưa có kết nối: LMS của trường, cổng điểm. AI bấm, gõ như người qua tiện ích Claude in Chrome.</p></div>
+  <div class="pp p-yellow"><h3><span class="em">💻</span> Máy tính</h3><p>File, thư mục trên máy: <span class="back4">↩ Bước 2</span> thư mục Cham_bai của LO 5.2.</p></div>
+  <div class="pp p-gray"><h3><span class="em">🧭</span> Chọn đường nào?</h3><p>Có kết nối thì dùng kết nối. Chưa có thì dùng trình duyệt. File trên máy thì mở thư mục.</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Hôm nay con dùng mấy đường ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Hai đường: Gmail, Drive là kết nối ứng dụng; Cham_bai là máy tính.</p></div>
+<aside class="notes"><p>Cả ba nền tảng đều đang có tính năng tương tự (Claude Cowork, ChatGPT, Gemini); tên mục khác nhau. Với trình duyệt, nên dùng một hồ sơ Chrome riêng chỉ đăng nhập tài khoản trường.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Giao việc: gửi điểm cho từng em" data-title="Từ trò chuyện sang giao việc">
+<div class="s-head"><h2 class="ht">Từ trò chuyện sang giao việc</h2></div>
+<div class="s-body"><div class="cols cols-2 ai-s">
+  <div class="pp p-gray"><h3><span class="em">💬</span> Trò chuyện</h3>
+    <div class="formula sm"><span class="f" style="background:#fff">Hỏi</span><span class="op">➜</span><span class="f" style="background:#fff">AI trả lời</span><span class="op">➜</span><span class="f" style="background:#fff">Tự làm tiếp</span></div>
+    <p style="margin-top:10px">AI soạn một thư mẫu; giáo viên tự chép, dán, gửi 35 lần.</p></div>
+  <div class="pp p-green"><h3><span class="em">🤝</span> Giao việc</h3>
+    <div class="formula sm"><span class="f" style="background:#fff">Mô tả kết quả</span><span class="op">➜</span><span class="f" style="background:#fff">AI làm</span><span class="op">➜</span><span class="f" style="background:#fff">Duyệt, nhận việc xong</span></div>
+    <p style="margin-top:10px">AI tự đọc bảng điểm, soạn 32 thư, gửi khi được phép, báo cáo lại.</p></div>
+</div>
+<div class="cols cols-3 gap-s">
+  <div class="pp p-blue c"><h3 style="justify-content:center"><span class="em">🗺️</span> Lập kế hoạch</h3><p>Chia việc thành các bước, trình bày trước khi làm</p></div>
+  <div class="pp p-yellow c"><h3 style="justify-content:center"><span class="em">⚙️</span> Thực hiện</h3><p>Làm nhiều bước liên tục, dừng ở chỗ cần hỏi</p></div>
+  <div class="pp p-lav c"><h3 style="justify-content:center"><span class="em">🔌</span> Kết nối</h3><p>Dùng Gmail, Drive, thư mục vừa bật ở Phần 1</p></div>
+</div>
+<div class="quote3">"Mô tả kết quả, rời đi, rồi quay lại nhận việc đã xong."<cite>Claude Help Center, Get started with Claude Cowork</cite></div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-giat-minh.webp" alt="Octo"><p class="sp oo">Giao việc rồi con làm sao biết AI đang làm gì?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">AI trình bày kế hoạch trước, hỏi trước khi gửi và báo cáo khi xong. Xem ngay nhé.</p></div>
+<aside class="notes"><p>Nguyên văn: With Cowork, you can describe an outcome, step away, and come back to finished work. Ba năng lực khi AI làm việc thay vì trò chuyện: lập kế hoạch, thực hiện, kết nối.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Giao việc: gửi điểm cho từng em" data-title="Bước 1: Chọn chế độ Plan, gõ yêu cầu">
+<div class="s-head"><h2 class="ht">Bước 1: Chọn chế độ Plan, gõ yêu cầu</h2></div><div class="prog4"><span class="on"><b>1</b>Chọn Plan, gõ yêu cầu</span><span class=""><b>2</b>Duyệt kế hoạch</span><span class=""><b>3</b>Xem thư mẫu</span><span class=""><b>4</b>Cho phép gửi</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude Cowork<span class="sp2">Chế độ: Plan <span class="dotn">1</span></span></div><div class="msgs"><div class="u"><span class="k1">Gửi điểm và nhận xét bài Phân số bằng nhau cho từng học sinh lớp 6A.</span> <span class="k2">Lấy điểm từ bang-diem-6A.csv, nhận xét từ nhan-xet-6A.md trong thư mục Cham_bai, email từ Danh_sach_6A.</span> <span class="k3">Mỗi em một thư riêng, chỉ có điểm và nhận xét của em đó; em chưa nộp thì không gửi.</span> <span class="k4">Soạn sẵn, cho tôi xem 2 thư mẫu và hỏi tôi trước khi gửi.</span> <span class="dotn">2</span></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Chọn chế độ <b>Plan</b> (trình bày kế hoạch trước)</span></div><div class="ri"><span class="dotn">2</span><span>Gõ: việc gì, dữ liệu ở đâu, mỗi em một thư riêng, <b>hỏi trước khi gửi</b></span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>AI chưa gửi gì, mà đưa ra kế hoạch để thầy cô xem.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>“Mỗi em một thư riêng” và “hỏi tôi trước khi gửi” là hai câu quan trọng nhất!</p></div><div class="nx4"><b>Tiếp theo →</b><span>Đọc và duyệt kế hoạch</span></div></div></div></div>
+
+<aside class="notes"><p>Câu yêu cầu viết liền: việc gì, dữ liệu ở đâu, thư gồm gì, ai không nhận, cho xem mẫu, hỏi trước khi gửi.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Giao việc: gửi điểm cho từng em" data-title="Bước 2: Đọc và duyệt kế hoạch">
+<div class="s-head"><h2 class="ht">Bước 2: Đọc và duyệt kế hoạch</h2></div><div class="prog4"><span class="done"><b>✓</b>Chọn Plan, gõ yêu cầu</span><span class="on"><b>2</b>Duyệt kế hoạch</span><span class=""><b>3</b>Xem thư mẫu</span><span class=""><b>4</b>Cho phép gửi</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude Cowork<span class="sp2">Plan</span></div><div class="msgs"><div class="u past">Gửi điểm và nhận xét bài Phân số bằng nhau cho từng học sinh lớp 6A…</div><div class="a"><p><b>Kế hoạch:</b><br>1. Đọc bảng điểm, nhận xét, danh sách lớp 6A<br>2. Ghép theo họ tên: 32 em có điểm, 3 em chưa nộp (không gửi)<br>3. Soạn 32 thư nháp, cho cô xem 2 thư mẫu<br>4. <b>Xin phép cô trước khi gửi</b> <span class="dotn">1</span></p><p><span class='btn3 pri mark'>Approve plan <span class="dotn">2</span></span></p></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Kiểm tra số em nhận thư và bước <b>xin phép</b></span></div><div class="ri"><span class="dotn">2</span><span>Đúng thì duyệt; sai thì sửa bằng lời</span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>AI soạn 32 thư nháp, chưa gửi.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>32 em có điểm, 3 em chưa nộp không nhận thư. Đúng như con dặn.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Xem 2 thư mẫu</span></div></div></div></div>
+
+<aside class="notes"><p>Đây là lúc dễ phát hiện sai nhất: số học sinh, file lấy dữ liệu, ai không nhận thư.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Giao việc: gửi điểm cho từng em" data-title="Bước 3: Xem 2 thư mẫu">
+<div class="s-head"><h2 class="ht">Bước 3: Xem 2 thư mẫu</h2></div><div class="prog4"><span class="done"><b>✓</b>Chọn Plan, gõ yêu cầu</span><span class="done"><b>✓</b>Duyệt kế hoạch</span><span class="on"><b>3</b>Xem thư mẫu</span><span class=""><b>4</b>Cho phép gửi</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="stack"><div class="mock " style=""><div class="bar"><span class="dot gml">✉</span>Gmail<span class="sp2">thư nháp</span></div><div class="mail4"><p class="mh">Thư nháp 1/32 · Tới: an.nguyen@truong.edu.vn <span class="dotn">1</span></p><p class="ms">Kết quả bài Phân số bằng nhau · Toán 6A</p><div><p>Chào em An, em đạt <b>9/10</b> điểm. Em nắm chắc cách nhận biết phân số bằng nhau. Câu 7 em xem lại cách tìm x bằng nhân chéo ở Ví dụ 2 nhé. <span class="dotn">2</span></p></div></div></div>
+    <div class="mock " style=""><div class="bar"><span class="dot gml">✉</span>Gmail<span class="sp2">thư nháp</span></div><div class="mail4"><p class="mh">Thư nháp 2/32 · Tới: anh.le@truong.edu.vn</p><p class="ms">Kết quả bài Phân số bằng nhau · Toán 6A</p><div><p>Chào em Minh Anh, em đạt <b>7/10</b> điểm. Em làm tốt các câu nhận biết; em ôn lại câu 3, 7, 9 nhé.</p></div></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Đọc đúng người nhận</span></div><div class="ri"><span class="dotn">2</span><span>Đối chiếu điểm, nhận xét với bảng của LO 5.2</span></div></div><div class="blk see"><h3><span class="em">✅</span> Thấy được</h3><p>Hai thư đúng tên, đúng điểm, chỉ có thông tin của một em.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Thư nào cũng chỉ có thông tin của <b>một em</b>. Kiểm tra kỹ chỗ này!</p></div><div class="nx4"><b>Tiếp theo →</b><span>Đọc kỹ hộp xin phép rồi cho gửi</span></div></div></div></div>
+
+<aside class="notes"><p>Kiểm tra kỹ: không em nào nhận được điểm của em khác.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Giao việc: gửi điểm cho từng em" data-title="Bước 4: Đọc kỹ rồi cho phép gửi">
+<div class="s-head"><h2 class="ht">Bước 4: Đọc kỹ rồi cho phép gửi</h2></div><div class="prog4"><span class="done"><b>✓</b>Chọn Plan, gõ yêu cầu</span><span class="done"><b>✓</b>Duyệt kế hoạch</span><span class="done"><b>✓</b>Xem thư mẫu</span><span class="on"><b>4</b>Cho phép gửi</span></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude Cowork<span class="sp2">Hộp xin phép</span></div><div class="pane" style="padding:24px 26px;display:grid;gap:14px"><b style="font-size:21px"><span class="em">✉️</span> Gửi 32 thư từ Gmail của cô?</b>
+  <p style="font-size:18px">Người nhận: <b>32 học sinh lớp 6A</b> <span class="dotn">1</span><br>Mỗi thư: điểm và nhận xét riêng của một em<br>Không gửi: 3 em chưa nộp</p>
+  <div class="row" style="gap:10px"><span class="btn3 okb mark">Allow <span class="dotn">2</span></span><span class="btn3">Deny</span></div></div></div><div class="docm"><span class="em">💬</span> <b>Báo cáo:</b> Đã gửi 32/32 thư. 3 em chưa nộp: Đỗ Minh Khang, Vũ Thảo, Hoàng Long (chưa gửi gì).</div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Đọc số người nhận và nội dung sẽ gửi</span></div><div class="ri"><span class="dotn">2</span><span>Đúng hết mới bấm <b>Allow</b></span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>32 thư đã gửi; AI báo cáo những em chưa nộp.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>32 thư mà con chỉ bấm vài lần. Nhưng nhớ: <b>đọc kỹ</b> rồi mới bấm.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Nhìn lại: AI đã làm theo vòng nào?</span></div></div></div></div>
+
+<aside class="notes"><p>Thư đã gửi thì không thu hồi được. Gửi, chia sẻ, xóa luôn để AI hỏi trước. Nếu kết nối Gmail chỉ tạo thư nháp, AI để 32 thư trong mục Thư nháp; thầy cô gửi từ Gmail.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Giao việc: gửi điểm cho từng em" data-title="Vòng làm việc vừa rồi">
+<div class="s-head"><h2 class="ht">Nhìn lại: AI vừa làm theo một vòng, thầy cô có mặt ở 3 chỗ</h2></div>
+<div class="s-body">
+<div class="fl3">
+  <div class="st"><span class="n3">1</span><h4><span class="em">📨</span> Giao việc</h4><p><span class="back4">↩ Bước 1</span><br>Câu yêu cầu bốn ý.</p></div>
+  <div class="st gate"><span class="n3">2</span><h4><span class="em">🗺️</span> Lập kế hoạch</h4><p><span class="back4">↩ Bước 2</span><br>Cô duyệt kế hoạch.</p></div>
+  <div class="st"><span class="n3">3</span><h4><span class="em">🔎</span> Tìm hiểu</h4><p>Đọc bảng điểm, nhận xét, danh sách.</p></div>
+  <div class="st"><span class="n3">4</span><h4><span class="em">⚙️</span> Làm</h4><p>Ghép theo tên, soạn 32 thư nháp.</p></div>
+</div>
+<div class="fl3">
+  <div class="st gate"><span class="n3">5</span><h4><span class="em">👀</span> Cho xem mẫu</h4><p><span class="back4">↩ Bước 3</span><br>Cô xem 2 thư.</p></div>
+  <div class="st gate"><span class="n3">6</span><h4><span class="em">✋</span> Xin phép</h4><p><span class="back4">↩ Bước 4</span><br>Cô bấm Allow.</p></div>
+  <div class="st"><span class="n3">7</span><h4><span class="em">📤</span> Gửi</h4><p>32 thư, mỗi em một thư.</p></div>
+  <div class="st"><span class="n3">8</span><h4><span class="em">📋</span> Báo cáo</h4><p>Đã gửi gì, ai chưa nộp.</p></div>
+</div>
+<p class="sm c muted">Ô viền cam đứt: chỗ thầy cô có mặt. Còn lại AI tự làm, tự kiểm tra kết quả rồi làm tiếp.</p></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-y-tuong.webp" alt="Octo"><p class="sp oo">Ba ô cam đều do câu con gõ ở Bước 1 mà ra ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng vậy! Muốn duyệt ở đâu thì nói rõ ngay trong câu giao việc.</p></div>
+<aside class="notes"><p>Vòng làm việc theo cách Claude mô tả: lập kế hoạch, tìm hiểu, hành động, kiểm tra, lặp lại. Ba điểm duyệt do chính câu yêu cầu ở Bước 1 tạo ra: chế độ Plan, xem 2 thư mẫu, hỏi trước khi gửi.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Giao việc: gửi điểm cho từng em" data-title="Chế độ và cấp quyền">
+<div class="s-head"><h2 class="ht">Chọn chế độ và cấp quyền cho từng loại việc</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="lad">
+    <div class="r3"><div class="bar p-green"><b><span class="em">👁️</span> Đọc</b>Xem file, thư, bảng điểm, danh sách</div><div class="tg p-green">ĐƯỢC PHÉP</div></div>
+    <div class="r3"><div class="bar p-blue"><b><span class="em">✏️</span> Ghi</b>Tạo thư nháp, lưu file trong thư mục đã chọn</div><div class="tg p-blue">XIN QUYỀN</div></div>
+    <div class="r3"><div class="bar p-yellow"><b><span class="em">📤</span> Gửi, chia sẻ</b>Gửi thư, chia sẻ Drive, đăng bài</div><div class="tg p-yellow">LUÔN HỎI</div></div>
+    <div class="r3"><div class="bar p-peach"><b><span class="em">🗑️</span> Xóa</b>Xóa file, xóa thư</div><div class="tg p-peach">LUÔN HỎI</div></div>
+    <div class="r3"><div class="bar p-pink"><b><span class="em">💳</span> Thanh toán, tạo tài khoản</b>Mua hàng, đăng ký dịch vụ mới</div><div class="tg p-pink">CHẶN</div></div>
+  </div>
+  <div class="stack">
+    <div class="pp p-gray"><h3><span class="em">🎛️</span> Chế độ làm việc</h3><ul><li><b>Plan:</b> trình bày kế hoạch trước <span class="back4">↩ Bước 1</span></li><li><b>Hỏi từng bước:</b> hỏi trước mỗi thao tác</li><li><b>Tự làm:</b> làm liền, dừng ở chỗ cần xác nhận</li></ul></div>
+    <div class="pp p-yellow"><h3 style="font-size:21px"><span class="em">💡</span> Hai câu hỏi khi duyệt</h3><p class="sm">Việc này có <b>đi ra ngoài</b> không? Có <b>khó làm lại</b> không? Có thì để AI hỏi trước.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Gửi thư điểm thì con để mức nào ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Luôn hỏi. Đó là việc đi ra ngoài và không thu hồi được.</p></div>
+<aside class="notes"><p>Tên chế độ và tên quyền khác nhau theo nền tảng, phiên bản (Claude: Plan, chế độ hỏi trước, chế độ tự làm; quyền từng công cụ của kết nối: luôn cho phép, cần duyệt, chặn. ChatGPT: Always ask, Allow read actions…). Kiểm tra trước buổi dạy.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Giao việc: gửi điểm cho từng em" data-title="Nếu để AI tự gửi hết">
+<div class="s-head"><h2 class="ht"><span class="em">⚠️</span> Nếu bỏ bước xem mẫu và xin phép?</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="stack"><div class="pp p-pink"><h3><span class="em">😱</span> Chuyện có thể xảy ra</h3><p>Bảng điểm bị lệch một dòng khi ghép tên. AI gửi luôn, <span class="hl-bad">cả lớp nhận nhầm điểm của bạn khác</span>; thư đã gửi không thu hồi được.</p></div>
+    <div class="pp p-green"><h3><span class="em">🛡️</span> Bước 3, 4 chặn được lỗi này</h3><p>Hai thư mẫu đối chiếu với bảng điểm sẽ lộ ngay chỗ lệch, trước khi thư nào đi ra ngoài.</p></div></div>
+  <table class="t3"><thead><tr><th>Việc AI làm</th><th class="c">Để AI…</th></tr></thead><tbody>
+  <tr><td>Đọc bảng điểm, danh sách</td><td class="c"><span class="tag3 ok">Tự làm</span></td></tr>
+  <tr><td>Soạn thư nháp</td><td class="c"><span class="tag3 ok">Tự làm</span></td></tr>
+  <tr><td>Gửi thư cho học sinh, phụ huynh</td><td class="c"><span class="tag3 red4">Hỏi trước</span></td></tr>
+  <tr><td>Xóa thư, xóa file</td><td class="c"><span class="tag3 red4">Hỏi trước</span></td></tr>
+  <tr><td>Đăng ký dịch vụ gửi thư hàng loạt</td><td class="c"><span class="tag3 no">Không cho</span></td></tr></tbody></table>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-giat-minh.webp" alt="Octo"><p class="sp oo">Ôi, gửi nhầm điểm thì phiền to!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng vậy. Vì thế bước xem mẫu và xin phép không bao giờ bỏ.</p></div>
+<aside class="notes"><p>Gửi nhầm điểm là lộ thông tin học sinh. Luôn xem thư mẫu và để AI hỏi trước khi gửi.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Giao việc: gửi điểm cho từng em" data-title="Thực hành 1: gửi điểm cho lớp của mình">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 1: giao cho AI gửi điểm cho từng em</h2></div>
+<div class="s-body"><div class="mis4"><span class="tg">NHIỆM VỤ</span><p>Dùng bảng điểm, nhận xét từ LO 5.2. Chọn chế độ Plan, gõ yêu cầu, duyệt kế hoạch, <b>xem 2 thư mẫu</b>, rồi mới cho phép gửi.</p><span class="tm">⏱ 15 phút</span></div>
+<div class="cols cols-6-6 ai-s">
+  <div class="code lt" data-file="Câu yêu cầu mẫu (điền chỗ trống)" style=""><pre>Gửi [nội dung] cho từng [học sinh, phụ huynh] lớp [lớp]. Lấy dữ liệu từ [file]. Mỗi người một thư riêng, chỉ có thông tin của họ; [ai] thì không gửi. Soạn sẵn, cho tôi xem 2 thư mẫu và hỏi tôi trước khi gửi.</pre></div>
+  <div class="pp p-yellow"><h3 style="font-size:21px"><span class="em">💡</span> Khi tập</h3><p class="sm">Thay email học sinh bằng email của chính mình hoặc đồng nghiệp, để thử mà không gửi nhầm.</p></div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Học đi đôi với hành! Nhớ luôn có câu “hỏi tôi trước khi gửi” nhé.</p></div>
+<aside class="notes"><p>Sản phẩm: kế hoạch AI đưa ra, 2 thư mẫu, hộp xin phép, báo cáo kết quả.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="3. Cho cả chuỗi tự chạy" data-title="Hội thoại: tuần nào cũng vậy" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-phong-giao-vien.webp')">
+  <span class="scene-tag"><span class="pt">Phần 3</span>Cho cả chuỗi tự chạy</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-suy-nghi.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-y-tuong.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:241.60000000000002px;--tl:92px">Tuần nào cũng thế: gửi link bài, nhắc em chưa nộp, chấm, rồi gửi điểm. Con phải nhớ từng việc…</p>
+  <p class="bub t-r" style="left:618px;top:118px;width:500px;--t:58px">Viết các bước ra một lần thành một <b>quy trình tự động</b> (<span class="en">Workflow</span>), rồi hẹn giờ. Con chỉ duyệt ở bước gửi điểm và đọc nhật ký.</p>
+  <aside class="notes"><p>Chuyển sang việc lặp lại theo lịch.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Cho cả chuỗi tự chạy" data-title="Chuỗi việc của một tiết">
+<div class="s-head"><h2 class="ht">Quy trình tự động: chuỗi việc của một tiết, viết ra một lần</h2></div>
+<div class="s-body">
+<div class="pp out"><h3>Quy trình tự động (<span class="en">Workflow</span>)</h3><p class="c">là chuỗi các bước định sẵn, mỗi bước chạy khi đến giờ hoặc khi được gọi; AI làm phần việc trong từng bước, con người duyệt ở bước đi ra ngoài.</p></div>
+<div class="fl3">
+  <div class="st"><span class="n3">1</span><h4><span class="em">📤</span> Gửi link bài</h4><p>Link bài giảng LO 5.1 cho cả lớp.</p><p class="eg">Thứ Hai 7:00</p></div>
+  <div class="st"><span class="n3">2</span><h4><span class="em">🔔</span> Nhắc nộp</h4><p>Đối chiếu phiếu nộp, nhắc em chưa nộp.</p><p class="eg">Thứ Tư 18:00</p></div>
+  <div class="st"><span class="n3">3</span><h4><span class="em">🤖</span> Chấm, nhận xét</h4><p>Theo cách của trợ lý LO 5.2.</p><p class="eg">Thứ Năm 7:00</p></div>
+  <div class="st gate"><span class="n3">4</span><h4><span class="em">✅</span> Duyệt rồi gửi</h4><p>Như Phần 2: xem mẫu, cho phép.</p><p class="eg">Cô bấm Allow</p></div>
+  <div class="st"><span class="n3">5</span><h4><span class="em">📊</span> Báo cáo tổ</h4><p>Tóm tắt cả lớp cho tổ trưởng.</p><p class="eg">Ngay sau bước 4</p></div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Mỗi bước rõ <b>khi nào chạy, làm gì, chỗ nào con duyệt</b>.</p></div>
+<aside class="notes"><p>Viết các bước bằng lời thường, như danh sách công việc. Bước gửi điểm luôn có người duyệt. Bước 1, 2 gửi thư theo mẫu cố định nên có thể cho tự gửi sau vài tuần chạy đúng, tùy quy định của trường.</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Cho cả chuỗi tự chạy" data-title="Làm mẫu: lưu thành file kế hoạch">
+<div class="s-head"><h2 class="ht">Làm mẫu: lưu thành file kế hoạch</h2></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude Cowork<span class="sp2"></span></div><div class="msgs"><div class="u">Lưu 5 bước này thành file ke-hoach-tiet-hoc.md trong Cham_bai. Mỗi bước ghi: khi nào chạy, làm gì, lấy dữ liệu ở đâu, có cần hỏi tôi không. Mỗi lần chạy, làm theo file và ghi nhật ký vào nhat-ky.md. <span class="dotn">1</span></div><div class="a">Đã lưu <span class="fchip md"><i class="ph ph-file-text"></i>ke-hoach-tiet-hoc.md</span></div></div></div>
+  <div class="fileview"><div class="fh"><span class="em">📄</span> Cham_bai/ke-hoach-tiet-hoc.md <span class="dotn">2</span></div><div class="fb4">
+    <span class="h"># Kế hoạch tiết Toán hằng tuần · 6A</span>
+    <span>1. Gửi link bài · Thứ Hai 7:00 · thư cho cả lớp · tự gửi</span>
+    <span>2. Nhắc nộp · Thứ Tư 18:00 · đối chiếu Phiếu nộp với Danh_sach_6A · tự gửi</span>
+    <span>3. Chấm, nhận xét · Thứ Năm 7:00 · theo Dap_an, Mau_nhan_xet · lưu bản nháp</span>
+    <span>4. Gửi điểm · sau bước 3 · <b>hỏi tôi, cho xem 2 thư mẫu</b></span>
+    <span>5. Báo cáo tổ trưởng · sau bước 4 · <b>hỏi tôi</b></span>
+    <span class="h"># Mỗi lần chạy</span><span>Ghi nhật ký vào nhat-ky.md: đã làm gì, chỗ nào cần giáo viên xem.</span></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Gõ: lưu các bước thành file, mỗi bước ghi đủ 4 ý</span></div><div class="ri"><span class="dotn">2</span><span>Mở file AI tạo, đọc từng dòng: giờ chạy, chỗ hỏi trước</span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>Một file kế hoạch thầy cô đọc được như danh sách công việc; AI làm theo file mỗi lần chạy.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Sửa quy trình về sau chỉ là sửa file này.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Hẹn giờ cho cả chuỗi</span></div></div></div></div>
+
+<aside class="notes"><p>Không cần tự viết file .md: mô tả bằng lời, hoặc chụp ảnh bảng kế hoạch giấy, rồi nhờ AI tạo file. Rà soát file AI tạo trước khi chạy.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Cho cả chuỗi tự chạy" data-title="Khi nào mỗi bước chạy?">
+<div class="s-head"><h2 class="ht">Kích hoạt: khi nào mỗi bước bắt đầu?</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s">
+  <div class="pp p-blue"><h3><span class="em">🙋</span> Theo yêu cầu</h3><p>Thầy cô gõ một câu lúc cần.</p><div class="docm" style="margin-top:8px">“Chạy bước 4 theo ke-hoach-tiet-hoc.md cho lớp 6A.”</div></div>
+  <div class="pp p-lav"><h3><span class="em">⏰</span> Theo lịch</h3><p>Tác vụ hẹn giờ: bước 1, 2, 3 mỗi tuần.</p><div class="docm" style="margin-top:8px">Thứ Hai 7:00 · Thứ Tư 18:00 · Thứ Năm 7:00</div></div>
+  <div class="pp p-green"><h3><span class="em">📂</span> Khi có điều kiện</h3><p>Ví dụ “khi hết hạn nộp”. Cách làm thực tế: hẹn giờ kiểm tra ngay sau hạn.</p><div class="docm" style="margin-top:8px">Thứ Tư 20:05: hết hạn rồi thì chốt danh sách chưa nộp.</div></div>
+</div>
+<div class="pp p-yellow"><h3 style="font-size:20px"><span class="em">💻</span> Lưu ý quan trọng với Claude Cowork</h3><p class="sm">Tác vụ hẹn giờ chỉ chạy khi <b>máy tính đang mở</b> và ứng dụng Claude đang chạy. Lỡ giờ vì tắt máy thì AI chạy bù khi thầy cô mở máy và báo lại.</p></div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-giat-minh.webp" alt="Octo"><p class="sp oo">Vậy tối thứ Tư con tắt máy thì thư nhắc không đi ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng, nó sẽ chạy bù khi con mở máy. Việc gấp thì để máy mở hoặc tự gửi.</p></div>
+<aside class="notes"><p>Theo Claude Help Center (Schedule recurring tasks in Cowork). ChatGPT có tác vụ lặp lại, Gemini có lịch chạy; cách chạy khi tắt máy khác nhau theo nền tảng, kiểm tra trước khi dùng.</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Cho cả chuỗi tự chạy" data-title="Làm mẫu: hẹn giờ cho cả chuỗi">
+<div class="s-head"><h2 class="ht">Làm mẫu: hẹn giờ cho cả chuỗi</h2></div><div class="s-body"><div class="dm4"><div class="scr"><div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude Cowork<span class="sp2">Claude Cowork</span></div><div class="side" style="min-height:360px"><div class="nav"><div><span class="em">💬</span> Tasks</div><div class="on mark"><span class="em">⏰</span> Scheduled <span class="dotn">1</span></div></div>
+  <div class="pane"><span class="btn3 pri mark">+ New task <span class="dotn">2</span></span>
+  <div class="docm" style="margin-top:8px">Làm theo ke-hoach-tiet-hoc.md cho lớp 6A, đúng bước của giờ này. Hỏi tôi trước khi gửi điểm. Ghi nhật ký vào nhat-ky.md. <span class="dotn">3</span></div>
+  <div class="row-i"><div><div class="rt">Tiết Toán 6A · gửi link bài</div><div class="d">Thứ Hai hằng tuần · 7:00</div></div><span class="tog on"></span></div>
+  <div class="row-i"><div><div class="rt">Tiết Toán 6A · nhắc nộp</div><div class="d">Thứ Tư hằng tuần · 18:00</div></div><span class="tog on"></span></div>
+  <div class="row-i"><div><div class="rt">Tiết Toán 6A · chấm, gửi điểm</div><div class="d">Thứ Năm hằng tuần · 7:00</div></div><span class="tog on"></span></div></div></div></div></div><div class="rail4"><div class="blk do"><h3><span class="em">👆</span> Thầy cô làm</h3><div class="ri"><span class="dotn">1</span><span>Mở mục <b>Scheduled</b> (tác vụ hẹn giờ)</span></div><div class="ri"><span class="dotn">2</span><span>Bấm <b>+ New task</b>, chọn giờ lặp lại</span></div><div class="ri"><span class="dotn">3</span><span>Gõ: làm theo file kế hoạch, chỗ hỏi trước, nhật ký</span></div></div><div class="blk see"><h3><span class="em">✅</span> AI làm ra</h3><p>Ba tác vụ hiện trong danh sách, công tắc bật. Trước khi để tự chạy, bấm chạy thử một lần.</p></div><div class="coach4"><img data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt=""><p>Chạy thử một lần trước khi để nó tự chạy nhé.</p></div><div class="nx4"><b>Tiếp theo →</b><span>Xem cả chuỗi chạy ra những gì</span></div></div></div></div>
+
+<aside class="notes"><p>Mỗi tác vụ hẹn giờ là một câu giao việc như Phần 2, chỉ thêm giờ chạy. Tên mục có thể khác; kiểm tra trước buổi dạy.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Cho cả chuỗi tự chạy" data-title="Cả chuỗi chạy ra những gì">
+<div class="s-head"><h2 class="ht">Một tuần chạy thật: AI làm ra những gì?</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s">
+  <div class="stack"><span class="lb"><span class="em">⏰</span> Thứ Hai 7:00 · tự gửi</span><div class="mock " style=""><div class="bar"><span class="dot gml">✉</span>Gmail<span class="sp2">thư đã gửi</span></div><div class="mail4"><p class="mh">Tới: Cả lớp 6A (35 em)</p><p class="ms">Bài giảng Phân số bằng nhau</p><div><p>Các em mở link, học lý thuyết, làm 10 câu và bấm Nộp bài trước <b>20:00 thứ Tư</b>.<br>claude.ai/public/artifacts/…</p></div></div></div></div>
+  <div class="stack"><span class="lb"><span class="em">⏰</span> Thứ Tư 18:00 · tự gửi</span><div class="mock " style=""><div class="bar"><span class="dot gml">✉</span>Gmail<span class="sp2">thư đã gửi</span></div><div class="mail4"><p class="mh">Tới: Đỗ Minh Khang, Vũ Thảo, Hoàng Long</p><p class="ms">Nhắc nộp bài</p><div><p>Cô chưa thấy bài của em. Còn 2 tiếng nữa là hết hạn nộp bài Phân số bằng nhau nhé.</p></div></div></div></div>
+  <div class="stack"><span class="lb red4"><span class="em">✅</span> Thứ Năm · sau khi cô duyệt</span><div class="mock " style=""><div class="bar"><span class="dot gml">✉</span>Gmail<span class="sp2">thư đã gửi</span></div><div class="mail4"><p class="mh">Tới: Tổ trưởng Toán</p><p class="ms">Báo cáo lớp 6A tuần 6</p><div><p>32/35 em nộp · trung bình 7,8 · câu 7 (tìm x) 18 em sai · tiết sau ôn 10 phút dạng tìm x.</p></div></div></div></div>
+</div>
+<div class="docm"><span class="em">✉️</span> Cùng sáng thứ Năm: 32 thư điểm riêng từng em, gửi sau khi cô xem 2 thư mẫu và bấm Allow (như Phần 2).</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-ngac-nhien.webp" alt="Octo"><p class="sp oo">Con chỉ phải bấm Allow một lần trong tuần thôi ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng thế, và đọc nhật ký. Xem nhật ký tuần này nhé.</p></div>
+<aside class="notes"><p>Thư nhắc chỉ gửi những em chưa có tên trong phiếu nộp. Báo cáo tổ trưởng không có điểm từng em, chỉ có số liệu chung.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Cho cả chuỗi tự chạy" data-title="Đọc nhật ký, sửa từ gốc">
+<div class="s-head"><h2 class="ht">Đọc nhật ký sau mỗi lần chạy, sửa từ gốc</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="docm"><h4><span class="em">📒</span> nhat-ky.md · tuần 6</h4>
+    <p><span class="em">✅</span> T2 7:00 · gửi link bài cho 35 em</p>
+    <p><span class="em">⏳</span> T4 18:00 · lỡ giờ vì máy tắt; <b>chạy bù 19:12</b> khi mở máy</p>
+    <p><span class="em">⚠️</span> T4 · <span class="hl-bad">gửi thư nhắc cho Nguyễn Văn Nam dù em đã nộp</span> (tên trên phiếu: “Ng Van Nam”)</p>
+    <p><span class="em">✅</span> T5 7:00 · chấm 32 bài, chờ cô duyệt trước khi gửi điểm</p></div>
+  <div class="stack">
+    <div class="pp p-pink"><h3><span class="em">✂️</span> Sửa tay: nên tránh</h3><p>Nhắn riêng xin lỗi em Nam. Tuần sau em gõ tắt tên lại bị nhắc.</p></div>
+    <div class="mis4"><span class="tg">CÂU SỬA</span><p>Gõ: <b>“Sửa ke-hoach-tiet-hoc.md, bước 2: tên trên phiếu không khớp danh sách thì không gửi thư nhắc, ghi vào mục Cần giáo viên xem.”</b></p><span></span></div>
+    <div class="pp p-yellow"><h3 style="font-size:19px"><span class="em">💡</span> Lỡ giờ chạy</h3><p class="sm">Thư nhắc gấp: để máy mở tối thứ Tư, hoặc dời giờ nhắc sang giờ thầy cô thường mở máy.</p></div>
+  </div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Sửa một lần vào kế hoạch, mọi tuần sau đều đúng.</p></div>
+<aside class="notes"><p>Nhật ký do AI tự ghi. Giáo viên đọc, thấy lỗi thì sửa vào file kế hoạch, lần sau chạy đúng. Lỗi tên gõ tắt giống lỗi đã gặp ở LO 5.2: cách sửa cũng giống, ghi ngoại lệ vào hướng dẫn.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Cho cả chuỗi tự chạy" data-title="Rủi ro khi AI tự làm">
+<div class="s-head"><h2 class="ht">Rủi ro khi AI tự làm và cách phòng</h2></div>
+<div class="s-body"><div class="cols cols-5 gap-s">
+  <div class="pp p-pink"><h3 style="font-size:21px"><span class="em">🕵️</span> Lệnh ẩn</h3><p class="sm">Thư, trang web có thể chứa câu khiến AI làm khác yêu cầu.</p><p class="eg">Phòng: giữ bước hỏi trước khi gửi.</p></div>
+  <div class="pp p-peach"><h3 style="font-size:21px"><span class="em">👤</span> Dữ liệu học sinh</h3><p class="sm">Điểm của em này lọt vào thư của em khác.</p><p class="eg">Phòng: xem thư mẫu, mỗi thư một em.</p></div>
+  <div class="pp p-yellow"><h3 style="font-size:21px"><span class="em">🔑</span> Tài khoản</h3><p class="sm">AI dùng được tài khoản đang kết nối.</p><p class="eg">Phòng: chỉ tài khoản trường.</p></div>
+  <div class="pp p-lav"><h3 style="font-size:21px"><span class="em">↩️</span> Không hoàn tác</h3><p class="sm">Thư đã gửi, điểm đã báo không thu hồi được.</p><p class="eg">Phòng: duyệt trước bước gửi.</p></div>
+  <div class="pp p-gray"><h3 style="font-size:21px"><span class="em">🌙</span> Chạy khi vắng mặt</h3><p class="sm">Lỗi của tác vụ hẹn giờ có thể không ai thấy.</p><p class="eg">Phòng: đọc nhật ký mỗi tuần.</p></div>
+</div>
+<div class="pp p-blue c"><p><span class="em">📚</span> <b>Module 6</b> đi sâu: đạo đức, rủi ro và kiểm soát chất lượng khi dùng AI. Luật Bảo vệ dữ liệu cá nhân có hiệu lực từ 1/1/2026.</p></div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-lo-lang.webp" alt="Octo"><p class="sp oo">Càng tự động thì càng phải cẩn thận hả thầy?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng thế. Năm rủi ro này đều có cách phòng, và con đã làm gần hết rồi!</p></div>
+<aside class="notes"><p>Lệnh ẩn (prompt injection) theo trang Use Claude in Chrome safely. Claude có bộ lọc an toàn nhưng vẫn cần giữ bước hỏi trước với việc gửi, chia sẻ.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Cho cả chuỗi tự chạy" data-title="Gói mở rộng cho cả tổ">
+<div class="s-head"><h2 class="ht">Đóng cả chuỗi thành một gói mở rộng (<span class="en">Plugin</span>) cho cả tổ</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="giftbox"><div class="gt"><span class="em">🎁</span>tiet-hoc-toan-6<span class="v">v1.0</span></div>
+    <div class="gi"><div class="pp p-green"><h3 style="font-size:20px"><span class="em">🧰</span> Kỹ năng</h3><p class="sm">Làm bài giảng có trắc nghiệm (LO 5.1)</p></div><div class="pp p-blue"><h3 style="font-size:20px"><span class="em">🤖</span> Trợ lý</h3><p class="sm">Trợ lý chấm bài (LO 5.2)</p></div>
+    <div class="pp p-yellow"><h3 style="font-size:20px"><span class="em">🔌</span> Kết nối</h3><p class="sm">Gmail, Google Drive (LO 5.3)</p></div><div class="pp p-gray"><h3 style="font-size:20px"><span class="em">📄</span> File mẫu</h3><p class="sm">ke-hoach-tiet-hoc.md<br>Mau_nhan_xet.md</p></div></div></div>
+  <div class="stack">
+    <div class="people"><div class="pe"><span class="em">👩‍💼</span>Tổ trưởng<br><span class="v">v1.0</span></div><div class="pe"><span class="em">👨‍🏫</span>GV 6A<br><span class="v">v1.0</span></div><div class="pe"><span class="em">👩‍🏫</span>GV 6B<br><span class="v">v1.0</span></div><div class="pe"><span class="em">🧑‍🏫</span>GV 6C<br><span class="v">v1.0</span></div></div>
+    <table class="t3"><thead><tr><th></th><th>Kỹ năng</th><th>Gói mở rộng</th></tr></thead><tbody><tr><th>Phạm vi</th><td>Một việc</td><td>Cả một quy trình</td></tr><tr><th>Chia sẻ</th><td>Từng kỹ năng</td><td>Cả gói, cài một lần</td></tr></tbody></table>
+    <div class="pp p-pink"><h3 style="font-size:20px"><span class="em">🛡️</span> Lưu ý</h3><p class="sm">Mỗi người tự kết nối tài khoản của mình; gói không chứa dữ liệu học sinh. Chỉ cài gói từ nguồn tin cậy.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-hao-hung.webp" alt="Octo"><p class="sp oo">Cả ba bài của module nằm gọn trong một gói ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng vậy! Tổ trưởng nâng lên bản 1.1 thì cả tổ cập nhật là dùng chung bản mới.</p></div>
+<aside class="notes"><p>Gói mở rộng (Plugin) là một thư mục gồm kỹ năng, trợ lý, kết nối, lệnh tắt, cài và cập nhật như một khối. Claude Cowork: Customize > Plugins. Gói chứa kỹ năng, không thay thế kỹ năng. Đây là cả Module 5 trong một gói.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Cho cả chuỗi tự chạy" data-title="Thực hành 2: cho chuỗi tự chạy">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 2: cho chuỗi việc của mình tự chạy</h2></div>
+<div class="s-body"><div class="mis4"><span class="tg">NHIỆM VỤ</span><p>Viết chuỗi việc của một tiết, lưu thành file kế hoạch, tạo tác vụ hẹn giờ, <b>chạy thử một lần</b>, đọc nhật ký và sửa một chỗ.</p><span class="tm">⏱ 15 phút</span></div>
+<div class="cols cols-2 gap-s">
+  <div class="check-i"><span class="em">☑️</span><span>Mỗi bước có giờ chạy, việc làm, dữ liệu, chỗ hỏi trước</span></div>
+  <div class="check-i"><span class="em">☑️</span><span>Bước gửi điểm có xem mẫu và hỏi trước</span></div>
+  <div class="check-i"><span class="em">☑️</span><span>Chạy thử một lần trước khi để tự chạy</span></div>
+  <div class="check-i"><span class="em">☑️</span><span>Đã sửa ít nhất một chỗ sau khi đọc nhật ký</span></div>
+</div>
+<div class="pp p-yellow"><h3 style="font-size:20px"><span class="em">🛡️</span> Giữ an toàn</h3><p class="sm">Tài khoản trường · mỗi em chỉ nhận thông tin của mình · không gửi cả bảng điểm cho cả lớp · đọc nhật ký mỗi tuần · khi tập, gửi thử về email của mình.</p></div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-dong-y.webp" alt="Octo"><p class="sp oo">Con chạy thử ra ngay, nhật ký ghi rõ từng bước!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Tuyệt! Nhớ đọc nhật ký mỗi tuần nhé.</p></div>
+<aside class="notes"><p>Gợi ý: bản tin tuần gửi phụ huynh, nhắc nộp bài, tổng hợp điểm danh.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="4. Tổng kết" data-title="Hội thoại: vai trò của giáo viên" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hoc.webp')">
+  <span class="scene-tag"><span class="pt">Tổng kết</span>Thầy Rùa và Octo</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-an-mung.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-khen.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:254.97916666666669px;--tl:92px">Từ bài giảng, chấm bài đến gửi điểm, giờ cả chuỗi tự chạy rồi thầy ơi!</p>
+  <p class="bub t-r" style="left:636px;top:118px;width:500px;--t:58px">Giỏi lắm! Nhưng nhớ nhé: AI làm theo cách con thiết kế. Con <b>duyệt trước khi gửi và chịu trách nhiệm</b> về điểm của học sinh.</p>
+  <p class="bub t-l" style="left:676px;top:456px;width:460px;--t:64px">Vâng ạ! Con sẽ đọc nhật ký mỗi tuần.</p>
+  <aside class="notes"><p>Khẳng định vai trò giáo viên.</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Tổng kết" data-title="Tổng kết LO 5.3">
+<div class="s-head"><h2 class="ht">Tổng kết LO 5.3</h2><p class="hs">Tự động gửi bài, nhắc nộp và gửi điểm cho từng học sinh.</p></div><div class="s-body"><div class="cols cols-3 gap-s" style="align-items:stretch"><div class="pp p-blue sm4"><span class="d4l">PHẦN 1</span><h3><span class="em">🔌</span> Kết nối</h3><ul class="sm4l"><li><span class="em">✅</span><span>Gmail, Drive, thư mục trên máy</span></li><li><span class="em">✅</span><span>Kiểm tra bằng câu đọc trước khi giao việc</span></li><li><span class="em">✅</span><span>Ba đường: ứng dụng, trình duyệt, máy tính</span></li></ul></div><div class="pp p-green sm4"><span class="d4l">PHẦN 2</span><h3><span class="em">✉️</span> Giao việc gửi điểm</h3><ul class="sm4l"><li><span class="em">✅</span><span>Plan, mỗi em một thư, hỏi trước khi gửi</span></li><li><span class="em">✅</span><span>Duyệt kế hoạch, xem thư mẫu, cho phép</span></li><li><span class="em">✅</span><span>Gửi, chia sẻ, xóa: luôn hỏi trước</span></li></ul></div><div class="pp p-yellow sm4"><span class="d4l">PHẦN 3</span><h3><span class="em">⏰</span> Cho cả chuỗi tự chạy</h3><ul class="sm4l"><li><span class="em">✅</span><span>Quy trình viết thành file kế hoạch</span></li><li><span class="em">✅</span><span>Hẹn giờ; máy phải mở; đọc nhật ký</span></li><li><span class="em">✅</span><span>Đóng gói cả chuỗi cho cả tổ</span></li></ul></div></div><div class="pp p-gray nxt"><p><span class="em">➡️</span> <b>Tiếp theo, Module 6:</b> dùng AI có trách nhiệm, an toàn với dữ liệu học sinh.</p></div></div>
+
+<aside class="notes"><p>Tổng kết theo các phần.</p></aside>
+</section>
+
+<section class="slide cg has-talk" data-sec="4. Tổng kết" data-title="Chúc mừng">
+<div class="s-head"><h2 class="ht"><span class="em">🎉</span> Chúc mừng thầy cô đã hoàn thành bài học số 5.3!</h2></div><div class="s-body"><div class="cg-card"><p class="k">Sau bài học, thầy cô đã có thể:</p><ul><li><i class="ph ph-check"></i><span>Kết nối AI với Gmail và Google Drive</span></li><li><i class="ph ph-check"></i><span>Giao cho AI gửi điểm, nhận xét riêng từng em sau khi duyệt</span></li><li><i class="ph ph-check"></i><span>Cho cả chuỗi việc của một tiết tự chạy theo lịch</span></li></ul></div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-vui.webp" alt="Octo"><p class="sp oo">AI làm được nhiều thế, con cần cẩn thận điều gì nữa ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Module 6 sẽ giúp con dùng AI <b>an toàn và có trách nhiệm</b>. Hẹn con ở đó!</p></div>
+<aside class="notes"><p>Cầu nối sang Module 6.</p></aside>
+</section>
+
+<section class="slide s-end" data-sec="4. Tổng kết" data-title="Hẹn gặp lại" data-nofoot>
+  <h2>Hẹn gặp lại các thầy cô!</h2>
+  <aside class="notes"><p>Kết thúc.</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Tổng kết" data-title="Câu hỏi ôn tập">
+<div class="s-head"><h2 class="ht"><span class="em">❓</span> Câu hỏi ôn tập</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s ai-s">
+<div class="quiz" data-answer="b"><p class="q">1. Trước khi cho AI gửi điểm cho cả lớp, nên làm gì?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Gửi ngay cho kịp</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Xem vài thư mẫu, đối chiếu điểm, rồi mới cho phép</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Gửi cả bảng điểm cho cả lớp</span></button></div><p class="fb" data-ok="Đúng. Thư đã gửi không thu hồi được." data-no="Chưa đúng. Đáp án B."></p></div>
+<div class="quiz" data-answer="b"><p class="q">2. Tác vụ hẹn giờ 18:00 thứ Tư không chạy. Lý do hay gặp nhất?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>AI quên</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Máy tính tắt hoặc ứng dụng Claude không mở</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Gmail bị khóa</span></button></div><p class="fb" data-ok="Đúng. Tác vụ chạy bù khi mở máy." data-no="Chưa đúng. Đáp án B."></p></div>
+<div class="quiz" data-answer="b"><p class="q">3. Nhật ký báo gửi nhầm thư nhắc cho em đã nộp. Nên làm gì?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Tự xin lỗi mỗi tuần</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Gõ một câu sửa vào file kế hoạch</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Tắt cả chuỗi</span></button></div><p class="fb" data-ok="Đúng. Sửa từ gốc thì tuần sau đúng." data-no="Chưa đúng. Đáp án B."></p></div>
+</div></div>
+
+<aside class="notes"><p>Ba tình huống thầy cô sẽ gặp.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Tổng kết" data-title="Khung 4D">
+<div class="s-head"><h2 class="ht">Khung 4D khi để AI gửi kết quả cho học sinh</h2></div><div class="s-body"><div class="d4row"><div class="pp p-blue d4"><span class="d4l">D1 · DELEGATION</span><h3><span class="em">🎯</span> Giao việc</h3><p>Giao việc soạn và gửi thư; giữ lại việc duyệt trước khi gửi.</p><div class="d4ss"><span class="d4s">Nhận thức vấn đề</span><span class="d4s">Nhận thức nền tảng AI</span><span class="d4s">Phân công nhiệm vụ</span></div><p class="d4in"><b>Trong bài:</b> Phần 2, 3</p></div><div class="pp p-green d4"><span class="d4l">D2 · DESCRIPTION</span><h3><span class="em">📝</span> Mô tả</h3><p>Nêu rõ dữ liệu ở đâu, mỗi em một thư, ai không nhận, chỗ hỏi trước.</p><div class="d4ss"><span class="d4s">Mô tả sản phẩm</span><span class="d4s">Mô tả quy trình</span><span class="d4s">Mô tả cách ứng xử</span></div><p class="d4in"><b>Trong bài:</b> Phần 2, 3</p></div><div class="pp p-yellow d4"><span class="d4l">D3 · DISCERNMENT</span><h3><span class="em">🔍</span> Phân định</h3><p>Đọc kế hoạch, thư mẫu, hộp xin phép, nhật ký.</p><div class="d4ss"><span class="d4s">Phân định sản phẩm</span><span class="d4s">Phân định quy trình</span><span class="d4s">Phân định cách ứng xử</span></div><p class="d4in"><b>Trong bài:</b> Phần 2, 3</p></div><div class="pp p-lav d4"><span class="d4l">D4 · DILIGENCE</span><h3><span class="em">🛡️</span> Cẩn trọng</h3><p>Mỗi em chỉ nhận thông tin của mình; tài khoản trường; đọc nhật ký.</p><div class="d4ss"><span class="d4s">Cẩn trọng khi tạo</span><span class="d4s">Minh bạch</span><span class="d4s">Chịu trách nhiệm khi dùng</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 2, 3</p></div></div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">AI càng tự làm nhiều, <b>Cẩn trọng</b> càng quan trọng.</p></div>
+<aside class="notes"><p>Thứ tự chuẩn: Delegation, Description, Discernment, Diligence.</p></aside>
+</section>
+
+</div></main>
+<script src="assets/js/deck.js"></script>
+</body>
+</html>

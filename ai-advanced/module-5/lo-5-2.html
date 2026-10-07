@@ -1,0 +1,664 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LO 5.2 · Thiết kế và xây dựng Agent, Sub-agent và Workflow</title>
+<link rel="stylesheet" href="assets/css/deck.css">
+<link rel="stylesheet" href="assets/css/lo-5-2.css">
+</head>
+<body class="deck-compact" data-deck="LO 5.2" data-deck-title="Thiết kế và xây dựng Agent, Sub-agent và Workflow" data-home="index.html">
+<main class="deck"><div class="stage">
+
+<!-- ============ MỞ ĐẦU ============ -->
+
+<section class="slide s-cover" data-sec="Mở đầu" data-title="Bìa: LO 5.2">
+  <div class="brand"><span class="chip"><i class="ph-fill ph-sparkle"></i>AI Fluency nâng cao</span><span>Module 5 · Đóng gói kỹ năng và thiết kế quy trình AI nhiều tác vụ</span></div>
+  <div>
+    <div class="lo">LO 5.2</div>
+    <h1>Thiết kế và xây dựng Agent, <span class="nw">Sub-agent</span> và Workflow</h1>
+    <p class="sub">Tạo Agent đảm nhận một vai trò, hiểu cách Agent suy nghĩ và gọi Agent trong một bước của Workflow</p>
+  </div>
+  <div class="meta"><span><b>Thời lượng:</b> khoảng 100 phút</span><span><b>Sản phẩm:</b> Agent đã chạy thử, prompt gọi Agent trong Workflow</span><span><b>Công cụ:</b> Claude, ChatGPT, Gemini</span></div>
+  <aside class="notes"><p>Nối với LO 5.1: mỗi học viên đã có ít nhất một Skill tự viết và một Skill tạo bằng skill-creator, đã biết AI kích hoạt Skill bằng cách so khớp yêu cầu với mô tả (description), và biết AI có thể dùng nhiều Skill trong cùng một cuộc trò chuyện (nguyên lý Ghép nối).</p><p>Câu hỏi mở đầu: "Nếu có một đồng nghiệp chuyên trách việc ra đề, thầy cô sẽ giao cho người đó những gì, và giữ lại cho mình những quyết định nào?" Bài hôm nay trả lời câu hỏi đó cho AI: tạo một Agent cho một vai trò, biết khi nào cần thêm <span class="nw">Sub-agent</span> hay Agent Teams, rồi đặt Agent vào quy trình ra đề có giáo viên duyệt ở từng chặng.</p></aside>
+</section>
+
+<section class="slide" data-sec="Mở đầu" data-title="Mục tiêu và lộ trình">
+  <div class="s-head"><h2 class="t">Mục tiêu và lộ trình bài học</h2></div>
+  <div class="s-body">
+    <div class="cols cols-5-7 grow ai-s">
+      <div class="cols gap-s">
+        <h3 class="col-h">Sau bài học, thầy cô có thể</h3>
+        <ol class="list small">
+          <li><b>Giải thích</b> Agent là gì, khác Skill và Project thế nào; nhận biết khi nào cần một Agent.</li>
+          <li><b>Thiết kế và tạo</b> một Agent trên Claude bằng cách viết thủ công hoặc ra lệnh; chạy thử và sửa.</li>
+          <li><b>Nhận biết</b> khi nào nên dùng <span class="nw">Sub-agent</span>, Agent Teams và cách yêu cầu AI dùng chúng.</li>
+          <li><b>Gọi</b> Agent trong một bước của Workflow; phân biệt Workflow với Agent, đọc cách Agent suy nghĩ, chọn Skill và công cụ.</li>
+        </ol>
+        <div class="callout ok"><i class="ph ph-package"></i><div><b>Sản phẩm:</b> một Agent của thầy cô đã chạy thử 3 yêu cầu; prompt gọi Agent trong một bước của Workflow, kèm kết quả chạy thử.</div></div>
+      </div>
+      <div class="cols gap-s">
+        <div class="agenda mini">
+          <div class="row"><span class="no">01</span><div><h4>Từ Skill đến Agent</h4><p>Slide 3 - 6</p></div><span class="time">12'</span></div>
+          <div class="row"><span class="no">02</span><div><h4>Thiết kế và xây dựng Agent</h4><p>Slide 7 - 10 · Thực hành 1</p></div><span class="time">32'</span></div>
+          <div class="row"><span class="no">03</span><div><h4><span class="nw">Sub-agent</span> và Agent Teams (giới thiệu)</h4><p>Slide 11 - 13</p></div><span class="time">11'</span></div>
+          <div class="row"><span class="no">04</span><div><h4>Agent trong Workflow</h4><p>Slide 14 - 19 · Thực hành 2</p></div><span class="time">35'</span></div>
+          <div class="row"><span class="no">05</span><div><h4>Tổng kết</h4><p>Slide 20 - 22</p></div><span class="time">7'</span></div>
+        </div>
+        <p class="xs">Ví dụ xuyên suốt: Tổ Ngữ văn 9 ra đề kiểm tra giữa kỳ với Agent Trợ lý Khảo thí.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Thứ tự bài: từ một Skill lên một vai trò, tức một Agent (Phần 1); trọng tâm là thiết kế và xây dựng một Agent trên Claude, chạy thử và sửa (Phần 2); giới thiệu <span class="nw">Sub-agent</span> và Agent Teams để biết khi nào cần (Phần 3); khái niệm Workflow, Workflow khác Agent thế nào, cách Agent suy nghĩ và cách gọi Agent trong một bước của Workflow (Phần 4); nhìn lại bằng 4D và tổng kết (Phần 5).</p><p>Hai hoạt động thực hành chiếm khoảng 27 phút. Mỗi phần đi từ khái niệm chung, không gắn với công cụ nào, đến ví dụ trên Claude, sau đó là ChatGPT và Gemini khi có.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Từ Skill đến Agent" data-title="Từ Skill đến Agent: từ một việc đến một vai trò">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 1</span>Từ Skill đến Agent</div><h2 class="t">Từ Skill đến Agent: từ một việc đến một vai trò</h2></div>
+  <div class="s-body">
+    <div class="cols cols-5-7 grow ai-s">
+      <div class="cols gap-s">
+        <div class="card line-left"><p style="font-size:21px;color:var(--ink);line-height:1.45"><b>Agent</b> (tác nhân AI) là AI <b>tự điều khiển cách làm việc</b> để hoàn thành nhiệm vụ: tự lập kế hoạch, chọn bước, dùng công cụ, xem kết quả rồi làm tiếp đến khi xong.</p></div>
+        <div class="formula"><div class="pat lg"><span class="bx">Hướng dẫn</span><span class="ar">+</span><span class="bx">Kiến thức nền</span><span class="ar">+</span><span class="bx">Skill, công cụ</span></div><div class="pat lg"><span class="ar">+</span><span class="bx">AI tự chọn bước</span><span class="ar">=</span><span class="bx ok">Agent cho một vai trò</span></div></div>
+        <div class="card soft"><h4><i class="ph ph-identification-badge blue"></i> Hình dung</h4><p class="small"><b>Skill</b> giống một quy trình mẫu có văn bản: ai làm theo cũng ra cùng chất lượng. <b>Agent</b> giống một cán bộ chuyên trách: nhận nhiệm vụ, tự sắp xếp các bước, biết dùng quy trình nào cho việc nào, tự kiểm tra trước khi bàn giao.</p></div>
+      </div>
+      <div class="cols gap-s">
+        <table class="tbl th-nowrap">
+          <thead><tr><th></th><th>Skill</th><th style="background:#dbe5ff">Agent</th></tr></thead>
+          <tbody>
+            <tr><th>Phạm vi</th><td>Một việc</td><td class="hl">Một vai trò gồm nhiều việc liên quan</td></tr>
+            <tr><th>Thành phần</th><td>Hướng dẫn cho một việc, tài&nbsp;liệu đi kèm</td><td class="hl">Hướng dẫn vai trò, kiến thức nền, nhiều Skill, công cụ</td></tr>
+            <tr><th>Cách làm việc</th><td>Theo các bước Skill đã viết</td><td class="hl">Tự lập kế hoạch, chọn bước, xem kết quả để làm tiếp</td></tr>
+            <tr><th>Cách dùng</th><td>AI tự mở khi yêu cầu khớp mô&nbsp;tả</td><td class="hl">Mở Agent rồi giao việc; bối cảnh có sẵn ở mọi cuộc trò chuyện</td></tr>
+            <tr><th>Ranh giới</th><td>Các bước, tiêu chí của một việc</td><td class="hl">Việc được làm, việc không làm, dữ liệu không nhận</td></tr>
+            <tr><th>Ví dụ</th><td><code class="k">soan-cau-hoi</code></td><td class="hl">Trợ lý Khảo thí Tổ Ngữ văn 9</td></tr>
+          </tbody>
+        </table>
+        <div class="callout warn"><i class="ph ph-warning"></i><div><b>Hiểu đúng:</b> AI tự dùng nhiều Skill trong cùng một cuộc trò chuyện khi yêu cầu khớp mô tả (nguyên lý Ghép nối, LO 5.1). Agent không dùng để chạy lần lượt từng Skill; Agent <b>tự điều khiển trọn một việc nhiều bước</b> trong một vai trò, với bối cảnh và ranh giới xác định.</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Định nghĩa dùng trong bài theo Anthropic (Building effective agents, slide 14): agent là hệ thống trong đó AI "dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks"; về bản chất là "LLMs using tools based on environmental feedback in a loop". Agent cho một vai trò được cấu hình bằng hướng dẫn, kiến thức nền, Skill và công cụ. Điểm dừng để người duyệt không thuộc định nghĩa Agent: đó là lựa chọn khi thiết kế quy trình (bài viết dùng chữ "can pause for human feedback at checkpoints"), trình bày ở LO 5.3. Số người dùng cũng không quyết định một AI có phải Agent hay không. Agent được tạo bằng file trong Claude Code, OpenAI Codex hoặc Gemini CLI (slide 6); Project của Claude, GPT của ChatGPT, Gem của Gemini giữ bối cảnh và hướng dẫn cho trò chuyện, không phải Agent theo nghĩa của bài.</p><p>Nhấn mạnh ô "Hiểu đúng". Tài liệu của Anthropic nêu rõ: "Claude can load multiple skills simultaneously. Your skill should work well alongside others, not assume it's the only capability available." (The Complete Guide to Building Skills for Claude, nguyên lý Composability, đã học ở LO 5.1 slide 12). Vì vậy một giáo viên đã bật đủ Skill ra đề chỉ cần gõ một yêu cầu, AI sẽ tự mở các Skill phù hợp. Lý do cần Agent nằm ở chỗ khác: việc nhiều bước cần AI tự lập kế hoạch, chọn Skill và công cụ, kiểm tra kết quả, trong một vai trò có tài liệu nền, quy tắc và phạm vi rõ.</p><p>Hình dung "quy trình mẫu có văn bản" và "cán bộ chuyên trách" thống nhất với bậc thang 3 tầng của module (LO 5.3, slide 28).</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Từ Skill đến Agent" data-title="Khi nào cần một Agent?">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 1</span>Từ Skill đến Agent<span class="tag activity"><i class="ph ph-hand-pointing"></i>Thử ngay</span></div><h2 class="t">Khi nào cần một Agent?</h2></div>
+  <div class="s-body">
+    <div class="cols cols-4-8 grow ai-s">
+      <div class="cols gap-s">
+        <div class="card flat"><h3><i class="ph ph-signpost blue"></i> Chưa cần Agent khi</h3>
+          <ul class="list tight small">
+            <li>Việc làm một lần, mỗi lần một khác: <b>Prompt</b></li>
+            <li>Một việc lặp lại theo một quy trình: <b>Skill</b> (LO 5.1)</li>
+            <li>Chỉ cần tài liệu chung cho một chủ đề: <b>Project</b></li>
+          </ul>
+        </div>
+        <div class="quote sm"><p>"Tìm giải pháp đơn giản nhất có thể, chỉ tăng độ phức tạp khi cần."</p><cite>Anthropic, Building effective agents (12/2024)</cite></div>
+      </div>
+      <div class="cols gap-s">
+        <p class="small strong" style="color:var(--ink)">Nghĩ về một vai trò thầy cô hay nhờ AI đảm nhận, bấm chọn các dấu hiệu đúng. <span style="white-space:nowrap">Từ 3 dấu hiệu: nên tạo một Agent.</span></p>
+        <div class="checker" data-mid="1" data-full-min="3" data-verdict="v-custom">
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Một vai trò gồm nhiều việc liên quan, lặp lại theo đợt<small>Mỗi kỳ kiểm tra đều soạn câu hỏi, thẩm định, soạn hướng dẫn chấm, rà soát</small></span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Việc nhiều bước, khó định trước đủ các bước<small>Chọn lại ngữ liệu khi chưa phù hợp độ khó; sửa câu hỏi khi tổng điểm lệch</small></span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Cần dùng nhiều Skill, công cụ và tự kiểm tra kết quả<small>Đọc cấu trúc đề, mở Skill soạn câu hỏi, đối chiếu tổng điểm, tạo file đề</small></span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Mọi lần làm đều cần cùng một bộ tài liệu nền<small>Chương trình môn học, cấu trúc đề của tổ, ngữ liệu tổ đã chọn</small></span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Cần ranh giới rõ: việc không làm, dữ liệu không nhận<small>Không chấm bài, không nhập điểm, không đưa thông tin nhạy cảm của học sinh</small></span></label>
+        </div>
+        <div class="verdict" id="v-custom" data-full="Nên tạo một Agent|Việc cần AI tự làm nhiều bước trong một vai trò có bối cảnh và ranh giới rõ: tạo Agent ở Phần 2." data-part="Skill hoặc Project là đủ|Một việc lặp lại theo các bước cố định: dùng Skill. Một bộ tài liệu chung: dùng Project. Tạo Agent khi việc cần AI tự làm nhiều bước." data-none="Một câu lệnh tốt là đủ|Việc làm một lần hoặc mỗi lần một khác thì chưa cần đóng gói."></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Năm dấu hiệu là quy ước của khóa học, rút từ syllabus và từ bài Building effective agents của Anthropic. Dấu hiệu 2: agent hợp với "open-ended problems where it's difficult or impossible to predict the required number of steps, and where you can't hardcode a fixed path". Dấu hiệu 3: agent cần "ground truth" từ môi trường ở mỗi bước (như kết quả dùng công cụ) để tự đánh giá tiến độ. Ngưỡng 3 dấu hiệu nhằm tránh tạo Agent cho việc chỉ cần một Skill. Hai điều không phải dấu hiệu cần Agent: số người dùng, và việc phải dừng để giáo viên duyệt (đó là lựa chọn khi thiết kế quy trình, Phần 4).</p><p>Câu trích gốc: "When building applications with LLMs, we recommend finding the simplest solution possible, and only increasing complexity when needed." (Anthropic, Building effective agents, 19/12/2024).</p><p>Mời một học viên nêu một vai trò cụ thể, cả lớp cùng bấm. Gợi ý: Agent soạn bản tin phụ huynh, Agent chuẩn bị hồ sơ sinh hoạt chuyên môn, Agent hỏi đáp quy chế cho giáo viên mới. Lưu ý: Skill và Agent không loại trừ nhau, Agent dùng Skill.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Từ Skill đến Agent" data-title="Một Agent cho một vai trò: Trợ lý Khảo thí">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 1</span>Từ Skill đến Agent<span class="tag example"><i class="ph ph-chalkboard-teacher"></i>Ví dụ dạy học</span></div><h2 class="t">Một Agent cho một vai trò: Trợ lý Khảo thí Tổ Ngữ văn 9</h2></div>
+  <div class="s-body">
+    <p class="req"><b>Yêu cầu của giáo viên bộ môn:</b> "Soạn đề kiểm tra giữa kỳ I Ngữ văn 9, 90 phút, theo cấu trúc đề của tổ. Ngữ liệu phần Đọc hiểu đính kèm."</p>
+    <div class="flow mid">
+      <div class="step"><span class="num">1</span><h4>Đọc vai trò, tài&nbsp;liệu&nbsp;nền</h4><p>Hướng dẫn, chương trình, cấu trúc đề của tổ có sẵn mỗi lần làm.</p></div>
+      <div class="step"><span class="num">2</span><h4>Mở Skill khớp mô tả</h4><p><code class="k">soan-cau-hoi</code> cho bước soạn đề; các bước sau dùng <code class="k">tham-dinh-cau-hoi</code>, <code class="k">soan-huong-dan-cham</code>.</p></div>
+      <div class="step"><span class="num">3</span><h4>Soạn đề, tự thẩm định</h4><p>Rà từng câu theo tiêu chí của <code class="k">tham-dinh-cau-hoi</code>; sửa câu chưa đạt.</p></div>
+      <div class="step"><span class="num">4</span><h4>Soạn hướng dẫn chấm</h4><p>Đáp án, hướng dẫn chấm cho đề đã soạn theo <code class="k">soan-huong-dan-cham</code>.</p></div>
+      <div class="step"><span class="num">5</span><h4>Bàn giao bản nháp</h4><p>Đề, bảng thẩm định, hướng dẫn chấm lưu thành file mới.</p></div>
+    </div>
+    <div class="cols cols-7-5 grow ai-s">
+      <div class="card">
+        <h4><i class="ph ph-squares-four blue"></i> Mỗi thành phần nằm ở đâu (Claude Code)</h4>
+        <table class="tbl" style="margin-top:6px">
+          <tbody>
+            <tr><th style="width:26%">Hướng dẫn</th><td>Vai trò, cách làm, đầu ra, giới hạn: phần thân file <code class="k">.claude/agents/tro-ly-khao-thi.md</code></td></tr>
+            <tr><th>Kiến thức nền</th><td>Chương trình, cấu trúc đề, ngữ liệu: file trong thư mục dự án của tổ</td></tr>
+            <tr><th>Skill</th><td>Các Skill của tổ trong <code class="k">.claude/skills/</code>; Agent tự mở khi khớp mô tả</td></tr>
+            <tr><th>Công cụ</th><td>Đọc file, tạo file mới: trường <code class="k">tools</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="card soft">
+        <h4><i class="ph ph-scales blue"></i> Ai quyết định điều gì</h4>
+        <ul class="list tight small">
+          <li><b>Agent tự quyết:</b> dùng Skill nào, theo thứ tự nào; khi nào tự thẩm định và sửa (tối đa 2 vòng)</li>
+          <li><b>Giáo viên quyết:</b> duyệt đề, duyệt hướng dẫn chấm; mọi kết quả của Agent là bản nháp</li>
+        </ul>
+        <p class="small" style="margin-top:8px;color:var(--ink)"><b>Cách tạo Agent này:</b> Phần 2 (các bước), Phần 4 (file đầy đủ).</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Đi theo đúng một yêu cầu: giáo viên chỉ gõ một câu, phần còn lại do hướng dẫn của Agent và các Skill đảm nhận. Slide này cho thấy Agent làm việc thế nào; cách tạo Agent học ở Phần 2, file đầy đủ của Trợ lý Khảo thí và cách gọi Agent trong quy trình ra đề học ở Phần 4. Bước 2 cho thấy cơ chế đã học ở LO 5.1: AI so khớp yêu cầu với mô tả và mở Skill khi cần, không phải giáo viên tự chạy từng Skill.</p><p>Mọi kết quả của Agent là bản nháp; giáo viên quyết định có dùng hay không.</p><p>Ô "Ai quyết định điều gì" nối với định nghĩa ở slide 3: trong phạm vi được giao, Agent tự chọn Skill, thứ tự làm, khi nào tự sửa; những quyết định có hệ quả (dùng đề nào, hướng dẫn chấm nào) thuộc về giáo viên. File mẫu: templates/agents/tro-ly-khao-thi.md.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Từ Skill đến Agent" data-title="Tạo Agent trên 3 nền tảng: Claude Code, Codex, Gemini CLI">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 1</span>Từ Skill đến Agent<span class="tag claude"><i class="ph ph-sparkle"></i>Claude Code</span><span class="tag gpt"><i class="ph ph-terminal-window"></i>Codex, Gemini CLI</span></div><h2 class="t">Tạo Agent trên 3 nền tảng: Claude Code, Codex, Gemini CLI</h2></div>
+  <div class="s-body">
+    <table class="tbl roomy">
+      <thead><tr><th style="width:15%"></th><th style="width:30%">Claude Code</th><th style="width:28%">OpenAI Codex</th><th>Gemini CLI</th></tr></thead>
+      <tbody>
+        <tr><th>Dùng ở</th><td>Extension VS Code, JetBrains; dòng lệnh; thẻ Code của ứng dụng Claude trên máy tính</td><td>Extension IDE; dòng lệnh; ứng dụng ChatGPT trên máy tính</td><td>Dòng lệnh</td></tr>
+        <tr><th>Cách cấu hình</th><td>File <b>.md</b> trong <code class="k">.claude/agents/</code>: name, description, tools; phần thân là hướng dẫn</td><td>File <b>.toml</b> trong <code class="k">.codex/agents/</code>: name, description, developer_instructions</td><td>File <b>.md</b> trong <code class="k">.gemini/agents/</code>: name, description, tools; phần thân là hướng dẫn</td></tr>
+        <tr><th>Tự làm nhiều bước, dùng công cụ</th><td><b>Cowork</b>: tự chia việc cho Agent / <span class="nw">Sub-agent</span> chạy song song.</td><td>Giao việc trong thư mục dự án; nhiều luồng việc chạy song song</td><td>Gọi đúng Agent bằng <code class="k">@tên-agent</code></td></tr>
+      </tbody>
+    </table>
+    <div class="cols cols-2 gap-s">
+      <div class="callout warn"><i class="ph ph-info"></i><div><b>Project, GPT, Gem không phải Agent:</b> chúng giữ bối cảnh, tài liệu và hướng dẫn cho trò chuyện. Agent trong bài được tạo bằng file, chạy trong Claude Code, Codex, Gemini CLI.</div></div>
+      <div class="callout"><i class="ph ph-copy"></i><div><b>Cùng một khuôn:</b> file Agent của Claude Code và Gemini CLI đều là Markdown có phần đầu YAML; Codex dùng TOML với cùng các trường chính.</div></div>
+    </div>
+    <p class="src">Nguồn: code.claude.com/docs/en/sub-agents; learn.chatgpt.com (Codex, Subagents); geminicli.com/docs/core/subagents. Tên menu và phiên bản thay đổi thường xuyên: kiểm tra lại trước buổi dạy.</p>
+  </div>
+  <aside class="notes"><p>Slide này trả lời câu hỏi "tạo Agent ở đâu". Agent trong bài là AI được cấu hình bằng một file (vai trò, cách làm, công cụ, giới hạn) và tự làm nhiều bước trong thư mục làm việc. Cả ba nhà cung cấp đều có dạng này trong công cụ làm việc với thư mục: Claude Code của Anthropic, Codex của OpenAI, Gemini CLI của Google.</p><p>Claude Code (tài liệu Subagents): "Subagents are Markdown files with YAML frontmatter"; lưu ở .claude/agents/ (dự án) hoặc ~/.claude/agents/ (cá nhân); chạy làm Agent chính bằng "claude --agent &lt;name&gt;".</p><p>OpenAI Codex (tài liệu Subagents): "To define your own custom agents, add standalone TOML files under ~/.codex/agents/ for personal agents or .codex/agents/ for project-scoped agents"; trường bắt buộc name, description, developer_instructions ("Core instructions that define the agent's behavior"). Dùng được ở Codex CLI, extension IDE và ứng dụng ChatGPT trên máy tính.</p><p>Gemini CLI (tài liệu Subagents, từ 04/2026): file .gemini/agents/*.md hoặc ~/.gemini/agents/*.md; "The body of the markdown file becomes the agent's System Prompt"; trường bắt buộc name, description; gọi trực tiếp bằng @tên. Project (Claude, ChatGPT) và Gem (Gemini) là nơi lưu bối cảnh cho trò chuyện, đã học ở LO 5.1.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Thiết kế và xây dựng Agent" data-title="Ba thành phần cốt lõi của một Agent">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 2</span>Thiết kế và xây dựng Agent<span class="tag anthropic"><i class="ph ph-book-open"></i>Theo OpenAI, Google, Anthropic</span></div><h2 class="t">Ba thành phần cốt lõi của một Agent</h2><p class="sub" style="max-width:none">Một Agent gồm mô hình suy luận, hướng dẫn làm việc và công cụ hành động; giáo viên chủ yếu viết hướng dẫn và chọn công cụ.</p></div>
+  <div class="s-body">
+    <div class="cols cols-3 gap-s stretch comp3">
+      <div class="card cp"><div class="cp-h"><div class="ic"><i class="ph ph-brain"></i></div><div class="cp-t"><h3>Mô hình</h3><span class="en">Model</span></div><span class="cp-b">Thường để mặc định</span></div><p>Bộ phận suy luận của Agent: hiểu yêu cầu, lập kế hoạch và quyết định bước tiếp theo.</p><p class="eg"><b>Claude Code:</b> trường <code class="k">model</code>, không bắt buộc.</p></div>
+      <div class="card cp hl"><div class="cp-h"><div class="ic"><i class="ph ph-list-numbers"></i></div><div class="cp-t"><h3>Hướng dẫn</h3><span class="en">Instructions</span></div><span class="cp-b">Giáo viên viết</span></div><p>Agent đóng vai trò gì, làm theo trình tự nào, trả kết quả dạng gì, không được làm gì.</p><p class="eg"><b>Ví dụ:</b> viết nhận xét cuối kỳ từ bảng mức đạt; không gửi nhận xét cho phụ huynh.</p></div>
+      <div class="card cp hl"><div class="cp-h"><div class="ic"><i class="ph ph-wrench"></i></div><div class="cp-t"><h3>Công cụ</h3><span class="en">Tools</span></div><span class="cp-b">Giáo viên chọn</span></div><p>Những gì Agent được dùng để hành động: đọc và tạo file, dùng Skill, kết nối ứng dụng.</p><p class="eg"><b>Ví dụ:</b> đọc bảng mức đạt, tạo file nhận xét mới, dùng hai Skill đã viết.</p></div>
+    </div>
+    <div class="cols cols-2 gap-s stretch">
+      <div class="card soft gp"><h4><i class="ph ph-pen-nib"></i>Viết hướng dẫn rõ ràng<span class="by">Theo OpenAI</span></h4>
+        <ul class="gl"><li><b>Tận dụng tài liệu sẵn có:</b> chuyển quy trình, quy định, mẫu biểu của tổ thành các bước cho Agent.</li><li><b>Chia nhỏ nhiệm vụ:</b> mỗi bước ngắn gọn, dễ làm theo.</li><li><b>Xác định hành động rõ ràng:</b> mỗi bước ứng với một việc cần làm hoặc một kết quả cần có.</li><li><b>Lường trước tình huống ngoại lệ:</b> thiếu thông tin thì hỏi lại; yêu cầu ngoài phạm vi thì từ chối.</li></ul></div>
+      <div class="card soft gp"><h4><i class="ph ph-flask"></i>Bắt đầu đơn giản, kiểm thử rồi mở rộng<span class="by">Theo Anthropic, OpenAI</span></h4>
+        <ul class="gl"><li><b>Đơn giản:</b> một Agent cho một vai trò; chỉ thêm công cụ khi cần.</li><li><b>Minh bạch:</b> yêu cầu Agent trình bày kế hoạch trước khi thực hiện.</li><li><b>Kiểm thử:</b> chạy thử với vài yêu cầu, đối chiếu kết quả, điều chỉnh hướng dẫn và ghi phiên bản.</li></ul></div>
+    </div>
+    <p class="src">Nguồn: OpenAI, A practical guide to building agents (2025); Google, Agent Development Kit; Anthropic, Building effective agents (12/2024)</p>
+  </div>
+  <aside class="notes"><p>Slide mở đầu Phần 2 trình bày khung chung, không gắn với công cụ nào. Theo OpenAI (A practical guide to building agents, 2025): "In its most fundamental form, an agent consists of three core components: Model: The LLM powering the agent's reasoning and decision-making; Tools: External functions or APIs the agent can use to take action; Instructions: Explicit guidelines and guardrails defining how the agent behaves." Tài liệu Agent Development Kit của Google trình bày theo cùng trình tự: "Define agent identity and purpose", "Guide the agent with instructions", "Equip the agent with tools".</p><p>Thẻ "Viết hướng dẫn rõ ràng" theo bốn nguyên tắc của OpenAI: "Use existing documents", "Prompt agents to break down tasks", "Define clear actions" ("Make sure every step in your routine corresponds to a specific action or output"), "Capture edge cases" (ví dụ "how to proceed when a user provides incomplete information or asks an unexpected question"). Microsoft Copilot Studio đưa ra khung tương tự cho phần hướng dẫn: "Role, Scope, Context, Tone, and Error Handling".</p><p>Thẻ "Bắt đầu đơn giản, kiểm thử rồi mở rộng" theo ba nguyên tắc cuối bài Building effective agents của Anthropic: "Maintain simplicity in your agent's design. Prioritize transparency by explicitly showing the agent's planning steps. Carefully craft your agent-computer interface (ACI) through thorough tool documentation and testing." OpenAI cũng khuyến nghị phát triển dần ("customers typically achieve greater success with an incremental approach") và lập bộ đánh giá ("Set up evals to establish a performance baseline").</p><p>Các slide tiếp theo: slide 8 cho thấy ba thành phần nằm ở đâu trong file Agent của Claude Code (model, tools, skills ở phần đầu; hướng dẫn ở phần thân); slide 9 trình bày cách tạo; Thực hành 1 ở slide 10.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Thiết kế và xây dựng Agent" data-title="Cấu trúc một Agent: file .md">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 2</span>Thiết kế và xây dựng Agent<span class="tag claude"><i class="ph ph-sparkle"></i>Ví dụ trên Claude Code</span></div><h2 class="t">Cấu trúc một Agent: file .md</h2><p class="sub" style="max-width:none">File Agent gồm hai phần: phần đầu giúp Claude nhận diện và khởi tạo Agent; phần thân hướng dẫn Agent cách thực hiện công việc.</p></div>
+  <div class="s-body">
+    <div class="cols cols-7-5 grow ai-s">
+      <div class="cols gap-s">
+        <div class="fpart fp-head"><div class="fp-h"><span class="fp-tag">Phần đầu</span><span class="fp-f">.claude/agents/tro-ly-nhan-xet.md</span></div><pre><span class="c">---</span>
+<span class="k">name:</span> tro-ly-nhan-xet
+<span class="k">description:</span> Viết nhận xét cuối kỳ cho cả lớp từ bảng mức đạt,
+             xuất bảng nhận xét để giáo viên duyệt.
+<span class="k">tools:</span> Read, Write
+<span class="k">skills:</span>
+  - viet-nhan-xet-hoc-sinh
+  - tham-dinh-nhan-xet
+<span class="c">---</span></pre></div>
+        <div class="fpart fp-body"><div class="fp-h"><span class="fp-tag">Phần thân</span></div><pre>Bạn là Trợ lý Nhận xét cho giáo viên Ngữ văn 9.
+Hãy tạo bản nháp để giáo viên rà soát và quyết định.
+
+<span class="h">## Cách làm</span>
+<span class="m">1.</span> Đọc bảng mức đạt; nếu thiếu thông tin, hỏi lại giáo viên.
+<span class="m">2.</span> Phân nhóm học sinh theo mức đạt.
+<span class="m">3.</span> Viết nhận xét cho từng học sinh theo Skill viet-nhan-xet-hoc-sinh.
+<span class="m">4.</span> Đối chiếu với Skill tham-dinh-nhan-xet và chỉnh nội dung chưa đạt.
+<span class="m">5.</span> Lưu bản nháp vào file mới nhan-xet-nhap.md.
+
+<span class="h">## Đầu ra</span>
+<span class="m">-</span> Bảng: Họ tên | Nhận xét
+<span class="m">-</span> Danh sách học sinh cần giáo viên xem lại, kèm lý do
+
+<span class="h">## Giới hạn</span>
+<span class="m">-</span> Chỉ sử dụng thông tin có trong bảng; không suy đoán thêm.
+<span class="m">-</span> Không tự sửa mức đạt hoặc gửi nhận xét cho học sinh, phụ huynh.</pre></div>
+      </div>
+      <div class="cols gap-s">
+        <div class="card rd rd-head">
+          <h4><span class="fp-tag">Phần đầu</span>Thông tin nhận diện (frontmatter)</h4>
+          <dl>
+            <dt>name</dt><dd>Tên định danh của Agent. <b class="nw">Bắt buộc</b></dd>
+            <dt>description</dt><dd>Mô tả Agent làm gì và dùng trong trường hợp nào. <b class="nw">Bắt buộc</b></dd>
+            <dt>tools</dt><dd>Những công cụ Agent được phép sử dụng.</dd>
+            <dt>skills</dt><dd>Những Skill Agent có thể sử dụng khi làm việc.</dd>
+          </dl>
+        </div>
+        <div class="card rd rd-body">
+          <h4><span class="fp-tag">Phần thân</span>Hướng dẫn (Markdown)</h4>
+          <p>Khi được giao việc, Agent thực hiện theo phần hướng dẫn này. Một hướng dẫn tốt nên nêu rõ:</p>
+          <dl class="parts4"><dt>Vai trò</dt><dd>Agent đóng vai gì?</dd><dt>Cách làm</dt><dd>Thực hiện những bước nào?</dd><dt>Đầu ra</dt><dd>Kết quả ở dạng nào?</dd><dt>Giới hạn</dt><dd>Những việc nào không được làm?</dd></dl>
+        </div>
+        <div class="card rd rd-desc">
+          <h4>Viết description</h4>
+          <div class="dd2"><span class="bad"><i class="ph ph-x"></i>Chưa rõ</span><span class="q">Trợ lý nhận xét học sinh.</span></div>
+          <div class="dd2"><span class="good"><i class="ph ph-check"></i>Rõ ràng</span><span class="q">Viết nhận xét cuối kỳ cho cả lớp từ bảng mức đạt. Dùng khi cần nhận xét học bạ, sổ liên lạc.</span></div>
+          <p class="dd-note">Mô tả càng cụ thể, Claude càng dễ chọn đúng Agent.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>File Agent gồm hai phần: phần đầu (YAML) giúp Claude nhận diện và khởi tạo Agent; phần thân là hướng dẫn Agent làm theo. Theo tài liệu Subagents của Claude Code: "The frontmatter defines the subagent's metadata and configuration. The body becomes the system prompt that guides the subagent's behavior. Subagents receive only this system prompt plus basic environment details like the working directory, not the Claude Code system prompt."</p><p>Các trường: name ("Unique identifier") và description ("When Claude should delegate to this subagent") là bắt buộc. tools: "Inherits every tool available to subagents if omitted", vì vậy nên ghi rõ công cụ cần dùng. skills: "The full skill content is injected, not only the description." Muốn Claude chủ động giao việc, tài liệu gợi ý thêm cụm như "use proactively" vào description. Khi được giao việc, Agent "starts with a fresh, isolated context window. It doesn't see your conversation history", nên phần thân cần đủ vai trò, cách làm, đầu ra, giới hạn.</p><p>Cùng khuôn với SKILL.md ở LO 5.1: phần đầu và phần thân. File mẫu: templates/agents/tro-ly-nhan-xet.md. CHƯA KIỂM CHỨNG trường skills có nạp sẵn khi chạy bằng claude --agent; Agent vẫn tự mở Skill khớp mô tả.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Thiết kế và xây dựng Agent" data-title="Tạo Agent trên Claude: viết thủ công hoặc ra lệnh">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 2</span>Thiết kế và xây dựng Agent<span class="tag claude"><i class="ph ph-sparkle"></i>Ví dụ trên Claude</span></div><h2 class="t">Tạo Agent trên Claude: viết thủ công hoặc ra lệnh</h2></div>
+  <div class="s-body">
+    <div class="cols cols-2 grow stretch">
+      <div class="card line-left">
+        <h3><i class="ph ph-pencil-simple-line blue"></i> 1. Viết thủ công</h3>
+        <ol class="list tight small">
+          <li>Sao chép file mẫu <code class="k">tro-ly-nhan-xet.md</code></li>
+          <li>Sửa mô tả, công cụ, Skill, cách làm, giới hạn cho việc của mình</li>
+          <li>Lưu vào <code class="k">.claude/agents/</code> của thư mục dự&nbsp;án</li>
+          <li>Thư mục mới tạo: khởi động lại Claude&nbsp;Code</li>
+          <li>Đọc lại phần đầu: tên, mô tả, công cụ đúng ý chưa</li>
+        </ol>
+        <div class="callout ok" style="margin-top:12px"><i class="ph ph-check-circle"></i><div>Viết thủ công giúp hiểu từng phần của file; nên làm trước khi nhờ Claude tạo.</div></div>
+      </div>
+      <div class="card">
+        <h3><i class="ph ph-chats-circle blue"></i> 2. Ra lệnh cho Claude</h3>
+        <p class="small">Trong Claude Code, mô tả Agent cần tạo và nơi lưu:</p>
+        <div class="code sm" style="margin-top:8px" data-file="Câu lệnh tạo Agent"><pre>Tạo một agent tên tro-ly-nhan-xet trong .claude/agents/ để viết và tự thẩm định nhận xét cuối kỳ cho cả lớp từ bảng mức đạt. Agent được đọc file và chỉ tạo file mới, dùng Skill viet-nhan-xet-hoc-sinh và tham-dinh-nhan-xet, trình bày kế hoạch trước khi làm, xuất bảng Họ tên | Nhận xét.</pre></div>
+        <p class="small" style="margin-top:8px">Đọc lại file Claude tạo theo các mục ở cột 1. Lệnh <code class="k">/agents</code> hiển thị hai cách tạo Agent.</p>
+      </div>
+    </div>
+    <div class="card flat">
+      <div class="cols" style="grid-template-columns:auto 1fr;gap:18px;align-items:center">
+        <h4 style="margin:0"><i class="ph ph-play-circle blue"></i> Dùng Agent</h4>
+        <div class="pills"><span class="pill g"><i class="ph ph-terminal-window"></i>Làm Agent chính: claude --agent tro-ly-nhan-xet</span><span class="pill"><i class="ph ph-chat-centered-text"></i>Gọi tên trong phiên đang làm: "Dùng agent tro-ly-nhan-xet cho lớp 9A"</span></div>
+      </div>
+    </div>
+    <p class="src">Nguồn: code.claude.com/docs/en/sub-agents</p>
+  </div>
+  <aside class="notes"><p>Ưu tiên viết thủ công trước: học viên đọc và sửa từng phần của file mẫu, hiểu rõ mô tả, công cụ, cách làm, giới hạn. Sau đó mới nhờ Claude tạo cho nhanh. Tài liệu chính thức: "To create one, ask Claude to write it for you, or write the file yourself." Sau khi Claude tạo, luôn mở file đọc lại phần đầu: Claude có thể đặt thêm công cụ không cần thiết.</p><p>Lệnh /agents: "Running /agents prints a reminder to ask Claude or edit .claude/agents/ and ~/.claude/agents/ directly"; bản v2.1.197 trở về trước mở trình hướng dẫn có thẻ Running và Library. Nếu học viên thấy giao diện khác, đó là do phiên bản.</p><p>Dùng làm Agent chính: "claude --agent code-reviewer"; muốn mặc định cho mọi phiên của dự án thì đặt "agent" trong .claude/settings.json. Gọi tên trong phiên đang làm thì file chạy như một <span class="nw">Sub-agent</span> (Phần 3).</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Thiết kế và xây dựng Agent" data-title="Thực hành 1: tạo Agent của mình">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 2</span>Thiết kế và xây dựng Agent<span class="tag practice"><i class="ph ph-hand"></i>Thực hành 1 · 15 phút</span></div><h2 class="t">Thực hành 1: tạo Agent của mình</h2><p class="sub" style="max-width:none">Tạo một Agent cho một vai trò của thầy cô, dùng lại Skill đã viết ở LO 5.1, kiểm tra bằng 3 yêu cầu thử.</p></div>
+  <div class="s-body">
+    <div class="flow mid th2flow">
+      <div class="step"><h4><span class="num">1</span>Chọn vai trò · 3'</h4><p>Vai trò gồm nhiều bước, lặp lại thường xuyên; ghi việc làm, việc không làm.</p></div>
+      <div class="step"><h4><span class="num">2</span>Viết file Agent · 6'</h4><p>Điền khung bên dưới, hoặc ra lệnh cho Claude tạo như slide 9.</p></div>
+      <div class="step"><h4><span class="num">3</span>Chạy thử, sửa · 6'</h4><p>Chạy 3 yêu cầu thử; sửa file, tăng phiên bản, chạy lại cả 3.</p></div>
+    </div>
+    <div class="cols cols-6-6 grow ai-s">
+      <div class="cols gap-s">
+        <div class="code sm skel" data-file="Khung file Agent: điền chỗ trống"><pre data-lang="md">---
+name: [ten-agent]
+description: [Việc Agent làm]. Dùng khi [tình huống cần dùng].
+tools: Read, Write
+skills:
+  - [ten-skill]
+---
+Bạn là [vai trò] cho [giáo viên, tổ].
+Hãy tạo bản nháp để giáo viên rà soát và quyết định.
+## Cách làm
+1. Đọc [tài liệu đầu vào]; nếu thiếu thông tin, hỏi lại giáo viên.
+2. Trình bày kế hoạch trước khi làm.
+3. [Việc chính] theo Skill [ten-skill].
+4. Lưu bản nháp vào file mới [ten-file].
+## Đầu ra
+- [Định dạng kết quả]
+## Giới hạn
+- Không [việc không làm].</pre></div>
+        <p class="xs">Mẫu: <b>templates/agents/khung-agent.md</b>. Codex, Gemini CLI: theo khuôn ở slide 6.</p>
+      </div>
+      <div class="cols gap-s">
+        <div class="card soft roles2"><h4>Gợi ý vai trò</h4><dl><dt>Mầm non</dt><dd>Bản tin tuần gửi phụ huynh</dd><dt>Tiểu học</dt><dd>Nhận xét cuối kỳ</dd><dt>THCS, THPT</dt><dd>Phiếu học tập theo tuần</dd><dt>ĐH, CĐ</dt><dd>Đề cương, rubric học phần</dd></dl></div>
+        <h3 class="col-h">3 yêu cầu thử</h3>
+        <table class="tbl compact th2tbl">
+          <thead><tr><th style="width:24%">Yêu cầu thử</th><th style="width:27%">Kiểm tra phần</th><th>Đạt khi</th></tr></thead>
+          <tbody>
+            <tr><th>Đúng việc</th><td>Cách làm, Đầu ra</td><td>Agent trình bày kế hoạch, dùng đúng Skill, tạo đúng file</td></tr>
+            <tr><th>Nói cách khác</th><td>description</td><td>Agent vẫn nhận đúng việc; thiếu thông tin thì hỏi lại</td></tr>
+            <tr><th>Ngoài phạm vi</th><td>Giới hạn, tools</td><td>Agent từ chối, nêu lý do</td></tr>
+          </tbody>
+        </table>
+        <div class="callout ok"><i class="ph ph-package"></i><div><b>Sản phẩm:</b> file Agent kèm kết quả 3 yêu cầu thử, dùng ở Thực hành 2.</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Mục tiêu: mỗi học viên có một file Agent chạy được. Bước 2 ưu tiên điền khung để hiểu từng phần của file (slide 8); học viên có thể ra lệnh cho Claude tạo (slide 9), sau đó đọc lại phần đầu vì Claude có thể thêm công cụ không cần thiết. Codex và Gemini CLI: dùng cùng nội dung theo khuôn ở slide 6.</p><p>Cột "Kiểm tra phần" cho biết mỗi yêu cầu thử kiểm tra phần nào của file, cũng là chỗ cần sửa khi chưa đạt. Ví dụ với Trợ lý Nhận xét: đúng việc "Viết nhận xét cuối kỳ cho lớp 9A từ bang-muc-dat-9A.csv"; nói cách khác "Làm giúp phần nhận xét học bạ lớp chủ nhiệm"; ngoài phạm vi "Gửi các nhận xét này cho phụ huynh". Mỗi lần sửa: tăng phiên bản, chạy lại cả 3 yêu cầu.</p><p>Gợi ý vai trò: mầm non soạn bản tin tuần gửi phụ huynh; tiểu học viết nhận xét cuối kỳ; THCS, THPT soạn phiếu học tập theo tuần; đại học, cao đẳng soạn đề cương, rubric học phần. Building effective agents khuyến nghị "extensive testing in sandboxed environments, along with the appropriate guardrails". CHƯA KIỂM CHỨNG: cách gọi Agent trong Codex, Gemini CLI.</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Sub-agent và Agent Teams" data-title="Sub-agent: Agent chính chia việc, nhận lại bản tóm tắt">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 3</span><span><span class="nw">Sub-agent</span> và Agent Teams (giới thiệu)</span><span class="tag claude"><i class="ph ph-sparkle"></i>Theo tài liệu Claude Code</span></div><h2 class="t"><span class="nw">Sub-agent</span>: Agent chính chia việc, nhận lại bản tóm tắt</h2><p class="sub" style="max-width:none">Mỗi <span class="nw">Sub-agent</span> làm trong ngữ cảnh riêng; cuộc trò chuyện chính chỉ nhận kết quả, nên luôn gọn và tập trung.</p></div>
+  <div class="s-body">
+    <div class="cols cols-6-6 grow ai-s">
+      <div class="cols gap-s">
+        <div class="team">
+          <div class="tm lead"><i class="ph ph-robot"></i><div><b>Agent chính</b><span>Chia việc, tổng hợp báo cáo</span></div></div>
+          <div class="sa-flow"><span class="sa-down"><i class="ph ph-arrow-down"></i>Giao việc</span><span class="sa-up"><i class="ph ph-arrow-up"></i>Báo cáo tóm tắt</span></div>
+          <div class="mates sa-mates"><div class="tm mate sub"><i class="ph ph-user-gear"></i><div><b>Sub-agent 1</b><span>Ngữ cảnh riêng</span></div></div><div class="tm mate sub"><i class="ph ph-user-gear"></i><div><b>Sub-agent 2</b><span>Ngữ cảnh riêng</span></div></div><div class="tm mate sub"><i class="ph ph-user-gear"></i><div><b>Sub-agent 3</b><span>Ngữ cảnh riêng</span></div></div></div>
+          <p class="tcap">Khác Agent Teams: <span class="nw">Sub-agent</span> làm riêng rồi báo cáo về Agent chính, không phản biện nhau.</p>
+        </div>
+        <div class="dodont sa-dd">
+          <div class="dd-yes"><h4><i class="ph ph-check-circle"></i>Nên dùng</h4><ul><li>Việc đọc nhiều, chỉ cần kết luận<span class="ex">Rà 12 đề cũ, báo lại các dạng câu hay gặp</span></li><li>Việc cần giới hạn quyền<span class="ex">Thẩm định đề: chỉ đọc, không sửa</span></li><li>Việc độc lập, có thể tóm tắt kết quả<span class="ex">Mỗi <span class="nw">Sub-agent</span> soạn một phần đề</span></li></ul></div>
+          <div class="dd-no"><h4><i class="ph ph-x-circle"></i>Không nên dùng</h4><ul><li>Việc cần trao đổi qua lại nhiều lần<span class="ex">Cùng giáo viên sửa từng câu trong đề</span></li><li>Các bước nối tiếp, chung ngữ cảnh<span class="ex">Lên kế hoạch, soạn rồi sửa cùng một đề</span></li><li>Việc nhỏ, cần kết quả ngay<span class="ex">Sửa một lỗi chính tả trong câu hỏi</span></li></ul></div>
+        </div>
+        <div class="sa-ways"><p class="sa-ways-h">Hai cách tạo <span class="nw">Sub-agent</span></p><div class="sa-way"><span class="num sm">1</span><div><b>Nêu trong câu lệnh</b><p>AI tự tạo <span class="nw">Sub-agent</span> cho việc đang làm, như ví dụ bên cạnh; không cần chuẩn bị trước.</p></div></div><div class="sa-way"><span class="num sm">2</span><div><b>Tạo file <span class="nw">Sub-agent</span></b><p>Nhờ Claude viết, hoặc tự viết file .md trong <code class="k">.claude/agents/</code>; dùng lại nhiều lần, gõ @ để gọi đích danh.</p></div></div></div>
+      </div>
+      <div class="cols gap-s">
+        <h3 class="col-h">Thẩm định đề kiểm tra<span class="tag example sm-tag"><i class="ph ph-lightbulb"></i>Ví dụ</span></h3>
+        <div class="code sm" data-file="Câu lệnh dùng Sub-agent"><pre>Dùng 3 Sub-agent thẩm định de-nhap.md theo cau-truc-de.md. Mỗi Sub-agent rà một phần: Đọc hiểu, Viết, đáp án; không sửa file.
+Báo cáo của mỗi Sub-agent gồm:
+- Kết luận: DÙNG ĐƯỢC hoặc SỬA LẠI.
+- Lỗi cần sửa: số câu, tiêu chí chưa đạt, đề xuất sửa.
+- Những điểm giáo viên cần tự kiểm tra.
+Tổng hợp ba báo cáo thành một bản cho tôi.</pre></div>
+        <div class="sa-rep"><div class="sa-rep-h"><i class="ph ph-arrow-bend-up-left"></i>Agent chính tổng hợp ba báo cáo</div><ul><li><b>Kết luận:</b> SỬA LẠI.</li><li><b>Lỗi cần sửa:</b> câu 3 (Đọc hiểu) khó hơn cấu trúc đề; câu 7 thiếu ý trong đáp án.</li><li><b>Giáo viên tự kiểm tra:</b> độ dài ngữ liệu phần Đọc hiểu.</li></ul></div>
+        <div class="callout"><i class="ph ph-info"></i><div><span class="nw">Sub-agent</span> không thấy cuộc trò chuyện chính, nên lời giao việc cần nêu đủ file, tiêu chí và nội dung báo cáo.</div></div>
+      </div>
+    </div>
+    <p class="src">Nguồn: code.claude.com/docs/en/sub-agents; code.claude.com/docs/en/best-practices</p>
+  </div>
+  <aside class="notes"><p>Sơ đồ theo tài liệu Subagents của Claude Code: "Each subagent runs in its own context window with a custom system prompt, specific tool access, and independent permissions"; <span class="nw">Sub-agent</span> "does that work in its own context and returns only the summary". <span class="nw">Sub-agent</span> không thấy cuộc trò chuyện chính: "doesn't see your conversation history, the skills you've already invoked, or the files Claude has already read", vì vậy lời giao việc phải tự đủ. So với Agent Teams (slide sau): "Subagents report results back to the main agent. In agent teams, teammates share a task list, claim work, and communicate directly with each other." "Use subagents when you need quick, focused workers that report back. Use agent teams when teammates need to share findings, challenge each other, and coordinate on their own." (Theo tài liệu mới, <span class="nw">Sub-agent</span> được Claude đặt tên cũng nhắn được cho nhau, nhưng việc điều phối vẫn do Agent chính.)</p><p>Không cần tạo <span class="nw">Sub-agent</span> trước. Best practices của Claude Code: "Tell Claude to use subagents explicitly: 'Use a subagent to review this code for security issues.'"; "Delegate research with 'use subagents to investigate X'". Khi đó Claude giao việc cho <span class="nw">Sub-agent</span> dựng sẵn: Explore (chỉ đọc, để tìm hiểu) hoặc general-purpose ("Claude delegates to general-purpose when the task requires both exploration and modification, complex reasoning to interpret results, or multiple dependent steps"). Câu lệnh mẫu phỏng theo ví dụ "Use a subagent to review the rate limiter diff against PLAN.md... Report gaps, not style preferences": nêu việc cần kiểm, căn cứ để kiểm và nội dung cần báo cáo. Việc lặp lại nhiều lần thì lưu <span class="nw">Sub-agent</span> thành file, như tham-dinh-de-kiem-tra.md (templates/agents/) dùng ở slide 17; gõ @ rồi chọn <span class="nw">Sub-agent</span> để chắc chắn <span class="nw">Sub-agent</span> đó chạy.</p><p>Nên dùng, không nên dùng theo mục chọn giữa <span class="nw">Sub-agent</span> và cuộc trò chuyện chính: "Use subagents when: The task produces verbose output you don't need in your main context; You want to enforce specific tool restrictions or permissions; The work is self-contained and can return a summary." "Use the main conversation when: The task needs frequent back-and-forth or iterative refinement; Multiple phases share significant context, such as planning, implementation, and testing; You're making a quick, targeted change; Latency matters." Mặc định <span class="nw">Sub-agent</span> có thể tạo <span class="nw">Sub-agent</span> con, tối đa ba tầng dưới cuộc trò chuyện chính; không cần giới thiệu với giáo viên.</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Sub-agent và Agent Teams" data-title="Agent Teams: đội agent">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 3</span><span><span class="nw">Sub-agent</span> và Agent Teams (giới thiệu)</span><span class="tag claude"><i class="ph ph-sparkle"></i>Thử nghiệm trên Claude Code</span></div><h2 class="t">Agent Teams: nhiều agent làm việc như một đội</h2><p class="sub" style="max-width:none">Nhiều phiên Claude Code cùng làm một việc: trưởng nhóm điều phối; thành viên tự nhận việc và trao đổi trực tiếp với nhau.</p></div>
+  <div class="s-body">
+    <div class="cols cols-6-6 grow ai-s">
+      <div class="cols gap-s">
+        <div class="team">
+          <div class="tm lead"><i class="ph ph-crown-simple"></i><div><b>Trưởng nhóm</b><span>Chia việc, tổng hợp kết quả</span></div></div>
+          <i class="ph ph-arrow-down va"></i>
+          <div class="tm tlist"><i class="ph ph-list-checks"></i><div><b>Danh sách việc chung</b><span>Thành viên tự nhận việc</span></div></div>
+          <i class="ph ph-arrow-down va"></i>
+          <div class="mates"><div class="tm mate"><i class="ph ph-user"></i><b>Thành viên 1</b></div><i class="ph ph-arrows-left-right ha"></i><div class="tm mate"><i class="ph ph-user"></i><b>Thành viên 2</b></div><i class="ph ph-arrows-left-right ha"></i><div class="tm mate"><i class="ph ph-user"></i><b>Thành viên 3</b></div></div>
+          <p class="tcap">Khác <span class="nw">Sub-agent</span>: thành viên trao đổi, phản biện nhau, không chỉ báo cáo về trưởng nhóm.</p>
+        </div>
+        <div class="dodont">
+          <div class="dd-yes"><h4><i class="ph ph-check-circle"></i>Nên dùng</h4><ul><li>Rà soát, tìm hiểu từ nhiều góc độ<span class="ex">Rà đề theo cấu trúc, kiến thức, độ khó</span></li><li>Mỗi thành viên làm một phần riêng<span class="ex">Mỗi thành viên soạn học liệu một chủ đề</span></li><li>Kiểm chứng nhiều giả thuyết cùng lúc<span class="ex">Tìm nguyên nhân điểm Đọc hiểu thấp</span></li></ul></div>
+          <div class="dd-no"><h4><i class="ph ph-x-circle"></i>Không nên dùng</h4><ul><li>Việc tuần tự, bước sau chờ bước trước<span class="ex">Dùng một Agent hoặc nối chuỗi</span></li><li>Nhiều thành viên sửa cùng một file<span class="ex">Dễ ghi đè lên nhau</span></li><li>Việc thường ngày, việc nhỏ<span class="ex">Một phiên tốn ít token hơn</span></li></ul></div>
+        </div>
+      </div>
+      <div class="cols gap-s">
+        <h3 class="col-h">Kiểm chứng giả thuyết về điểm Đọc hiểu<span class="tag example sm-tag"><i class="ph ph-lightbulb"></i>Ví dụ</span></h3>
+        <div class="code sm" data-file="Câu lệnh dùng Agent Teams"><pre>Kết quả phần Đọc hiểu bài kiểm tra giữa kỳ khối 9 thấp hơn kỳ trước.
+Dữ liệu: de-giua-ky.md, huong-dan-cham.md, bang-diem-khoi-9.csv.
+Dùng Agent Teams gồm 3 thành viên, mỗi thành viên kiểm tra một giả thuyết:
+- Đề khó hơn cấu trúc đề của tổ.
+- Ngữ liệu xa lạ với học sinh.
+- Hướng dẫn chấm quá chặt.
+Các thành viên phản biện kết luận của nhau.
+Ghi kết luận còn đứng vững vào bao-cao-doc-hieu.md.</pre></div>
+        <table class="tbl compact th2tbl">
+          <tbody>
+            <tr><th style="width:24%">Cách bật</th><td>Biến môi trường <code class="k">CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1</code></td></tr>
+            <tr><th>Quy mô</th><td>3 đến 5 thành viên, mỗi thành viên một phần việc rõ</td></tr>
+            <tr><th>Theo dõi</th><td>Chọn thành viên trong bảng agent để xem và nhắn trực tiếp</td></tr>
+          </tbody>
+        </table>
+        <div class="callout"><i class="ph ph-info"></i><div>Mỗi thành viên là một phiên riêng nên tốn token hơn nhiều. Giới thiệu để biết, không bắt buộc thực hành.</div></div>
+      </div>
+    </div>
+    <p class="src">Nguồn: code.claude.com/docs/en/agent-teams</p>
+  </div>
+  <aside class="notes"><p>Theo tài liệu Agent teams: "Agent teams are experimental and disabled by default. Enable them by setting CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1 in your settings.json or environment." "One session acts as the team lead, coordinating work, assigning tasks, and synthesizing results. Teammates work independently, each in its own context window, and communicate directly with each other." Thành phần: team lead, teammates, task list ("Shared list of work items that teammates claim and complete"), mailbox ("Messaging system for communication between agents").</p><p>Nên dùng, theo tài liệu: "Research and review", "New modules or features", "Debugging with competing hypotheses" (đã chuyển sang việc của tổ chuyên môn). Không nên: "Agent teams add coordination overhead and use significantly more tokens than a single session... For sequential tasks, same-file edits, or work with many dependencies, a single session or subagents are more effective." So với <span class="nw">Sub-agent</span>: "Use subagents when you need quick, focused workers that report back. Use agent teams when teammates need to share findings, challenge each other, and coordinate on their own."</p><p>Câu lệnh mẫu dựa trên ví dụ "Investigate with competing hypotheses" của tài liệu: các thành viên phản biện giả thuyết của nhau "like a scientific debate", vì "Sequential investigation suffers from anchoring". Quy mô: "Start with 3-5 teammates for most workflows." Nêu rõ số thành viên trong câu lệnh, vì "Claude decides the number of teammates to spawn based on your task, or you can specify exactly what you want"; nếu Claude dùng Sub-agent thay vì lập đội: "ask again and explicitly request an agent team." Theo dõi: trong bảng agent dưới ô nhập, dùng phím mũi tên lên, xuống để chọn thành viên, Enter để xem và nhắn trực tiếp. Chỉ có trong Claude Code, cần phiên tương tác.</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Sub-agent và Agent Teams" data-title="Ví dụ theo cấp học">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 3</span><span><span class="nw">Sub-agent</span> và Agent Teams (giới thiệu)</span><span class="tag example"><i class="ph ph-graduation-cap"></i>Ví dụ theo cấp học</span></div><h2 class="t">Ví dụ theo cấp học: Agent và Sub-agent</h2></div>
+  <div class="s-body">
+    <div class="branches">
+      <div class="branch mn"><div class="ic"><i class="ph ph-baby"></i></div><div><div class="lvl">MẦM NON</div><h4>Trợ lý Góc phụ huynh</h4><p>Soạn bản tin tuần, thông báo, lời nhắc lịch sinh hoạt từ ghi chú của cô.</p><p><b>Thêm <span class="nw">Sub-agent</span>:</b> không cần; việc ngắn, một Agent là đủ.</p></div></div>
+      <div class="branch th"><div class="ic"><i class="ph ph-backpack"></i></div><div><div class="lvl">TIỂU HỌC</div><h4>Trợ lý Nhận xét</h4><p>Agent ở Phần 2, dùng 2 Skill của LO 5.1: <code class="k">viet-nhan-xet-hoc-sinh</code>, <code class="k">tham-dinh-nhan-xet</code>.</p><p><b>Thêm <span class="nw">Sub-agent</span>:</b> khi viết cho 4 lớp cùng lúc, mỗi lớp một <span class="nw">Sub-agent</span> chạy song song.</p></div></div>
+      <div class="branch tr"><div class="ic"><i class="ph ph-student"></i></div><div><div class="lvl">THCS / THPT</div><h4>Trợ lý Khảo thí</h4><p>Một Agent soạn đề, tự thẩm định, soạn hướng dẫn chấm (ví dụ xuyên suốt).</p><p><b>Thêm <span class="nw">Sub-agent</span>:</b> khi tổ muốn thẩm định độc lập, người thẩm định không tham gia soạn.</p></div></div>
+      <div class="branch dh"><div class="ic"><i class="ph ph-graduation-cap"></i></div><div><div class="lvl">ĐẠI HỌC / CAO ĐẲNG</div><h4>Trợ lý Học phần</h4><p>Đề cương chi tiết, rubric theo chuẩn đầu ra (CLO), câu hỏi thảo&nbsp;luận theo tuần.</p><p><b>Thêm <span class="nw">Sub-agent</span>:</b> 3 <span class="nw">Sub-agent</span> đọc song song 12 bài báo tham khảo, chỉ gửi tóm tắt về.</p></div></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Cả bốn ví dụ đều bắt đầu từ một Agent; <span class="nw">Sub-agent</span> chỉ thêm khi có lý do ở Phần 3. Mầm non: một Agent là đủ (đúng nguyên tắc giải pháp đơn giản nhất). Tiểu học: Trợ lý Nhận xét của Phần 2; lý do thêm <span class="nw">Sub-agent</span> là làm song song (4 lớp độc lập). THCS, THPT: Trợ lý Khảo thí của Phần 4; lý do thêm <span class="nw">Sub-agent</span> là thẩm định độc lập. Đại học, cao đẳng: lý do ngữ cảnh riêng (mỗi <span class="nw">Sub-agent</span> đọc một nhóm bài báo, chỉ gửi tóm tắt).</p><p>Mọi Agent chỉ tạo bản nháp; con người quyết định bước gửi đi. Hỏi lớp: "Ví dụ nào gần với việc của thầy cô nhất? Agent đó cần thêm Sub-agent ở đâu, vì sao?"</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Agent trong Workflow" data-title="Workflow là gì, khác Agent thế nào">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 4</span>Agent trong Workflow<span class="tag anthropic"><i class="ph ph-book-open"></i>Theo Anthropic</span></div><h2 class="t">Workflow là gì, khác Agent thế nào</h2></div>
+  <div class="s-body">
+    <div class="quote sm"><p>"Workflow là hệ thống trong đó AI và công cụ được điều phối theo những đường đi định sẵn.<br>Agent là hệ thống trong đó AI tự điều khiển quá trình và cách dùng công cụ của mình."</p><cite>Anthropic, Building effective agents (Erik Schluntz, Barry Zhang, 19/12/2024)</cite></div>
+    <div class="cols cols-3 gap-s ai-s wfk">
+      <div class="card flat"><h4><i class="ph ph-path blue"></i> Workflow</h4><p class="small"><b>Con người định sẵn các bước</b>; mỗi bước giao cho người hoặc Agent. Dễ dự đoán, nhất quán giữa các lần.</p><p class="small eg"><b>Phù hợp:</b> việc đã rõ quy trình như ra đề, nhận xét định kỳ, báo cáo tuần.</p></div>
+      <div class="card flat"><h4><i class="ph ph-compass blue"></i> Agent</h4><p class="small"><b>AI tự quyết định bước tiếp theo</b>, tự chọn Skill và công cụ. Linh hoạt, nhưng tốn thời gian hơn và cần thử kỹ, có giới hạn rõ.</p><p class="small eg"><b>Phù hợp:</b> việc mở, khó đoán số bước như chuẩn bị hồ sơ sinh hoạt chuyên môn.</p></div>
+      <div class="card flat hl"><h4><i class="ph ph-tree-structure blue"></i> Agent trong Workflow</h4><p class="small"><b>Workflow định các bước; Agent đảm nhận một số bước</b> và tự quyết cách làm trong bước đó; con người duyệt giữa các bước.</p><p class="small eg"><b>Ví dụ:</b> ra đề, Trợ lý Khảo thí soạn đề và hướng dẫn chấm, tổ trưởng duyệt.</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Mở đầu Phần 4: sau khi đã tạo được Agent (Phần 2), đặt Agent cạnh Workflow theo định nghĩa của Anthropic. Nguyên văn: "Workflows are systems where LLMs and tools are orchestrated through predefined code paths. Agents, on the other hand, are systems where LLMs dynamically direct their own processes and tool usage, maintaining control over how they accomplish tasks."</p><p>Ba thẻ trả lời câu hỏi "chọn hình thức nào": việc rõ quy trình chọn Workflow; việc mở, khó đoán số bước chọn Agent ("open-ended problems where it's difficult or impossible to predict the required number of steps"); quy trình có những bước cần AI tự xoay xở thì đặt Agent vào Workflow. Về độ phức tạp: "we recommend finding the simplest solution possible, and only increasing complexity when needed".</p><p>Hỏi lớp: "Agent đã tạo ở Thực hành 1 sẽ đảm nhận bước nào trong một quy trình của tổ?"</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Agent trong Workflow" data-title="Agent suy nghĩ thế nào">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 4</span>Agent trong Workflow<span class="tag example"><i class="ph ph-cursor-click"></i>Bấm để xem</span></div><h2 class="t">Agent suy nghĩ thế nào</h2><p class="sub" style="max-width:none">Trước khi làm, Agent suy nghĩ: hiểu yêu cầu, lập kế hoạch, chọn Skill và công cụ; giáo viên xem được quá trình này.</p></div>
+  <div class="s-body">
+    <div class="thk" data-demo data-state="all">
+      <div class="tsteps"><button class="tst" data-go="1"><span class="num">1</span><span class="tx"><b>Đọc yêu cầu và hướng dẫn</b><small>Yêu cầu của giáo viên, file Agent, tài liệu nền.</small></span></button><button class="tst" data-go="2"><span class="num">2</span><span class="tx"><b>Suy nghĩ, lập kế hoạch</b><small>Phân tích yêu cầu, tìm thông tin còn thiếu, chia thành các bước.</small></span></button><button class="tst" data-go="3"><span class="num">3</span><span class="tx"><b>Chọn Skill, công cụ</b><small>So khớp từng bước với mô tả (description) của Skill và công cụ được phép dùng.</small></span></button><button class="tst" data-go="4"><span class="num">4</span><span class="tx"><b>Thực hiện, kiểm tra</b><small>Xem kết quả, tự kiểm tra, quyết định bước tiếp theo.</small></span></button><button class="tst all" data-go="all"><span class="num"><i class="ph ph-eye"></i></span><span class="tx"><b>Xem tất cả</b></span></button><div class="tnotes"><div class="callout"><i class="ph ph-eye"></i><div><b>Xem quá trình suy nghĩ:</b> Claude: Extended thinking; ChatGPT: chế độ Thinking; Gemini: Show thinking.</div></div><div class="callout ok"><i class="ph ph-wrench"></i><div><b>Agent hiểu sai, chọn sai Skill?</b> Sửa mô tả hoặc hướng dẫn của Agent, Skill; không chỉ sửa kết quả.</div></div></div></div>
+      <div class="apps" data-demo data-state="claude">
+        <div class="app-tabs"><button class="atab" data-go="claude"><i class="ph-fill ph-asterisk"></i>Claude</button><button class="atab" data-go="chatgpt"><i class="ph ph-open-ai-logo"></i>ChatGPT</button></div>
+        <div class="app cl" data-app="claude">
+          <div class="app-bar"><span class="wdots"><i></i><i></i><i></i></span><span class="app-name"><i class="ph-fill ph-asterisk"></i>Claude</span><span class="app-chip"><i class="ph ph-robot"></i>tro-ly-khao-thi</span></div>
+          <div class="app-body">
+            <div class="u-msg">Soạn đề kiểm tra giữa kỳ I Ngữ văn 9, 90 phút, theo cấu trúc đề của tổ. Ngữ liệu trong thư mục ngu-lieu/.</div>
+            <div class="th-blk"><div class="th-h"><i class="ph ph-sparkle spin"></i><span class="shim">Thinking…</span><i class="ph ph-caret-up"></i></div><div class="th-c"><p class="tl" data-s="1"><em>1</em><span>Yêu cầu: đề giữa kỳ I, lớp 9, 90 phút, theo cấu trúc đề của tổ. Hướng dẫn của tôi: chỉ soạn bản nháp, giáo viên duyệt.</span></p><p class="tl" data-s="2"><em>2</em><span>Đã đủ lớp, thời gian và ngữ liệu. Kế hoạch: soạn đề, tự thẩm định, soạn hướng dẫn chấm.</span></p><p class="tl" data-s="3"><em>3</em><span>Bước soạn đề khớp mô tả của Skill soan-cau-hoi; cần đọc ngữ liệu trong ngu-lieu/ bằng công cụ Read.</span></p><p class="tl" data-s="4"><em>4</em><span>Đề đủ phần Đọc hiểu và Viết, tổng 10 điểm, thẩm định đạt. Lưu đề nháp vào de-nhap.md, chuyển sang soạn hướng dẫn chấm.</span></p></div></div>
+            <div class="tool" data-s="3"><i class="ph ph-file-text"></i><b>Read</b><span>ngu-lieu/doc-hieu.docx</span></div>
+            <div class="tool" data-s="3"><i class="ph ph-puzzle-piece"></i><b>Skill</b><span>soan-cau-hoi</span></div>
+            <div class="tool" data-s="4"><i class="ph ph-pencil-simple-line"></i><b>Write</b><span>de-nhap.md</span><em class="dots3"><i></i><i></i><i></i></em></div>
+          </div>
+          <div class="app-in"><i class="ph ph-plus"></i><span class="ph-t">Reply to Claude…</span><span class="stop"><i class="ph-fill ph-stop"></i></span></div>
+        </div>
+        <div class="app gp" data-app="chatgpt">
+          <div class="app-bar"><span class="app-name">ChatGPT<i class="ph ph-caret-down"></i></span><span class="app-chip">Thinking</span></div>
+          <div class="app-body">
+            <div class="u-msg">Soạn đề kiểm tra giữa kỳ I Ngữ văn 9, 90 phút, theo cấu trúc đề của tổ. Ngữ liệu trong thư mục ngu-lieu/.</div>
+            <div class="th-blk"><div class="th-h"><span class="shim">Thinking</span><i class="ph ph-caret-down"></i></div><div class="th-c"><p class="tl" data-s="1"><em>1</em><span>Yêu cầu: đề giữa kỳ I, lớp 9, 90 phút, theo cấu trúc đề của tổ. Hướng dẫn của tôi: chỉ soạn bản nháp, giáo viên duyệt.</span></p><p class="tl" data-s="2"><em>2</em><span>Đã đủ lớp, thời gian và ngữ liệu. Kế hoạch: soạn đề, tự thẩm định, soạn hướng dẫn chấm.</span></p><p class="tl" data-s="3"><em>3</em><span>Bước soạn đề khớp mô tả của Skill soan-cau-hoi; cần đọc ngữ liệu trong ngu-lieu/ bằng công cụ Read.</span></p><p class="tl" data-s="4"><em>4</em><span>Đề đủ phần Đọc hiểu và Viết, tổng 10 điểm, thẩm định đạt. Lưu đề nháp vào de-nhap.md, chuyển sang soạn hướng dẫn chấm.</span></p></div></div>
+            <div class="tool" data-s="3"><i class="ph ph-file-text"></i><span>Reading doc-hieu.docx</span></div>
+            <div class="tool" data-s="3"><i class="ph ph-puzzle-piece"></i><span>Using skill soan-cau-hoi</span></div>
+            <div class="tool" data-s="4"><i class="ph ph-pencil-simple-line"></i><span>Writing de-nhap.md</span><em class="dots3"><i></i><i></i><i></i></em></div>
+          </div>
+          <div class="app-in"><i class="ph ph-plus"></i><span class="ph-t">Ask anything</span><span class="stop"><i class="ph-fill ph-stop"></i></span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Slide tương tác. Bấm Claude hoặc ChatGPT để đổi giao diện minh họa; bấm từng bước bên trái để làm nổi phần tương ứng trong khung Thinking và các dòng công cụ; "Xem tất cả" hiện lại toàn bộ. Bốn bước là khung chung, không gắn với công cụ nào: đọc yêu cầu và hướng dẫn, suy nghĩ và lập kế hoạch, chọn Skill và công cụ theo mô tả, thực hiện và kiểm tra kết quả để quyết định bước tiếp theo.</p><p>Bước 3 cho thấy vai trò của mô tả (description): Agent chọn Skill bằng cách so khớp yêu cầu với mô tả, đúng nguyên lý Ghép nối của LO 5.1; công cụ chỉ giới hạn trong trường tools của file Agent. Dòng suy nghĩ cuối cho thấy Agent tự kiểm tra kết quả rồi quyết định bước tiếp theo.</p><p>Giao diện là bản minh họa đã rút gọn. Claude hiện nhãn "Thinking" kèm nội dung suy nghĩ khi bật Extended thinking; ChatGPT hiện "Thinking" khi đang chạy, xong thì thu gọn thành "Thought for … s"; Gemini có nút Show thinking. Tên menu có thể thay đổi, kiểm tra trước buổi dạy. Khi Agent làm sai, đọc quá trình suy nghĩ để biết sai ở đâu: hiểu sai yêu cầu (sửa hướng dẫn), chọn sai Skill (sửa mô tả của Skill), thiếu công cụ (sửa trường tools).</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Agent trong Workflow" data-title="5 mẫu phối hợp nhiều bước">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 4</span>Agent trong Workflow<span class="tag anthropic"><i class="ph ph-book-open"></i>Theo Anthropic</span></div><h2 class="t">5 mẫu phối hợp nhiều bước</h2></div>
+  <div class="s-body">
+    <div class="cols cols-3 gap-s stretch patterns">
+      <div class="card flat"><h4>1. Nối chuỗi <span class="muted xs">Prompt Chaining</span></h4>
+        <div class="pat"><span class="bx">Soạn đề</span><span class="ar">→</span><span class="bx gate">Duyệt</span><span class="ar">→</span><span class="bx">Tạo đáp án</span><span class="ar">→</span><span class="bx">Chấm thử</span></div>
+        <p class="small">Chia công việc thành các bước theo thứ tự; kết quả của bước trước trở thành đầu vào cho bước sau, có thể dừng lại để kiểm tra trước khi tiếp tục.</p>
+        <p class="small"><b>Ví dụ:</b> Soạn đề → giáo viên duyệt → tạo đáp án → chấm thử và điều chỉnh đề.</p></div>
+      <div class="card flat"><h4>2. Phân luồng <span class="muted xs">Routing</span></h4>
+        <div class="pat"><span class="bx">Tin nhắn</span><span class="ar">→</span><span class="bx gate">Phân loại</span><span class="ar">→</span><span class="bx">Hướng xử lý phù hợp</span></div>
+        <p class="small">Phân loại đầu vào rồi chuyển mỗi loại đến cách xử lý tương ứng.</p>
+        <p class="small"><b>Ví dụ:</b> Phụ huynh hỏi lịch học → tra lịch; góp ý → tổng hợp; khiếu nại → chuyển người phụ trách.</p></div>
+      <div class="card flat"><h4>3. Song song <span class="muted xs">Parallelization</span> <span class="pill r">Dùng Sub-agent</span></h4>
+        <div class="pat"><span class="bx">Tài liệu</span><span class="ar">→</span><span class="bx"><span class="nw">Sub-agent</span> 1, 2, …, n</span><span class="ar">→</span><span class="bx ok">Tổng hợp</span></div>
+        <p class="small">Chia công việc thành các phần độc lập để xử lý đồng thời; hoặc thực hiện cùng một nhiệm vụ nhiều lần để đối chiếu kết quả.</p>
+        <p class="small"><b>Ví dụ:</b> Chia 30 bài làm cho nhiều <span class="nw">Sub-agent</span> chấm cùng lúc, sau đó tổng hợp; hoặc chấm thử một bài theo 3 cách rồi so sánh kết quả.</p></div>
+    </div>
+    <div class="cols cols-2 gap-s stretch patterns">
+      <div class="card flat"><h4>4. Điều phối và thực thi <span class="muted xs">Orchestrator-workers</span> <span class="pill r">Dùng Sub-agent</span></h4>
+        <div class="pat"><span class="bx">Agent chính</span><span class="ar">→</span><span class="bx"><span class="nw">Sub-agent</span> 1</span><span class="bx"><span class="nw">Sub-agent</span> n</span><span class="ar">→</span><span class="bx ok">Tổng hợp</span></div>
+        <p class="small">Agent chính phân rã công việc thành các phần phù hợp, giao cho các Agent / Sub-agent xử lý song song và tổng hợp kết quả cuối cùng.</p></div>
+      <div class="card flat"><h4>5. Soạn và thẩm định <span class="muted xs">Evaluator-optimizer</span></h4>
+        <div class="pat"><span class="bx">Soạn</span><span class="ar">→</span><span class="bx gate">Thẩm định</span><span class="ar">→</span><span class="bx">Sửa</span><span class="ar">↺</span><span class="bx ok">Đạt</span></div>
+        <p class="small">Một bên soạn, một bên chấm theo tiêu chí rõ, lặp đến khi đạt.</p></div>
+    </div>
+    <p class="src">Nguồn: Anthropic, Building effective agents (12/2024)</p>
+  </div>
+  <aside class="notes"><p>Năm mẫu là bộ từ vựng để mô tả cách các bước trong Workflow phối hợp với nhau. Nguyên văn từng mẫu: Prompt chaining "decomposes a task into a sequence of steps, where each LLM call processes the output of the previous one"; Routing "classifies an input and directs it to a specialized followup task"; Parallelization gồm "sectioning" (chia việc độc lập chạy song song) và "voting" (chạy cùng một việc nhiều lần để có nhiều góc nhìn); Orchestrator-workers: "a central LLM dynamically breaks down tasks, delegates them to worker LLMs, and synthesizes their results"; Evaluator-optimizer: "one LLM call generates a response while another provides evaluation and feedback in a loop", hiệu quả khi có "clear evaluation criteria".</p><p>Bài viết gốc nói về các lần gọi AI trong một hệ thống; khóa học áp dụng sang cách giao việc cho Agent. Nhãn "Dùng <span class="nw">Sub-agent</span>" là gợi ý của khóa học: mẫu song song và điều phối cần nhiều agent (Phần 3). Mẫu soạn và thẩm định: tách <span class="nw">Sub-agent</span> khi cần người thẩm định độc lập.</p><p>Hỏi lớp: tin nhắn phụ huynh trong nhóm lớp hợp với mẫu nào? (Phân luồng.) Đề kiểm tra 15 phút cho 4 lớp cùng khối hợp với mẫu nào? (Song song.)</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Agent trong Workflow" data-title="Tạo Trợ lý Khảo thí: file Agent">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 4</span>Agent trong Workflow<span class="tag example"><i class="ph ph-cursor-click"></i>Bấm để xem</span></div><h2 class="t">Tạo Trợ lý Khảo thí: file Agent</h2><p class="sub" style="max-width:none">File Agent áp dụng bốn mẫu phối hợp: Nối chuỗi, Song song, Điều phối và thực thi, Soạn và thẩm định.</p></div>
+  <div class="s-body">
+    <div class="afx" data-demo data-state="all">
+      <div class="afile">
+        <div class="afile-h"><i class="ph ph-file-text"></i>.claude/agents/tro-ly-khao-thi.md</div>
+        <div class="afile-b">
+          <div class="ln" data-p=""><span class="p">---</span></div>
+          <div class="ln" data-p="b1"><span class="k">name:</span> tro-ly-khao-thi</div>
+          <div class="ln" data-p="b1"><span class="k">description:</span> Soạn bản nháp đề kiểm tra định kỳ Ngữ văn 9 theo cấu trúc đề của tổ, gồm soạn đề, thẩm định, soạn hướng dẫn chấm. Dùng khi tổ cần ra đề giữa kỳ, cuối kỳ.</div>
+          <div class="ln" data-p="b2 a4"><span class="k">tools:</span> Read, Write, Agent(soan-phan-de, tham-dinh-de-kiem-tra)</div>
+          <div class="ln" data-p=""><span class="p">---</span></div>
+          <div class="ln" data-p="">&nbsp;</div>
+          <div class="ln" data-p="">Bạn là Trợ lý Khảo thí của Tổ Ngữ văn 9, điều phối việc soạn đề. Bạn soạn bản nháp; giáo viên duyệt và quyết định.</div>
+          <div class="ln" data-p="">&nbsp;</div>
+          <div class="ln" data-p="a1"><span class="h">## Cách làm (theo quy trình ra đề của tổ)</span></div>
+          <div class="ln" data-p="a1"><span class="m">1.</span> Xác nhận đầu vào: lớp, phạm vi kiến thức, thời gian làm bài, cấu trúc đề, ngữ liệu.<span class="mtags"><span class="mt m1">Mẫu 1</span></span></div>
+          <div class="ln" data-p="a1 a3 a4"><span class="m">2.</span> Chia đề theo cấu trúc thành các phần (Đọc hiểu, Viết); giao mỗi phần cho một Sub-agent soan-phan-de soạn cùng lúc.<span class="mtags"><span class="mt m3">Mẫu 3</span><span class="mt m4">Mẫu 4</span></span></div>
+          <div class="ln" data-p="a1 a4"><span class="m">3.</span> Ghép các phần thành đề hoàn chỉnh; lưu de-nhap.md.<span class="mtags"><span class="mt m4">Mẫu 4</span></span></div>
+          <div class="ln" data-p="a1 a5"><span class="m">4.</span> Giao Sub-agent tham-dinh-de-kiem-tra thẩm định de-nhap.md; sửa câu chưa đạt và thẩm định lại đến khi đạt; lưu bang-tham-dinh.md.<span class="mtags"><span class="mt m5">Mẫu 5</span></span></div>
+          <div class="ln" data-p="a1"><span class="m">5.</span> Soạn đáp án, hướng dẫn chấm từ đề đã đạt (Skill soan-huong-dan-cham); lưu huong-dan-cham-nhap.md.</div>
+          <div class="ln" data-p="">&nbsp;</div>
+          <div class="ln" data-p="a1"><span class="h">## Đầu ra: mỗi bước một file mới</span></div>
+          <div class="ln" data-p="a1">de-nhap.md · bang-tham-dinh.md · huong-dan-cham-nhap.md</div>
+          <div class="ln" data-p="">&nbsp;</div>
+          <div class="ln" data-p="b3"><span class="h">## Giới hạn</span></div>
+          <div class="ln" data-p="b3"><span class="m">-</span> Chỉ dùng ngữ liệu được cung cấp; không bịa nguồn, trích dẫn.</div>
+          <div class="ln" data-p="b3"><span class="m">-</span> Không sửa file đã duyệt; không chấm bài, không nhập điểm.</div>
+          <div class="ln" data-p="b3"><span class="m">-</span> Không gửi đề cho học sinh, phụ huynh.</div>
+        </div>
+      </div>
+      <div class="aparts">
+        <p class="agrp">Mẫu phối hợp trong file</p><button class="apart pat1" data-go="a1"><span class="num">1</span><span><b>Nối chuỗi <span class="en">Prompt Chaining</span></b><span class="d">Các bước đi theo thứ tự; file đầu ra của bước trước là đầu vào của bước sau.</span></span></button><button class="apart pat3" data-go="a3"><span class="num">3</span><span><b>Song song <span class="en">Parallelization</span></b><span class="d">Các Sub-agent soạn phần Đọc hiểu và phần Viết cùng lúc.</span></span></button><button class="apart pat4" data-go="a4"><span class="num">4</span><span><b>Điều phối và thực thi <span class="en">Orchestrator-workers</span></b><span class="d">Agent chính chia đề thành các phần, giao Sub-agent và ghép kết quả.</span></span></button><button class="apart pat5" data-go="a5"><span class="num">5</span><span><b>Soạn và thẩm định <span class="en">Evaluator-optimizer</span></b><span class="d">Sub-agent thẩm định độc lập; Agent chính sửa và thẩm định lại đến khi đạt.</span></span></button><p class="agrp">Các phần khác của file</p><div class="achips"><button class="achip" data-go="b1"><i class="ph ph-text-aa"></i>Mô tả</button><button class="achip" data-go="b2"><i class="ph ph-wrench"></i>Công cụ</button><button class="achip" data-go="b3"><i class="ph ph-prohibit"></i>Giới hạn</button><button class="achip" data-go="all"><i class="ph ph-eye"></i>Toàn bộ file</button></div><div class="callout sm-ext"><i class="ph ph-info"></i><div><b>Lưu ý:</b> Trợ lý Khảo thí chỉ giao việc được cho <span class="nw">Sub-agent</span> khi chạy làm Agent chính (<code class="k">claude --agent tro-ly-khao-thi</code>). Dòng tools ghi rõ hai <span class="nw">Sub-agent</span> được giao việc: soạn từng phần đề (soan-phan-de) và thẩm định đề (tham-dinh-de-kiem-tra).</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Slide tương tác, nối với 5 mẫu ở slide 16: bấm từng mẫu để làm nổi các dòng áp dụng mẫu đó trong file; nhãn "Mẫu 1, 3, 4, 5" ở cuối dòng cho biết mẫu tương ứng. Nối chuỗi là cả chuỗi bước 1 đến 5: mỗi bước lưu một file, bước sau dùng file đó. Song song và Điều phối và thực thi nằm ở bước 2, 3: Agent chính đọc cấu trúc đề, tự chia đề thành các phần, giao mỗi phần cho một Sub-agent soan-phan-de soạn cùng lúc rồi ghép thành de-nhap.md. Soạn và thẩm định ở bước 4: Sub-agent tham-dinh-de-kiem-tra thẩm định độc lập (không tham gia soạn), Agent chính sửa câu chưa đạt rồi giao thẩm định lại đến khi đạt. Mẫu 2 (Phân luồng) không dùng vì đầu vào chỉ có một loại.</p><p>Điều kiện kỹ thuật theo tài liệu Subagents của Claude Code: "When an agent runs as the main thread with claude --agent, it can spawn subagents using the Agent tool. To restrict which subagent types it can spawn, use Agent(agent_type) syntax in the tools field." Ví dụ trong tài liệu: "tools: Agent(worker, researcher), Read, Bash" ("This is an allowlist"). Các Sub-agent có thể chạy song song: "spawn multiple subagents to work simultaneously". Bản Trợ lý Khảo thí ở Phần 1 là bản một Agent; bản này mở rộng với Sub-agent của Phần 3.</p><p>Các phần khác: mô tả là căn cứ để Claude gọi Agent (slide 18); công cụ chỉ gồm đọc, tạo file mới và gọi hai Sub-agent được liệt kê; phần Giới hạn cùng trường tools là hàng rào chính. Mẫu: templates/agents/tro-ly-khao-thi.md, soan-phan-de.md, tham-dinh-de-kiem-tra.md.</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Agent trong Workflow" data-title="Gọi Agent trong một bước của Workflow">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 4</span>Agent trong Workflow</div><h2 class="t">Gọi Agent trong một bước của Workflow</h2><p class="sub" style="max-width:none">Workflow định các bước; ở bước giao cho Agent, giáo viên gọi Agent, đưa đầu vào và nhận đầu ra cho bước sau.</p></div>
+  <div class="s-body">
+    <div class="flow mid callflow">
+      <div class="step"><span class="num">1</span><h4>Giao yêu cầu</h4><p>Giáo viên bộ môn: lớp, phạm vi, ngữ liệu.</p></div>
+      <div class="step hl"><span class="num">2</span><h4>Gọi Trợ lý Khảo thí</h4><p>Soạn đề, tự thẩm định; đầu ra: de-nhap.md.</p></div>
+      <div class="step cp"><span class="num">3</span><h4>Duyệt đề</h4><p>Tổ trưởng chuyên môn xem, chỉnh sửa và duyệt.</p></div>
+      <div class="step hl"><span class="num">4</span><h4>Gọi Trợ lý Khảo thí</h4><p>Soạn hướng dẫn chấm cho đề đã duyệt.</p></div>
+    </div>
+    <h3 class="col-h">Ba cách gọi Agent trên Claude Code</h3>
+    <div class="cols cols-3 gap-s ai-s calls">
+      <div class="card flat"><h4><span class="num">1</span>Gọi theo tên trong yêu cầu</h4><div class="cmdbox">Dùng agent tro-ly-khao-thi soạn đề giữa kỳ I Ngữ văn 9 theo cấu trúc đề của tổ; ngữ liệu trong ngu-lieu/; lưu đề vào de-nhap.md.</div></div>
+      <div class="card flat"><h4><span class="num">2</span>Chạy Agent làm phiên chính</h4><div class="cmdbox mono">claude --agent tro-ly-khao-thi</div><p class="small">Cả phiên làm việc theo hướng dẫn của Agent.</p></div>
+      <div class="card flat"><h4><span class="num">3</span>Để Claude tự gọi</h4><p class="small">Yêu cầu khớp mô tả (description) của Agent thì Claude tự giao việc cho Agent; vì vậy mô tả cần nêu rõ Agent làm gì, khi nào dùng.</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Workflow là các bước định sẵn; Agent chỉ là người làm ở một số bước. Ở bước 2 và 4, giáo viên gọi Trợ lý Khảo thí với đầu vào rõ ràng (yêu cầu, ngữ liệu, đề đã duyệt) và yêu cầu đầu ra cụ thể (file, nơi lưu); bước 3 là người duyệt. Cách đặt điểm duyệt, kích hoạt và vận hành cả Workflow nhiều Agent tự động học ở LO 5.3.</p><p>Ba cách gọi theo tài liệu Subagents của Claude Code: gọi rõ tên trong yêu cầu ("Use the code-reviewer subagent to..."); chạy Agent làm phiên chính ("claude --agent code-reviewer"); để Claude tự giao việc dựa trên yêu cầu và trường description của Agent ("Claude Code proactively delegates tasks based on the task description in your request, the description field in subagent configurations"). Vì cách 3, mô tả nên nêu rõ việc và thời điểm dùng, như mẫu ở slide trước.</p><p>Với OpenAI Codex và Gemini CLI: tạo Agent theo khuôn ở slide 6 rồi gọi theo tên trong yêu cầu; cách gọi cụ thể thay đổi theo phiên bản, kiểm tra tài liệu của công cụ trước buổi dạy.</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Agent trong Workflow" data-title="Thực hành 2: gọi Agent trong một bước của Workflow">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 4</span>Agent trong Workflow<span class="tag practice"><i class="ph ph-hand"></i>Thực hành 2 · 12 phút</span></div><h2 class="t">Thực hành 2: gọi Agent trong một bước của Workflow</h2><p class="sub" style="max-width:none">Dùng Agent của Thực hành 1 cho một bước trong quy trình của tổ; đọc quá trình suy nghĩ, sửa đến khi đầu ra dùng được.</p></div>
+  <div class="s-body">
+    <div class="flow mid th2flow">
+      <div class="step"><h4><span class="num">1</span>Chọn bước giao cho Agent · 3'</h4><p>Bước Agent của Thực hành 1 đảm nhận được; xác định đầu vào, đầu ra cho bước sau.</p></div>
+      <div class="step"><h4><span class="num">2</span>Viết prompt gọi Agent · 4'</h4><p>Nêu tên Agent, việc cần làm, đầu vào, đầu ra; gọi theo tên hoặc chạy <code class="k">claude --agent</code>.</p></div>
+      <div class="step"><h4><span class="num">3</span>Chạy thử, đọc quá trình suy nghĩ · 5'</h4><p>Agent hiểu yêu cầu, lập kế hoạch, chọn Skill và công cụ thế nào; sai ở đâu sửa ở đó, chạy lại.</p></div>
+    </div>
+    <div class="cols cols-7-5 grow ai-s">
+      <div class="cols gap-s">
+        <div class="code sm" data-file="Prompt gọi Agent: điền chỗ trống"><pre>Dùng agent [tên-agent] [việc cần làm] cho [lớp, phạm vi].
+Đầu vào: [file, thư mục].
+Lưu kết quả vào [tên file] cho bước [bước sau].</pre></div>
+        <p class="xs th2eg"><b>Ví dụ với Trợ lý Nhận xét:</b> Dùng agent tro-ly-nhan-xet viết nhận xét cuối kỳ I cho lớp 9A. Đầu vào: bang-muc-dat-9A.csv. Lưu kết quả vào nhan-xet-9A-nhap.md cho bước giáo viên chủ nhiệm duyệt.</p>
+        <h3 class="col-h">Đọc quá trình suy nghĩ, sửa đúng chỗ</h3>
+        <table class="tbl compact th2tbl">
+          <thead><tr><th>Thấy trong quá trình suy nghĩ</th><th style="width:42%">Sửa ở</th></tr></thead>
+          <tbody>
+            <tr><td>Hiểu sai việc, thiếu đầu vào</td><td>Prompt gọi Agent</td></tr>
+            <tr><td>Bỏ bước, làm sai thứ tự</td><td>Phần Cách làm của Agent</td></tr>
+            <tr><td>Chọn sai Skill, không mở Skill cần dùng</td><td>Mô tả (description) của Skill</td></tr>
+            <tr><td>Thiếu công cụ, dùng công cụ ngoài phạm vi</td><td>Trường tools của Agent</td></tr>
+            <tr><td>Sai định dạng, sai tên file đầu ra</td><td>Phần Đầu ra của Agent</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="cols gap-s">
+        <h3 class="col-h">Tự kiểm trước khi nộp</h3>
+        <div class="checker compact" data-mid="2" data-full-min="4" data-verdict="v-call">
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Prompt nêu tên Agent, việc cần làm, đầu vào và đầu ra</span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Agent hiểu đúng yêu cầu, lập kế hoạch đủ các bước</span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Agent chọn đúng Skill, chỉ dùng công cụ được phép</span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Đầu ra đúng định dạng, dùng được cho bước sau</span></label>
+        </div>
+        <div class="verdict" id="v-call" data-full="Sẵn sàng nộp|Agent làm đúng bước được giao; đầu ra dùng được cho bước sau." data-part="Gần xong|Còn {left} mục chưa đạt; sửa đúng chỗ theo bảng bên trái rồi chạy lại." data-none="Bắt đầu từ bước 1|Chọn bước giao cho Agent rồi viết prompt."></div>
+        <div class="callout ok"><i class="ph ph-package"></i><div><b>Sản phẩm:</b> prompt gọi Agent trong một bước của Workflow, kèm kết quả chạy thử và các chỗ đã sửa.</div></div>
+        <p class="xs">Mẫu: <b>templates/goi-agent-trong-workflow.md</b></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Học viên dùng Agent đã tạo ở Thực hành 1 (Nhánh A hoặc Nhánh B). Bước 1: chọn một bước trong quy trình quen thuộc của tổ (ra đề, nhận xét định kỳ, bản tin gửi phụ huynh...), ghi rõ đầu vào và đầu ra mà bước sau cần. Bước 2: viết prompt theo khuôn; ba cách gọi Agent ở slide 18. Nhánh B gọi Agent theo tên (Gemini CLI: gõ @tên).</p><p>Bước 3 nối với slide 15: bật chế độ xem suy nghĩ, đối chiếu bốn bước (đọc yêu cầu và hướng dẫn, lập kế hoạch, chọn Skill và công cụ, thực hiện và kiểm tra). Bảng bên trái chỉ chỗ sửa: sửa ở prompt, file Agent hoặc mô tả của Skill, không chỉ sửa kết quả. Sau mỗi lần sửa, chạy lại cùng prompt để so sánh.</p><p>Nhóm làm nhanh: bổ sung vào phần Cách làm của Agent một mẫu phối hợp ở slide 16, ví dụ Nối chuỗi (mỗi bước lưu một file cho bước sau), rồi chạy lại. Ví dụ trên slide dùng Trợ lý Nhận xét, Agent mẫu của Thực hành 1 (templates/agents/tro-ly-nhan-xet.md).</p></aside>
+</section>
+
+<section class="slide" data-sec="5. Tổng kết" data-title="Khung 4D khi tạo Agent">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 5</span>Tổng kết</div><h2 class="t">Khung 4D khi tạo Agent và đặt vào Workflow</h2></div>
+  <div class="s-body">
+    <div class="fourd">
+      <div class="dcard d1"><span class="dn">D1 · DELEGATION</span><h3>Giao việc</h3><p>Chọn hình thức đơn giản nhất đủ dùng; giao cho Agent đúng vai trò, việc làm và việc không làm; chỉ thêm <span class="nw">Sub-agent</span> khi có lý&nbsp;do.</p><div class="subs"><span>Nhận thức vấn đề<i>Problem Awareness</i></span><span>Nhận thức nền tảng AI<i>Platform Awareness</i></span><span>Phân công nhiệm vụ<i>Task Delegation</i></span></div><div class="in"><b>Trong bài:</b> Phần 1, 2, 3</div></div>
+      <div class="dcard d2"><span class="dn">D2 · DESCRIPTION</span><h3>Mô tả</h3><p>Mô tả (description) và hướng dẫn của Agent: vai trò, cách làm, định dạng kết quả, giới hạn đủ rõ; lời giao việc cho <span class="nw">Sub-agent</span> nêu đủ file, tiêu chí, nội dung báo cáo.</p><div class="subs"><span>Mô tả sản phẩm<i>Product Description</i></span><span>Mô tả quy trình<i>Process Description</i></span><span>Mô tả cách ứng xử<i>Performance Description</i></span></div><div class="in"><b>Trong bài:</b> Phần 2, 3, 4</div></div>
+      <div class="dcard d3"><span class="dn">D3 · DISCERNMENT</span><h3>Phân định</h3><p>Chạy thử 3 yêu cầu; đọc quá trình suy nghĩ của Agent; kiểm tra đầu ra trước khi dùng cho bước sau.</p><div class="subs"><span>Phân định sản phẩm<i>Product Discernment</i></span><span>Phân định quy trình<i>Process Discernment</i></span><span>Phân định cách ứng xử<i>Performance Discernment</i></span></div><div class="in"><b>Trong bài:</b> Thực hành 1; Phần 4</div></div>
+      <div class="dcard d4"><span class="dn">D4 · DILIGENCE</span><h3>Cẩn trọng</h3><p>Công cụ tối thiểu cho Agent; Agent chỉ tạo bản nháp; chỉ dùng thông tin cần thiết, không đưa thông tin nhạy cảm; ghi phiên bản; giáo viên chịu trách nhiệm.</p><div class="subs"><span>Cẩn trọng khi tạo<i>Creation Diligence</i></span><span>Minh bạch<i>Transparency Diligence</i></span><span>Chịu trách nhiệm khi dùng<i>Deployment Diligence</i></span></div><div class="in"><b>Trong bài:</b> trường tools; phần Giới hạn</div></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Thứ tự chuẩn của khung AI Fluency (Dakan, Feller và Anthropic): Delegation, Description, Discernment, Diligence. Thuật ngữ tiếng Việt theo bản dịch khóa AI Fluency for Educators.</p><p>Ở bài này trọng tâm là Giao việc và Cẩn trọng: khi tạo Agent và đặt vào Workflow, thầy cô không giám sát từng câu trả lời, nên phải quyết định trước Agent làm gì, được dùng công cụ gì, giới hạn ở đâu. Đây là vùng tương tác Agency trong khung AI Fluency (AI làm thay theo khung hành vi con người thiết lập).</p><p>D1, D2 gặp nhau ở phần hướng dẫn của Agent: cũng như giao việc cho <span class="nw">Sub-agent</span>, giao việc cho Agent cần đủ "an objective, an output format, guidance on the tools and sources to use, and clear task boundaries" (How we built our multi-agent research system, 06/2025).</p></aside>
+</section>
+
+<section class="slide" data-sec="5. Tổng kết" data-title="Kiểm tra nhanh">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 5</span>Tổng kết<span class="tag activity"><i class="ph ph-question"></i>Kiểm tra nhanh</span></div><h2 class="t">Câu hỏi ôn tập</h2></div>
+  <div class="s-body">
+    <div class="cols cols-3 grow ai-s">
+      <div class="quiz" data-answer="b">
+        <p class="q">1. Tổ đã bật đủ 3 Skill ra đề. Giáo viên gõ một yêu cầu "soạn đề giữa kỳ theo cấu trúc đề của tổ". Điều gì đúng?</p>
+        <div class="opts">
+          <button class="opt" data-k="a"><span class="k">A</span><span>AI chỉ dùng được một Skill, phải tạo mỗi Skill một <span class="nw">Sub-agent</span></span></button>
+          <button class="opt" data-k="b"><span class="k">B</span><span>AI có thể dùng nhiều Skill khớp mô tả trong cùng cuộc trò chuyện</span></button>
+          <button class="opt" data-k="c"><span class="k">C</span><span>Giáo viên phải mở 3 cuộc trò chuyện, mỗi cuộc một Skill</span></button>
+        </div>
+        <p class="fb" data-ok="Đúng. Nguyên lý Ghép nối: AI có thể dùng nhiều Skill cùng lúc." data-no="Chưa đúng. Đáp án B: AI so khớp yêu cầu với mô tả và có thể dùng nhiều Skill cùng lúc."></p>
+      </div>
+      <div class="quiz" data-answer="b">
+        <p class="q">2. Muốn Agent không bao giờ sửa file đề đã duyệt. Cách chắc chắn nhất là gì?</p>
+        <div class="opts">
+          <button class="opt" data-k="a"><span class="k">A</span><span>Ghi "hãy cẩn thận" vào mô tả của Agent</span></button>
+          <button class="opt" data-k="b"><span class="k">B</span><span>Giới hạn công cụ (tools) và ghi rõ trong phần Giới hạn</span></button>
+          <button class="opt" data-k="c"><span class="k">C</span><span>Dặn lại mỗi lần giao việc</span></button>
+        </div>
+        <p class="fb" data-ok="Đúng. Công cụ tối thiểu cộng phần Giới hạn rõ ràng là hàng rào chắc nhất." data-no="Chưa đúng. Đáp án B: giới hạn công cụ và ghi rõ trong phần Giới hạn; lời dặn chung chung dễ bị bỏ qua."></p>
+      </div>
+      <div class="quiz" data-answer="b">
+        <p class="q">3. Gọi Trợ lý Khảo thí soạn đề nhưng Agent dùng sai Skill. Việc nên làm trước tiên là gì?</p>
+        <div class="opts">
+          <button class="opt" data-k="a"><span class="k">A</span><span>Gọi lại nhiều lần đến khi Agent làm đúng</span></button>
+          <button class="opt" data-k="b"><span class="k">B</span><span>Xem quá trình suy nghĩ để biết Agent hiểu yêu cầu thế nào, rồi sửa mô tả hoặc hướng dẫn</span></button>
+          <button class="opt" data-k="c"><span class="k">C</span><span>Tạo thêm một Agent mới cho mỗi Skill</span></button>
+        </div>
+        <p class="fb" data-ok="Đúng. Quá trình suy nghĩ cho biết Agent hiểu yêu cầu và chọn Skill thế nào; sửa đúng chỗ ở mô tả hoặc hướng dẫn." data-no="Chưa đúng. Đáp án B: xem quá trình suy nghĩ trước, rồi sửa mô tả hoặc hướng dẫn của Agent, Skill."></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Bấm vào đáp án để xem phản hồi; có thể cho cả lớp giơ tay chọn A, B, C trước.</p><p>Câu 1 kiểm tra hiểu lầm hay gặp nhất (nguyên lý Composability: "Claude can load multiple skills simultaneously"). Câu 2 kiểm tra nguyên tắc công cụ tối thiểu và phần Giới hạn của file Agent (Phần 2). Câu 3 kiểm tra cách đọc quá trình suy nghĩ của Agent để sửa đúng chỗ (Phần 4).</p></aside>
+</section>
+
+<section class="slide" data-sec="5. Tổng kết" data-title="Tổng kết LO 5.2">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 5</span>Tổng kết</div><h2 class="t">Tổng kết LO 5.2</h2><p class="sub" style="max-width:none">Tạo Agent đảm nhận một vai trò, dùng <span class="nw">Sub-agent</span> khi cần, hiểu cách Agent suy nghĩ và gọi Agent trong một bước của Workflow.</p></div>
+  <div class="s-body">
+    <div class="sum4">
+      <div class="sumc"><div class="sumc-h"><small>Phần 1</small><b><i class="ph ph-robot"></i><span>Từ Skill đến Agent</span></b></div><ul><li><i class="ph ph-check-circle"></i><span>Agent tự lập kế hoạch, chọn Skill và công cụ để làm việc của một vai trò.</span></li><li><i class="ph ph-check-circle"></i><span>Cần Agent khi việc lặp lại theo đợt, nhiều bước, dùng nhiều Skill và công cụ.</span></li><li><i class="ph ph-check-circle"></i><span>Tạo Agent bằng file trên Claude Code, Codex, Gemini CLI.</span></li></ul></div>
+      <div class="sumc"><div class="sumc-h"><small>Phần 2</small><b><i class="ph ph-pencil-simple-line"></i><span>Thiết kế, xây dựng Agent</span></b></div><ul><li><i class="ph ph-check-circle"></i><span>Ba thành phần cốt lõi: mô hình, hướng dẫn, công cụ.</span></li><li><i class="ph ph-check-circle"></i><span>File Agent: phần đầu để nhận diện (tên, mô tả, công cụ, Skill), phần thân là hướng dẫn.</span></li><li><i class="ph ph-check-circle"></i><span>Viết thủ công hoặc ra lệnh cho Claude; chạy thử 3 yêu cầu rồi sửa.</span></li></ul></div>
+      <div class="sumc"><div class="sumc-h"><small>Phần 3</small><b><i class="ph ph-users-three"></i><span><span class="nw">Sub-agent</span>, Agent Teams</span></b></div><ul><li><i class="ph ph-check-circle"></i><span><span class="nw">Sub-agent</span> làm trong ngữ cảnh riêng, chỉ gửi lại bản tóm tắt.</span></li><li><i class="ph ph-check-circle"></i><span>Hai cách tạo: nêu trong câu lệnh, hoặc tạo file <span class="nw">Sub-agent</span> để dùng lại.</span></li><li><i class="ph ph-check-circle"></i><span>Agent Teams: thành viên trao đổi, phản biện nhau; câu lệnh nêu rõ số thành viên.</span></li></ul></div>
+      <div class="sumc"><div class="sumc-h"><small>Phần 4</small><b><i class="ph ph-flow-arrow"></i><span>Agent trong Workflow</span></b></div><ul><li><i class="ph ph-check-circle"></i><span>Workflow đi theo đường định sẵn; Agent tự quyết cách làm trong bước được giao.</span></li><li><i class="ph ph-check-circle"></i><span>Đọc quá trình suy nghĩ để biết Agent chọn Skill, công cụ thế nào.</span></li><li><i class="ph ph-check-circle"></i><span>Gọi Agent trong một bước: nêu việc, đầu vào, đầu ra.</span></li></ul></div>
+    </div>
+    <div class="card dark sum-next"><i class="ph ph-arrow-circle-right"></i><p><b>Tiếp theo, LO 5.3:</b> kết nối Agent với máy tính, trình duyệt, Drive, Gmail, lịch, LMS để Agent tự thực hiện việc được giao, vận hành Workflow tự động và đóng gói thành Plugin cho cả tổ.</p></div>
+  </div>
+  <aside class="notes"><p>Tổng kết theo bốn phần của bài: từ Skill đến Agent, thiết kế và xây dựng Agent, <span class="nw">Sub-agent</span> và Agent Teams, Agent trong Workflow. Phụ đề nhắc lại mục tiêu của bài.</p><p>Hoạt động gợi ý: mỗi học viên nêu một vai trò trong công việc của mình có thể giao cho Agent, và một phần việc nên giao cho <span class="nw">Sub-agent</span>. Nhắc học viên giữ file Agent và prompt đã chạy thử: LO 5.3 dùng lại Agent này, kết nối công cụ, lập kế hoạch cho cả Workflow, chọn cách kích hoạt và điểm duyệt, theo dõi nhật ký, rồi đóng gói thành Plugin cho cả tổ.</p></aside>
+</section>
+
+
+</div></main>
+<script src="assets/js/deck.js"></script>
+</body>
+</html>
