@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LO 5.1 · Từ Prompt đến Skill: Đóng gói năng lực chuyên môn cho AI</title>
+<link rel="stylesheet" href="assets/css/deck.css">
+<link rel="stylesheet" href="assets/css/story.css">
+<link rel="stylesheet" href="assets/css/v3.css">
+<link rel="stylesheet" href="assets/css/v3-m6.css">
+</head>
+<body class="v3" data-deck="LO 5.1" data-deck-title="Từ Prompt đến Skill: Đóng gói năng lực chuyên môn cho AI" data-home="index.html">
+<main class="deck"><div class="stage">
+
+<section class="slide s-cover" data-sec="Mở đầu" data-title="Bìa: LO 5.1">
+  <div class="brand"><span class="chip"><i class="ph-fill ph-sparkle"></i>AI Fluency nâng cao</span><span>Module 5 · Đóng gói kỹ năng và thiết kế quy trình AI nhiều tác vụ</span></div>
+  <div>
+    <div class="lo">LO 5.1</div>
+    <h1>Từ Prompt đến Skill: Đóng gói năng lực chuyên môn cho AI</h1>
+    <p class="sub">Hiểu cấu trúc và cơ chế hoạt động của Skill; xây dựng, kiểm thử, cải tiến Skill cho công việc chuyên môn; chia sẻ Skill cho cả tổ</p>
+  </div>
+  <div class="meta"><span><b>Thời lượng:</b> khoảng 150 phút (gợi ý 2 buổi)</span><span><b>Sản phẩm:</b> 2 Skill trong thư viện của tổ</span><span><b>Công cụ:</b> Claude, ChatGPT, Gemini</span></div>
+  <aside class="notes"><p>Hỏi mở đầu: "Trong 4 module vừa qua, thầy cô đã lưu được bao nhiêu câu lệnh hay? Lần gần nhất dùng lại, có phải sửa không?"</p><p>Nguyên tắc của bài: mỗi phần trình bày khái niệm và khung tư duy chung trước, không gắn với công cụ nào; sau đó mới đến ví dụ trên Claude, ChatGPT.</p></aside>
+</section>
+
+<section class="slide lo-title" data-sec="Mở đầu" data-title="Mục tiêu bài học">
+<div class="s-body" style="justify-content:center"><h2 class="ht">LO 5.1: Từ Prompt đến Skill: Đóng gói năng lực chuyên môn cho AI</h2><div class="objs3"><div class="o3"><b>01</b><span>Hiểu Skill là gì, khác Prompt ở đâu, khi nào nên dùng</span></div><div class="o3"><b>02</b><span>Xây dựng, kiểm thử và cải tiến một Skill cho công việc của mình</span></div><div class="o3"><b>03</b><span>Chia sẻ Skill cho cả tổ qua thư viện chung</span></div></div></div>
+
+<aside class="notes"><p>Giới thiệu ba mục tiêu. Nhấn mạnh: cuối bài mỗi thầy cô có ít nhất một Skill chạy được.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="Mở đầu" data-title="Hội thoại mở đầu" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hoc.webp')">
+  <span class="scene-tag"><span class="pt">Mở đầu</span>Thầy Rùa và Octo</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-lo-lang.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-giang-giai.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:228.42990654205607px;--tl:92px">Thầy Rùa ơi! Con lưu cả một sổ câu lệnh hay rồi. Vậy mà cuối kỳ viết nhận xét cho 80 em, lần nào con cũng phải tìm, dán lại cả đoạn hướng dẫn. Sót một dòng là AI viết lệch ngay!</p>
+  <p class="bub t-r" style="left:665px;top:118px;width:500px;--t:58px">Vì con vẫn đang dặn lại từ đầu ở mỗi lần đấy, Bạch Tuộc! Hãy đóng gói cách làm ấy thành một <b>Skill</b>: dạy AI một lần, dùng được mọi lần. Cùng thầy xem một tình huống nhé!</p>
+  <aside class="notes"><p>Kết nối, đặt vấn đề: hỏi lớp có việc nào lần nào cũng phải dán lại cùng một hướng dẫn cho AI không. Ghi vài việc lên bảng để dùng ở phần thử thách.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Skill là gì" data-title="Tình huống: nhận xét cuối kỳ">
+<div class="s-head"><h2 class="ht">Tình huống: viết nhận xét cuối kỳ cho 80 học sinh</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="pp p-blue"><h3><span class="em">👩‍🏫</span> Bối cảnh</h3><p>Cô Vy dạy Ngữ văn 9, phụ trách hai lớp, khoảng <b>80 học sinh</b>. Cuối kỳ, cô cần nhận xét cho từng em để ghi vào học bạ và sổ liên lạc.</p></div>
+  <div class="pp p-yellow"><h3><span class="em">📋</span> Mỗi nhận xét cần</h3><ul><li>Đúng 2 đến 3 câu, khớp với mức đạt trong bảng</li><li>Câu đầu ghi nhận một điểm mạnh cụ thể</li><li>Câu sau gợi mở điều cần cố gắng, không chê trách</li><li>Không để hai em trùng nhận xét</li></ul></div>
+</div>
+<p class="big-q">Nếu mỗi lớp lại phải dặn AI từ đầu, cô Vy sẽ mất bao nhiêu thời gian và kết quả có đều tay không?</p></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Cô Vy đã thử hai cách. Thầy cô cùng so sánh kết quả của từng cách nhé!</p></div>
+<aside class="notes"><p>Đọc tình huống. Hỏi lớp: thầy cô thường dặn AI những gì khi nhờ viết nhận xét?</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Skill là gì" data-title="Cách 1: dán lại câu lệnh">
+<div class="s-head"><h2 class="ht">Cách 1: dán lại câu lệnh mỗi lần</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot gp">◎</span>ChatGPT<span class="sp2">Lớp 9B · lần dán thứ 2</span></div><div class="msgs"><div class="u"><span class="fchip"><i class="ph ph-file-xls"></i>Muc_dat_9B.xlsx</span><br>Hãy viết nhận xét cuối kỳ cho từng học sinh trong bảng. Mỗi em 2 đến 3 câu, nêu điểm mạnh trước…</div><div class="a"><table class='mini'><tr><th>Họ tên</th><th>Nhận xét</th></tr><tr><td>Lê Minh Anh</td><td>Em đọc hiểu tốt. <span class='hl-bad'>Tuy nhiên em còn yếu</span> ở phần viết.</td></tr><tr><td>Trần Gia Bảo</td><td><span class='hl-bad'>Em thiếu tập trung trong giờ học</span>, cần cố gắng hơn.</td></tr><tr><td>Phạm Thu Hà</td><td>Em đọc hiểu tốt. <span class='hl-bad'>Tuy nhiên em còn yếu</span> ở phần viết.</td></tr></table></div></div><div class="composer">Trả lời…<i class="ph ph-arrow-up"></i></div></div>
+  <div class="stack">
+    <div class="pp p-pink"><h3><span class="em">😓</span> Chuyện gì đã xảy ra?</h3><ul><li>Quên dán dòng <i>"không dùng từ yếu, kém"</i></li><li>AI tự thêm nhận xét về thái độ, dù bảng không có</li><li>Hai em có nhận xét giống hệt nhau</li></ul></div>
+    <div class="pp p-gray"><h3><span class="em">⏱️</span> Cái giá phải trả</h3><p>Mỗi lớp dán lại một lần, sót một dòng là kết quả lệch. Cô phải đọc và sửa lại cả bảng.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-ngac-nhien.webp" alt="Octo"><p class="sp oo">Ơ, câu lệnh vẫn là câu lệnh cũ mà, sao lớp này lại ra kết quả khác ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Vì chỉ cần sót một dòng dặn dò, AI sẽ tự đoán phần còn lại. Câu lệnh càng dài thì càng dễ sót.</p></div>
+<aside class="notes"><p>Chỉ vào các chỗ tô đỏ: từ ngữ chê trách, nhận xét không có căn cứ, nhận xét trùng lặp. Đây là lỗi điển hình khi câu lệnh dài phải dán lại nhiều lần.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Skill là gì" data-title="Cách 2: dùng Skill">
+<div class="s-head"><h2 class="ht">Cách 2: đóng gói cách làm thành Skill</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2">Lớp 9B · một câu yêu cầu</span></div><div class="msgs"><div class="u"><span class="fchip"><i class="ph ph-file-xls"></i>Muc_dat_9B.xlsx</span><br>Viết nhận xét cuối kỳ cho lớp 9B</div><div class="use"><i class="ph ph-sparkle"></i>Using viet-nhan-xet-hoc-sinh</div><div class="a"><table class='mini'><tr><th>Họ tên</th><th>Nhận xét</th></tr><tr><td>Lê Minh Anh</td><td><span class='hl-ok'>Em đọc hiểu văn bản tốt</span>, nêu ý mạch lạc. Em hãy luyện thêm cách mở bài để bài viết hấp dẫn hơn.</td></tr><tr><td>Trần Gia Bảo</td><td><span class='hl-ok'>Em trình bày rõ ràng</span>, chữ viết cẩn thận. Em hãy đọc thêm truyện ngắn để vốn từ phong phú hơn.</td></tr><tr><td>Phạm Thu Hà</td><td><span class='hl-ok'>Em có nhiều ý tưởng sáng tạo</span> trong bài viết. Em hãy chú ý sắp xếp ý theo dàn bài.</td></tr></table></div></div><div class="composer">Trả lời…<i class="ph ph-arrow-up"></i></div></div>
+  <div class="stack">
+    <div class="pp p-green"><h3><span class="em">😊</span> Kết quả</h3><ul><li>Chỉ cần một câu yêu cầu ngắn</li><li>Đúng cấu trúc, đúng giọng văn ở mọi lớp</li><li>Không trùng lặp, không suy đoán thêm</li></ul></div>
+    <div class="pp p-blue"><h3><span class="em">📁</span> Vì sao làm được?</h3><p>Cách làm của cô Vy đã được lưu thành file <b>SKILL.md</b>. Thấy yêu cầu khớp, AI tự mở Skill và làm theo.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-ngac-nhien.webp" alt="Octo"><p class="sp oo">Ồ, chỉ một câu ngắn thôi mà AI làm đúng hết các yêu cầu của cô Vy!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng vậy! Cô Vy đã dạy AI cách làm một lần, các lần sau AI tự dùng lại.</p></div>
+<aside class="notes"><p>Chỉ dòng Using viet-nhan-xet-hoc-sinh: dấu hiệu Claude đã dùng Skill. Giáo viên vẫn đọc từng nhận xét trước khi nhập vào hệ thống.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Skill là gì" data-title="Skill là gì?">
+<div class="s-head"><h2 class="ht">1. Skill là gì?</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="stack">
+    <div class="pp out"><h3>Skill (kỹ năng AI)</h3><p class="c">là một bộ hướng dẫn được đóng gói dưới dạng thư mục, giúp AI xử lý các tác vụ hoặc quy trình cụ thể.</p></div>
+    <div class="cols cols-2 gap-s">
+      <div class="pp p-peach"><h3><span class="em">💬</span> Prompt</h3><p>Là một yêu cầu, giống <b>giao việc từng lần</b>. Lần sau lại phải viết, dán lại.</p></div>
+      <div class="pp p-green"><h3><span class="em">🎓</span> Skill</h3><p>Là một năng lực đã đóng gói, giống <b>đào tạo một nhân sự</b> biết làm một nhóm việc.</p></div>
+    </div>
+  </div>
+  <div class="stack">
+    <div class="pp p-gray"><h3><span class="em">🗂️</span> Một Skill trông thế nào?</h3>
+      <div class="docm"><span class="mut">viet-nhan-xet-hoc-sinh/</span><br>&nbsp;&nbsp;<span class="em">📄</span> <b>SKILL.md</b> <span class="mut">hướng dẫn chính</span><br>&nbsp;&nbsp;<span class="em">📁</span> references/ <span class="mut">cụm từ gợi ý, quy định</span></div></div>
+    <div class="row"><span class="lb"><span class="em">✍️</span> Viết một lần</span><span class="lb ok"><span class="em">💾</span> Lưu trong file</span><span class="lb warm"><span class="em">⚡</span> AI tự dùng khi cần</span></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-to-mo.webp" alt="Octo"><p class="sp oo">Vậy Skill khác gì những câu lệnh hay con đã lưu trong sổ hả thầy?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Câu lệnh trong sổ thì con phải tự tìm và dán. Skill được lưu thành file, AI tự mở khi việc khớp với mô tả.</p></div>
+<aside class="notes"><p>Định nghĩa của khóa học. Skill không thay thế Prompt: một câu lệnh tốt là điểm xuất phát để viết Skill. Skill là chuẩn mở, dùng được trên Claude, ChatGPT và nhiều công cụ AI khác.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Skill là gì" data-title="Khi nào nên đóng gói thành Skill?">
+<div class="s-head"><h2 class="ht">Khi nào nên đóng gói thành Skill?</h2><p class="hs">Có từ 2 dấu hiệu trở lên: nên viết thành Skill</p></div>
+<div class="s-body"><div class="cols cols-5 gap-s">
+  <div class="pp p-blue c"><h3 style="justify-content:center"><span class="em">🔁</span></h3><b>Gõ lại cùng một hướng dẫn</b><p class="sm">Mỗi lần lại dán yêu cầu, lưu ý như cũ</p></div>
+  <div class="pp p-green c"><h3 style="justify-content:center"><span class="em">📐</span></h3><b>Theo một mẫu, một chuẩn</b><p class="sm">Đúng mẫu nhận xét, đúng cấu trúc giáo án</p></div>
+  <div class="pp p-yellow c"><h3 style="justify-content:center"><span class="em">🪜</span></h3><b>Nhiều bước, thứ tự cố định</b><p class="sm">Đọc bảng, đối chiếu, viết, rà soát</p></div>
+  <div class="pp p-peach c"><h3 style="justify-content:center"><span class="em">🏫</span></h3><b>Quy định riêng của tổ</b><p class="sm">Cụm từ nhận xét tổ đã thống nhất</p></div>
+  <div class="pp p-lav c"><h3 style="justify-content:center"><span class="em">👥</span></h3><b>Cả tổ cùng dùng</b><p class="sm">Đồng nghiệp cần kết quả đồng bộ</p></div>
+</div>
+<div class="cols cols-2">
+  <div class="pp p-gray"><h3><span class="em">💬</span> Prompt là đủ</h3><p>Hỏi AI nghĩa một từ Hán Việt trong bài học: hỏi một lần, mỗi lần một nội dung khác.</p></div>
+  <div class="pp p-green"><h3><span class="em">📦</span> Nên đóng gói</h3><p>Viết nhận xét cuối kỳ cho 80 em: lặp lại mỗi kỳ, cùng một khuôn, cùng quy định của trường.</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Thế việc gì con cũng viết thành Skill cho tiện được không thầy?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Chưa cần đâu con. Việc làm một lần, mỗi lần một khác thì một câu lệnh tốt là đủ.</p></div>
+<aside class="notes"><p>Năm dấu hiệu rút từ hướng dẫn chính thức của Anthropic (The Complete Guide to Building Skills for Claude). Mời một thầy cô nêu một việc cụ thể, cả lớp đếm số dấu hiệu.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Skill là gì" data-title="Thử thách: việc nào nên đóng gói?">
+<div class="s-head"><h2 class="ht"><span class="em">🧩</span> Thử thách: việc nào nên đóng gói thành Skill?</h2></div>
+<div class="s-body"><div class="task"><i class="ph ph-hand-pointing"></i><div>Thầy cô đọc từng việc, chọn <b>Prompt</b> hay <b>Skill</b>, rồi bấm xem đáp án.</div></div>
+<div class="rv" data-demo data-state="q"><table class="t3"><thead><tr><th style="width:44%">Việc của giáo viên</th><th class="c" style="width:14%">Chọn</th><th>Vì sao</th></tr></thead><tbody>
+<tr><td>Phiếu bài tập cuối mỗi bài Toán 7 theo mẫu của tổ</td><td class="c ans"><span class="tag3 ok">Skill</span></td><td class="ans">Lặp lại mỗi bài, cùng một mẫu, cả tổ dùng</td></tr>
+<tr><td>Lời dẫn cho một tiết thao giảng cấp trường</td><td class="c ans"><span class="tag3 warm">Prompt</span></td><td class="ans">Làm một lần, nội dung riêng của tiết đó</td></tr>
+<tr><td>Bản tin tuần gửi phụ huynh lớp mầm non</td><td class="c ans"><span class="tag3 ok">Skill</span></td><td class="ans">Tuần nào cũng làm, giọng văn và bố cục cố định</td></tr>
+<tr><td>Tra cứu nhanh năm sinh của một tác giả</td><td class="c ans"><span class="tag3 warm">Prompt</span></td><td class="ans">Hỏi một câu là xong, không có khuôn chung</td></tr>
+<tr><td>Rubric chấm tiểu luận theo chuẩn đầu ra học phần</td><td class="c ans"><span class="tag3 ok">Skill</span></td><td class="ans">Dùng cho nhiều đợt, có tiêu chí và quy định riêng</td></tr>
+</tbody></table><div class="c" style="margin-top:10px"><button class="rvb go" type="button" data-go="a"><i class="ph ph-eye"></i>Xem đáp án</button><button class="rvb back" type="button" data-go="q"><i class="ph ph-eye-slash"></i>Ẩn đáp án</button></div></div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Mẹo nhỏ: nếu thầy cô thấy mình <b>gõ lại cùng một hướng dẫn từ lần thứ ba</b>, đó là lúc nên viết Skill!</p></div>
+<aside class="notes"><p>Cho lớp giơ tay chọn trước rồi mới bấm xem đáp án. Có thể thay bằng chính các việc thầy cô đã nêu ở đầu bài.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="2. Bên trong một Skill" data-title="Hội thoại: bên trong một Skill" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-phong-giao-vien.webp')">
+  <span class="scene-tag"><span class="pt">Phần 2</span>Bên trong một Skill</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-gioi-thieu.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:216.38px;--tl:92px">Thầy ơi, bên trong một Skill trông thế nào ạ? Con có phải biết lập trình mới viết được không?</p>
+  <p class="bub t-r" style="left:636px;top:118px;width:500px;--t:58px">Không cần đâu con. Skill chỉ là một file chữ thuần, ai soạn được văn bản Word đều viết được. Cùng thầy mở Skill của cô Vy ra xem nhé!</p>
+  <aside class="notes"><p>Chuyển sang Phần 2: trấn an học viên chưa quen kỹ thuật.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Bên trong một Skill" data-title="Bên trong file SKILL.md">
+<div class="s-head"><h2 class="ht">Bên trong file SKILL.md của cô Vy</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="code sm" data-file="viet-nhan-xet-hoc-sinh/SKILL.md" style=""><pre data-lang="md">---
+name: viet-nhan-xet-hoc-sinh
+description: Viết nhận xét cuối kỳ cho từng học sinh từ bảng mức đạt. Ghi nhận điểm mạnh, gợi mở điều cần cố gắng, không trùng lặp. Dùng khi cần nhận xét học bạ, sổ liên lạc.
+---
+# Viết nhận xét học sinh cuối kỳ
+## Các bước
+1. Đọc từng dòng của bảng mức đạt.
+2. Câu 1: ghi nhận một điểm mạnh cụ thể.
+3. Câu 2: gợi mở điều cần cố gắng bằng một việc em làm được.
+4. Rà cả bảng: không để hai em trùng nhận xét.
+## Quy tắc
+- Không dùng các từ "yếu", "kém", "lười".
+- Chỉ dùng thông tin trong bảng; không nêu hoàn cảnh gia đình, sức khỏe.</pre></div>
+  <div class="stack">
+    <div class="pp p-blue"><h3><span class="em">🏷️</span> Phần đầu: thẻ tên</h3><p><b>name</b>: tên Skill, chữ thường không dấu.<br><b>description</b>: Skill làm gì, khi nào dùng. AI đọc phần này để quyết định có mở Skill hay không.</p></div>
+    <div class="pp p-green"><h3><span class="em">📝</span> Phần thân: cách làm</h3><p>Các bước, ví dụ đầu ra, quy tắc. AI chỉ đọc phần này khi Skill được dùng.</p></div>
+    <div class="pp p-gray"><h3><span class="em">📄</span> File .md là gì?</h3><p>Một file chữ thuần như Notepad: # là tiêu đề, - là gạch đầu dòng. Người và AI đều đọc dễ.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-y-tuong.webp" alt="Octo"><p class="sp oo">Hóa ra chỉ là một file chữ như soạn văn bản thôi ạ!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng thế! Phần quý nhất là chuyên môn của con được viết thành từng bước cụ thể.</p></div>
+<aside class="notes"><p>Theo chuẩn Agent Skills, chỉ name và description là bắt buộc. Phần thân không bắt buộc định dạng; Anthropic khuyến nghị có các bước, ví dụ đầu vào và đầu ra, cách xử lý tình huống đặc biệt. Bản đầy đủ có trong templates/skills/.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Bên trong một Skill" data-title="AI dùng Skill thế nào?">
+<div class="s-head"><h2 class="ht">AI chọn Skill như đọc mục lục một cuốn sách</h2></div>
+<div class="s-body">
+<div class="loop3 noback" style="--n:3"><div class="lp"><span class="em">👀</span><h4>Đọc lướt mô tả</h4><p>Luôn đọc tên, mô tả của mọi Skill đang bật</p></div><div class="lp"><span class="em">🔍</span><h4>So với yêu cầu</h4><p>Mô tả nào khớp với việc đang làm?</p></div><div class="lp"><span class="em">📖</span><h4>Mở đúng Skill</h4><p>Đọc toàn bộ hướng dẫn rồi làm theo</p></div></div>
+<div class="task"><i class="ph ph-chat-text"></i><div>Cô Vy gõ: <b>"Viết giúp tôi nhận xét học bạ cho lớp 9A từ bảng này."</b></div></div>
+<table class="t3"><thead><tr><th style="width:24%">Skill đang bật</th><th>Mô tả</th><th class="c" style="width:16%">Kết quả</th></tr></thead><tbody>
+<tr><td>viet-nhan-xet-hoc-sinh</td><td>Viết nhận xét cuối kỳ… Dùng khi cần nhận xét <b>học bạ</b>, sổ liên lạc.</td><td class="c"><span class="tag3 ok"><span class="em">✅</span> Mở</span></td></tr>
+<tr><td>tham-dinh-nhan-xet</td><td>Thẩm định bảng nhận xét… Dùng sau khi viết, trước khi giáo viên duyệt.</td><td class="c"><span class="tag3">Chưa mở</span></td></tr>
+<tr><td>soan-phieu-hoc-tap</td><td>Soạn phiếu học tập theo mẫu của tổ.</td><td class="c"><span class="tag3 warm">Bỏ qua</span></td></tr>
+</tbody></table></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Vậy nếu mô tả viết chung chung thì sao hả thầy?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Thì AI không nhận ra lúc cần dùng, Skill sẽ không được kích hoạt. Mô tả quyết định tất cả!</p></div>
+<aside class="notes"><p>Cơ chế nạp theo tầng (progressive disclosure): tên và mô tả luôn được nạp, nội dung SKILL.md chỉ nạp khi khớp, tài liệu đi kèm chỉ mở khi cần. AI so khớp theo ý chứ không chỉ đếm từ.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Bên trong một Skill" data-title="Viết mô tả cho đúng">
+<div class="s-head"><h2 class="ht">Viết mô tả (description) sao cho AI nhận ra đúng lúc</h2></div>
+<div class="s-body">
+<div class="ann"><span class="a" style="--c:#2456d6"><span class="tx">Viết nhận xét cuối kỳ cho từng học sinh từ bảng mức đạt.</span><em>Làm gì</em></span> <span class="a" style="--c:#0e8a5f"><span class="tx">Ghi nhận điểm mạnh, gợi mở điều cần cố gắng, không trùng lặp.</span><em>Năng lực chính</em></span> <span class="a" style="--c:#b8650a"><span class="tx">Dùng khi cần nhận xét học bạ, sổ liên lạc.</span><em>Khi nào dùng</em></span></div>
+<p class="sm muted c">3 kiểu mô tả Anthropic khuyên tránh</p>
+<div class="cols cols-3 gap-s">
+  <div class="pp p-pink"><h3><span class="em">🌫️</span> Quá mơ hồ</h3><p>"Hỗ trợ công việc của giáo viên."</p><p class="eg">AI không biết hỗ trợ việc gì.</p></div>
+  <div class="pp p-peach"><h3><span class="em">🕳️</span> Thiếu lúc dùng</h3><p>"Tạo bộ học liệu nhiều trang, trình bày đẹp."</p><p class="eg">Biết làm gì nhưng không biết khi nào dùng.</p></div>
+  <div class="pp p-lav"><h3><span class="em">🧪</span> Quá kỹ thuật</h3><p>"Xử lý dữ liệu đánh giá định tính theo thang phân mức."</p><p class="eg">Giáo viên không nói như vậy.</p></div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Hãy viết mô tả bằng chính <b>những từ thầy cô hay gõ</b> khi nhờ AI: "nhận xét cuối kỳ", "học bạ", "sổ liên lạc".</p></div>
+<aside class="notes"><p>Cấu trúc mô tả theo The Complete Guide to Building Skills for Claude: [làm gì] + [khi nào dùng] + [năng lực chính], thứ tự linh hoạt. Ba kiểu chưa tốt: too vague, missing triggers, too technical.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="3. Xây dựng Skill" data-title="Hội thoại: tự viết Skill" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-bang-xanh.webp')">
+  <span class="scene-tag"><span class="pt">Phần 3</span>Xây dựng Skill</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-hao-hung.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-giang-giai.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:207.01999999999998px;--tl:92px">Con muốn tự viết Skill nhận xét cho lớp mình ngay! Con nên bắt đầu từ đâu hả thầy?</p>
+  <p class="bub t-r" style="left:665px;top:118px;width:500px;--t:58px">Từ chính cách con vẫn làm: các bước, quy tắc của tổ, một nhận xét mẫu thật tốt. Thầy chỉ con 4 bước, rồi mình thực hành luôn nhé!</p>
+  <aside class="notes"><p>Chuyển sang Phần 3: Skill tốt bắt đầu từ cách làm chuẩn của giáo viên.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Xây dựng Skill" data-title="4 bước xây dựng Skill">
+<div class="s-head"><h2 class="ht">Xây dựng Skill qua 4 bước</h2><p class="hs">Ví dụ: cô Vy đóng gói việc viết nhận xét cuối kỳ</p></div>
+<div class="s-body"><div class="fl3">
+  <div class="st"><span class="n3">1</span><h4><span class="em">🎯</span> Xác định nhiệm vụ</h4><p>Việc gì, dùng cho đâu, thế nào là dùng được ngay?</p><p class="eg">Nhận xét cuối kỳ, cho học bạ, 2 đến 3 câu mỗi em.</p></div>
+  <div class="st"><span class="n3">2</span><h4><span class="em">🧭</span> Chuẩn hóa cách làm</h4><p>Viết lại các bước, quy tắc, tài liệu mình vẫn dùng.</p><p class="eg">Điểm mạnh trước, gợi mở sau; không dùng "yếu, kém".</p></div>
+  <div class="st"><span class="n3">3</span><h4><span class="em">✍️</span> Viết Skill</h4><p>Tên, mô tả, các bước, ví dụ đầu ra, quy tắc dữ liệu.</p><p class="eg">Điền vào file mẫu SKILL-template.md.</p></div>
+  <div class="st"><span class="n3">4</span><h4><span class="em">🧪</span> Kiểm thử, hoàn thiện</h4><p>Thử với tình huống thật, sửa hướng dẫn, ghi phiên bản.</p><p class="eg">Thử 3 yêu cầu, sửa mô tả, lên bản 1.1.</p></div>
+</div>
+<div class="cols cols-4 gap-s">
+  <div class="pp p-blue"><h3 style="font-size:19px">Cụ thể, làm được</h3><p class="sm">"Câu 1 nêu một kỹ năng em làm tốt", không phải "viết cho hay".</p></div>
+  <div class="pp p-green"><h3 style="font-size:19px">Lường trước tình huống</h3><p class="sm">Ô trống thì ghi "[GV bổ sung]", không tự đoán.</p></div>
+  <div class="pp p-yellow"><h3 style="font-size:19px">Gọi đúng tài liệu</h3><p class="sm">Ghi rõ khi nào đọc file cụm từ gợi ý.</p></div>
+  <div class="pp p-lav"><h3 style="font-size:19px">Giữ gọn</h3><p class="sm">Bảng tra dài để trong references/.</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-suy-nghi.webp" alt="Octo"><p class="sp oo">Bước nào là khó nhất ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Bước 2 con ạ. Viết được cách mình vẫn làm thành từng bước rõ ràng thì Skill đã xong một nửa.</p></div>
+<aside class="notes"><p>Bốn bước của khóa học, đúc kết từ hướng dẫn của Anthropic; bốn ô dưới là 4 nguyên tắc viết SKILL.md (Be specific and actionable, Include error handling, Reference bundled resources clearly, Use progressive disclosure).</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Xây dựng Skill" data-title="Tạo Skill trên Claude">
+<div class="s-head"><h2 class="ht">Hướng dẫn tạo và bật Skill trên Claude</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2">claude.ai</span></div><div class="side" style="min-height:330px"><div class="nav"><div><span class="em">💬</span> Chats</div><div><span class="em">📁</span> Projects</div><div class="on mark"><span class="em">⚙️</span> Customize <span class="dotn">1</span></div></div>
+  <div class="pane"><div class="row" style="justify-content:space-between"><b style="font-size:18px">Skills <span class="dotn">2</span></b><span class="btn3 pri mark">+ Create skill <span class="dotn">3</span></span></div>
+  <div class="row-i"><div><div class="rt">viet-nhan-xet-hoc-sinh</div><div class="d">Viết nhận xét cuối kỳ cho từng học sinh từ bảng mức đạt…</div></div><span class="row" style="gap:6px"><span class="dotn">4</span><span class="tog on"></span></span></div>
+  <div class="row-i"><div><div class="rt">docx</div><div class="d">Tạo, đọc, sửa file Word (Skill có sẵn của Anthropic)</div></div><span class="tog on"></span></div>
+  <div class="row-i"><div><div class="rt">tham-dinh-nhan-xet</div><div class="d">Thẩm định bảng nhận xét trước khi giáo viên duyệt…</div></div><span class="tog"></span></div></div></div></div>
+  <div class="stack">
+    <div class="check-i"><span class="dotn">1</span><span>Mở <b>Customize</b> ở thanh bên trái</span></div>
+    <div class="check-i"><span class="dotn">2</span><span>Chọn mục <b>Skills</b></span></div>
+    <div class="check-i"><span class="dotn">3</span><span>Bấm <b>+</b>: viết Skill mới hoặc tải lên file .zip</span></div>
+    <div class="check-i"><span class="dotn">4</span><span><b>Bật</b> Skill, mở cuộc trò chuyện mới để thử</span></div>
+    <div class="pp p-gray"><h3 style="font-size:19px"><span class="em">🔄</span> Trên nền tảng khác</h3><p class="sm"><b>ChatGPT:</b> Plugins &gt; Skills &gt; Create.<br><b>Gemini:</b> lưu SKILL.md trên Drive, gõ @ để gắn file và yêu cầu làm theo.</p></div>
+  </div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Học đi đôi với hành! Giờ thầy cô mở AI lên và cùng viết Skill đầu tiên của mình nhé!</p></div>
+<aside class="notes"><p>Theo trung tâm trợ giúp Claude: Customize > Skills, tạo mới hoặc tải lên .zip (thư mục Skill ở cấp ngoài cùng), bật Skill rồi thử. Cần bật Code execution nếu Skill có đoạn mã. Tên menu có thể thay đổi, kiểm tra trước buổi dạy.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Xây dựng Skill" data-title="Thực hành 1: viết Skill đầu tiên">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 1: viết Skill đầu tiên của thầy cô</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="stack">
+    <div class="task"><i class="ph ph-target"></i><div><b>Nhiệm vụ:</b> chọn một việc lặp lại của mình, nhờ AI viết thành Skill theo câu lệnh dưới, rồi tải lên và bật Skill. <span class="pr-badge">15 phút</span></div></div>
+    <div class="code lt" data-file="Câu lệnh nhờ AI viết Skill (thay phần trong ngoặc vuông)" style=""><pre>Hãy giúp tôi viết một Skill tên [viet-nhan-xet-hoc-sinh] để [viết nhận xét cuối kỳ cho từng học sinh từ bảng mức đạt]. Tôi thường làm theo các bước: [đọc bảng, câu đầu nêu điểm mạnh, câu sau gợi mở điều cần cố gắng, rà trùng lặp]. Quy tắc: [không dùng từ "yếu, kém"; chỉ dùng thông tin trong bảng]. Đây là một kết quả tốt làm ví dụ: [dán một nhận xét mẫu].
+Viết theo chuẩn SKILL.md: phần đầu có name và description (làm gì, khi nào dùng, năng lực chính), phần thân có các bước, ví dụ đầu ra và quy tắc dữ liệu.</pre></div>
+  </div>
+  <div class="stack">
+    <div class="pp p-yellow"><h3><span class="em">💡</span> Gợi ý chọn việc</h3><ul><li><b>Mầm non:</b> bản tin tuần gửi phụ huynh</li><li><b>Tiểu học:</b> phiếu bài tập cuối tuần</li><li><b>THCS, THPT:</b> kế hoạch bài dạy theo mẫu của tổ</li><li><b>ĐH, CĐ:</b> rubric chấm tiểu luận</li></ul></div>
+    <div class="pp p-green"><h3><span class="em">📦</span> Sản phẩm</h3><p>File SKILL.md đã tải lên và bật trên nền tảng thầy cô dùng.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-laptop.webp" alt="Octo"><p class="sp oo">Con dán câu lệnh này vào là AI viết Skill cho con luôn ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng vậy, nhưng con phải đọc lại từng dòng: AI viết, con là người duyệt cách làm.</p></div>
+<aside class="notes"><p>Mẫu trống: templates/SKILL-template.md. Thầy cô có thể tự viết thay vì nhờ AI; quan trọng là đọc lại từng dòng trước khi lưu.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Xây dựng Skill" data-title="Thực hành 2: kiểm thử Skill">
+<div class="s-head"><h2 class="ht"><span class="em">🧪</span> Thực hành 2: kiểm thử Skill với 3 yêu cầu</h2></div>
+<div class="s-body">
+<div class="task"><i class="ph ph-target"></i><div><b>Nhiệm vụ:</b> mở cuộc trò chuyện mới, gõ lần lượt 3 yêu cầu, xem AI có dùng Skill đúng lúc không. <span class="pr-badge">10 phút</span></div></div>
+<table class="t3"><thead><tr><th style="width:30%">Thầy cô gõ</th><th class="c" style="width:16%">Mong đợi</th><th style="width:22%">Kết quả lần 1</th><th>Sửa ở đâu</th></tr></thead><tbody>
+<tr><td>"Viết nhận xét cuối kỳ cho lớp 9A" <span class="fchip"><i class="ph ph-file-xls"></i>9A.xlsx</span></td><td class="c">Dùng Skill</td><td><span class="tag3 ok"><span class="em">✅</span> Using viet-nhan-xet…</span></td><td class="muted">Không cần sửa</td></tr>
+<tr><td>"Viết lời phê cho lớp 9B"</td><td class="c">Dùng Skill</td><td><span class="tag3 no"><span class="em">❌</span> Không dùng Skill</span></td><td>Thêm cách nói <b>"lời phê"</b> vào phần mô tả</td></tr>
+<tr><td>"Tóm tắt bài thơ Sang thu"</td><td class="c">Không dùng</td><td><span class="tag3 ok"><span class="em">✅</span> Không dùng</span></td><td class="muted">Không cần sửa</td></tr>
+</tbody></table>
+<div class="cols cols-3 gap-s">
+  <div class="pp p-blue"><h3 style="font-size:19px">Skill không được dùng</h3><p class="sm">Mô tả thiếu cách nói người dùng hay gõ</p></div>
+  <div class="pp p-peach"><h3 style="font-size:19px">Dùng cả khi không cần</h3><p class="sm">Mô tả quá rộng: viết cụ thể hơn</p></div>
+  <div class="pp p-green"><h3 style="font-size:19px">Kết quả chưa đạt</h3><p class="sm">Thiếu bước, thiếu ví dụ đầu ra: sửa phần thân</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-cang-thang.webp" alt="Octo"><p class="sp oo">Lần 2 AI không dùng Skill, con có phải viết lại từ đầu không ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Không cần con. Chỉ cần thêm cách nói "lời phê" vào mô tả rồi chạy lại là được.</p></div>
+<aside class="notes"><p>Kiểm thử theo Anthropic: triggering tests (yêu cầu rõ ràng, diễn đạt khác, không liên quan) và functional tests (chạy cùng một yêu cầu vài lần, so với tiêu chí). Sửa xong thì chạy lại cả 3 và tăng phiên bản.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="4. Cải tiến Skill" data-title="Hội thoại: Skill chạy được đã là xong?" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hong.webp')">
+  <span class="scene-tag"><span class="pt">Phần 4</span>Cải tiến Skill</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-vui.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-giang-giai.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:231.11307767944936px;--tl:92px">Skill đầu tay của con chạy được rồi thầy ơi! Vậy là xong rồi phải không ạ?</p>
+  <p class="bub t-r" style="left:665px;top:118px;width:500px;--t:58px">Chạy được mới là bắt đầu thôi con. Hãy nhờ AI review Skill, rồi thử công cụ skill-creator. Còn nhận góp ý nào là do con quyết định.</p>
+  <aside class="notes"><p>Phản biện, lưu ý: Skill chạy được chưa chắc đã tốt.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Cải tiến Skill" data-title="Nhờ AI review Skill">
+<div class="s-head"><h2 class="ht">Nhờ AI review Skill: AI góp ý, thầy cô quyết định</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot gp">◎</span>ChatGPT<span class="sp2"></span></div><div class="msgs"><div class="u"><span class="fchip md"><i class="ph ph-file-text"></i>SKILL.md</span><br>Bạn là chuyên gia viết Skill cho AI. Hãy review file SKILL.md này theo 6 tiêu chí, chưa sửa gì, trả về bảng góp ý xếp theo mức độ quan trọng.</div><div class="a"><table class='mini'><tr><th>#</th><th>Góp ý</th></tr><tr><td>1</td><td>Mô tả: thêm cách nói "nhận xét cuối kỳ", "lời phê"</td></tr><tr><td>2</td><td>Đổi sang giọng văn thân mật hơn</td></tr><tr><td>3</td><td>Tách bước 2 thành hai bước riêng</td></tr><tr><td>4</td><td>Thêm một nhận xét mẫu làm ví dụ đầu ra</td></tr></table></div></div></div>
+  <div class="stack">
+    <div class="pp p-green"><h3><span class="em">✅</span> Nhận góp ý 1, 3, 4</h3><p>Làm Skill rõ hơn, AI dễ làm đúng hơn.</p></div>
+    <div class="pp p-pink"><h3><span class="em">🚫</span> Bỏ góp ý 2</h3><p>Giọng thân mật khác quy định viết học bạ của trường.</p></div>
+    <div class="code lt" data-file="Câu lệnh sửa" style=""><pre>Hãy sửa SKILL.md theo các góp ý số 1, 3, 4. Giữ nguyên tên Skill và những phần tôi không yêu cầu sửa. Tăng phiên bản lên 1.1 và ghi thay đổi vào mục Nhật ký cải tiến.</pre></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-suy-nghi.webp" alt="Octo"><p class="sp oo">Góp ý của AI nghe đều hợp lý, sao con lại bỏ góp ý số 2 ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Vì con hiểu quy định của trường hơn AI. AI đề xuất, con là người quyết định.</p></div>
+<aside class="notes"><p>Review trước, sửa sau. Câu lệnh sửa chỉ định rõ phần được sửa để AI không tự ý viết lại toàn bộ Skill. Câu lệnh mẫu: templates/cau-lenh-mau-skill.md.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Cải tiến Skill" data-title="Tạo Skill bằng skill-creator">
+<div class="s-head"><h2 class="ht">skill-creator: tạo Skill bằng cách trò chuyện</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2"></span></div><div class="msgs"><div class="u"><span class="fchip doc"><i class="ph ph-file-doc"></i>Mau_thong_bao.docx</span><br>/skill-creator Hãy tạo một Skill giúp tôi soạn thông báo gửi phụ huynh theo mẫu của trường.</div><div class="use"><i class="ph ph-sparkle"></i>Using skill-creator</div><div class="a"><p>Để viết Skill đúng việc, thầy cô cho biết thêm: thông báo thường về việc gì, thầy cô đưa những thông tin nào, giọng văn và độ dài ra sao?</p></div><div class="u">Họp phụ huynh, lịch nghỉ, các khoản thu. Trang trọng, dưới 200 chữ, không nêu tên học sinh.</div><div class="a"><p><span class="em">✅</span> Đã viết Skill <b>thong-bao-phu-huynh</b>. Đề xuất 3 tình huống thử: họp phụ huynh cuối kỳ I · lịch nghỉ Tết · thiếu địa điểm (Skill phải hỏi lại).</p></div></div><div class="composer">Trả lời…<i class="ph ph-arrow-up"></i></div></div>
+  <div class="stack">
+    <div class="pp p-lav"><h3><span class="em">🧑‍🔧</span> skill-creator làm gì?</h3><ul><li>Hỏi thêm mục đích, đầu vào, đầu ra</li><li>Viết SKILL.md đúng chuẩn</li><li>Đề xuất tình huống để thử</li></ul></div>
+    <div class="pp p-yellow"><h3><span class="em">💡</span> Mẹo hay</h3><p>Làm việc cùng AI đến khi ưng kết quả, rồi nói: <i>"Biến cách chúng ta vừa làm thành một Skill để tôi dùng lại."</i></p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-nhay-mat.webp" alt="Octo"><p class="sp oo">Có skill-creator rồi, con khỏi cần học cấu trúc Skill nữa nhỉ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Vẫn cần con ạ. Hiểu cấu trúc thì con mới đánh giá được Skill mà công cụ viết ra.</p></div>
+<aside class="notes"><p>skill-creator là Skill do Anthropic xây dựng để tạo mới, sửa, cải tiến và đo hiệu quả Skill; có sẵn trên claude.ai (cần bật Code execution). Trên ChatGPT, tài khoản đủ điều kiện cũng có skill-creator.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Cải tiến Skill" data-title="Thực hành 3: cải tiến Skill">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 3: cải tiến Skill và tạo Skill thứ hai</h2></div>
+<div class="s-body"><div class="cols cols-2 ai-s">
+  <div class="pp p-blue"><h3><span class="em">🔧</span> A. Cải tiến Skill tự viết <span class="pr-badge">10 phút</span></h3><ol style="padding-left:22px;font-size:18.5px;line-height:1.5"><li>Dán SKILL.md kèm câu lệnh review</li><li>Ghi số các góp ý muốn nhận</li><li>Dùng câu lệnh sửa, nhận bản 1.1</li><li>Chạy lại 3 yêu cầu thử của Thực hành 2</li></ol></div>
+  <div class="pp p-lav"><h3><span class="em">🧑‍🔧</span> B. Tạo Skill bằng skill-creator <span class="pr-badge">10 phút</span></h3><ol style="padding-left:22px;font-size:18.5px;line-height:1.5"><li>Gõ /skill-creator, mô tả việc, đính kèm mẫu</li><li>Trả lời các câu hỏi của skill-creator</li><li>Đọc lại SKILL.md, yêu cầu sửa chỗ chưa đúng</li><li>Lưu, bật và thử 3 tình huống</li></ol></div>
+</div>
+<div class="code lt" data-file="Yêu cầu mẫu cho phần B" style=""><pre>/skill-creator Hãy tạo một Skill giúp tôi [soạn thông báo gửi phụ huynh] theo mẫu đính kèm [Mau_thong_bao.docx].</pre></div>
+<div class="pp p-green"><h3><span class="em">📦</span> Sản phẩm</h3><p>Skill tự viết bản 1.1 kèm bảng review; Skill thứ hai tạo bằng skill-creator kèm 3 dòng so sánh với Skill tự viết.</p></div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">So sánh hai Skill giúp thầy cô thấy rõ: công cụ viết nhanh, còn <b>chuyên môn của thầy cô</b> làm Skill đúng việc.</p></div>
+<aside class="notes"><p>Lớp đông: chia cặp, một người làm A, một người làm B rồi đổi. Hai Skill này sẽ được đưa vào thư viện của tổ ở phần sau.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="5. Chia sẻ Skill" data-title="Hội thoại: chia sẻ Skill cho cả tổ" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-bang-xanh.webp')">
+  <span class="scene-tag"><span class="pt">Phần 5</span>Chia sẻ Skill</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-hao-hung.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-vui.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:207.01999999999998px;--tl:92px">Các thầy cô trong tổ cũng muốn dùng Skill của con. Con gửi file cho mọi người luôn nhé thầy?</p>
+  <p class="bub t-r" style="left:657px;top:118px;width:500px;--t:58px">Chia sẻ là đúng rồi! Trước khi gửi, con xóa mọi thông tin học sinh, ghi người phụ trách và phiên bản. Cả tổ nên giữ chung một thư viện.</p>
+  <aside class="notes"><p>Chuyển sang Phần 5: từ Skill của một người thành tài sản của cả tổ.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="5. Chia sẻ Skill" data-title="Skill, Project và thư viện của tổ">
+<div class="s-head"><h2 class="ht">Skill, Project và thư viện Skill của tổ</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="stack">
+    <div class="cols cols-2 gap-s">
+      <div class="pp p-blue"><h3><span class="em">🏠</span> Project</h3><p>Giữ <b>bối cảnh</b> cho một nhóm việc: hướng dẫn chung, tài liệu của tổ.</p></div>
+      <div class="pp p-green"><h3><span class="em">🧰</span> Skill</h3><p>Giữ <b>cách làm</b> cho một việc. Bật một lần, dùng được ở mọi Project.</p></div>
+    </div>
+    <div class="pp p-gray"><h3><span class="em">🤝</span> Dùng cả hai</h3><p>Project "Tổ Ngữ văn 9" có chương trình, quy định đánh giá; Skill viết nhận xét làm đúng từng việc. Giáo viên chỉ cần gõ yêu cầu ngắn.</p></div>
+    <div class="row3"><span class="lb"><span class="em">👤</span> Đồng nghiệp: .zip</span><span class="lb ok"><span class="em">👥</span> Cả tổ: Drive chung</span><span class="lb warm"><span class="em">🏫</span> Cả trường: tài khoản</span></div>
+  </div>
+  <div class="stack">
+    <div class="docm"><h4><span class="em">📁</span> Thu_vien_Skill_To_Van9/</h4>
+      <table class="mini"><tr><th>Skill</th><th>Phụ trách</th><th>Bản</th><th>Trạng thái</th></tr>
+      <tr><td>viet-nhan-xet-hoc-sinh</td><td>Cô Vy</td><td>1.1</td><td>Đang dùng</td></tr>
+      <tr><td>tham-dinh-nhan-xet</td><td>Thầy Nam</td><td>1.0</td><td>Đang dùng</td></tr>
+      <tr><td>soan-phieu-hoc-tap</td><td>Cô Mai</td><td>0.9</td><td>Thử nghiệm</td></tr></table></div>
+    <div class="pp p-pink"><h3 style="font-size:19px"><span class="em">🛡️</span> Nhận Skill từ bên ngoài?</h3><p class="sm">Ưu tiên nguồn chính thức. Đọc toàn bộ file, chú ý đoạn mã và kết nối ra ngoài, chạy thử rồi mới dùng cho việc thật.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Sao phải ghi phiên bản và người phụ trách cho từng Skill hả thầy?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Để cả tổ biết đang dùng bản nào, đã sửa gì, cần hỏi ai. Thiếu những dòng ấy, mỗi người sẽ giữ một bản khác nhau.</p></div>
+<aside class="notes"><p>Project đã học ở Module 3. Theo trung tâm trợ giúp Claude: Project giữ kiến thức nền luôn được nạp; Skill là quy trình chỉ mở khi cần và dùng được ở mọi nơi. Thư viện trên Drive là bản gốc; sửa là tăng phiên bản, bản cũ chuyển vào _luu_tru/.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="5. Chia sẻ Skill" data-title="Thực hành 4: đưa Skill vào thư viện">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 4: đưa Skill vào thư viện của tổ</h2></div>
+<div class="s-body"><div class="fl3">
+  <div class="st"><span class="n3">A</span><h4><span class="em">📝</span> Đăng ký · 3'</h4><p>Thêm hai Skill vào danh mục: tên, người phụ trách, phiên bản, trạng thái.</p><p class="eg">viet-nhan-xet-hoc-sinh · Cô Vy · 1.1 · Đang dùng</p></div>
+  <div class="st"><span class="n3">B</span><h4><span class="em">📤</span> Chia sẻ · 5'</h4><p>Kiểm tra không còn thông tin học sinh, gửi gói .zip cho người ngồi cạnh.</p><p class="eg">Đồng nghiệp tải lên, bật và chạy thử một yêu cầu.</p></div>
+  <div class="st"><span class="n3">C</span><h4><span class="em">💬</span> Phản hồi · 2'</h4><p>Đồng nghiệp ghi 1 điểm dùng tốt, 1 điểm cần sửa vào nhật ký cải tiến.</p><p class="eg">"Dùng tốt: nhanh. Cần sửa: thêm cách xử lý ô trống."</p></div>
+</div>
+<div class="pp p-green"><h3><span class="em">📦</span> Sản phẩm</h3><p>Danh mục thư viện có hai Skill của thầy cô và một lượt chia sẻ kèm phản hồi của đồng nghiệp.</p></div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Một người góp ý, <b>cả tổ cùng hưởng lợi</b>. Đó là sức mạnh của thư viện Skill chung!</p></div>
+<aside class="notes"><p>Phản hồi của đồng nghiệp là nguồn cải tiến tốt nhất: đây là lần đầu Skill được người khác dùng.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="6. Tổng kết" data-title="Hội thoại: Skill và vai trò của giáo viên" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hoc.webp')">
+  <span class="scene-tag"><span class="pt">Tổng kết</span>Thầy Rùa và Octo</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-an-mung.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-chuc-mung.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:254.97916666666669px;--tl:92px">Con có hai Skill trong thư viện của tổ rồi! Từ giờ AI viết nhận xét cho con luôn, thầy nhỉ?</p>
+  <p class="bub t-r" style="left:601px;top:118px;width:500px;--t:58px">AI làm theo đúng cách con đã viết vào Skill. Nhưng cách làm ấy là chuyên môn của con, và người đọc, chỉnh, duyệt từng nhận xét vẫn là con.</p>
+  <p class="bub t-l" style="left:676px;top:456px;width:460px;--t:64px">Con hiểu rồi! Skill giúp con làm nhanh và đều tay, còn chất lượng cuối cùng do con quyết định.</p>
+  <aside class="notes"><p>Khẳng định vai trò con người.</p></aside>
+</section>
+
+<section class="slide" data-sec="6. Tổng kết" data-title="Tổng kết LO 5.1">
+<div class="s-head"><h2 class="ht">Tổng kết LO 5.1</h2><p class="hs">Hiểu cấu trúc và cơ chế hoạt động của Skill; xây dựng, kiểm thử, cải tiến Skill cho công việc chuyên môn; chia sẻ Skill cho cả tổ.</p></div><div class="s-body"><div class="cols cols-4 gap-s" style="align-items:stretch"><div class="pp p-blue sm4"><span class="d4l">PHẦN 1, 2</span><h3><span class="em">🧰</span> Hiểu Skill</h3><ul class="sm4l"><li><span class="em">✅</span><span>Skill là bộ hướng dẫn đóng gói dạng thư mục, có file SKILL.md</span></li><li><span class="em">✅</span><span>Khác Prompt: lưu lại, AI tự mở khi yêu cầu khớp mô tả</span></li><li><span class="em">✅</span><span>Mô tả nêu làm gì, khi nào dùng, năng lực chính</span></li></ul></div><div class="pp p-green sm4"><span class="d4l">PHẦN 3</span><h3><span class="em">✍️</span> Xây dựng Skill</h3><ul class="sm4l"><li><span class="em">✅</span><span>Bốn bước: xác định nhiệm vụ, chuẩn hóa cách làm, viết Skill, kiểm thử</span></li><li><span class="em">✅</span><span>Kiểm thử 3 yêu cầu: rõ ràng, nói khác, không liên quan</span></li><li><span class="em">✅</span><span>Tạo và bật Skill trên Claude, ChatGPT, Gemini</span></li></ul></div><div class="pp p-yellow sm4"><span class="d4l">PHẦN 4</span><h3><span class="em">🔧</span> Cải tiến Skill</h3><ul class="sm4l"><li><span class="em">✅</span><span>Nhờ AI review, giáo viên chọn góp ý rồi sửa</span></li><li><span class="em">✅</span><span>Nâng phiên bản, ghi nhật ký cải tiến</span></li><li><span class="em">✅</span><span>skill-creator hỏi thêm, viết SKILL.md, đề xuất tình huống thử</span></li></ul></div><div class="pp p-lav sm4"><span class="d4l">PHẦN 5</span><h3><span class="em">🤝</span> Chia sẻ Skill</h3><ul class="sm4l"><li><span class="em">✅</span><span>Project giữ bối cảnh, Skill giữ cách làm</span></li><li><span class="em">✅</span><span>Thư viện Skill của tổ ghi người phụ trách, phiên bản</span></li><li><span class="em">✅</span><span>Kiểm tra kỹ Skill từ bên ngoài trước khi dùng</span></li></ul></div></div><div class="pp p-gray nxt"><p><span class="em">➡️</span> <b>Tiếp theo, LO 5.2:</b> thiết kế và xây dựng một Agent đảm nhận một vai trò, dùng Sub-agent khi cần và gọi Agent trong một bước của Workflow.</p></div></div>
+
+<aside class="notes"><p>Tổng kết theo các phần của bài.</p></aside>
+</section>
+
+<section class="slide cg has-talk" data-sec="6. Tổng kết" data-title="Chúc mừng">
+<div class="s-head"><h2 class="ht"><span class="em">🎉</span> Chúc mừng thầy cô đã hoàn thành Bài học số 5.1!</h2></div><div class="s-body"><div class="cg-card"><p class="k">Sau bài học, thầy cô đã có thể:</p><ul><li><i class="ph ph-check"></i><span>Hiểu Skill là bộ hướng dẫn đóng gói dạng thư mục, khác Prompt ở chỗ lưu lại và AI tự dùng khi khớp mô tả</span></li><li><i class="ph ph-check"></i><span>Xây dựng Skill qua 4 bước, viết mô tả đúng, kiểm thử với 3 yêu cầu</span></li><li><i class="ph ph-check"></i><span>Cải tiến Skill bằng AI review và skill-creator; chia sẻ qua thư viện của tổ</span></li></ul></div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-vui.webp" alt="Octo"><p class="sp oo">Thầy ơi, ra đề kiểm tra gồm soạn đề, thẩm định, soạn hướng dẫn chấm. Có cách nào giao cả vai trò ấy cho AI không ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Có đấy! Ở bài sau, con sẽ tạo một <b>Agent</b> đảm nhận vai trò ấy. Hẹn con ở LO 5.2 nhé!</p></div>
+<aside class="notes"><p>Tổng kết và cầu nối sang LO 5.2.</p></aside>
+</section>
+
+<section class="slide s-end" data-sec="6. Tổng kết" data-title="Hẹn gặp lại" data-nofoot>
+  <h2>Hẹn gặp lại các thầy cô!</h2>
+  <aside class="notes"><p>Kết thúc bài học.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="6. Tổng kết" data-title="Câu hỏi ôn tập">
+<div class="s-head"><h2 class="ht"><span class="em">❓</span> Câu hỏi ôn tập</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s">
+<div class="quiz" data-answer="a"><p class="q">1. AI không dùng Skill dù yêu cầu đúng việc. Nên sửa phần nào trước?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Mô tả (description)</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Nhật ký cải tiến</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Tên thư mục</span></button></div><p class="fb" data-ok="Đúng. AI đọc mô tả để quyết định có mở Skill hay không." data-no="Chưa đúng. Đáp án A: thêm vào mô tả những cách nói thầy cô hay gõ."></p></div>
+<div class="quiz" data-answer="b"><p class="q">2. AI review Skill và đưa ra 4 góp ý. Thầy cô nên làm gì?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Nhận hết vì AI hiểu Skill hơn</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Chọn góp ý phù hợp với quy định của tổ rồi mới sửa</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Bỏ qua tất cả</span></button></div><p class="fb" data-ok="Đúng. AI đề xuất, giáo viên quyết định." data-no="Chưa đúng. Đáp án B: chọn góp ý phù hợp, bỏ góp ý trái quy định."></p></div>
+<div class="quiz" data-answer="c"><p class="q">3. Tìm được một Skill soạn đề trên trang cộng đồng. Việc nên làm trước khi bật?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Bật ngay vì nhiều người đã tải</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Đổi tên rồi chia sẻ cho tổ</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Đọc toàn bộ file, chú ý đoạn mã và kết nối ra ngoài, rồi chạy thử</span></button></div><p class="fb" data-ok="Đúng. Coi việc cài Skill như cài phần mềm." data-no="Chưa đúng. Đáp án C: đọc kỹ và chạy thử trước khi dùng."></p></div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Thầy cô chọn đáp án trước, rồi bấm để xem giải thích nhé!</p></div>
+<aside class="notes"><p>Cho lớp chọn trước, rồi bấm để xem phản hồi.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="6. Tổng kết" data-title="Khung 4D">
+<div class="s-head"><h2 class="ht">Khung 4D trong vòng đời một Skill</h2></div><div class="s-body"><div class="d4row"><div class="pp p-blue d4"><span class="d4l">D1 · DELEGATION</span><h3><span class="em">🎯</span> Giao việc</h3><p>Chọn việc đáng đóng gói; chọn Prompt, Project hay Skill; tìm Skill có sẵn trước khi tự viết.</p><div class="d4ss"><span class="d4s">Nhận thức vấn đề</span><span class="d4s">Nhận thức nền tảng AI</span><span class="d4s">Phân công nhiệm vụ</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 5</p></div><div class="pp p-green d4"><span class="d4l">D2 · DESCRIPTION</span><h3><span class="em">📝</span> Mô tả</h3><p>Viết SKILL.md rõ: các bước, ví dụ đầu ra, quy tắc; mô tả đúng cấu trúc.</p><div class="d4ss"><span class="d4s">Mô tả sản phẩm</span><span class="d4s">Mô tả quy trình</span><span class="d4s">Mô tả cách ứng xử</span></div><p class="d4in"><b>Trong bài:</b> Phần 2, 3</p></div><div class="pp p-yellow d4"><span class="d4l">D3 · DISCERNMENT</span><h3><span class="em">🔍</span> Phân định</h3><p>Kiểm thử 3 yêu cầu, nhờ AI review và chọn góp ý; so sánh với Skill do skill-creator tạo.</p><div class="d4ss"><span class="d4s">Phân định sản phẩm</span><span class="d4s">Phân định quy trình</span><span class="d4s">Phân định cách ứng xử</span></div><p class="d4in"><b>Trong bài:</b> Phần 3, 4</p></div><div class="pp p-lav d4"><span class="d4l">D4 · DILIGENCE</span><h3><span class="em">🛡️</span> Cẩn trọng</h3><p>Quy tắc dữ liệu, nguồn Skill tin cậy, phiên bản; giáo viên duyệt trước khi dùng.</p><div class="d4ss"><span class="d4s">Cẩn trọng khi tạo</span><span class="d4s">Minh bạch</span><span class="d4s">Chịu trách nhiệm khi dùng</span></div><p class="d4in"><b>Trong bài:</b> Phần 4, 5</p></div></div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Bốn năng lực của khung AI Fluency giúp thầy cô dùng Skill <b>hiệu quả và có trách nhiệm</b>.</p></div>
+<aside class="notes"><p>Thứ tự chuẩn của khung AI Fluency (Dakan, Feller và Anthropic): Delegation, Description, Discernment, Diligence.</p></aside>
+</section>
+
+</div></main>
+<script src="assets/js/deck.js"></script>
+</body>
+</html>

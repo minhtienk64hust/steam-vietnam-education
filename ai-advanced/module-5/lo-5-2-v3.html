@@ -1,0 +1,402 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LO 5.2 · Thiết kế và xây dựng Agent, Sub-agent và Workflow</title>
+<link rel="stylesheet" href="assets/css/deck.css">
+<link rel="stylesheet" href="assets/css/story.css">
+<link rel="stylesheet" href="assets/css/v3.css">
+<link rel="stylesheet" href="assets/css/v3-m6.css">
+</head>
+<body class="v3" data-deck="LO 5.2" data-deck-title="Thiết kế và xây dựng Agent, Sub-agent và Workflow" data-home="index.html">
+<main class="deck"><div class="stage">
+
+<section class="slide s-cover" data-sec="Mở đầu" data-title="Bìa: LO 5.2">
+  <div class="brand"><span class="chip"><i class="ph-fill ph-sparkle"></i>AI Fluency nâng cao</span><span>Module 5 · Đóng gói kỹ năng và thiết kế quy trình AI nhiều tác vụ</span></div>
+  <div>
+    <div class="lo">LO 5.2</div>
+    <h1>Thiết kế và xây dựng Agent, <span class="nw">Sub-agent</span> và Workflow</h1>
+    <p class="sub">Tạo Agent đảm nhận một vai trò, hiểu cách Agent suy nghĩ và gọi Agent trong một bước của Workflow</p>
+  </div>
+  <div class="meta"><span><b>Thời lượng:</b> khoảng 100 phút</span><span><b>Sản phẩm:</b> Agent đã chạy thử, prompt gọi Agent trong Workflow</span><span><b>Công cụ:</b> Claude, ChatGPT, Gemini</span></div>
+  <aside class="notes"><p>Nối với LO 5.1: mỗi học viên đã có ít nhất một Skill tự viết và một Skill tạo bằng skill-creator, đã biết AI kích hoạt Skill bằng cách so khớp yêu cầu với mô tả (description), và biết AI có thể dùng nhiều Skill trong cùng một cuộc trò chuyện (nguyên lý Ghép nối).</p><p>Câu hỏi mở đầu: "Nếu có một đồng nghiệp chuyên trách việc ra đề, thầy cô sẽ giao cho người đó những gì, và giữ lại cho mình những quyết định nào?" Bài hôm nay trả lời câu hỏi đó cho AI: tạo một Agent cho một vai trò, biết khi nào cần thêm <span class="nw">Sub-agent</span> hay Agent Teams, rồi đặt Agent vào quy trình ra đề có giáo viên duyệt ở từng chặng.</p></aside>
+</section>
+
+<section class="slide lo-title" data-sec="Mở đầu" data-title="Mục tiêu bài học">
+<div class="s-body" style="justify-content:center"><h2 class="ht">LO 5.2: Thiết kế và xây dựng Agent, Sub-agent và Workflow</h2><div class="objs3"><div class="o3"><b>01</b><span>Hiểu Agent là gì, khác Skill ở đâu, khi nào cần một Agent</span></div><div class="o3"><b>02</b><span>Tạo một Agent cho vai trò của mình và chạy thử</span></div><div class="o3"><b>03</b><span>Dùng Sub-agent khi cần và gọi Agent trong một bước của Workflow</span></div></div></div>
+
+<aside class="notes"><p>Ba mục tiêu của bài. Ví dụ xuyên suốt: Tổ Ngữ văn 9 ra đề kiểm tra giữa kỳ với Agent Trợ lý Khảo thí.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="Mở đầu" data-title="Hội thoại mở đầu" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-phong-giao-vien.webp')">
+  <span class="scene-tag"><span class="pt">Mở đầu</span>Thầy Rùa và Octo</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-cang-thang.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-giang-giai.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:218.40684793554885px;--tl:92px">Thầy Rùa ơi! Con có ba Skill ra đề rồi. Nhưng kỳ nào con cũng phải dặn AI đọc cấu trúc đề, dùng Skill nào trước, kiểm tra gì sau...</p>
+  <p class="bub t-r" style="left:665px;top:118px;width:500px;--t:58px">Skill giúp AI làm đúng từng việc. Khi cả một vai trò gồm nhiều việc nối nhau, con cần một <b>Agent</b>: AI tự lập kế hoạch, chọn Skill và công cụ. Cùng thầy xem nhé!</p>
+  <aside class="notes"><p>Kết nối với bài trước: tổ đã có các Skill ra đề, nhưng giáo viên vẫn phải tự điều phối từng bước.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Agent là gì" data-title="Tình huống: ra đề giữa kỳ">
+<div class="s-head"><h2 class="ht">Tình huống: ra đề kiểm tra giữa kỳ cho khối 9</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="pp p-blue"><h3><span class="em">👨‍🏫</span> Bối cảnh</h3><p>Thầy Nam được tổ giao soạn đề giữa kỳ I Ngữ văn 9, làm bài 90 phút, <b>theo cấu trúc đề của tổ</b>. Tổ đã có sẵn ba Skill: soạn câu hỏi, thẩm định câu hỏi, soạn hướng dẫn chấm.</p></div>
+  <div class="pp p-yellow"><h3><span class="em">🪜</span> Việc phải làm</h3><ul><li>Đọc cấu trúc đề và ngữ liệu</li><li>Soạn phần Đọc hiểu và phần Viết</li><li>Rà lại độ khó, tổng điểm</li><li>Soạn đáp án, hướng dẫn chấm</li></ul></div>
+</div>
+<p class="big-q">Thầy Nam nên giao từng bước cho AI, hay giao <b>cả vai trò</b> cho một trợ lý?</p></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Thầy Bình và thầy Nam đã chọn hai cách khác nhau. Thầy cô cùng xem kết quả nhé!</p></div>
+<aside class="notes"><p>Đọc tình huống, hỏi lớp: thầy cô thường giao cho AI từng bước hay cả quy trình?</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Agent là gì" data-title="Cách 1: tự điều phối từng bước">
+<div class="s-head"><h2 class="ht">Cách 1: tự điều phối từng bước</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot gp">◎</span>ChatGPT<span class="sp2">Thầy Bình · 6 lượt nhắn</span></div><div class="msgs"><div class="u">Soạn phần Đọc hiểu đề giữa kỳ Ngữ văn 9 theo cấu trúc này: [dán cấu trúc]</div><div class="a">Đây là 5 câu hỏi Đọc hiểu…</div><div class="u">Giờ soạn phần Viết. Nhớ tổng điểm là 10.</div><div class="a">Đây là đề phần Viết…</div><div class="u">Soạn hướng dẫn chấm cho cả đề.</div><div class="a">Hướng dẫn chấm: <span class='hl-bad'>Câu 3 (1,0 điểm)…</span> <span class='hl-bad'>Tổng: 9,5 điểm</span></div></div><div class="composer">Trả lời…<i class="ph ph-arrow-up"></i></div></div>
+  <div class="stack">
+    <div class="pp p-pink"><h3><span class="em">😓</span> Chuyện gì đã xảy ra?</h3><ul><li>Phải nhắc lại cấu trúc đề ở mỗi bước</li><li>Tổng điểm lệch còn 9,5</li><li>Tự chép kết quả sang file sau mỗi bước</li></ul></div>
+    <div class="pp p-gray"><h3><span class="em">🧑‍💼</span> Ai đang điều phối?</h3><p>Chính thầy Bình: đọc, dặn, chép, rồi lại dặn. AI chỉ làm từng mảnh.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-buon.webp" alt="Octo"><p class="sp oo">Con cũng hay làm thế này, nhắn qua nhắn lại mãi mới xong một đề!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Vì con đang làm người điều phối thay cho AI. Hãy xem thầy Nam làm khác thế nào.</p></div>
+<aside class="notes"><p>Cuộc trò chuyện dài, yêu cầu ở đầu dễ bị bỏ sót ở các bước sau. Giáo viên vẫn là người điều phối từng thao tác.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Agent là gì" data-title="Cách 2: giao cho Trợ lý Khảo thí">
+<div class="s-head"><h2 class="ht">Cách 2: giao cả vai trò cho Agent Trợ lý Khảo thí</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot vs">{ }</span>Claude Code<span class="sp2">tro-ly-khao-thi · 1 yêu cầu</span></div><div class="msgs"><div class="u">Soạn đề giữa kỳ I Ngữ văn 9, 90 phút, theo cấu trúc đề của tổ. <span class="fchip doc"><i class="ph ph-folder"></i>ngu-lieu/</span></div><div class="think">Kế hoạch: đọc cấu trúc đề → soạn đề → tự thẩm định → soạn hướng dẫn chấm</div><div class="use"><i class="ph ph-sparkle"></i>Skill soan-cau-hoi · Read ngu-lieu/doc-hieu.docx</div><div class="use"><i class="ph ph-sparkle"></i>Skill tham-dinh-cau-hoi · sửa câu 3 cho đúng mức độ</div><div class="use"><i class="ph ph-sparkle"></i>Skill soan-huong-dan-cham · tổng 10,0 điểm</div><div class="a">Đã tạo 3 bản nháp để thầy duyệt: <span class="fchip md"><i class="ph ph-file-text"></i>de-nhap.md</span> <span class="fchip md"><i class="ph ph-file-text"></i>bang-tham-dinh.md</span> <span class="fchip md"><i class="ph ph-file-text"></i>huong-dan-cham-nhap.md</span></div></div><div class="composer">Trả lời…<i class="ph ph-arrow-up"></i></div></div>
+  <div class="stack">
+    <div class="pp p-green"><h3><span class="em">😊</span> Kết quả</h3><ul><li>Một yêu cầu, Agent tự lập kế hoạch</li><li>Tự chọn đúng Skill cho từng bước</li><li>Tự thẩm định, sửa câu chưa đạt</li></ul></div>
+    <div class="pp p-blue"><h3><span class="em">🧑‍🏫</span> Thầy Nam làm gì?</h3><p>Đọc kế hoạch, duyệt ba bản nháp. Quyết định cuối cùng vẫn là của thầy.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-ngac-nhien.webp" alt="Octo"><p class="sp oo">Ồ, Agent tự biết bước nào dùng Skill nào luôn ạ!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng vậy! Đó là điểm khác của Agent: nó tự điều khiển cả một việc nhiều bước.</p></div>
+<aside class="notes"><p>Agent đọc hướng dẫn vai trò, tự lập kế hoạch, dùng các Skill của tổ và công cụ đọc, tạo file. Mọi kết quả là bản nháp.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Agent là gì" data-title="Agent là gì?">
+<div class="s-head"><h2 class="ht">1. Agent là gì?</h2></div>
+<div class="s-body">
+<div class="pp out"><h3>Agent (tác nhân AI)</h3><p class="c">là AI tự điều khiển cách làm việc để hoàn thành nhiệm vụ: tự lập kế hoạch, chọn bước, dùng công cụ, xem kết quả rồi làm tiếp đến khi xong.</p></div>
+<div class="formula"><span class="f p-blue"><span class="em">📜</span> Hướng dẫn</span><span class="op">+</span><span class="f p-green"><span class="em">🧰</span> Skill, công cụ</span><span class="op">+</span><span class="f p-yellow"><span class="em">🧠</span> AI tự chọn bước</span><span class="op">=</span><span class="f p-lav"><span class="em">🤖</span> Agent một vai trò</span></div>
+<div class="cols cols-2 gap-s">
+  <div class="pp p-peach"><h3><span class="em">📄</span> Skill giống quy trình mẫu</h3><p>Làm đúng <b>một việc</b>, ai làm theo cũng ra cùng chất lượng. Ví dụ: soan-cau-hoi.</p></div>
+  <div class="pp p-lav"><h3><span class="em">🧑‍💼</span> Agent giống cán bộ chuyên trách</h3><p>Đảm nhận <b>một vai trò</b>, tự sắp xếp các bước, biết dùng quy trình nào cho việc nào. Ví dụ: Trợ lý Khảo thí.</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Vậy Agent chỉ là để chạy lần lượt từng Skill thay con ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Chưa đúng con ạ. Agent tự điều khiển cả một việc nhiều bước trong một vai trò, với ranh giới rõ ràng.</p></div>
+<aside class="notes"><p>Định nghĩa theo Anthropic, Building effective agents: AI tự điều khiển quá trình và cách dùng công cụ, làm việc theo vòng lặp dựa trên kết quả. AI vốn đã dùng được nhiều Skill trong một cuộc trò chuyện; Agent không dùng để chạy lần lượt từng Skill mà để đảm nhận trọn một vai trò, với bối cảnh và ranh giới rõ.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Agent là gì" data-title="Chọn hình thức đơn giản nhất">
+<div class="s-head"><h2 class="ht">Không phải việc gì cũng cần Agent</h2><p class="hs">"Tìm giải pháp đơn giản nhất có thể, chỉ tăng độ phức tạp khi cần." (Anthropic)</p></div>
+<div class="s-body"><div class="stairs">
+  <div class="s p-gray" style="min-height:230px"><span class="em">💬</span><h3>Prompt</h3><p>Việc làm một lần, mỗi lần một khác</p><p class="eg">Hỏi nghĩa một từ trong bài</p></div>
+  <div class="s p-green" style="min-height:290px"><span class="em">🧰</span><h3>Skill</h3><p>Một việc lặp lại theo một quy trình</p><p class="eg">Viết nhận xét cuối kỳ</p></div>
+  <div class="s p-blue" style="min-height:350px"><span class="em">🏠</span><h3>Project</h3><p>Nhiều việc cần chung một bộ tài liệu</p><p class="eg">Hỏi đáp quy chế chuyên môn</p></div>
+  <div class="s p-lav" style="min-height:410px"><span class="em">🤖</span><h3>Agent</h3><p>Một vai trò nhiều bước, cần nhiều Skill, công cụ và ranh giới rõ</p><p class="eg">Trợ lý Khảo thí ra đề</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-suy-nghi.webp" alt="Octo"><p class="sp oo">Thế con tạo Agent cho mọi việc luôn cho tiện được không thầy?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Không nên con. Leo từng bậc thôi: bậc dưới đủ dùng thì chưa cần lên bậc trên.</p></div>
+<aside class="notes"><p>Đi lên bậc trên khi bậc dưới không còn đủ. Năm dấu hiệu cần Agent: vai trò nhiều việc lặp theo đợt; nhiều bước khó định trước; cần nhiều Skill, công cụ và tự kiểm tra; cần chung bộ tài liệu nền; cần ranh giới rõ.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="1. Agent là gì" data-title="Thử thách: chọn hình thức">
+<div class="s-head"><h2 class="ht"><span class="em">🧩</span> Thử thách: chọn hình thức phù hợp</h2></div>
+<div class="s-body"><div class="task"><i class="ph ph-hand-pointing"></i><div>Thầy cô chọn <b>Prompt, Skill, Project</b> hay <b>Agent</b> cho từng việc, rồi bấm xem đáp án.</div></div>
+<div class="rv" data-demo data-state="q"><table class="t3"><thead><tr><th style="width:46%">Việc của giáo viên</th><th class="c" style="width:14%">Chọn</th><th>Vì sao</th></tr></thead><tbody>
+<tr><td>Hỏi AI gợi ý một trò chơi khởi động cho tiết học ngày mai</td><td class="c ans"><span class="tag3 warm">Prompt</span></td><td class="ans">Làm một lần, nội dung mỗi lần một khác</td></tr>
+<tr><td>Phiếu bài tập cuối tuần theo mẫu của tổ</td><td class="c ans"><span class="tag3 ok">Skill</span></td><td class="ans">Một việc lặp lại, cùng một mẫu</td></tr>
+<tr><td>Hỏi đáp về quy chế đánh giá và kế hoạch năm học của trường</td><td class="c ans"><span class="tag3">Project</span></td><td class="ans">Nhiều câu hỏi cùng dựa trên một bộ tài liệu</td></tr>
+<tr><td>Mỗi đợt kiểm tra: soạn đề, thẩm định, soạn hướng dẫn chấm theo cấu trúc của tổ</td><td class="c ans"><span class="tag3 no">Agent</span></td><td class="ans">Một vai trò nhiều bước, dùng nhiều Skill và công cụ</td></tr>
+</tbody></table><div class="c" style="margin-top:10px"><button class="rvb go" type="button" data-go="a"><i class="ph ph-eye"></i>Xem đáp án</button><button class="rvb back" type="button" data-go="q"><i class="ph ph-eye-slash"></i>Ẩn đáp án</button></div></div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Câu hỏi then chốt: việc này là <b>một việc</b> hay <b>cả một vai trò</b> gồm nhiều bước?</p></div>
+<aside class="notes"><p>Cho lớp chọn trước khi bấm xem đáp án.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="2. Tạo Agent" data-title="Hội thoại: tạo Agent có khó không" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hong.webp')">
+  <span class="scene-tag"><span class="pt">Phần 2</span>Tạo Agent</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-gioi-thieu.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:216.38px;--tl:92px">Agent nghe hay quá! Nhưng tạo một Agent có khó không thầy? Con không biết lập trình.</p>
+  <p class="bub t-r" style="left:636px;top:118px;width:500px;--t:58px">Không cần lập trình đâu con. Agent chỉ là một file chữ gồm ba phần cốt lõi. Phần quan trọng nhất là hướng dẫn, con viết bằng chính lời của mình.</p>
+  <aside class="notes"><p>Chuyển sang Phần 2: tạo Agent.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Tạo Agent" data-title="Ba thành phần của một Agent">
+<div class="s-head"><h2 class="ht">Ba thành phần cốt lõi của một Agent</h2><p class="hs">Theo OpenAI, Google và Anthropic</p></div>
+<div class="s-body"><div class="cols cols-3 gap-s">
+  <div class="pp p-gray"><h3><span class="em">🧠</span> Mô hình</h3><p>Bộ não suy luận: hiểu yêu cầu, lập kế hoạch, quyết định bước tiếp theo.</p><p class="eg">Thường để mặc định.</p></div>
+  <div class="pp p-blue"><h3><span class="em">📜</span> Hướng dẫn</h3><p>Agent đóng vai gì, làm theo trình tự nào, trả kết quả dạng gì, không được làm gì.</p><p class="eg">Giáo viên viết: phần quan trọng nhất.</p></div>
+  <div class="pp p-green"><h3><span class="em">🧰</span> Công cụ</h3><p>Những gì Agent được dùng để hành động: đọc, tạo file, dùng Skill.</p><p class="eg">Giáo viên chọn: chỉ cấp công cụ cần thiết.</p></div>
+</div>
+<div class="cols cols-4 gap-s">
+  <div class="pp p-yellow"><h3 style="font-size:20px">Dùng tài liệu sẵn có</h3><p class="sm">Chuyển quy trình của tổ thành các bước</p></div>
+  <div class="pp p-yellow"><h3 style="font-size:20px">Chia nhỏ nhiệm vụ</h3><p class="sm">Mỗi bước ngắn, dễ làm theo</p></div>
+  <div class="pp p-yellow"><h3 style="font-size:20px">Hành động rõ ràng</h3><p class="sm">Mỗi bước có một việc, một kết quả</p></div>
+  <div class="pp p-yellow"><h3 style="font-size:20px">Lường trước ngoại lệ</h3><p class="sm">Thiếu thông tin thì hỏi lại</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-y-tuong.webp" alt="Octo"><p class="sp oo">Vậy con chỉ cần viết thật kỹ phần hướng dẫn thôi ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng thế, và chọn công cụ vừa đủ. Agent càng ít công cụ thừa thì càng an toàn.</p></div>
+<aside class="notes"><p>Theo OpenAI, A practical guide to building agents: Model, Tools, Instructions. Bốn ô dưới là 4 cách viết hướng dẫn tốt của OpenAI.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Tạo Agent" data-title="Bên trong file Agent">
+<div class="s-head"><h2 class="ht">Bên trong file Agent Trợ lý Nhận xét</h2></div>
+<div class="s-body"><div class="cols cols-7-5 ai-s">
+  <div class="code sm" data-file=".claude/agents/tro-ly-nhan-xet.md" style=""><pre data-lang="md">---
+name: tro-ly-nhan-xet
+description: Viết nhận xét cuối kỳ cho cả lớp từ bảng mức đạt, xuất bảng nhận xét để giáo viên duyệt. Dùng khi cần nhận xét học bạ, sổ liên lạc.
+tools: Read, Write
+skills:
+  - viet-nhan-xet-hoc-sinh
+  - tham-dinh-nhan-xet
+---
+Bạn là Trợ lý Nhận xét cho giáo viên Ngữ văn 9. Hãy tạo bản nháp để giáo viên rà soát và quyết định.
+## Cách làm
+1. Đọc bảng mức đạt; nếu thiếu thông tin, hỏi lại giáo viên.
+2. Viết nhận xét cho từng em theo Skill viet-nhan-xet-hoc-sinh.
+3. Đối chiếu với Skill tham-dinh-nhan-xet, sửa chỗ chưa đạt.
+4. Lưu bản nháp vào file mới nhan-xet-nhap.md.
+## Giới hạn
+- Chỉ dùng thông tin có trong bảng; không suy đoán thêm.
+- Không tự sửa mức đạt, không gửi nhận xét cho phụ huynh.</pre></div>
+  <div class="stack">
+    <div class="pp p-blue"><h3><span class="em">🏷️</span> Phần đầu: thẻ nhận diện</h3><p><b>name, description</b>: Claude dựa vào đây để chọn đúng Agent.<br><b>tools, skills</b>: công cụ và Skill được dùng.</p></div>
+    <div class="pp p-green"><h3><span class="em">📝</span> Phần thân: hướng dẫn</h3><p>Trả lời 4 câu hỏi: vai trò gì, làm những bước nào, kết quả ở đâu, việc nào không làm.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-nhay-mat.webp" alt="Octo"><p class="sp oo">Trông giống file Skill quá thầy ạ!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Cùng một kiểu file chữ. Khác ở chỗ Agent mô tả cả một vai trò và được dùng nhiều Skill.</p></div>
+<aside class="notes"><p>Theo tài liệu Subagents của Claude Code: phần đầu YAML định nghĩa cấu hình, phần thân trở thành hướng dẫn (system prompt) của Agent. Mẫu: templates/agents/tro-ly-nhan-xet.md.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Tạo Agent" data-title="Tạo Agent trên Claude Code">
+<div class="s-head"><h2 class="ht">Hai cách tạo Agent trên Claude Code</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="stack">
+    <span class="lb"><span class="em">✍️</span> Cách 1: tự viết file</span>
+    <div class="mock " style=""><div class="bar"><span class="dot vs">{ }</span>Claude Code<span class="sp2">VS Code</span></div><div class="side" style="min-height:220px"><div class="nav"><div><span class="em">📁</span> de-kiem-tra-9</div><div style="padding-left:20px"><span class="em">📁</span> .claude</div><div style="padding-left:38px"><span class="em">📁</span> agents</div><div class="on mark" style="margin-left:56px"><span class="em">📄</span> tro-ly-nhan-xet.md</div><div style="padding-left:20px"><span class="em">📁</span> ngu-lieu</div></div><div class="pane"><p>Lưu file Agent vào thư mục <b>.claude/agents/</b> của dự án.</p><p class="xs">Thư mục mới tạo: khởi động lại Claude Code.</p></div></div></div>
+  </div>
+  <div class="stack">
+    <span class="lb ok"><span class="em">💬</span> Cách 2: ra lệnh cho Claude</span>
+    <div class="mock " style=""><div class="bar"><span class="dot vs">{ }</span>Claude Code<span class="sp2"></span></div><div class="msgs"><div class="u">Tạo một agent tên tro-ly-nhan-xet trong .claude/agents/ để viết và tự thẩm định nhận xét cuối kỳ từ bảng mức đạt. Agent chỉ đọc file và tạo file mới, dùng Skill viet-nhan-xet-hoc-sinh và tham-dinh-nhan-xet, trình bày kế hoạch trước khi làm.</div><div class="a"><span class="em">✅</span> Đã tạo <span class="fchip md"><i class="ph ph-file-text"></i>.claude/agents/tro-ly-nhan-xet.md</span>. Thầy cô mở file để kiểm tra lại phần công cụ nhé.</div></div></div>
+  </div>
+</div>
+<div class="row" style="justify-content:center"><span class="lb warm"><span class="em">▶️</span> Dùng Agent: gõ "Dùng agent tro-ly-nhan-xet cho lớp 9A" hoặc chạy <code class="k">claude --agent tro-ly-nhan-xet</code></span></div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Học đi đôi với hành! Giờ thầy cô cùng tạo Agent cho một vai trò của mình nhé!</p></div>
+<aside class="notes"><p>Tài liệu chính thức: tạo Agent bằng cách nhờ Claude viết, hoặc tự viết file. Viết tay trước giúp hiểu từng phần; sau khi Claude tạo, luôn đọc lại phần đầu vì Claude có thể thêm công cụ không cần thiết. Codex dùng .codex/agents/*.toml, Gemini CLI dùng .gemini/agents/*.md.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Tạo Agent" data-title="Thực hành 1: tạo Agent của mình">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 1: tạo Agent và chạy thử 3 yêu cầu</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="stack">
+    <div class="task"><i class="ph ph-target"></i><div><b>Nhiệm vụ:</b> chọn một vai trò, điền khung file Agent, lưu và chạy thử. <span class="pr-badge">15 phút</span></div></div>
+    <div class="code sm" data-file="templates/agents/khung-agent.md" style=""><pre data-lang="md">---
+name: [ten-agent]
+description: [Việc Agent làm]. Dùng khi [tình huống cần dùng].
+tools: Read, Write
+skills:
+  - [ten-skill]
+---
+Bạn là [vai trò] cho [giáo viên, tổ]. Hãy tạo bản nháp để giáo viên rà soát và quyết định.
+## Cách làm
+1. Đọc [tài liệu đầu vào]; nếu thiếu thông tin, hỏi lại giáo viên.
+2. [Việc chính] theo Skill [ten-skill].
+3. Lưu bản nháp vào file mới [ten-file].
+## Giới hạn
+- Không [việc không làm].</pre></div>
+  </div>
+  <div class="stack">
+    <table class="t3"><thead><tr><th>Yêu cầu thử</th><th>Đạt khi</th></tr></thead><tbody>
+    <tr><td><span class="em">🎯</span> Đúng việc: "Viết nhận xét cuối kỳ cho lớp 9A"</td><td>Trình bày kế hoạch, dùng đúng Skill, tạo đúng file</td></tr>
+    <tr><td><span class="em">🔄</span> Nói cách khác: "Làm lời phê học bạ cho 9B"</td><td>Vẫn nhận đúng việc; thiếu thông tin thì hỏi lại</td></tr>
+    <tr><td><span class="em">🚫</span> Ngoài phạm vi: "Nhập điểm lên hệ thống giúp tôi"</td><td>Từ chối và nêu lý do</td></tr></tbody></table>
+    <div class="pp p-yellow"><h3 style="font-size:21px"><span class="em">💡</span> Gợi ý vai trò</h3><p class="sm"><b>Mầm non:</b> bản tin tuần · <b>Tiểu học:</b> nhận xét cuối kỳ · <b>THCS, THPT:</b> phiếu học tập theo tuần · <b>ĐH, CĐ:</b> đề cương, rubric học phần</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-dong-y.webp" alt="Octo"><p class="sp oo">Lần thử thứ ba Agent từ chối thật thầy ạ!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Tốt! Nghĩa là phần giới hạn con viết đã có tác dụng.</p></div>
+<aside class="notes"><p>Mỗi yêu cầu thử kiểm tra một phần của file: đúng việc kiểm tra Cách làm; nói cách khác kiểm tra description; ngoài phạm vi kiểm tra Giới hạn và tools.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="2. Tạo Agent" data-title="Đọc cách Agent suy nghĩ">
+<div class="s-head"><h2 class="ht">Đọc cách Agent suy nghĩ để sửa đúng chỗ</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="mock " style=""><div class="bar"><span class="dot cl">✳</span>Claude<span class="sp2">Extended thinking</span></div><div class="msgs"><div class="u">Soạn đề giữa kỳ I Ngữ văn 9 theo cấu trúc đề của tổ.</div><div class="think"><span class="em">💭</span> Yêu cầu: đề giữa kỳ, lớp 9, 90 phút. Kế hoạch: soạn đề, tự thẩm định, soạn hướng dẫn chấm.<br><span class="em">💭</span> Bước soạn đề khớp mô tả của <span class='hl-bad'>Skill tham-dinh-cau-hoi</span>…</div><div class="use"><i class="ph ph-sparkle"></i>Skill tham-dinh-cau-hoi (chọn sai ở bước soạn đề)</div></div></div>
+  <div class="stack">
+    <div class="pp p-pink"><h3><span class="em">🔎</span> Thấy gì?</h3><p>Ở bước soạn đề, Agent lại mở Skill thẩm định vì mô tả hai Skill na ná nhau.</p></div>
+    <div class="pp p-green"><h3><span class="em">🔧</span> Sửa ở đâu?</h3><p>Không sửa tay đề nháp. Viết lại <b>mô tả</b> của hai Skill cho rõ: một Skill soạn, một Skill thẩm định. Chạy lại.</p></div>
+    <table class="t3"><tbody><tr><td>Hiểu sai việc</td><td>Câu lệnh gọi Agent</td></tr><tr><td>Bỏ bước, sai thứ tự</td><td>Phần Cách làm của Agent</td></tr><tr><td>Chọn sai Skill</td><td>Mô tả của Skill</td></tr></tbody></table>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Sao con không sửa thẳng vào đề nháp cho nhanh ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Sửa tay thì lần sau Agent lại sai. Sửa đúng chỗ gây lỗi thì mọi lần sau đều đúng.</p></div>
+<aside class="notes"><p>Bật chế độ xem suy nghĩ: Claude Extended thinking, ChatGPT chế độ Thinking, Gemini Show thinking. Agent chọn Skill bằng cách so khớp với mô tả, nên sửa mô tả là sửa tận gốc.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="3. Sub-agent và Agent Teams" data-title="Hội thoại: một Agent đọc quá nhiều" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-bang-xanh.webp')">
+  <span class="scene-tag"><span class="pt">Phần 3</span>Sub-agent và Agent Teams</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-cang-thang.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-y-tuong.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:218.40684793554885px;--tl:92px">Con giao Trợ lý Khảo thí rà cả bộ đề dài. Nó đọc rất lâu, cuộc trò chuyện dài quá, con khó theo dõi thầy ạ.</p>
+  <p class="bub t-r" style="left:618px;top:118px;width:500px;--t:58px">Lúc ấy hãy chia việc! <b>Sub-agent</b> làm riêng từng phần rồi chỉ gửi lại bản tóm tắt; <b>Agent Teams</b> thì các thành viên còn trao đổi, phản biện nhau.</p>
+  <aside class="notes"><p>Chuyển sang Phần 3 (giới thiệu).</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Sub-agent và Agent Teams" data-title="Sub-agent và Agent Teams">
+<div class="s-head"><h2 class="ht">Sub-agent và Agent Teams: chia việc cho nhiều Agent</h2></div>
+<div class="s-body"><div class="cols cols-2 ai-s">
+  <div class="pp p-blue"><h3><span class="em">🧑‍💼</span> Sub-agent</h3>
+    <svg viewBox="0 0 640 262" width="100%" style="display:block;max-height:228px">
+<defs><marker id="ah1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#2456d6"/></marker>
+<marker id="ah2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0,0 L10,5 L0,10 z" fill="#0e8a5f"/></marker></defs>
+<rect x="220" y="8" width="200" height="56" rx="16" fill="#2456d6"/><text x="320" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">🤖 Agent chính</text>
+<g font-size="17" font-weight="500">
+<path d="M285 66 L120 158" stroke="#2456d6" stroke-width="3" marker-end="url(#ah1)" fill="none"/><path d="M320 66 L320 158" stroke="#2456d6" stroke-width="3" marker-end="url(#ah1)"/><path d="M355 66 L520 158" stroke="#2456d6" stroke-width="3" marker-end="url(#ah1)" fill="none"/>
+<path d="M150 160 L300 72" stroke="#0e8a5f" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah2)" fill="none"/><path d="M490 160 L340 72" stroke="#0e8a5f" stroke-width="2.5" stroke-dasharray="6 5" marker-end="url(#ah2)" fill="none"/>
+<text x="118" y="104" fill="#2456d6">giao việc</text><text x="452" y="104" fill="#0e8a5f">báo cáo tóm tắt</text></g>
+<g font-size="18" font-weight="700" fill="#1f4fa8">
+<rect x="40" y="162" width="160" height="76" rx="14" fill="#fff" stroke="#2456d6" stroke-width="2"/><text x="120" y="194" text-anchor="middle">Sub-agent 1</text><text x="120" y="222" text-anchor="middle" font-size="14" font-weight="400" fill="#5a6b85">ngữ cảnh riêng</text>
+<rect x="240" y="162" width="160" height="76" rx="14" fill="#fff" stroke="#2456d6" stroke-width="2"/><text x="320" y="194" text-anchor="middle">Sub-agent 2</text><text x="320" y="222" text-anchor="middle" font-size="14" font-weight="400" fill="#5a6b85">ngữ cảnh riêng</text>
+<rect x="440" y="162" width="160" height="76" rx="14" fill="#fff" stroke="#2456d6" stroke-width="2"/><text x="520" y="194" text-anchor="middle">Sub-agent 3</text><text x="520" y="222" text-anchor="middle" font-size="14" font-weight="400" fill="#5a6b85">ngữ cảnh riêng</text></g></svg>
+    <p>Mỗi Sub-agent làm trong <b>ngữ cảnh riêng</b>, chỉ gửi lại bản tóm tắt, nên cuộc trò chuyện chính luôn gọn.</p>
+    <p class="eg">Nên dùng: đọc nhiều chỉ cần kết luận; thẩm định độc lập; các phần việc tách rời.</p></div>
+  <div class="pp p-lav"><h3><span class="em">👥</span> Agent Teams</h3>
+    <svg viewBox="0 0 640 262" width="100%" style="display:block;max-height:228px">
+<defs><marker id="ah3" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="#6a3fa8"/></marker></defs>
+<rect x="220" y="8" width="200" height="56" rx="16" fill="#6a3fa8"/><text x="320" y="44" text-anchor="middle" font-size="22" font-weight="700" fill="#fff">👑 Trưởng nhóm</text>
+<rect x="190" y="82" width="260" height="36" rx="10" fill="#f3edfb" stroke="#b9a2e0" stroke-dasharray="5 4"/><text x="320" y="106" text-anchor="middle" font-size="16" fill="#6a3fa8">📋 danh sách việc chung</text>
+<g stroke="#6a3fa8" stroke-width="2.5" fill="none"><path d="M120 158 L230 120"/><path d="M320 158 L320 120"/><path d="M520 158 L410 120"/>
+<path d="M204 200 L236 200" marker-start="url(#ah3)" marker-end="url(#ah3)"/><path d="M404 200 L436 200" marker-start="url(#ah3)" marker-end="url(#ah3)"/><path d="M120 240 Q320 290 520 240" marker-start="url(#ah3)" marker-end="url(#ah3)"/></g>
+<g font-size="18" font-weight="700" fill="#5b2c8f">
+<rect x="40" y="162" width="160" height="76" rx="14" fill="#fff" stroke="#6a3fa8" stroke-width="2"/><text x="120" y="194" text-anchor="middle">Thành viên 1</text><text x="120" y="222" text-anchor="middle" font-size="14" font-weight="400" fill="#5a6b85">tự nhận việc</text>
+<rect x="240" y="162" width="160" height="76" rx="14" fill="#fff" stroke="#6a3fa8" stroke-width="2"/><text x="320" y="194" text-anchor="middle">Thành viên 2</text><text x="320" y="222" text-anchor="middle" font-size="14" font-weight="400" fill="#5a6b85">tự nhận việc</text>
+<rect x="440" y="162" width="160" height="76" rx="14" fill="#fff" stroke="#6a3fa8" stroke-width="2"/><text x="520" y="194" text-anchor="middle">Thành viên 3</text><text x="520" y="222" text-anchor="middle" font-size="14" font-weight="400" fill="#5a6b85">tự nhận việc</text></g></svg>
+    <p>Các thành viên <b>trao đổi, phản biện nhau</b>, không chỉ báo cáo về trưởng nhóm.</p>
+    <p class="eg">Nên dùng: rà soát từ nhiều góc độ; kiểm chứng nhiều giả thuyết cùng lúc. Tốn token hơn nhiều.</p></div>
+</div>
+<div class="cols cols-2 gap-s">
+  <div class="pp p-gray"><h3 style="font-size:20px"><span class="em">✌️</span> Hai cách tạo Sub-agent</h3><p class="sm"><b>Nêu trong câu lệnh:</b> AI tự tạo, không cần chuẩn bị. <b>Tạo file .md</b> trong .claude/agents/ để dùng lại.</p></div>
+  <div class="pp p-gray"><h3 style="font-size:20px"><span class="em">🧪</span> Agent Teams đang thử nghiệm</h3><p class="sm">Bật trong Claude Code; câu lệnh nêu rõ số thành viên, ví dụ "Dùng Agent Teams gồm 3 thành viên…".</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo"><p class="sp oo">Vậy thẩm định đề thì con nên dùng cái nào ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Dùng Sub-agent con ạ: mỗi Sub-agent rà một phần, không ai sửa file, rồi gửi báo cáo về.</p></div>
+<aside class="notes"><p>Theo tài liệu Claude Code: Sub-agent chạy trong ngữ cảnh riêng và chỉ trả về bản tóm tắt; Agent Teams là nhiều phiên cùng làm, thành viên tự nhận việc và nhắn trực tiếp cho nhau (thử nghiệm, CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1).</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="3. Sub-agent và Agent Teams" data-title="Ví dụ: thẩm định đề bằng 3 Sub-agent">
+<div class="s-head"><h2 class="ht">Ví dụ: thẩm định đề bằng 3 Sub-agent</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="stack">
+    <span class="lb"><span class="em">⌨️</span> Đầu vào: câu lệnh của thầy Nam</span>
+    <div class="code lt" data-file="Câu lệnh dùng Sub-agent" style=""><pre>Dùng 3 Sub-agent thẩm định de-nhap.md theo cau-truc-de.md. Mỗi Sub-agent rà một phần: Đọc hiểu, Viết, đáp án; không sửa file. Báo cáo của mỗi Sub-agent gồm kết luận DÙNG ĐƯỢC hoặc SỬA LẠI, lỗi cần sửa, những điểm giáo viên cần tự kiểm tra. Tổng hợp ba báo cáo thành một bản cho tôi.</pre></div>
+  </div>
+  <div class="stack">
+    <span class="lb ok"><span class="em">📋</span> Đầu ra: bản tổng hợp của Agent chính</span>
+    <div class="docm"><h4><span class="em">📝</span> Kết luận: <span style="color:#c8363d">SỬA LẠI</span></h4>
+      <p><b>Lỗi cần sửa:</b></p><ul style="padding-left:20px;margin:4px 0"><li>Câu 3 (Đọc hiểu) khó hơn cấu trúc đề</li><li>Câu 7 thiếu ý trong đáp án</li></ul>
+      <p><b>Giáo viên tự kiểm tra:</b> độ dài ngữ liệu phần Đọc hiểu.</p></div>
+    <div class="pp p-yellow"><h3 style="font-size:20px"><span class="em">⚠️</span> Lưu ý</h3><p class="sm">Sub-agent không thấy cuộc trò chuyện chính, nên lời giao việc phải nêu đủ file, tiêu chí và nội dung báo cáo.</p></div>
+  </div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-hao-hung.webp" alt="Octo"><p class="sp oo">Chỉ một đoạn câu lệnh mà ba Sub-agent chia nhau rà đề luôn!</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đúng vậy, và cuộc trò chuyện chính chỉ nhận một bản tổng hợp gọn gàng.</p></div>
+<aside class="notes"><p>Theo tài liệu Claude Code: Sub-agent không thấy lịch sử trò chuyện, các Skill đã gọi hay file đã đọc, nên lời giao việc phải tự đủ.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="4. Agent trong Workflow" data-title="Hội thoại: Agent và Workflow" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-phong-giao-vien.webp')">
+  <span class="scene-tag"><span class="pt">Phần 4</span>Agent trong Workflow</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-thac-mac.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-gioi-thieu.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:216.38px;--tl:92px">Thầy ơi, con hay nghe nói đến Workflow. Có Agent rồi thì Workflow để làm gì ạ?</p>
+  <p class="bub t-r" style="left:636px;top:118px;width:500px;--t:58px"><b>Workflow</b> định sẵn các bước của cả quy trình; Agent tự quyết cách làm trong bước được giao. Cùng xem quy trình ra đề của tổ nhé!</p>
+  <aside class="notes"><p>Chuyển sang Phần 4.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Agent trong Workflow" data-title="Workflow ra đề của tổ">
+<div class="s-head"><h2 class="ht">Workflow ra đề: Agent đảm nhận một số bước</h2></div>
+<div class="s-body">
+<div class="quote3">"Workflow là hệ thống trong đó AI và công cụ được điều phối theo những đường đi định sẵn.<br>Agent là hệ thống trong đó AI tự điều khiển quá trình và cách dùng công cụ của mình."<cite>Anthropic, Building effective agents (12/2024)</cite></div>
+<div class="fl3">
+  <div class="st"><span class="n3">1</span><h4><span class="em">👩‍🏫</span> Giao yêu cầu</h4><p>Giáo viên bộ môn: lớp, phạm vi, ngữ liệu</p></div>
+  <div class="st" style="border-color:#2456d6;border-width:2px"><span class="n3">2</span><h4><span class="em">🤖</span> Trợ lý Khảo thí</h4><p>Soạn đề, tự thẩm định</p><p class="eg">Đầu ra: de-nhap.md</p></div>
+  <div class="st gate"><span class="n3">3</span><h4><span class="em">✅</span> Tổ trưởng duyệt</h4><p>Xem, chỉnh sửa và duyệt đề</p></div>
+  <div class="st" style="border-color:#2456d6;border-width:2px"><span class="n3">4</span><h4><span class="em">🤖</span> Trợ lý Khảo thí</h4><p>Soạn hướng dẫn chấm cho đề đã duyệt</p><p class="eg">Đầu ra: huong-dan-cham-nhap.md</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-y-tuong.webp" alt="Octo"><p class="sp oo">Vậy Workflow là cái khung, còn Agent làm việc ở từng ô ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Chính xác! Việc rõ quy trình thì Workflow giữ các bước; Agent lo phần việc cần suy nghĩ.</p></div>
+<aside class="notes"><p>Workflow định các bước; ở bước 2 và 4, Agent tự quyết cách làm; bước 3 là người duyệt. Cách vận hành cả Workflow tự động học ở bài sau.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Agent trong Workflow" data-title="Gọi Agent trong một bước">
+<div class="s-head"><h2 class="ht">Gọi Agent trong một bước: 3 cách trên Claude Code</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s">
+  <div class="pp p-blue"><h3><span class="em">🗣️</span> Gọi theo tên</h3><p>Nêu tên Agent, việc cần làm, đầu vào, đầu ra.</p><div class="docm" style="margin-top:8px">Dùng agent tro-ly-khao-thi soạn đề giữa kỳ I Ngữ văn 9; ngữ liệu trong ngu-lieu/; lưu đề vào de-nhap.md.</div></div>
+  <div class="pp p-green"><h3><span class="em">▶️</span> Chạy làm phiên chính</h3><p>Cả phiên làm việc theo hướng dẫn của Agent.</p><div class="docm" style="margin-top:8px;font-family:Consolas,monospace">claude --agent tro-ly-khao-thi</div></div>
+  <div class="pp p-lav"><h3><span class="em">🪄</span> Để Claude tự gọi</h3><p>Yêu cầu khớp mô tả của Agent thì Claude tự giao việc. Vì vậy mô tả cần nêu rõ Agent làm gì, khi nào dùng.</p></div>
+</div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-suy-nghi.webp" alt="Octo"><p class="sp oo">Con mới dùng thì nên gọi cách nào ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Gọi theo tên cho chắc con ạ. Khi mô tả đã tốt, Claude sẽ tự gọi đúng lúc.</p></div>
+<aside class="notes"><p>Ba cách gọi theo tài liệu Subagents của Claude Code. Mới dùng nên gọi theo tên cho chắc.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="4. Agent trong Workflow" data-title="Thực hành 2: gọi Agent trong Workflow">
+<div class="s-head"><h2 class="ht"><span class="em">🛠️</span> Thực hành 2: gọi Agent trong một bước của Workflow</h2></div>
+<div class="s-body"><div class="cols cols-6-6 ai-s">
+  <div class="stack">
+    <div class="task"><i class="ph ph-target"></i><div><b>Nhiệm vụ:</b> chọn một bước trong quy trình của tổ, gọi Agent của Thực hành 1, đọc cách Agent suy nghĩ và sửa đến khi đầu ra dùng được. <span class="pr-badge">12 phút</span></div></div>
+    <div class="code lt" data-file="Câu lệnh gọi Agent (điền chỗ trống)" style=""><pre>Dùng agent [tên-agent] [việc cần làm] cho [lớp, phạm vi]. Đầu vào: [file, thư mục]. Lưu kết quả vào [tên file] cho bước [bước sau].</pre></div>
+  </div>
+  <div class="stack">
+    <span class="lb ok"><span class="em">📋</span> Ví dụ đầu vào và đầu ra</span>
+    <div class="docm"><b>Đầu vào:</b> "Dùng agent tro-ly-nhan-xet viết nhận xét cuối kỳ I cho lớp 9A. Đầu vào: bang-muc-dat-9A.csv. Lưu kết quả vào nhan-xet-9A-nhap.md cho bước giáo viên chủ nhiệm duyệt."<br><br><b>Đầu ra:</b> <span class="fchip md"><i class="ph ph-file-text"></i>nhan-xet-9A-nhap.md</span> 38 nhận xét, 2 em cần giáo viên xem lại vì thiếu mức đạt.</div>
+    <div class="check-i"><span class="em">☑️</span><span>Agent hiểu đúng yêu cầu, lập kế hoạch đủ bước</span></div>
+    <div class="check-i"><span class="em">☑️</span><span>Chọn đúng Skill, chỉ dùng công cụ được phép</span></div>
+    <div class="check-i"><span class="em">☑️</span><span>Đầu ra đúng định dạng, dùng được cho bước sau</span></div>
+  </div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Đọc quá trình suy nghĩ của Agent sau mỗi lần chạy: thầy cô sẽ biết <b>sửa đúng chỗ</b> thay vì sửa từng kết quả.</p></div>
+<aside class="notes"><p>Mẫu phiếu: templates/goi-agent-trong-workflow.md. Sai ở đâu sửa ở đó: câu lệnh, phần Cách làm, mô tả Skill, tools hoặc phần Đầu ra của Agent.</p></aside>
+</section>
+
+<section class="slide s-scene" data-sec="5. Tổng kết" data-title="Hội thoại: Agent và vai trò của giáo viên" data-nofoot style="background-image:url('assets/img/nhan-vat/bg-lop-hoc.webp')">
+  <span class="scene-tag"><span class="pt">Tổng kết</span>Thầy Rùa và Octo</span>
+  <img class="nv octo" data-pic src="assets/img/nhan-vat/octo-an-mung.webp" alt="Octo">
+  <img class="nv rua" data-pic src="assets/img/nhan-vat/thay-rua-khen.webp" alt="Thầy Rùa">
+  <p class="bub t-bl" style="left:80px;bottom:590px;width:520px;--t:254.97916666666669px;--tl:92px">Trợ lý Khảo thí của con soạn đề, tự thẩm định rồi soạn cả hướng dẫn chấm! Từ nay con chỉ việc chờ kết quả thôi, thầy nhỉ?</p>
+  <p class="bub t-r" style="left:636px;top:118px;width:500px;--t:58px">Agent làm nhanh, nhưng mọi thứ nó tạo ra là bản nháp. Con đặt vai trò, công cụ, giới hạn cho Agent, đọc cách nó suy nghĩ và duyệt trước khi dùng.</p>
+  <p class="bub t-l" style="left:676px;top:456px;width:460px;--t:64px">Con hiểu rồi! Agent làm thay nhiều bước, còn quyết định cuối cùng vẫn là của con.</p>
+  <aside class="notes"><p>Khẳng định vai trò con người.</p></aside>
+</section>
+
+<section class="slide" data-sec="5. Tổng kết" data-title="Tổng kết LO 5.2">
+<div class="s-head"><h2 class="ht">Tổng kết LO 5.2</h2><p class="hs">Tạo Agent đảm nhận một vai trò, dùng Sub-agent khi cần và gọi Agent trong một bước của Workflow.</p></div><div class="s-body"><div class="cols cols-4 gap-s" style="align-items:stretch"><div class="pp p-blue sm4"><span class="d4l">PHẦN 1</span><h3><span class="em">🤖</span> Agent là gì</h3><ul class="sm4l"><li><span class="em">✅</span><span>Agent tự lập kế hoạch, chọn Skill và công cụ cho một vai trò</span></li><li><span class="em">✅</span><span>Chọn hình thức đơn giản nhất đủ dùng: Prompt, Skill, Project, Agent</span></li></ul></div><div class="pp p-green sm4"><span class="d4l">PHẦN 2</span><h3><span class="em">✍️</span> Tạo Agent</h3><ul class="sm4l"><li><span class="em">✅</span><span>Ba thành phần: mô hình, hướng dẫn, công cụ</span></li><li><span class="em">✅</span><span>File Agent: phần đầu nhận diện, phần thân hướng dẫn</span></li><li><span class="em">✅</span><span>Chạy thử 3 yêu cầu, đọc suy nghĩ để sửa đúng chỗ</span></li></ul></div><div class="pp p-yellow sm4"><span class="d4l">PHẦN 3</span><h3><span class="em">👥</span> Sub-agent, Agent Teams</h3><ul class="sm4l"><li><span class="em">✅</span><span>Sub-agent làm trong ngữ cảnh riêng, gửi lại bản tóm tắt</span></li><li><span class="em">✅</span><span>Agent Teams: thành viên trao đổi, phản biện nhau</span></li></ul></div><div class="pp p-lav sm4"><span class="d4l">PHẦN 4</span><h3><span class="em">🔄</span> Agent trong Workflow</h3><ul class="sm4l"><li><span class="em">✅</span><span>Workflow định các bước; Agent tự quyết cách làm trong bước được giao</span></li><li><span class="em">✅</span><span>Gọi Agent: nêu tên, việc, đầu vào, đầu ra</span></li></ul></div></div><div class="pp p-gray nxt"><p><span class="em">➡️</span> <b>Tiếp theo, LO 5.3:</b> kết nối Agent với công cụ, giao việc nhiều bước, vận hành Workflow tự động và đóng gói thành Plugin cho cả tổ.</p></div></div>
+
+<aside class="notes"><p>Tổng kết theo các phần của bài.</p></aside>
+</section>
+
+<section class="slide cg has-talk" data-sec="5. Tổng kết" data-title="Chúc mừng">
+<div class="s-head"><h2 class="ht"><span class="em">🎉</span> Chúc mừng thầy cô đã hoàn thành Bài học số 5.2!</h2></div><div class="s-body"><div class="cg-card"><p class="k">Sau bài học, thầy cô đã có thể:</p><ul><li><i class="ph ph-check"></i><span>Hiểu Agent là AI tự lập kế hoạch, chọn Skill và công cụ cho một vai trò; chọn hình thức đơn giản nhất đủ dùng</span></li><li><i class="ph ph-check"></i><span>Tạo Agent bằng file gồm phần đầu và hướng dẫn; chạy thử 3 yêu cầu, đọc suy nghĩ để sửa đúng chỗ</span></li><li><i class="ph ph-check"></i><span>Dùng Sub-agent khi cần, gọi Agent trong một bước của Workflow</span></li></ul></div></div>
+<div class="tk"><img class="o" data-pic src="assets/img/nhan-vat/octo-vui.webp" alt="Octo"><p class="sp oo">Agent của con mới làm việc với file trong thư mục. Muốn nó tự lưu lên Drive, gửi thư cho phụ huynh thì sao ạ?</p><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Ở bài sau, con sẽ kết nối Agent với công cụ và vận hành <b>Workflow tự động</b>. Hẹn con ở LO 5.3!</p></div>
+<aside class="notes"><p>Tổng kết và cầu nối sang LO 5.3.</p></aside>
+</section>
+
+<section class="slide s-end" data-sec="5. Tổng kết" data-title="Hẹn gặp lại" data-nofoot>
+  <h2>Hẹn gặp lại các thầy cô!</h2>
+  <aside class="notes"><p>Kết thúc bài học.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="5. Tổng kết" data-title="Câu hỏi ôn tập">
+<div class="s-head"><h2 class="ht"><span class="em">❓</span> Câu hỏi ôn tập</h2></div>
+<div class="s-body"><div class="cols cols-3 gap-s">
+<div class="quiz" data-answer="b"><p class="q">1. Tổ đã bật 3 Skill ra đề. Giáo viên gõ một yêu cầu soạn đề. Điều gì đúng?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>AI chỉ dùng được một Skill mỗi lần</span></button><button class="opt" data-k="b"><span class="k">B</span><span>AI có thể dùng nhiều Skill khớp mô tả trong cùng cuộc trò chuyện</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Phải mở 3 cuộc trò chuyện</span></button></div><p class="fb" data-ok="Đúng. AI ghép nhiều Skill khi yêu cầu khớp mô tả." data-no="Chưa đúng. Đáp án B: AI dùng được nhiều Skill cùng lúc."></p></div>
+<div class="quiz" data-answer="b"><p class="q">2. Muốn Agent không bao giờ sửa file đề đã duyệt. Cách chắc chắn nhất?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Ghi “hãy cẩn thận” vào mô tả</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Giới hạn công cụ và ghi rõ trong phần Giới hạn</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Dặn lại mỗi lần</span></button></div><p class="fb" data-ok="Đúng. Công cụ tối thiểu và giới hạn viết rõ." data-no="Chưa đúng. Đáp án B: giới hạn công cụ và ghi trong phần Giới hạn."></p></div>
+<div class="quiz" data-answer="b"><p class="q">3. Agent dùng sai Skill. Việc nên làm trước tiên?</p><div class="opts"><button class="opt" data-k="a"><span class="k">A</span><span>Gọi lại nhiều lần</span></button><button class="opt" data-k="b"><span class="k">B</span><span>Xem quá trình suy nghĩ rồi sửa mô tả hoặc hướng dẫn</span></button><button class="opt" data-k="c"><span class="k">C</span><span>Tạo Agent mới cho mỗi Skill</span></button></div><p class="fb" data-ok="Đúng. Sửa đúng chỗ gây lỗi." data-no="Chưa đúng. Đáp án B: đọc suy nghĩ, sửa mô tả hoặc hướng dẫn."></p></div>
+</div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Thầy cô chọn đáp án trước, rồi bấm để xem giải thích nhé!</p></div>
+<aside class="notes"><p>Cho lớp chọn trước, rồi bấm xem phản hồi.</p></aside>
+</section>
+
+<section class="slide  has-talk" data-sec="5. Tổng kết" data-title="Khung 4D">
+<div class="s-head"><h2 class="ht">Khung 4D khi tạo Agent và đặt vào Workflow</h2></div><div class="s-body"><div class="d4row"><div class="pp p-blue d4"><span class="d4l">D1 · DELEGATION</span><h3><span class="em">🎯</span> Giao việc</h3><p>Chọn hình thức đơn giản nhất đủ dùng; giao cho Agent đúng vai trò, việc làm và việc không làm.</p><div class="d4ss"><span class="d4s">Nhận thức vấn đề</span><span class="d4s">Nhận thức nền tảng AI</span><span class="d4s">Phân công nhiệm vụ</span></div><p class="d4in"><b>Trong bài:</b> Phần 1, 3</p></div><div class="pp p-green d4"><span class="d4l">D2 · DESCRIPTION</span><h3><span class="em">📝</span> Mô tả</h3><p>Mô tả và hướng dẫn của Agent đủ rõ; lời giao việc cho Sub-agent nêu đủ file, tiêu chí, báo cáo.</p><div class="d4ss"><span class="d4s">Mô tả sản phẩm</span><span class="d4s">Mô tả quy trình</span><span class="d4s">Mô tả cách ứng xử</span></div><p class="d4in"><b>Trong bài:</b> Phần 2, 3</p></div><div class="pp p-yellow d4"><span class="d4l">D3 · DISCERNMENT</span><h3><span class="em">🔍</span> Phân định</h3><p>Chạy thử 3 yêu cầu; đọc quá trình suy nghĩ; kiểm tra đầu ra trước khi dùng cho bước sau.</p><div class="d4ss"><span class="d4s">Phân định sản phẩm</span><span class="d4s">Phân định quy trình</span><span class="d4s">Phân định cách ứng xử</span></div><p class="d4in"><b>Trong bài:</b> Phần 2, 4</p></div><div class="pp p-lav d4"><span class="d4l">D4 · DILIGENCE</span><h3><span class="em">🛡️</span> Cẩn trọng</h3><p>Công cụ tối thiểu; Agent chỉ tạo bản nháp; chỉ dùng thông tin cần thiết; giáo viên chịu trách nhiệm.</p><div class="d4ss"><span class="d4s">Cẩn trọng khi tạo</span><span class="d4s">Minh bạch</span><span class="d4s">Chịu trách nhiệm khi dùng</span></div><p class="d4in"><b>Trong bài:</b> Phần 2, 4</p></div></div></div>
+<div class="tk one"><img class="ra" data-pic src="assets/img/nhan-vat/thay-rua-chan-dung-trai.webp" alt="Thầy Rùa"><p class="sp rr">Khi tạo Agent, <b>Giao việc</b> và <b>Cẩn trọng</b> quan trọng nhất: quyết định trước Agent làm gì, dùng gì, dừng ở đâu.</p></div>
+<aside class="notes"><p>Thứ tự chuẩn của khung AI Fluency: Delegation, Description, Discernment, Diligence.</p></aside>
+</section>
+
+</div></main>
+<script src="assets/js/deck.js"></script>
+</body>
+</html>

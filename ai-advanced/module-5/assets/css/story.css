@@ -1,0 +1,74 @@
+/* Module 5, version 2: story layer with Thầy Rùa (mentor) and Octo (learner).
+   Scenes open each part, dialogue strips sit at the bottom of content slides, a closing slide ends each lesson.
+   Used only by the v2 decks (lo-5-x-v2.html). */
+:root {
+  --talk-ink: #1f3a9e;
+  --octo-bg: #f0ebfd;
+  --rua-bg: #e6effe;
+}
+
+/* ---------- Scene: illustrated background, two characters, speech bubbles ---------- */
+.slide.s-scene { padding: 0; background-color: #e9e1d4; background-position: center; background-size: cover; background-repeat: no-repeat; }
+.s-scene .scene-tag {
+  position: absolute; left: 44px; top: 30px; z-index: 3;
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 7px 16px 7px 8px; border-radius: var(--r-pill);
+  background: rgba(255, 255, 255, .93); color: var(--ink-2);
+  font-size: 16px; font-weight: 600; box-shadow: 0 6px 18px rgba(13, 27, 46, .14);
+}
+.s-scene .scene-tag .pt { background: var(--blue); color: #fff; border-radius: var(--r-pill); padding: 3px 12px; font-size: 14px; font-weight: 700; letter-spacing: .02em; }
+.s-scene .nv { position: absolute; z-index: 1; pointer-events: none; user-select: none; }
+.s-scene .nv.octo { left: 56px; bottom: 0; height: 520px; filter: drop-shadow(0 16px 22px rgba(60, 40, 10, .22)); }
+.s-scene .nv.rua { right: -50px; bottom: -80px; height: 900px; transform: scaleX(-1); filter: drop-shadow(0 18px 26px rgba(20, 30, 60, .2)); }
+
+.bub {
+  position: absolute; z-index: 2; margin: 0;
+  background: #fff; color: var(--talk-ink);
+  border-radius: 28px; padding: 22px 28px;
+  font-size: 24.5px; line-height: 1.5; font-weight: 500;
+  box-shadow: 0 14px 34px rgba(16, 32, 80, .2);
+  text-wrap: pretty;
+}
+.bub b { font-weight: 700; color: inherit; }
+.bub::after { content: ""; position: absolute; background: inherit; }
+/* tail on the bottom edge, pointing down to a character below; --t: distance from the corner, --tl: length */
+.bub.t-bl::after { left: var(--t, 130px); top: calc(100% - 1px); width: 38px; height: var(--tl, 110px); clip-path: polygon(0 0, 100% 0, 16% 100%); }
+.bub.t-br::after { right: var(--t, 130px); top: calc(100% - 1px); width: 38px; height: var(--tl, 110px); clip-path: polygon(0 0, 100% 0, 84% 100%); }
+/* tail on a side edge, pointing sideways to the speaker's mouth; --t: distance from the top */
+.bub.t-r::after { left: calc(100% - 1px); top: var(--t, 60px); width: var(--tl, 58px); height: 42px; clip-path: polygon(0 0, 100% 64%, 0 100%); }
+.bub.t-l::after { right: calc(100% - 1px); top: var(--t, 60px); width: var(--tl, 58px); height: 42px; clip-path: polygon(100% 0, 0 64%, 100% 100%); }
+
+/* ---------- Dialogue strip at the bottom of a content slide ---------- */
+.talk { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: end; margin-top: auto; }
+.talk.solo { grid-template-columns: 1fr; }
+.talk.solo .say { max-width: 1180px; }
+.say { display: flex; align-items: flex-end; gap: 14px; min-width: 0; }
+.say .av { flex: none; width: 84px; height: 84px; object-fit: contain; }
+.say.octo .av { width: 92px; height: 92px; margin-bottom: -4px; filter: drop-shadow(0 6px 8px rgba(60, 40, 10, .18)); }
+.say.rua .av { filter: drop-shadow(0 6px 10px rgba(20, 30, 60, .16)); }
+.say p {
+  position: relative; flex: 1; min-width: 0; margin: 0 0 14px;
+  background: var(--octo-bg); color: var(--talk-ink);
+  border-radius: 18px; padding: 12px 18px;
+  font-size: 17.5px; line-height: 1.45; font-weight: 500;
+  text-wrap: pretty;
+}
+.say.rua p { background: var(--rua-bg); }
+.say p b { color: inherit; font-weight: 700; }
+.say p::after { content: ""; position: absolute; bottom: 12px; width: 18px; height: 20px; background: inherit; }
+.say > .av + p::after { right: calc(100% - 1px); clip-path: polygon(100% 0, 0 100%, 100% 100%); }
+.say > p:first-child::after { left: calc(100% - 1px); clip-path: polygon(0 0, 100% 100%, 0 100%); }
+
+/* ---------- Closing slide ---------- */
+.slide.s-end { background: #04060c url("../img/nhan-vat/bg-hen-gap-lai.webp") center / cover no-repeat; color: #fff; padding: 118px 110px; }
+.s-end h2 { font-size: 78px; line-height: 1.1; font-weight: 800; letter-spacing: -.02em; max-width: 980px; }
+.s-end p { margin-top: 22px; font-size: 26px; line-height: 1.5; color: #c9d6ee; max-width: 860px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .slide.is-active.s-scene .bub, .slide.is-active.s-scene .nv, .slide.is-active.s-scene .scene-tag { animation: rise .55s var(--ease) both; }
+  .slide.is-active.s-scene .nv.rua { animation-name: rise-flip; }
+  .slide.is-active.s-scene .bub:nth-of-type(1) { animation-delay: .25s; }
+  .slide.is-active.s-scene .bub:nth-of-type(2) { animation-delay: .9s; }
+  .slide.is-active.s-scene .bub:nth-of-type(3) { animation-delay: 1.55s; }
+  @keyframes rise-flip { from { opacity: 0; transform: scaleX(-1) translateY(14px); } to { opacity: 1; transform: scaleX(-1); } }
+}

@@ -1,0 +1,861 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>LO 5.1 · Từ Prompt đến Skill: Đóng gói năng lực chuyên môn cho AI</title>
+<link rel="stylesheet" href="assets/css/deck.css">
+  <link rel="stylesheet" href="assets/css/lo-5-1.css">
+</head>
+<body class="deck-compact" data-deck="LO 5.1" data-deck-title="Từ Prompt đến Skill: Đóng gói năng lực chuyên môn cho AI" data-home="index.html">
+<main class="deck"><div class="stage">
+
+<!-- ============ MỞ ĐẦU ============ -->
+
+<section class="slide s-cover" data-sec="Mở đầu" data-title="Bìa: LO 5.1">
+  <div class="brand"><span class="chip"><i class="ph-fill ph-sparkle"></i>AI Fluency nâng cao</span><span>Module 5 · Đóng gói kỹ năng và thiết kế quy trình AI nhiều tác vụ</span></div>
+  <div>
+    <div class="lo">LO 5.1</div>
+    <h1>Từ Prompt đến Skill: Đóng gói năng lực chuyên môn cho AI</h1>
+    <p class="sub">Hiểu cấu trúc và cơ chế hoạt động của Skill; xây dựng, kiểm thử, cải tiến Skill cho công việc chuyên môn; chia sẻ Skill cho cả tổ</p>
+  </div>
+  <div class="meta"><span><b>Thời lượng:</b> khoảng 150 phút (gợi ý 2 buổi)</span><span><b>Sản phẩm:</b> 2 Skill trong thư viện của tổ</span><span><b>Công cụ:</b> Claude, ChatGPT, Gemini</span></div>
+  <aside class="notes"><p>Hỏi mở đầu: "Trong 4 module vừa qua, thầy cô đã lưu được bao nhiêu câu lệnh hay? Lần gần nhất dùng lại, có phải sửa không?"</p><p>Nguyên tắc của bài: mỗi phần trình bày khái niệm và khung tư duy chung trước, không gắn với công cụ nào; sau đó mới đến ví dụ trên Claude, ChatGPT.</p></aside>
+</section>
+
+<section class="slide" data-sec="Mở đầu" data-title="Mục tiêu và lộ trình">
+  <div class="s-head"><h2 class="t">Mục tiêu và lộ trình bài học</h2></div>
+  <div class="s-body">
+    <div class="cols cols-5-7 grow ai-s">
+      <div class="cols gap-s">
+        <h3 class="col-h">Sau bài học, thầy cô có thể</h3>
+        <ol class="list small">
+          <li><b>Giải thích</b> Skill là gì, khác Prompt thế nào, khi nào nên dùng.</li>
+          <li><b>Mô tả</b> cấu trúc một Skill và cơ chế AI kích hoạt Skill.</li>
+          <li><b>Xây dựng, triển khai, kiểm thử</b> một Skill trên Claude, ChatGPT hoặc Gemini.</li>
+          <li><b>Tinh chỉnh, cải tiến</b> Skill bằng AI và công cụ chuyên sâu skill-creator; tìm Skill có sẵn từ nguồn uy tín, kiểm tra trước khi dùng.</li>
+          <li><b>Phân biệt</b> Skill với Project; chọn cách tổ chức công việc phù hợp.</li>
+          <li><b>Tái sử dụng, chia sẻ</b> Skill cho đồng nghiệp và xây thư viện Skill của tổ.</li>
+        </ol>
+        <div class="callout ok"><i class="ph ph-package"></i><div><b>Sản phẩm:</b> 1 Skill tự viết (đã review, sửa) và 1 Skill tạo bằng skill-creator, cả hai đăng ký vào thư viện của tổ.</div></div>
+      </div>
+      <div class="cols gap-s">
+        <div class="agenda mini">
+          <div class="row"><span class="no">01</span><div><h4>Skill là gì, khác gì Prompt?</h4><p>Slide 3 - 7</p></div><span class="time">15'</span></div>
+          <div class="row"><span class="no">02</span><div><h4>Cấu trúc Skill và cơ chế kích hoạt</h4><p>Slide 8 - 13</p></div><span class="time">20'</span></div>
+          <div class="row"><span class="no">03</span><div><h4>Xây dựng Skill và triển khai</h4><p>Slide 14 - 17 · Thực hành 1, 2</p></div><span class="time">30'</span></div>
+          <div class="row"><span class="no">04</span><div><h4>Tinh chỉnh, cải tiến chất lượng Skill</h4><p>Slide 18 - 22 · Thực hành 3</p></div><span class="time">35'</span></div>
+          <div class="row"><span class="no">05</span><div><h4>Skill, Project và cách tổ chức công việc</h4><p>Slide 23 - 24</p></div><span class="time">10'</span></div>
+          <div class="row"><span class="no">06</span><div><h4>Tái sử dụng và chia sẻ Skill</h4><p>Slide 25 - 26 · Thực hành 4</p></div><span class="time">15'</span></div>
+          <div class="row"><span class="no">07</span><div><h4>Tổng kết</h4><p>Slide 27 - 29</p></div><span class="time">10'</span></div>
+        </div>
+        <p class="xs">Gợi ý chia 2 buổi: Phần 1 đến 3 (khoảng 68 phút) · Phần 4 đến 7 (khoảng 70 phút)</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Thứ tự đi từ hiểu (Phần 1, 2), đến tự làm (Phần 3), nhờ AI làm tốt hơn và tìm Skill có sẵn (Phần 4), đặt Skill cạnh Project để tổ chức công việc (Phần 5), rồi tái sử dụng, chia sẻ cho cả tổ (Phần 6). Nhấn mạnh: cuối bài mỗi người mang về hai Skill chạy được.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Skill là gì" data-title="Skill là gì?">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 1</span>Skill là gì, khác gì Prompt?</div><h2 class="t">Skill là gì?</h2><p class="sub">Từ prompt gõ lại mỗi lần đến trí tuệ có cấu trúc (structured intelligence).</p></div>
+  <div class="s-body">
+    <div class="callout"><i class="ph ph-arrows-clockwise"></i><div>Nhiều tháng nay, thầy cô lặp lại cùng một hướng dẫn cho AI: viết ngữ cảnh, chỉ định định dạng, mô tả kết quả mong muốn. Mỗi lần mở cuộc trò chuyện mới lại bắt đầu từ đầu.</div></div>
+    <div class="cols cols-6-6 grow ai-s">
+      <div class="cols gap-s">
+        <div class="card line-left"><p style="font-size:22px;color:var(--ink);line-height:1.45"><b>Skill (kỹ năng AI)</b> là một bộ hướng dẫn được đóng gói dưới dạng thư mục, giúp AI xử lý các tác vụ hoặc quy trình cụ thể.</p></div>
+        <div class="card flat"><p>Skill chính là <b>prompt được lưu trữ vĩnh viễn trong file</b>, cụ thể là file <code class="k">SKILL.md</code> nằm trong một thư mục. Thầy cô viết hướng dẫn một lần duy nhất, lưu lại, AI sẽ tự động sử dụng mỗi khi cần khả năng đó: không cần gõ lại, không cần nhớ.</p></div>
+        <div class="pills"><span class="pill"><i class="ph ph-pencil-simple-line"></i>Viết một lần</span><span class="pill tl"><i class="ph ph-file-text"></i>Lưu trong file SKILL.md</span><span class="pill g"><i class="ph ph-lightning"></i>AI tự dùng khi cần</span></div>
+      </div>
+      <div class="card soft">
+        <div class="kick" style="margin-bottom:6px"><span class="tag example"><i class="ph ph-chalkboard-teacher"></i>Ví dụ của giáo viên</span></div>
+        <h3>Skill viết nhận xét học sinh</h3>
+        <table class="tbl compact" style="margin-top:8px">
+          <tbody>
+            <tr><th style="width:24%">Tên</th><td><code class="k">viet-nhan-xet-hoc-sinh</code></td></tr>
+            <tr><th>Mô tả</th><td>Viết nhận xét cuối kỳ cho từng học sinh từ bảng mức đạt. Ghi nhận điểm mạnh, gợi mở điều cần cố gắng, không trùng lặp. Dùng khi cần nhận xét học bạ, sổ liên lạc.</td></tr>
+            <tr><th>Hướng dẫn</th><td><ul class="list tight small"><li>Câu 1: ghi nhận điểm mạnh cụ thể</li><li>Câu 2: gợi mở điều cần cố gắng, không chê trách</li><li>Câu 3: một lời động viên ngắn</li><li>Không để hai em trùng nhận xét</li></ul></td></tr>
+          </tbody>
+        </table>
+        <p class="xs" style="margin-top:8px">Phần 2 sẽ xem file SKILL.md thật của Skill này.</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Hỏi mở đầu: "Thầy cô đã gõ lại cùng một hướng dẫn cho AI bao nhiêu lần?" Skill giải quyết đúng nỗi phiền đó: viết một lần, lưu thành file, AI tự dùng khi cần.</p><p>Ví dụ bên phải chỉ có 3 phần: tên, mô tả, hướng dẫn. Đó là bản tối thiểu của mọi Skill; Phần 2 đi sâu cấu trúc và xem bản đủ 12 mục. Khái niệm Skill do Anthropic đưa ra, nay là chuẩn mở nhiều AI cùng dùng.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Skill là gì" data-title="Skill khác Prompt ở đâu?">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 1</span>Skill là gì, khác gì Prompt?</div><h2 class="t">Skill khác Prompt ở đâu?</h2></div>
+  <div class="s-body">
+    <div class="cols cols-5-7 grow ai-s">
+      <div class="cols gap-s">
+        <div class="card soft"><h3><i class="ph ph-package blue"></i> Hình dung</h3><p>Skill có thể hiểu đơn giản là: thay vì mỗi lần đều phải hướng&nbsp;dẫn AI từ đầu, chúng ta <b>đóng gói một cách làm việc chuẩn thành một "kỹ năng"</b> để AI có thể sử dụng lặp lại.</p><p style="margin-top:10px">Nói cách khác:</p><ul class="list tight small" style="margin-top:4px"><li><b>Prompt</b> là một yêu cầu. <b>Skill</b> là một năng lực đã được đóng gói.</li><li><b>Prompt</b> giống như giao việc từng lần. <b>Skill</b> giống như đào&nbsp;tạo một nhân sự biết làm một nhóm việc cụ thể.</li></ul></div>
+        <div class="callout ok"><i class="ph ph-arrows-merge"></i><div><b>Skill không thay thế Prompt.</b> Cách viết Prompt tốt của thầy cô là điểm xuất phát để viết Skill: đóng gói thêm quy&nbsp;trình, mẫu đầu ra và tiêu chí kiểm tra.</div></div>
+      </div>
+      <table class="tbl th-nowrap">
+          <thead><tr><th></th><th>Prompt</th><th style="background:#dbe5ff">Skill</th></tr></thead>
+          <tbody>
+            <tr><th>Bản chất</th><td>Lời yêu cầu cho một lần hỏi</td><td class="hl">Bộ chỉ dẫn cấu trúc được đóng&nbsp;gói sẵn</td></tr>
+            <tr><th>Cách sử dụng</th><td>Viết mới/gõ/dán lại mỗi lần dùng</td><td class="hl">AI tự mở khi việc khớp mô tả, hoặc thầy cô gọi tên</td></tr>
+            <tr><th>Lưu ở đâu</th><td>Lịch sử trò chuyện, sổ tay, tin&nbsp;nhắn</td><td class="hl">Một thư mục, một file riêng, có&nbsp;tên</td></tr>
+            <tr><th>Chia sẻ</th><td>Đồng nghiệp phải xin lại câu&nbsp;lệnh, tự đoán cách dùng</td><td class="hl">Đưa Skill, ai dùng cũng theo cùng cách làm</td></tr>
+            <tr><th>Kết quả AI tạo ra</th><td>Thiếu ổn định, phụ thuộc câu&nbsp;lệnh từng lần</td><td class="hl">Ổn định, bám sát các bước và tiêu chí đã quy định</td></tr>
+            <tr><th>Quản lý phiên bản</th><td>Không lưu lịch sử chỉnh sửa, khó truy vết thay đổi</td><td class="hl">Đánh số phiên bản, ghi nhật ký thay đổi, dễ rà soát</td></tr>
+          </tbody>
+        </table>
+    </div>
+  </div>
+  <aside class="notes"><p>Hình dung chính của bài: Prompt là một yêu cầu, giống giao việc từng lần; Skill là một năng lực đã được đóng gói, giống đào tạo một nhân sự biết làm một nhóm việc cụ thể. Anthropic cũng ví việc viết Skill như soạn tài liệu hướng dẫn cho nhân sự mới. Các phần khác dùng thêm hình ảnh quen thuộc: thư viện Skill giống tủ học liệu của tổ.</p><p>Hỏi lớp: "Thầy cô từng hướng dẫn một đồng nghiệp mới hay một em cán sự lớp làm việc gì đến mức họ tự làm đúng mà không cần nhắc lại?" Một Skill tốt cũng cần rõ ràng như vậy. Khái niệm Skill do Anthropic đưa ra, nay là chuẩn mở nhiều AI cùng dùng (Phần 2).</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Skill là gì" data-title="Vì sao và khi nào cần Skill?">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 1</span>Skill là gì, khác gì Prompt?<span class="tag activity"><i class="ph ph-hand-pointing"></i>Thử ngay</span></div><h2 class="t">Vì sao và khi nào cần Skill?</h2></div>
+  <div class="s-body">
+    <div class="cols cols-4-8 grow ai-s">
+      <div class="cols gap-s">
+        <div class="card flat"><h3><i class="ph ph-user blue"></i> Cho từng thầy cô</h3><ul class="list tight small"><li>Không phải gõ lại hướng dẫn dài</li><li>Kết quả ổn định giữa các lần</li><li>Dành thời gian cho phần chuyên môn</li></ul></div>
+        <div class="card flat"><h3><i class="ph ph-users-three blue"></i> Cho cả tổ</h3><ul class="list tight small"><li>Chuẩn hóa một cách làm chung</li><li>Người mới dùng được ngay</li><li>Góp ý một lần, cả tổ hưởng lợi</li></ul></div>
+        <div class="quote sm"><p>"Thay vì giải thích lại cách làm và chuyên môn của mình trong mỗi cuộc trò chuyện, Skill giúp dạy AI một lần, dùng được mọi lần."</p><cite>Anthropic, The Complete Guide to Building Skills for Claude</cite></div>
+      </div>
+      <div class="cols gap-s">
+        <p class="small strong" style="color:var(--ink)">Khi nào cần? Nghĩ về một việc thầy cô hay nhờ AI làm, rồi bấm chọn các dấu hiệu đúng. <span style="white-space:nowrap">Từ 2 dấu hiệu trở lên: nên dùng Skill.</span></p>
+        <div class="checker" data-mid="1" data-full-min="2" data-verdict="v-mining">
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Thầy cô cứ phải gõ lại cùng một hướng dẫn<small>Mỗi lần nhờ AI lại dán lại yêu cầu, mẫu, lưu ý như cũ</small></span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Cần kết quả lần nào cũng theo một mẫu, một chuẩn<small>Ví dụ: đúng mẫu nhận xét, đúng cấu trúc kế hoạch bài dạy</small></span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Việc gồm nhiều bước, làm theo thứ tự cố định<small>Ví dụ: đọc bảng điểm, đối chiếu mức đạt, viết, tự rà soát</small></span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>AI cần biết quy định, cách làm riêng của trường, của tổ<small>Ví dụ: quy định đánh giá, cụm từ nhận xét tổ đã thống nhất</small></span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Muốn cả tổ dùng chung một cách làm<small>Đồng nghiệp làm cùng việc, cần kết quả đồng bộ</small></span></label>
+          <label class="chk"><input type="checkbox"><span class="box"><i class="ph ph-check"></i></span><span>Muốn dùng mẫu, Skill đã được chuyên môn hóa, tối ưu sẵn<small>Ví dụ: Skill tạo Word, PowerPoint, Excel có sẵn của Claude; Skill mẫu của tổ</small></span></label>
+        </div>
+        <div class="verdict" id="v-mining" data-full="Nên dùng Skill|Tự viết Skill hoặc dùng Skill có sẵn: hướng dẫn một lần, AI làm đúng cách ở mọi lần." data-part="Có thể đóng gói|Bắt đầu bằng một câu lệnh mẫu lưu sẵn; nếu việc còn lặp lại, viết thành Skill." data-none="Một câu lệnh tốt là đủ|Việc làm một lần hoặc mỗi lần một khác thì chưa cần Skill."></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>6 dấu hiệu dựa trên hướng dẫn chính thức của Claude (slide sau). Dấu hiệu 6 nhắc rằng không phải lúc nào cũng phải tự viết: Anthropic có sẵn Skill tạo Word, PowerPoint, Excel, PDF; tổ chuyên môn có thể dùng chung Skill mẫu đã tối ưu. Trường hợp không cần Skill: xem slide sau.</p><p>Quy ước trong khóa: từ 2 dấu hiệu trở lên thì nên tạo Skill; dấu hiệu 1 và 2 nặng ký nhất. Lưu ý: mọi kết quả AI đều phải kiểm tra, nên "cần kiểm tra" không phải lý do để tạo Skill. Trung tâm trợ giúp Claude cũng phân biệt: hướng dẫn chung áp dụng cho mọi cuộc trò chuyện (rules), Project giữ kiến thức nền, Skill là quy trình chỉ mở khi cần.</p><p>Mời một học viên nêu một việc cụ thể, cả lớp cùng bấm chọn. Gợi ý ứng viên từ Module 1 đến 4: Context Package, 5C Review, tóm tắt công văn, viết báo cáo theo Style Guide.</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Skill là gì" data-title="Khi nào nên xây dựng Skill: hướng dẫn chính thức">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 1</span>Skill là gì, khác gì Prompt?<span class="tag claude"><i class="ph ph-sparkle"></i>Hướng dẫn chính thức</span></div><h2 class="t">Khi nào nên xây dựng Skill: hướng dẫn chính thức</h2></div>
+  <div class="s-body">
+    <div class="quote q1">
+      <p>"Thay vì giải thích lại quy trình và chuyên môn của mình trong mỗi cuộc trò chuyện, Skill cho phép hướng dẫn AI một lần và dùng lại ở mọi lần."</p>
+      <cite>Anthropic, The Complete Guide to Building Skills for Claude (2026)<br><i>"Instead of re-explaining your preferences, processes, and domain expertise in every conversation, skills let you teach Claude once and benefit every time."</i></cite>
+    </div>
+    <h3 class="col-h">Ba nhóm việc Anthropic ghi nhận Skill phát huy hiệu quả</h3>
+    <div class="cols cols-3 gap-s stretch grp6">
+      <div class="dcard d1"><span class="dn">NHÓM 1</span><h3>Tạo sản phẩm nhất quán</h3><span class="vn">Document &amp; Asset Creation</span><p>Tài liệu, bài trình bày, mẫu biểu có chất lượng đồng đều. Skill cài sẵn quy chuẩn trình bày, khung mẫu và danh mục kiểm tra. Anthropic có sẵn Skill tạo Word, PowerPoint, Excel, PDF.</p><p class="in"><b>Ở trường:</b> nhận xét học bạ theo mẫu của trường, phiếu học tập theo mẫu của tổ.</p></div>
+      <div class="dcard d2"><span class="dn">NHÓM 2</span><h3>Tự động hóa quy trình</h3><span class="vn">Workflow Automation</span><p>Quy trình nhiều bước cần phương pháp nhất quán. Skill quy định thứ tự các bước, điểm kiểm tra và vòng rà soát.</p><p class="in"><b>Ở trường:</b> ra đề theo cấu trúc đề của tổ: soạn câu hỏi, thẩm định, soạn hướng dẫn chấm (LO&nbsp;5.2).</p></div>
+      <div class="dcard d3"><span class="dn">NHÓM 3</span><h3>Phối hợp công cụ kết nối</h3><span class="vn">MCP Enhancement</span><p>Hướng dẫn AI dùng công cụ kết nối đúng trình tự, kèm chuyên môn và bối cảnh người dùng không phải nhắc lại.</p><p class="in"><b>Ở trường:</b> lấy bảng điểm từ Drive, lưu nhận xét vào thư mục của tổ (LO&nbsp;5.3).</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Slide giới thiệu đúng khung của tài liệu chính thức, không ghép từng dấu hiệu với từng câu trích. Ý cốt lõi ở câu trích đầu trang. Ba nhóm việc lấy từ mục "Common skill use case categories" của The Complete Guide to Building Skills for Claude: Document &amp; Asset Creation (đầu ra nhất quán, cài sẵn quy chuẩn, khung mẫu, danh mục kiểm tra chất lượng); Workflow Automation (quy trình nhiều bước, có điểm kiểm tra giữa các bước, vòng rà soát); MCP Enhancement (hướng dẫn phối hợp công cụ kết nối, cài sẵn chuyên môn và bối cảnh).</p><p>Liên hệ với 6 dấu hiệu: hướng dẫn lặp lại và quy định riêng ứng với ý cốt lõi (quy trình, chuyên môn phải giải thích lại mỗi lần); yêu cầu đầu ra theo chuẩn ứng với Nhóm 1; nhiều bước cố định ứng với Nhóm 2; cả tổ dùng chung ứng với đối tượng tài liệu nêu: các nhóm cần chuẩn hóa cách AI làm việc trong tổ chức. Dùng mẫu, Skill tối ưu sẵn ứng với các Skill Anthropic xây dựng sẵn (docx, pptx, xlsx, pdf) mà tài liệu dùng làm ví dụ cho Nhóm 1. Nhóm 3 sẽ được triển khai ở LO 5.3.</p><p>Tài liệu: resources.anthropic.com (The Complete Guide to Building Skills for Claude, PDF 33 trang); support.claude.com (What are skills?).</p></aside>
+</section>
+
+<section class="slide" data-sec="1. Skill là gì" data-title="Cùng môn Ngữ văn 9: việc nào nên đóng gói?">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 1</span>Skill là gì, khác gì Prompt?<span class="tag example"><i class="ph ph-chalkboard-teacher"></i>Ví dụ dạy học</span></div><h2 class="t">Cùng môn Ngữ văn 9: việc nào nên đóng gói?</h2></div>
+  <div class="s-body">
+    <table class="tbl th-nowrap">
+      <thead><tr><th>Dấu hiệu</th><th>Hỏi AI nghĩa một từ Hán Việt trong bài học</th><th>Viết nhận xét cuối kỳ cho 40 học sinh</th></tr></thead>
+      <tbody>
+        <tr><th>Gõ lại cùng hướng dẫn</th><td><span class="nope">Không.</span> Hỏi một câu là xong, lần sau hỏi từ khác</td><td><span class="yes">Có.</span> Mỗi lớp, mỗi kỳ lại dán yêu cầu và lưu ý như cũ</td></tr>
+        <tr><th>Theo một mẫu, một chuẩn</th><td><span class="nope">Không.</span> Chỉ cần câu trả lời đúng, ngắn gọn</td><td><span class="yes">Có.</span> Đúng 3 câu, khớp mức đạt, khích lệ, không trùng</td></tr>
+        <tr><th>Nhiều bước cố định</th><td><span class="nope">Không.</span> Một bước: hỏi và đọc câu trả lời</td><td><span class="yes">Có.</span> Đọc bảng, đối chiếu mức đạt, viết, rà trùng lặp</td></tr>
+        <tr><th>Quy định riêng</th><td><span class="nope">Không.</span> Kiến thức chung, AI đã biết</td><td><span class="yes">Có.</span> Quy định đánh giá, cụm từ tổ thống nhất, cách xưng hô</td></tr>
+        <tr><th>Cả tổ dùng chung</th><td><span class="nope">Không.</span> Câu hỏi của riêng mình, lúc soạn bài</td><td><span class="yes">Có.</span> Mọi giáo viên bộ môn và chủ nhiệm</td></tr>
+        <tr><th>Có mẫu tối ưu sẵn</th><td><span class="nope">Không cần.</span> AI trả lời trực tiếp</td><td><span class="yes">Có.</span> Dùng Skill mẫu của tổ, không phải viết lại từ đầu</td></tr>
+        <tr class="hl"><th>Quyết định</th><td><span class="pill n">Prompt là đủ</span></td><td><span class="pill g"><i class="ph ph-check-circle"></i>Nên dùng Skill</span></td></tr>
+      </tbody>
+    </table>
+    <div class="cols cols-2 gap-s">
+      <div class="callout"><i class="ph ph-lightbulb"></i><div>Hỏi một lần, mỗi lần một nội dung khác: <b>Prompt là đủ</b>. Việc lặp lại theo một khuôn, có chuẩn riêng: nên <b>đóng gói thành Skill</b>.</div></div>
+      <div class="callout"><i class="ph ph-books"></i><div><b>Ở môn của thầy cô:</b> phiếu học tập theo mẫu của tổ, câu hỏi ôn tập cuối bài, đề kiểm tra 15 phút theo cấu trúc đề của tổ, bản tin tuần gửi phụ huynh.</div></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Hai việc cùng một môn, đặt cạnh nhau để thấy rõ ranh giới: hỏi nghĩa một từ là việc nhanh, mỗi lần một nội dung, không có khuôn chung nên chỉ cần một câu hỏi; viết nhận xét cuối kỳ lặp lại mỗi kỳ, cùng một khuôn, cùng quy định, nên đóng gói thành Skill. Việc bên phải (viết nhận xét cuối kỳ) là ví dụ xuyên suốt bài: Skill mẫu ở Phần 2 chính là Skill cho việc này. Đây cũng là việc tốn thời gian nhất của nhiều thầy cô vào cuối kỳ.</p><p>Hỏi lớp: "Trong môn thầy cô dạy, việc nào giống cột bên phải?" Lưu ý dữ liệu: chỉ đưa vào AI thông tin cần cho việc viết nhận xét; không đưa thông tin nhạy cảm như hoàn cảnh gia đình, sức khỏe.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Cấu trúc và kích hoạt" data-title="Cấu trúc một Skill và file .md">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 2</span>Cấu trúc Skill và cơ chế kích hoạt</div><h2 class="t">Cấu trúc một Skill và file .md</h2></div>
+  <div class="s-body">
+    <div class="cols cols-5-7 grow ai-s">
+      <div class="cols gap-s">
+        <h3 class="col-h">Mỗi Skill một thư mục, một file chính</h3>
+        <div class="tree">
+          <div><i class="ph ph-folder-open"></i><span class="d">skills/</span> <span class="n">thư mục tổng: chứa nhiều Skill</span></div>
+          <div class="i1"><i class="ph ph-folder-open"></i><span class="d">viet-nhan-xet-hoc-sinh/</span> <span class="n">tên thư mục = tên Skill</span></div>
+          <div class="i2"><i class="ph ph-file-text"></i><span class="f">SKILL.md</span> <span class="n">bắt buộc: hướng dẫn chính</span></div>
+          <div class="i2"><i class="ph ph-folder"></i><span class="d">references/</span> <span class="n">tùy chọn: tài liệu tham chiếu</span></div>
+          <div class="i2"><i class="ph ph-folder"></i><span class="d">assets/</span> <span class="n">tùy chọn: mẫu biểu, hình ảnh</span></div>
+          <div class="i2"><i class="ph ph-folder"></i><span class="d">scripts/</span> <span class="n">tùy chọn: đoạn mã tự động</span></div>
+          <div class="i1"><i class="ph ph-folder"></i><span class="d">tham-dinh-nhan-xet/</span> <span class="n">Skill thứ hai</span></div>
+          <div class="i2"><i class="ph ph-file-text"></i><span class="f">SKILL.md</span></div>
+        </div>
+        <div class="callout ok"><i class="ph ph-lightbulb"></i><div>Mới bắt đầu: chỉ cần <b>một file SKILL.md</b>. Thêm tài liệu đi kèm khi Skill đã chạy tốt. AI chỉ mở tài liệu đi kèm khi cần.</div></div>
+        <div class="callout warn"><i class="ph ph-warning"></i><div><b>File .md đứng lẻ</b> (vd: <code class="k">skills/ten-skill.md</code>) <b>không đúng chuẩn Skill</b>. Kiểu file lẻ là của <b>rules</b> (quy tắc chung, xem Phần 5) và lệnh tắt trong một số công cụ.</div></div>
+      </div>
+      <div class="cols gap-s">
+        <h3 class="col-h">File .md (Markdown): một định dạng file như .pdf, .docx</h3>
+        <p class="small" style="color:var(--ink)">Điểm khác: bên trong chỉ có chữ, định dạng bằng vài ký hiệu chuẩn. Vì vậy cả <b>người</b> và <b>AI</b> đều đọc dễ dàng.</p>
+        <table class="tbl compact th-nowrap">
+          <thead><tr><th></th><th>.docx</th><th>.pdf</th><th style="background:#dbe5ff">.md</th></tr></thead>
+          <tbody>
+            <tr><th>Mở bằng</th><td>Word</td><td>Trình đọc PDF</td><td class="hl">Mọi trình soạn thảo, kể cả Notepad</td></tr>
+            <tr><th>Bên trong</th><td>Chữ kèm định dạng ẩn</td><td>Bố cục cố định để in</td><td class="hl">Chữ thuần và vài ký&nbsp;hiệu</td></tr>
+            <tr><th>AI đọc</th><td>Phải tách chữ khỏi định dạng</td><td>Phải tách chữ, dễ lẫn bảng, cột</td><td class="hl">Đọc thẳng, thấy ngay cấu&nbsp;trúc</td></tr>
+          </tbody>
+        </table>
+        <div class="cols cols-2 gap-s ai-s">
+          <div class="code" data-file="Thầy cô gõ"><pre data-lang="md"># Viết nhận xét học sinh
+## Các bước
+1. Đọc từng dòng của bảng
+2. Viết 2 đến 3 câu cho mỗi em
+- Nêu **điểm mạnh** cụ thể
+- Không trùng nhau</pre></div>
+          <div class="card md-render"><p class="xs">Khi hiển thị</p><h3>Viết nhận xét học sinh</h3><h4>Các bước</h4><ol><li>Đọc từng dòng của bảng</li><li>Viết 2 đến 3 câu cho mỗi em</li></ol><ul><li>Nêu <b>điểm mạnh</b> cụ thể</li><li>Không trùng nhau</li></ul></div>
+        </div>
+        <p class="xs">Ký hiệu cần nhớ: # tiêu đề · ## tiêu đề nhỏ · 1. danh sách số · - gạch đầu dòng · **chữ đậm**</p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Cấu trúc theo chuẩn mở Agent Skills: SKILL.md là bắt buộc, các thư mục khác là tùy chọn. Bản nháp có thêm thư mục agents/, nhưng đây không phải thành phần chuẩn nên đã bỏ. Quy tắc đặt tên: chữ thường không dấu, số, dấu gạch nối, tối đa 64 ký tự.</p><p>Thư mục tổng skills/ là nơi công cụ tìm Skill: Claude Code dùng ~/.claude/skills/ (cá nhân) và .claude/skills/ (dự án), Plugin dùng skills/ bên trong gói. Mỗi Skill vẫn phải là một thư mục con có SKILL.md. Theo tài liệu Claude Code: file lẻ .claude/commands/ten.md là lệnh tắt kiểu cũ (vẫn chạy, nay đã gộp vào Skill); file lẻ trong .claude/rules/ là quy tắc, luôn được nạp vào mọi phiên làm việc.</p><p>Giới thiệu .md như một loại file quen thuộc: giống .docx hay .pdf, chỉ khác là bên trong là chữ thuần theo một chuẩn định dạng chung. Mở bằng Notepad là thấy ngay nội dung; AI không phải tách chữ khỏi định dạng hay bố cục, nên hiểu đúng tiêu đề, danh sách, chữ đậm. File rất nhẹ, dễ so sánh hai phiên bản.</p><p>Tạo file .md: Notepad, VS Code, hoặc Google Docs (Tệp &gt; Tải xuống &gt; Markdown). Đây cũng là định dạng thầy cô đã dùng cho Context Package và Style Guide ở các module trước.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Cấu trúc và kích hoạt" data-title="Các thành phần của file SKILL.md">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 2</span>Cấu trúc Skill và cơ chế kích hoạt</div><h2 class="t">Các thành phần của file SKILL.md</h2></div>
+  <div class="s-body">
+    <div class="cols cols-5-7 ai-s">
+      <div class="code" data-file="viet-nhan-xet-hoc-sinh/SKILL.md"><pre data-lang="md" style="white-space:pre-wrap">---
+name: viet-nhan-xet-hoc-sinh
+description: Viết nhận xét cuối kỳ cho từng học sinh... Dùng khi cần nhận xét học bạ...
+license: Nội bộ Tổ Ngữ văn 9
+compatibility: Claude, ChatGPT, Gemini
+metadata:
+  author: Cô Vy
+  version: "1.1"
+---
+# Viết nhận xét học sinh cuối kỳ
+## Các bước
+## Ví dụ đầu vào và đầu ra
+## Xử lý tình huống đặc biệt</pre></div>
+      <div class="cols gap-s">
+        <div class="card soft"><h4><span class="pill">Phần đầu</span> Thông tin nhận diện (frontmatter)</h4><ul class="list tight small"><li><code class="k">name</code> (tên): <b>bắt buộc</b>, chữ thường không dấu, nối bằng gạch ngang</li><li><code class="k">description</code> (mô tả): <b>bắt buộc</b>, nêu Skill làm gì và khi nào dùng</li><li>Tùy chọn: <code class="k">license</code>, <code class="k">compatibility</code>, <code class="k">metadata</code> (tác giả, phiên bản)</li></ul></div>
+        <div class="card soft"><h4><span class="pill tl">Phần thân</span> Hướng dẫn (Markdown)</h4><p class="small">Không bắt buộc định dạng; AI đọc khi Skill được kích hoạt. Anthropic khuyến nghị có: <b>các bước thực hiện</b>, <b>ví dụ đầu vào và đầu ra</b>, <b>cách xử lý tình huống đặc biệt</b>.</p></div>
+      </div>
+    </div>
+    <h3 class="col-h">Checklist 12 mục của khóa học, dùng cho Skill chia sẻ trong tổ</h3>
+    <div class="cols cols-4 gap-s">
+      <div class="card flat"><span class="kicker-num">KHI NÀO DÙNG?</span><ol class="list tight small" style="counter-reset:n 0"><li>Tên (name)</li><li>Mô tả (description)</li><li>Trường hợp không áp dụng</li></ol></div>
+      <div class="card flat"><span class="kicker-num">CẦN GÌ?</span><ol class="list tight small" style="counter-reset:n 3"><li>Đầu vào cần có</li><li>Tài liệu tham chiếu</li><li>Chỉ dẫn cốt lõi</li></ol></div>
+      <div class="card flat"><span class="kicker-num">LÀM VÀ KIỂM THẾ NÀO?</span><ol class="list tight small" style="counter-reset:n 6"><li>Các bước</li><li>Định dạng đầu ra, kèm ví dụ</li><li>Tiêu chí chất lượng</li></ol></div>
+      <div class="card flat"><span class="kicker-num">QUẢN TRỊ VÀ TRÁCH NHIỆM</span><ol class="list tight small" style="counter-reset:n 9"><li>Người duyệt</li><li>Quy tắc dữ liệu</li><li>Phiên bản và nhật ký</li></ol></div>
+    </div>
+    <p class="xs">Theo chuẩn, chỉ <b>tên</b> và <b>mô tả</b> là bắt buộc. 12 mục là khuyến nghị của khóa học: mục 1, 2 nằm ở phần đầu; mục 3 đến 12 viết trong phần thân.</p>
+  </div>
+  <aside class="notes"><p>Nguồn chuẩn: đặc tả Agent Skills (agentskills.io/specification). SKILL.md gồm phần đầu YAML (frontmatter) và phần thân Markdown. Bắt buộc: name (tối đa 64 ký tự, chữ thường, số, gạch ngang, trùng tên thư mục) và description (tối đa 1.024 ký tự, nêu Skill làm gì và khi nào dùng; trên claude.ai nên dưới 200 ký tự). Tùy chọn: license, compatibility, metadata, allowed-tools (thử nghiệm). Phần thân không giới hạn định dạng; đặc tả khuyến nghị hướng dẫn từng bước, ví dụ đầu vào và đầu ra, các trường hợp đặc biệt. The Complete Guide to Building Skills for Claude gợi ý khung: tên Skill, Instructions (các bước), Examples, Troubleshooting.</p><p>12 mục là "12 thành phần" trong chương trình khóa học, đưa vào SKILL.md dưới dạng checklist, không phải yêu cầu của chuẩn. Mục 1, 2 là hai trường bắt buộc; mục 7, 8 ứng với khuyến nghị về các bước và ví dụ; các mục còn lại là bổ sung cho bối cảnh nhà trường. Phiên bản có thể ghi trong metadata hoặc trong phần thân.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Cấu trúc và kích hoạt" data-title="Skill mẫu hoàn chỉnh đủ 12 mục">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 2</span>Cấu trúc Skill và cơ chế kích hoạt<span class="tag example"><i class="ph ph-file-text"></i>Mẫu dùng được ngay</span></div><h2 class="t">Skill mẫu hoàn chỉnh đủ 12 mục</h2></div>
+  <div class="s-body">
+    <div class="code sm grow three" data-file="viet-nhan-xet-hoc-sinh/SKILL.md"><pre data-lang="md" style="font-size:13.5px;line-height:1.42">---
+name: viet-nhan-xet-hoc-sinh
+description: Viết nhận xét cuối kỳ cho từng học sinh từ bảng mức đạt. Ghi nhận điểm mạnh, gợi mở điều cần cố gắng, không trùng lặp. Dùng khi cần nhận xét học bạ, sổ liên lạc.
+license: Nội bộ Tổ Ngữ văn 9
+compatibility: Claude, ChatGPT, Gemini; không cần chạy code, truy cập mạng
+metadata:
+  author: Cô Vy, Tổ Ngữ văn 9
+  version: "1.1"
+  updated: "2026-10-02"
+---
+
+# Viết nhận xét học sinh cuối kỳ
+
+## Trường hợp không áp dụng
+- Học sinh có hoàn cảnh đặc biệt, vấn đề sức khỏe hoặc kỷ luật: giáo viên tự viết
+
+## Đầu vào cần có
+- Bảng: Họ tên | Mức đạt | Điểm mạnh | Điều cần cố gắng
+- Môn hoặc nội dung nhận xét; độ dài mỗi nhận xét (mặc định: 2 đến 3 câu)
+
+## Tài liệu tham chiếu
+- references/quy-dinh-danh-gia.pdf (nếu có): quy định đánh giá học sinh của trường
+- references/tap-huan-nhan-xet.pptx (nếu có): slide tập huấn viết nhận xét của tổ
+- assets/mau-nhan-xet-hoc-ba.docx (nếu có): mẫu trình bày nhận xét của trường
+- references/cum-tu-goi-y.md: cụm từ khích lệ theo từng mức đạt
+
+## Chỉ dẫn cốt lõi
+- Viết với tư cách giáo viên Ngữ văn: xưng "cô" hoặc "thầy", gọi học sinh là "em".
+- Gắn nhận xét với kỹ năng của môn: đọc hiểu, viết, nói và nghe. Nêu đúng kỹ năng, không khen chung chung ("em học tốt").
+- Mức Tốt, Khá: ghi nhận thế mạnh, gợi hướng nâng cao. Mức Đạt, Chưa đạt: ghi nhận nỗ lực, nêu 1 đến 2 việc cụ thể cần làm.
+- Viết điều cần cố gắng thành việc em làm được (luyện thêm, đọc thêm, sửa lại); không dùng từ "yếu", "kém", "lười".
+- Ô điểm mạnh hoặc điều cần cố gắng trống: ghi "[GV bổ sung]", không tự suy đoán.
+
+## Các bước
+1. Đọc từng dòng của bảng.
+2. Câu 1: ghi nhận điểm mạnh cụ thể.
+3. Câu 2: nêu điều cần cố gắng bằng lời gợi mở, không chê trách.
+4. Câu 3 (nếu cần): một lời động viên ngắn.
+5. Rà cả bảng: không để hai học sinh có nhận xét giống hệt nhau.
+
+## Định dạng đầu ra
+Bảng 2 cột: Họ tên | Nhận xét (2 đến 3 câu, dưới 50 từ)
+Ví dụ: Nguyễn Văn An | Em đọc hiểu văn bản tốt, trình bày ý mạch lạc. Em hãy luyện thêm cách mở bài để bài viết hấp dẫn hơn. Cô tin em sẽ tiến bộ.
+
+## Tiêu chí chất lượng
+- Mỗi nhận xét có ít nhất 1 điểm mạnh cụ thể
+- Điều cần cố gắng viết theo hướng gợi mở
+- Khớp với mức đạt trong bảng
+- Không có hai nhận xét giống hệt nhau
+
+## Người duyệt
+- Giáo viên bộ môn: đọc từng nhận xét, chỉnh cho đúng với từng em.
+- Tổ trưởng chuyên môn: kiểm tra xác suất trước khi nhập vào hệ thống.
+AI chỉ trả bản nháp, không tự nhập vào hệ thống.
+
+## Quy tắc dữ liệu
+Chỉ dùng thông tin trong bảng; không nêu hoàn cảnh gia đình, sức khỏe, kỷ luật trong nhận xét.
+
+## Nhật ký cải tiến
+- v1.1 (02/10/2026): thêm bước rà trùng lặp cả bảng theo góp ý của tổ
+- v1.0 (15/09/2026): bản đầu tiên</pre></div>
+  </div>
+  <aside class="notes"><p>Đi qua nhanh 12 mục trên ví dụ, đối chiếu với checklist ở slide trước. Phần đầu có đủ hai trường bắt buộc và ba trường tùy chọn; phiên bản, người phụ trách ghi trong metadata. Ba mục "Chỉ dẫn cốt lõi, Các bước, Định dạng đầu ra" quyết định chất lượng đầu ra, ứng với ba kiểu Mô tả trong khung 4D: cách AI cư xử, cách AI làm, sản phẩm AI tạo ra.</p><p>Mục tài liệu tham chiếu cho thấy Skill có thể kèm file PDF, Word, PowerPoint: AI đọc được nhờ môi trường chạy code; tài liệu dài nên trích phần cần dùng sang .md để AI đọc nhanh và chính xác. Ba file ghi "nếu có" là chỗ để tổ thay bằng tài liệu thật của trường.</p><p>Bấm "Sao chép" để lấy nguyên văn, hoặc dùng thư mục templates/skills/viet-nhan-xet-hoc-sinh/ (kèm cụm từ gợi ý và bảng đầu vào mẫu để chạy thử).</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Cấu trúc và kích hoạt" data-title="AI kích hoạt Skill như thế nào?">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 2</span>Cấu trúc Skill và cơ chế kích hoạt</div><h2 class="t">AI kích hoạt Skill như thế nào?</h2><p class="sub">AI đọc Skill như đọc mục lục của một cuốn sách, không đọc cả cuốn.</p></div>
+  <div class="s-body">
+    <div class="flow">
+      <div class="step"><span class="num">1</span><h4>Đọc lướt mô tả</h4><p>Luôn đọc tên, mô tả của mọi Skill đang bật.</p></div>
+      <div class="step hl"><span class="num">2</span><h4>So với yêu cầu</h4><p>Khớp mô tả nào thì mở SKILL.md của Skill đó.</p></div>
+      <div class="step"><span class="num">3</span><h4>Mở tài liệu khi cần</h4><p>Bảng tra, mẫu biểu chỉ mở khi bước làm cần đến.</p></div>
+    </div>
+    <div class="cols cols-7-5 grow ai-s">
+      <div class="card">
+        <h4><i class="ph ph-magnifying-glass blue"></i> Ví dụ so khớp</h4>
+        <p class="req" style="margin-top:6px"><b>Thầy cô gõ:</b> "Viết giúp tôi <mark class="kw">nhận xét học bạ</mark> cho lớp 9A từ <mark class="kw">bảng</mark> này."</p>
+        <table class="tbl compact" style="margin-top:10px">
+          <thead><tr><th style="width:30%">Skill đang bật</th><th>Mô tả (AI luôn đọc)</th><th style="width:17%">Kết quả</th></tr></thead>
+          <tbody>
+            <tr><td><code class="k" style="white-space:nowrap;font-size:14.5px">viet-nhan-xet-hoc-sinh</code></td><td>Viết <mark class="kw">nhận xét</mark> cuối kỳ cho từng học sinh từ <mark class="kw">bảng</mark> mức đạt... Dùng khi cần nhận xét <mark class="kw">học&nbsp;bạ</mark>, sổ liên lạc...</td><td><span class="pill g"><i class="ph ph-check-circle"></i>Mở</span></td></tr>
+            <tr><td><code class="k" style="white-space:nowrap;font-size:14.5px">tham-dinh-nhan-xet</code></td><td>Thẩm định bảng <mark class="kw">nhận xét</mark>... Dùng <b>sau khi</b> viết nhận xét, trước khi giáo viên duyệt.</td><td><span class="pill n">Chưa mở</span></td></tr>
+            <tr><td><code class="k" style="white-space:nowrap;font-size:14.5px">soan-phieu-hoc-tap</code></td><td>Soạn phiếu học tập theo mẫu của tổ... Dùng khi cần phiếu học tập cho học sinh.</td><td><span class="pill n">Bỏ qua</span></td></tr>
+          </tbody>
+        </table>
+        <p class="xs" style="margin-top:8px">AI so khớp theo <b>ý</b>, không chỉ đếm từ trùng: Skill thứ hai cũng có chữ "nhận xét", nhưng việc lúc này là viết, chưa phải thẩm định.</p>
+      </div>
+      <div class="cols gap-s">
+        <div class="card soft">
+          <h4><i class="ph ph-target blue"></i> Mô tả quyết định tất cả</h4>
+          <p class="small">AI chọn Skill bằng cách so yêu cầu của thầy cô với mô tả. Vì vậy mô tả phải chứa <b>những cách nói thầy cô hay dùng</b>: "nhận&nbsp;xét cuối kỳ", "học bạ", "sổ liên lạc".</p>
+        </div>
+        <div class="dd" style="grid-template-columns:1fr">
+          <div class="col bad"><h4><i class="ph ph-x-circle"></i>Mô tả chung chung, mơ hồ</h4><p class="small">"Hỗ trợ giáo viên viết nhận xét." <span class="muted">AI không phân biệt được nhận&nbsp;xét cuối kỳ, nhận xét bài kiểm tra hay nhận xét hạnh kiểm, nên dễ mở nhầm hoặc bỏ qua.</span></p></div>
+        </div>
+        <div class="callout warn"><i class="ph ph-warning"></i><div>Mô tả mơ hồ thì AI không nhận ra lúc cần dùng, Skill không được kích hoạt. Cách viết mô tả: Phần 3.</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Cơ chế "nạp dần" (progressive disclosure) theo tài liệu Agent Skills của Anthropic: tên và mô tả của mỗi Skill tốn khoảng 100 token và luôn được nạp; nội dung SKILL.md chỉ nạp khi Skill được kích hoạt, nên giữ dưới khoảng 500 dòng; tài liệu kèm theo chỉ nạp khi cần.</p><p>Ví dụ so khớp dùng đúng mô tả của 3 Skill mẫu trong thư mục templates. Nhấn mạnh hàng thứ hai: AI hiểu ý, không so từng chữ. Hướng dẫn của Anthropic yêu cầu mô tả nói cả "làm gì" và "khi nào dùng", có những việc người dùng hay nói; khi kiểm thử, Skill phải được mở với yêu cầu rõ ràng, với cả yêu cầu diễn đạt khác đi, và không được mở với việc không liên quan. Tài liệu của Anthropic xếp mô tả quá chung chung (too vague) và mô tả thiếu tình huống dùng (missing triggers) vào nhóm mô tả chưa tốt. Skill không tự mở khi cần: bổ sung cách nói vào mô tả. Skill mở nhầm chỗ: viết mô tả cụ thể hơn.</p><p>Trên Claude, khi một Skill được dùng, giao diện hiện tên Skill trong các bước AI đang làm: nhìn vào đó để biết Skill đã được mở hay chưa. Luôn có thể gọi thẳng tên Skill nếu AI không tự mở.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Cấu trúc và kích hoạt" data-title="Nguyên lý cốt lõi của hệ thống vận hành Skill AI">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 2</span>Cấu trúc Skill và cơ chế kích hoạt<span class="tag claude"><i class="ph ph-sparkle"></i>Hướng dẫn chính thức</span></div><h2 class="t">Nguyên lý cốt lõi của hệ thống vận hành Skill AI</h2><p class="sub">Core design principles theo The Complete Guide to Building Skills for Claude (Anthropic): Progressive Disclosure, Composability, Portability.</p></div>
+  <div class="s-body">
+    <div class="cols cols-3 gap-s stretch">
+      <div class="dcard d1"><span class="dn">NGUYÊN LÝ 1</span><h3>Nạp theo tầng</h3><span class="vn">Progressive Disclosure</span><p>AI đọc Skill theo 3 tầng: tên và mô tả luôn đọc; nội dung SKILL.md khi việc khớp; tài liệu đi kèm khi bước làm cần đến. Nhờ vậy tiết kiệm bộ nhớ làm việc của AI mà vẫn đủ chuyên môn.</p><p class="in"><b>Khi viết Skill:</b> giữ SKILL.md gọn; quy định dài, bảng tra đặt trong references/.</p></div>
+      <div class="dcard d2"><span class="dn">NGUYÊN LÝ 2</span><h3>Ghép nối</h3><span class="vn">Composability</span><p>AI có thể dùng nhiều Skill cùng lúc. Ví dụ: "Viết nhận xét cuối kỳ cho lớp 9A rồi rà soát trước khi nộp" dùng cả <span style="white-space:nowrap">viet-nhan-xet-hoc-sinh</span> và <span style="white-space:nowrap">tham-dinh-nhan-xet</span>.</p><p class="in"><b>Khi viết Skill:</b> mỗi Skill một việc, không ôm cả quy trình; cần việc khác thì nêu Skill liên quan.</p></div>
+      <div class="dcard d3"><span class="dn">NGUYÊN LÝ 3</span><h3>Khả chuyển</h3><span class="vn">Portability</span><p>Một Skill chạy như nhau trên Claude, ChatGPT và Gemini, miễn môi trường có đủ công cụ Skill cần. Đó là nhờ chuẩn mở Agent Skills.</p><p class="in"><b>Khi viết Skill:</b> không viết hướng dẫn gắn với một giao diện, ví dụ "vào menu Settings...".</p></div>
+    </div>
+    <h3 class="col-h">Viết mô tả theo nguyên lý 2</h3>
+    <div class="dd">
+      <div class="col bad"><h4><i class="ph ph-x-circle"></i>Chưa tốt</h4><p class="small">"Skill này xử lý toàn bộ việc nhận xét, đánh giá và báo cáo cuối kỳ." <span class="muted">Ôm nhiều việc, khó kết hợp với Skill khác.</span></p></div>
+      <div class="col good"><h4><i class="ph ph-check-circle"></i>Tốt</h4><p class="small" style="color:var(--ink)">"Skill này viết nhận xét cuối kỳ cho từng học sinh. Cần rà soát trước khi nộp thì dùng kèm Skill <span style="white-space:nowrap">tham-dinh-nhan-xet</span>."</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Nguyên văn: "Core design principles: Progressive Disclosure, Composability, Portability." Progressive Disclosure: "Skills use a three-level system... This progressive disclosure minimizes token usage while maintaining specialized expertise." Composability: "Claude can load multiple skills simultaneously. Your skill should work well alongside others, not assume it's the only capability available." Portability: "Skills work identically across Claude.ai, Claude Code, and API... provided the environment supports any dependencies the skill requires."</p><p>Nguyên lý 1 đã minh họa ở slide trước, chỉ nhắc lại hệ quả khi viết. Nguyên lý 2 là cầu nối sang LO 5.2 (ghép nhiều Skill thành trợ lý). Nguyên lý 3 giải thích vì sao một bản gốc trong thư viện của tổ dùng được trên nhiều công cụ (Phần 6). Lưu ý khi giảng: câu gốc của Anthropic nói về các nền tảng của Claude (Claude.ai, Claude Code, API); với ChatGPT, Gemini, Skill dùng được nhờ chuẩn mở Agent Skills hoặc khi đưa file SKILL.md vào làm chỉ dẫn, và kết quả có thể khác nhau tùy mô hình AI.</p></aside>
+</section>
+
+<section class="slide" data-sec="2. Cấu trúc và kích hoạt" data-title="Ví dụ: Skill trên Claude và ChatGPT">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 2</span>Cấu trúc Skill và cơ chế kích hoạt<span class="tag claude"><i class="ph ph-sparkle"></i>Ví dụ trên Claude</span><span class="tag gpt"><i class="ph ph-chats-circle"></i>ChatGPT</span></div><h2 class="t">Ví dụ: một Skill trên Claude và ChatGPT</h2></div>
+  <div class="s-body">
+    <div class="cols cols-7-5 ai-s">
+      <div class="code" data-file="viet-nhan-xet-hoc-sinh/SKILL.md"><pre data-lang="md">---
+name: viet-nhan-xet-hoc-sinh
+description: Viết nhận xét cuối kỳ cho từng học sinh từ bảng mức đạt. Ghi nhận điểm mạnh, gợi mở điều cần cố gắng, không trùng lặp. Dùng khi cần nhận xét học bạ, sổ liên lạc.
+---
+Với mỗi dòng trong bảng, viết 2 đến 3 câu: ghi nhận điểm mạnh cụ thể,
+gợi mở điều cần cố gắng, động viên ngắn. Không để hai em trùng nhận xét.
+Không nêu hoàn cảnh gia đình, sức khỏe trong nhận xét.</pre></div>
+      <div class="card">
+        <h4>Claude tự kích hoạt Skill</h4>
+        <ol class="list tight small">
+          <li>Cô Vy gõ: "Viết nhận xét cuối kỳ môn Ngữ văn cho lớp 9A" và đính kèm bảng mức đạt của lớp</li>
+          <li>Claude đối chiếu yêu cầu với mô tả các Skill đang bật</li>
+          <li>Khớp: hiện dòng "Using viet-nhan-xet-hoc-sinh"</li>
+          <li>Trả bảng nhận xét cho từng em, đúng các bước, đúng độ dài</li>
+        </ol>
+      </div>
+    </div>
+    <div class="cols cols-3 gap-s">
+      <div class="card flat"><h4><i class="ph ph-sparkle blue"></i> Claude</h4><p class="small">Customize &gt; Skills: tạo Skill mới (tạo file .md hoặc tải lên file .zip), bật, tắt từng Skill. Có sẵn Skill tạo file Word, PowerPoint, Excel, PDF.</p><p class="small" style="margin-top:6px;color:var(--ink)"><b>Thế mạnh:</b> đóng gói năng lực chuyên sâu, tối ưu, cấu trúc, thực hiện tốt quy trình chuyên biệt.</p></div>
+      <div class="card flat"><h4><i class="ph ph-chats-circle blue"></i> ChatGPT</h4><p class="small">Tạo ngay trong cuộc trò chuyện: ChatGPT hỏi thêm rồi gợi ý cài đặt; hoặc vào mục Skills để soạn, tải lên. Tùy gói tài khoản.</p><p class="small" style="margin-top:6px;color:var(--ink)"><b>Thế mạnh:</b> dễ tiếp cận, tạo nhanh bằng hội thoại, biến nhu cầu thành trợ lý có kỹ năng.</p></div>
+      <div class="card flat"><h4><i class="ph ph-paperclip blue"></i> AI chưa hỗ trợ Skill</h4><p class="small">Đính kèm file SKILL.md (Gemini: gõ @ để gắn file Drive), yêu cầu làm theo đúng file.</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Đối chiếu với phần vừa học: hai dòng tên và mô tả là phần đầu, mấy dòng hướng dẫn là phần thân. Đây là bản tối thiểu; bản đủ 12 mục đã xem ở slide 10.</p><p>Nguồn: trung tâm trợ giúp Claude (Using skills in Claude) và OpenAI (Skills in ChatGPT). Một số nguồn cho biết Skills trên ChatGPT mở trước cho gói Business, Enterprise: kiểm tra gói tài khoản thực tế trước buổi dạy. Tên menu có thể thay đổi.</p><p>Hai dòng "Thế mạnh" là nhận định tổng quan: Claude thiên về đóng gói năng lực chuyên sâu, hợp với tổ đã có tư duy thiết kế quy trình; ChatGPT thiên về tạo nhanh bằng hội thoại, hợp để phổ cập cho giáo viên chưa quen kỹ thuật. Đây không phải tuyên bố chính thức của hai hãng.</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Xây dựng Skill" data-title="Quy trình xây dựng Skill">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 3</span>Xây dựng Skill và triển khai</div><h2 class="t">Quy trình xây dựng Skill</h2><p class="sub" style="max-width:none">Bốn bước đưa một việc lặp lại thành Skill để AI làm đúng mọi lần.</p></div>
+  <div class="s-body">
+    <div class="flow qt4">
+      <div class="step"><span class="num">1</span><h4>Xác định nhiệm vụ</h4><p>Xác định công việc, phạm vi áp dụng và kết quả cần đạt.</p></div>
+      <div class="step"><span class="num">2</span><h4>Chuẩn hóa cách làm</h4><p>Xác định các bước xử lý, nguyên tắc, quy tắc và tài liệu cần sử dụng.</p></div>
+      <div class="step"><span class="num">3</span><h4>Xây dựng Skill</h4><p>Quy định đầu&nbsp;vào, cách xử&nbsp;lý, đầu&nbsp;ra và tiêu&nbsp;chí đánh&nbsp;giá; sau đó viết thành cấu&nbsp;trúc Skill.</p></div>
+      <div class="step"><span class="num">4</span><h4>Kiểm thử &amp; hoàn thiện</h4><p>Thử với các tình&nbsp;huống thực&nbsp;tế, đánh&nbsp;giá kết&nbsp;quả và điều&nbsp;chỉnh hướng&nbsp;dẫn.</p></div>
+    </div>
+    <h3 class="col-h">Viết SKILL.md: 4 nguyên tắc</h3>
+    <div class="cols cols-4 gap-s">
+      <div class="card flat"><h4>Cụ thể, làm được</h4><p class="small"><span class="nope">Chưa tốt:</span> "Viết nhận xét cho hay."<br><span class="yes">Tốt:</span> "Câu 1 nêu một kỹ năng em làm tốt."</p></div>
+      <div class="card flat"><h4>Lường trước tình huống</h4><p class="small">Ô trống thì ghi "[GV bổ sung]"; mức đạt lạ thì hỏi lại giáo viên.</p></div>
+      <div class="card flat"><h4>Gọi đúng tài liệu</h4><p class="small">Ghi rõ khi nào đọc file nào, ví dụ references/cum-tu-goi-y.md.</p></div>
+      <div class="card flat"><h4>Giữ gọn</h4><p class="small">Bảng tra, ví dụ dài để trong references/; SKILL.md giữ các bước chính.</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Quy trình 4 bước của khóa học, đúc kết từ The Complete Guide to Building Skills for Claude (Anthropic, 2026). Xác định nhiệm vụ ứng với "identify 2-3 concrete use cases your skill should enable" và tiêu chí thành công ("Workflows complete without user correction"); chuẩn hóa cách làm là viết ra các bước, quy tắc, tài liệu mà thầy cô vẫn dùng; xây dựng Skill gồm phần đầu (tên, mô tả theo cấu trúc 3 phần ở slide sau) và phần thân (đầu vào, các bước, đầu ra, tiêu chí; checklist 12 mục ở slide 9); kiểm thử và hoàn thiện là kiểm thử kích hoạt và kiểm thử kết quả ("Run the same request 3-5 times. Compare outputs for structural consistency and quality."), làm ở Thực hành 2.</p><p>4 nguyên tắc theo tài liệu: "Be Specific and Actionable", "Include error handling", "Reference bundled resources clearly", "Use progressive disclosure".</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Xây dựng Skill" data-title="Cấu trúc mô tả (description)">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 3</span>Xây dựng Skill và triển khai<span class="tag claude"><i class="ph ph-sparkle"></i>Hướng dẫn chính thức</span></div><h2 class="t">Cấu trúc mô tả (description)</h2><p class="sub">Theo The Complete Guide to Building Skills for Claude (Anthropic).</p></div>
+  <div class="s-body">
+    <div class="pat lg"><span class="bx seg1">Làm gì</span><span class="ar">+</span><span class="bx seg2">Khi nào dùng</span><span class="ar">+</span><span class="bx seg3">Năng lực chính</span></div>
+    <p class="small" style="color:var(--ink)">Thứ tự các phần trong câu có thể linh hoạt.</p>
+    <div class="card">
+      <h4><i class="ph ph-magnifying-glass blue"></i> Phân tích mô tả của Skill <span style="white-space:nowrap">viet-nhan-xet-hoc-sinh</span></h4>
+      <p class="desc-demo"><span class="seg1">Viết nhận xét cuối kỳ cho từng học sinh từ bảng mức đạt.</span> <span class="seg3">Ghi nhận điểm mạnh, gợi mở điều cần cố gắng, không trùng lặp.</span> <span class="seg2">Dùng khi cần nhận xét học bạ, sổ&nbsp;liên&nbsp;lạc.</span></p>
+    </div>
+    <h3 class="col-h">3 kiểu mô tả Anthropic khuyên tránh</h3>
+    <div class="cols cols-3 gap-s">
+      <div class="dd" style="grid-template-columns:1fr"><div class="col bad"><h4><i class="ph ph-x-circle"></i>Quá mơ hồ</h4><p class="small">"Hỗ trợ công việc của giáo viên." <span class="muted">AI không biết hỗ&nbsp;trợ việc gì.</span></p></div></div>
+      <div class="dd" style="grid-template-columns:1fr"><div class="col bad"><h4><i class="ph ph-x-circle"></i>Thiếu tình huống dùng</h4><p class="small">"Tạo bộ học liệu nhiều trang, trình bày chuyên&nbsp;nghiệp." <span class="muted">Biết làm gì nhưng không biết khi nào dùng.</span></p></div></div>
+      <div class="dd" style="grid-template-columns:1fr"><div class="col bad"><h4><i class="ph ph-x-circle"></i>Quá kỹ thuật</h4><p class="small">"Xử lý dữ liệu đánh giá định tính theo thang đo phân mức." <span class="muted">Giáo viên không yêu cầu theo cách nói này.</span></p></div></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Nguyên văn mục "Writing effective skills / The description field": "Structure: [What it does] + [When to use it] + [Key capabilities]". Yêu cầu của trường description: "MUST include BOTH: What the skill does; When to use it (trigger conditions)... Include specific tasks users might say; Mention file types if relevant." Hai ý cuối là lưu ý cho phần "Khi nào dùng", không phải phần riêng của cấu trúc. Ví dụ tốt của Anthropic có năng lực chính: "Manages Linear project workflows including sprint planning, task creation, and status tracking. Use when user mentions "sprint", "Linear tasks", "project planning", or asks to "create tickets"." Ví dụ tốt của Anthropic: "Analyzes Figma design files and generates developer handoff documentation. Use when user uploads .fig files, asks for "design specs", "component documentation", or "design-to-code handoff"."</p><p>Ba kiểu chưa tốt, nguyên văn: "Helps with projects." (too vague); "Creates sophisticated multi-page documentation systems." (missing triggers); "Implements the Project entity model with hierarchical relationships." (too technical, no user triggers). Ví dụ trên slide là bản chuyển sang bối cảnh trường học. Mô tả của Skill mẫu viết theo thứ tự như các ví dụ của Anthropic: làm gì, năng lực chính, khi nào dùng; dài khoảng 160 ký tự.</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Xây dựng Skill" data-title="Triển khai Skill trên các nền tảng">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 3</span>Xây dựng Skill và triển khai</div><h2 class="t">Triển khai Skill trên các nền tảng</h2></div>
+  <div class="s-body">
+    <h3 class="col-h">Trên giao diện web, ứng dụng</h3>
+    <div class="cols cols-3 gap-s ai-s">
+      <div class="card line-left">
+        <h4><i class="ph ph-sparkle blue"></i> Claude</h4>
+        <ol class="list tight small" style="margin-top:6px">
+          <li>Customize &gt; Skills &gt; <b>+</b>: tạo Skill mới (tạo file .md) hoặc tải lên file .zip</li>
+          <li>Bật công tắc của Skill</li>
+          <li>Thử một yêu cầu đúng tình huống, xem các bước AI đang làm để biết Skill đã được dùng</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h4><i class="ph ph-chats-circle blue"></i> ChatGPT</h4>
+        <ol class="list tight small" style="margin-top:6px">
+          <li>Plugins &gt; tab Skills &gt; Create</li>
+          <li>Chọn: tạo bằng trò chuyện, dùng trình soạn thảo, hoặc tải lên từ máy</li>
+          <li>Hoặc yêu cầu ngay trong cuộc trò chuyện: ChatGPT hỏi thêm rồi gợi ý cài đặt</li>
+        </ol>
+      </div>
+      <div class="card">
+        <h4><i class="ph ph-google-logo blue"></i> Gemini</h4>
+        <ol class="list tight small" style="margin-top:6px">
+          <li>Chưa có mục Skill: lưu SKILL.md trên Google Drive</li>
+          <li>Gõ @ để gắn file, yêu cầu "Làm theo đúng file Skill đính kèm"</li>
+          <li>Hoặc đưa vào phần kiến thức của một Gem</li>
+        </ol>
+      </div>
+    </div>
+    <h3 class="col-h">Trên công cụ AI làm việc với thư mục máy tính: đặt thư mục Skill vào đúng chỗ</h3>
+    <div class="cols cols-2 gap-s">
+      <div class="card flat"><h4><i class="ph ph-terminal-window blue"></i> Claude Code</h4><p class="small"><code class="k">.claude/skills/ten-skill/SKILL.md</code> trong dự án, hoặc <code class="k">~/.claude/skills/</code> để dùng cho mọi dự án.</p></div>
+      <div class="card flat"><h4><i class="ph ph-planet blue"></i> Google Antigravity</h4><p class="small"><code class="k">.agents/skills/ten-skill/SKILL.md</code> trong dự án, hoặc <code class="k">~/.gemini/antigravity/skills/</code> để dùng cho mọi dự án.</p></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Claude (claude.com/docs, "Create custom skills"): "You upload a skill to Claude as a ZIP file. The ZIP must contain the skill directory itself as its top level"; "Go to Customize &gt; Skills in claude.ai or the desktop app and turn the skill on"; "Send prompts that should trigger the skill, and review Claude's thinking to confirm it's loading the skill." Trên giao diện có thể tạo Skill mới trực tiếp hoặc tải lên file .zip; file .zip phải chứa thư mục Skill ở cấp ngoài cùng. Nếu Skill có đoạn mã, cần bật chạy mã (Code execution) trong Settings.</p><p>ChatGPT (OpenAI Help, "Skills in ChatGPT"): Skills nằm trong Plugins, tab Skills; Create with chat, Create with editor, Upload from your computer; hoặc yêu cầu ChatGPT tạo Skill ngay trong cuộc trò chuyện. Google Antigravity (codelab "Authoring Google Antigravity Skills"): thư mục dự án <code>.agents/skills/</code> (bản cũ <code>.agent/skills/</code>), thư mục dùng chung <code>~/.gemini/antigravity/skills/</code>. Claude Code: <code>.claude/skills/</code> và <code>~/.claude/skills/</code>. Tên menu có thể thay đổi: kiểm tra trước buổi dạy. Gói mẫu .zip có trong templates/skills/.</p></aside>
+</section>
+
+<section class="slide" data-sec="3. Xây dựng Skill" data-title="Thực hành 1 và 2: xây dựng, triển khai, kiểm thử">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 3</span>Xây dựng Skill và triển khai<span class="tag practice"><i class="ph ph-hand"></i>Thực hành · 25 phút</span></div><h2 class="t">Thực hành: xây dựng, triển khai và kiểm thử Skill</h2></div>
+  <div class="s-body">
+    <div class="thb">
+      <div class="thb-b b1"><i class="ph ph-pencil-simple-line"></i><b>Thực hành 1</b><span class="pill n">15 phút</span></div>
+      <div class="thb-b b2"><i class="ph ph-flask"></i><b>Thực hành 2</b><span class="pill n">10 phút</span></div>
+    </div>
+    <div class="flow thq">
+      <div class="step"><span class="num">1</span><h4>Xác định nhiệm vụ</h4><ul><li><b>Công việc:</b> chọn một việc lặp lại, ví dụ viết nhận xét cuối kỳ.</li><li><b>Phạm vi:</b> lớp, môn, loại văn bản áp dụng.</li><li><b>Kết quả cần đạt:</b> thế nào là dùng được ngay.</li></ul></div>
+      <div class="step"><span class="num">2</span><h4>Chuẩn hóa cách làm</h4><ul><li><b>Các bước:</b> viết lại cách thầy cô vẫn làm, theo thứ tự.</li><li><b>Nguyên tắc, quy tắc:</b> giọng văn, độ dài, điều không được làm.</li><li><b>Tài liệu:</b> mẫu, bảng tra, một kết quả tốt làm ví dụ.</li></ul></div>
+      <div class="step"><span class="num">3</span><h4>Xây dựng Skill</h4><ul><li><b>Tên và mô tả:</b> làm gì, khi nào dùng, năng lực chính.</li><li><b>Hướng dẫn:</b> điền file mẫu SKILL-template.md: đầu vào, cách xử lý, đầu ra, tiêu chí đánh giá.</li><li><b>Rà soát:</b> đối chiếu checklist 12 mục.</li></ul></div>
+      <div class="step"><span class="num">4</span><h4>Kiểm thử &amp; hoàn thiện</h4><ul><li><b>Triển khai:</b> đưa Skill lên nền tảng, mở cuộc trò chuyện mới.</li><li><b>Kiểm thử kích hoạt:</b> yêu cầu rõ ràng, diễn đạt khác, không liên quan.</li><li><b>Kiểm thử kết quả:</b> chạy một yêu cầu 3 lần, đối chiếu tiêu chí.</li><li><b>Hoàn thiện:</b> sửa hướng dẫn, tăng phiên bản.</li></ul></div>
+    </div>
+    <div class="cols th12-low grow stretch">
+      <div class="card flat thg">
+        <h4><i class="ph ph-lightbulb blue"></i> Gợi ý chọn việc</h4>
+        <ul class="list tight small">
+          <li><b>Mầm non:</b> bản tin tuần gửi phụ huynh</li>
+          <li><b>Tiểu học:</b> phiếu bài tập cuối tuần</li>
+          <li><b>THCS, THPT:</b> kế hoạch bài dạy theo mẫu của tổ</li>
+          <li><b>ĐH, CĐ:</b> rubric chấm tiểu luận theo chuẩn đầu ra</li>
+        </ul>
+        <p class="thp"><i class="ph ph-package"></i><span><b>Sản phẩm:</b> SKILL.md đã kiểm thử, kèm ghi chép 3 lần thử.</span></p>
+      </div>
+      <div class="card flat">
+        <h4><i class="ph ph-wrench blue"></i> Kiểm thử chưa đạt: sửa ở đâu</h4>
+        <table class="tbl compact th12tbl" style="margin-top:6px">
+          <thead><tr><th>Gặp lỗi</th><th>Thường do</th><th>Sửa ở đâu</th></tr></thead>
+          <tbody>
+            <tr><td>Skill không được dùng</td><td>Mô tả thiếu cách nói người dùng hay gõ</td><td>Phần "Khi nào dùng" của mô tả</td></tr>
+            <tr><td>Dùng cả khi không cần</td><td>Mô tả quá rộng</td><td>Viết mô tả cụ thể hơn</td></tr>
+            <tr><td>Sai định dạng</td><td>Thiếu ví dụ đầu ra</td><td>Mục ví dụ</td></tr>
+            <tr><td>Kết quả chưa đạt</td><td>Thiếu bước hoặc tiêu chí</td><td>Các bước, tiêu chí chất lượng</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Thực hành đi đúng 4 bước của quy trình xây dựng Skill ở slide 14. Thực hành 1 gồm ba bước đầu (xác định nhiệm vụ, chuẩn hóa cách làm, xây dựng Skill), chưa cần công cụ AI, chỉ cần soạn thảo văn bản; mẫu trống: templates/SKILL-template.md; mô tả theo cấu trúc 3 phần ở slide 15; checklist 12 mục ở slide 9. Thực hành 2 là bước 4: triển khai lên nền tảng thầy cô dùng (slide 16), kiểm thử rồi hoàn thiện.</p><p>Thực hành 2 theo "Recommended Testing Approach" của Anthropic: triggering tests (triggers on obvious tasks, on paraphrased requests, doesn't trigger on unrelated topics) và functional tests; "Run the same request 3-5 times". Kiểm thử kích hoạt: yêu cầu rõ ràng và yêu cầu diễn đạt khác phải dùng Skill, yêu cầu không liên quan thì không. Skill mở thiếu (undertriggering): bổ sung chi tiết và cách nói vào mô tả; mở thừa (overtriggering): viết mô tả cụ thể hơn. Trên Claude, xem các bước AI đang làm để biết Skill đã được dùng.</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Tinh chỉnh, cải tiến chất lượng Skill" data-title="Nhờ AI review Skill">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 4</span>Tinh chỉnh, cải tiến chất lượng Skill</div><h2 class="t">Nhờ AI review Skill</h2><p class="sub">Dùng bất kỳ AI nào. Review trước, sửa sau; thầy cô quyết định nhận góp ý nào.</p></div>
+  <div class="s-body">
+    <div class="pills"><span class="pill r"><i class="ph ph-warning"></i>5 lỗi hay gặp ở Skill viết tay</span><span class="pill n">Mô tả chung chung</span><span class="pill n">Các bước mơ hồ</span><span class="pill n">Thiếu ví dụ đầu ra</span><span class="pill n">Tiêu chí cảm tính: "hay", "tốt"</span><span class="pill n">Quên quy tắc dữ liệu</span></div>
+    <div class="cols cols-2 grow ai-s">
+      <div class="code" data-file="Bước 1 · Câu lệnh review"><pre>Bạn là chuyên gia viết Skill cho AI. Hãy review file SKILL.md dưới đây, chưa sửa gì.
+[dán nội dung SKILL.md]
+
+Chấm theo 6 tiêu chí:
+1. Mô tả nói rõ làm gì và khi nào dùng
+2. Đủ 12 mục
+3. Các bước rõ ràng, đúng thứ tự
+4. Có ví dụ đầu ra
+5. Tiêu chí kiểm tra đo được
+6. Có quy tắc dữ liệu học sinh
+
+Trả về bảng: Tiêu chí | Đạt/Chưa | Vấn đề | Đề xuất sửa, xếp đề xuất theo mức độ quan trọng.</pre></div>
+      <div class="code" data-file="Bước 2 · Câu lệnh sửa"><pre>Hãy sửa file SKILL.md theo các góp ý số [1, 3, 4] ở trên.
+Giữ nguyên tên Skill và những phần tôi không yêu cầu sửa.
+Mô tả (description) viết theo cấu trúc: [làm gì] + [khi nào dùng, kèm cách nói hay gõ] + [năng lực chính], dưới 200 ký tự.
+Tăng phiên bản lên [1.1] và ghi các thay đổi vào mục "Nhật ký cải tiến".
+Trả về toàn bộ file SKILL.md hoàn chỉnh.</pre></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Phần này đi từ cách làm chung (nhờ AI review và sửa ngay trong cuộc trò chuyện) đến công cụ chuyên sâu skill-creator. Câu lệnh sửa chỉ định rõ phần được sửa để AI không tự ý viết lại toàn bộ Skill.</p><p>Ngoài lỗi lúc viết, Skill còn cần cập nhật khi chương trình, quy định của trường hoặc công cụ AI thay đổi. Câu lệnh mẫu có trong templates/cau-lenh-mau-skill.md.</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Tinh chỉnh, cải tiến chất lượng Skill" data-title="Skill-creator: công cụ chuyên sâu để tạo Skill">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 4</span>Tinh chỉnh, cải tiến chất lượng Skill<span class="tag claude"><i class="ph ph-sparkle"></i>Công cụ trên Claude</span></div><h2 class="t">Skill-creator: công cụ chuyên sâu để tạo Skill</h2></div>
+  <div class="s-body">
+    <div class="cols cols-5-7 grow ai-s">
+      <div class="cols gap-s">
+        <div class="card line-left"><p style="font-size:21px;color:var(--ink);line-height:1.45"><b>Skill-creator</b> là công cụ chuyên sâu do Anthropic xây dựng, chuyên phục vụ việc <b>tạo mới, sửa, cải tiến và đo chất lượng</b> Skill. Bản thân nó cũng là một Skill.</p></div>
+        <div class="card soft"><h4><i class="ph ph-user-focus blue"></i> Hình dung</h4><p class="small">Như có một chuyên viên soạn quy trình ngồi cạnh: hỏi đúng câu, viết đúng mẫu, thử giúp trước khi giao.</p></div>
+        <div class="card flat"><h4>Có ở đâu?</h4>
+          <ul class="list tight small">
+            <li><b>claude.ai:</b> có sẵn, Claude tự dùng khi thầy cô nhờ tạo Skill (cần bật Code execution)</li>
+            <li><b>Claude Code, Cowork:</b> cài dưới dạng plugin</li>
+            <li><b>Mã nguồn:</b> kho github.com/anthropics/skills</li>
+          </ul>
+        </div>
+      </div>
+      <div class="cols gap-s">
+        <table class="tbl compact">
+          <thead><tr><th style="width:22%">Skill-creator</th><th>Làm gì</th><th style="width:32%">Lợi ích cho thầy cô</th></tr></thead>
+          <tbody>
+            <tr><th>Phỏng vấn</th><td>Hỏi lần lượt mục đích, đầu vào, đầu ra, ví dụ, lưu ý</td><td>Không bỏ sót mục quan trọng</td></tr>
+            <tr><th>Viết Skill</th><td>Tạo SKILL.md đúng chuẩn, kèm tài liệu đi kèm nếu cần</td><td>Không lo sai cấu trúc, sai tên</td></tr>
+            <tr><th>Thử và đo</th><td>Đề xuất tình huống thử, chạy thử và đo hiệu quả của Skill</td><td>Biết Skill có thật sự giúp được việc</td></tr>
+            <tr><th>Tối ưu mô tả</th><td>Chỉnh mô tả (description) để AI nhận ra đúng lúc cần dùng</td><td>Skill được kích hoạt khi cần, không bị bỏ qua hay mở nhầm</td></tr>
+            <tr><th>Lưu và dùng</th><td>Lưu thành Skill trong Claude, bật là dùng</td><td>Không phải nén, tải file thủ công</td></tr>
+          </tbody>
+        </table>
+        <div class="callout"><i class="ph ph-lightbulb"></i><div>Hiểu cấu trúc Skill (Phần 2) và biết cách review giúp thầy cô <b>đánh giá được</b> Skill mà skill-creator viết ra.</div></div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Nguồn: trung tâm trợ giúp Claude (Creating custom skills) và kho anthropics/skills, nơi skill-creator được mô tả là công cụ để tạo Skill mới, sửa và cải tiến Skill có sẵn, đo hiệu quả của Skill, tối ưu mô tả để Skill được kích hoạt chính xác. Tính năng thử nghiệm, đo chất lượng có thể khác nhau tùy phiên bản và nơi dùng.</p><p>Câu lệnh nhờ AI viết Skill mới (dùng trên Gemini, ChatGPT) có trong templates/cau-lenh-mau-skill.md.</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Tinh chỉnh, cải tiến chất lượng Skill" data-title="Demo: tạo Skill mới bằng skill-creator">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 4</span>Tinh chỉnh, cải tiến chất lượng Skill<span class="tag claude"><i class="ph ph-sparkle"></i>Ví dụ trên Claude</span><span class="tag example"><i class="ph ph-cursor-click"></i>Bấm để xem</span></div><h2 class="t">Demo: tạo Skill mới bằng skill-creator</h2><p class="sub" style="max-width:none">Thầy cô mô tả việc cần đóng gói; skill-creator hỏi thêm, viết SKILL.md, đề xuất tình huống thử; thầy cô xem lại rồi lưu.</p></div>
+  <div class="s-body">
+    <div class="scd" data-demo data-state="all">
+      <div class="scd-steps">
+        <button class="scd-step" data-go="1"><span class="num">1</span><span><b>Gọi skill-creator, mô tả việc</b><span class="d">Gõ /skill-creator, kèm mẫu nếu có</span></span></button>
+        <button class="scd-step" data-go="2"><span class="num">2</span><span><b>skill-creator hỏi thêm</b><span class="d">Hỏi mục đích, đầu vào, đầu ra, lưu ý</span></span></button>
+        <button class="scd-step" data-go="3"><span class="num">3</span><span><b>Viết SKILL.md, đề xuất thử</b><span class="d">File đúng chuẩn, kèm tình huống thử</span></span></button>
+        <button class="scd-step" data-go="4"><span class="num">4</span><span><b>Xem lại, lưu, thử</b><span class="d">Bật Skill, thử ở cuộc trò chuyện mới</span></span></button>
+        <button class="scd-step all" data-go="all"><span class="num"><i class="ph ph-eye"></i></span><span><b>Xem tất cả</b></span></button>
+      </div>
+      <div class="chat">
+        <div class="chat-h"><i class="ph-fill ph-asterisk logo"></i>Claude</div>
+        <div class="chat-b">
+          <div class="msg-u" data-s="1"><span class="att"><i class="ph ph-file-doc"></i>Mau_thong_bao.docx</span><span class="slash">/skill-creator</span> Hãy tạo một Skill giúp tôi soạn thông báo gửi phụ huynh theo mẫu của trường.</div>
+          <div class="msg-c" data-s="2"><span class="use"><i class="ph ph-cube"></i>Using skill-creator</span><p>Để viết Skill đúng việc, thầy cô cho biết thêm:</p><ol class="qgrid"><li>Thông báo thường về việc gì?</li><li>Thầy cô cung cấp những thông tin nào?</li><li>Giọng văn, độ dài ra sao?</li><li>Điều gì không được đưa vào?</li></ol></div>
+          <div class="msg-u" data-s="2">Họp phụ huynh, lịch nghỉ, các khoản thu; tôi đưa ngày giờ, địa điểm, nội dung; trang trọng, dưới 200 chữ; không nêu tên học sinh.</div>
+          <div class="msg-c res" data-s="3">
+            <div><p>Đã viết Skill <b>thong-bao-phu-huynh</b>. Đề xuất 3 tình huống thử:</p><ul><li>Họp phụ huynh cuối kỳ I</li><li>Lịch nghỉ Tết Nguyên đán</li><li>Thiếu địa điểm: Skill phải hỏi lại</li></ul></div>
+            <pre class="skmd"><span class="p">---</span>
+<span class="k">name:</span> thong-bao-phu-huynh
+<span class="k">description:</span> Soạn thông báo gửi phụ huynh theo mẫu của trường. Dùng khi cần thông báo họp phụ huynh, lịch nghỉ, các khoản thu.
+<span class="p">---</span>
+<span class="h">## Các bước</span>
+1. Đọc thông tin; thiếu ngày giờ, địa điểm thì hỏi lại.
+2. Viết theo Mau_thong_bao.docx: tiêu đề, nội dung, thời gian, liên hệ.
+3. Trang trọng, dưới 200 chữ; không nêu tên học sinh.</pre>
+          </div>
+          <div class="save-row" data-s="4"><span class="btn-save"><i class="ph ph-floppy-disk"></i>Lưu Skill</span><span class="sw">Customize &gt; Skills: thong-bao-phu-huynh <i class="ph-fill ph-toggle-right"></i>Bật</span><span class="newchat">Cuộc trò chuyện mới: "Soạn thông báo họp phụ huynh cuối kỳ I lớp 9A"</span><span class="use"><i class="ph ph-cube"></i>Using thong-bao-phu-huynh</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Slide tương tác: bấm từng bước để làm nổi phần tương ứng trong cuộc trò chuyện; "Xem tất cả" hiện lại toàn bộ. Giao diện là bản minh họa đã rút gọn. Gõ /skill-creator để gọi đích danh Skill này (trong Claude Code, Skill chạy được như một lệnh); cũng có thể chỉ mô tả việc, Claude tự dùng skill-creator khi được nhờ tạo Skill. Quy trình theo trung tâm trợ giúp Claude (Creating custom skills): mô tả Skill và tải mẫu hoặc ví dụ lên, trả lời các câu hỏi Claude đặt ra, Claude tạo SKILL.md, sau đó lưu, bật và thử; khi Skill được dùng sẽ hiện dòng "Using [tên Skill]". Trên claude.ai, skill-creator có sẵn, cần bật Code execution.</p><p>Cách mở đầu thứ hai, rất hợp với giáo viên: làm việc cùng AI đến khi ưng kết quả, rồi nói "Biến quy trình chúng ta vừa làm trong cuộc trò chuyện này thành một Skill để tôi dùng lại."</p><p>Sau khi lưu: đối chiếu checklist 12 mục (slide 9), chạy 3 yêu cầu thử, ghi phiên bản. Chuyển ý sang phần tìm Skill có sẵn: trước khi tạo mới, nên tìm xem đã có Skill phù hợp chưa.</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Tinh chỉnh, cải tiến chất lượng Skill" data-title="Tìm Skill có sẵn từ nguồn uy tín">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 4</span>Tinh chỉnh, cải tiến chất lượng Skill<span class="tag claude"><i class="ph ph-sparkle"></i>Claude, ChatGPT</span></div><h2 class="t">Tìm Skill có sẵn từ nguồn uy tín</h2><p class="sub" style="max-width:none">Ngoài Skill tự viết, có thể tìm kiếm và sử dụng Skill đã được chia sẻ: ưu tiên nguồn chính thức, kiểm tra kỹ Skill của cộng đồng trước khi dùng.</p></div>
+  <div class="s-body">
+    <div class="cols cols-7-5 grow ai-s">
+      <div class="cols gap-s">
+        <h3 class="col-h">Tìm ở đâu</h3>
+        <div class="src3">
+          <div class="sr sr-off"><div class="sr-h"><i class="ph ph-seal-check"></i><b>Nguồn chính thức</b><span class="lv">Tin cậy cao</span></div>
+            <dl><dt>Claude</dt><dd>Customize &gt; Skills &gt; nút +: Skill của Anthropic (tạo Word, Excel, PowerPoint, PDF) và Skill của đối tác (Notion, Canva, Figma, Atlassian,...).</dd><dt>ChatGPT</dt><dd>Plugins &gt; tab Skills: Skill đã cài, Skill được chia sẻ trong tài khoản của trường; có sẵn skill-creator.</dd></dl></div>
+          <div class="sr sr-org"><div class="sr-h"><i class="ph ph-users-three"></i><b>Trong tổ, trong trường</b><span class="lv">Sát việc nhất</span></div>
+            <p>Thư viện Skill của tổ; Skill được chia sẻ trong tài khoản Claude hoặc ChatGPT của trường: đã viết, đã thử, đang dùng.</p></div>
+          <div class="sr sr-com"><div class="sr-h"><i class="ph ph-globe"></i><b>Cộng đồng</b><span class="lv">Kiểm tra kỹ</span></div>
+            <p>Thư mục mở như skills.sh, kho GitHub của các tổ chức uy tín: hữu ích để tham khảo cách viết; ưu tiên Skill có thông tin kiểm tra an toàn.</p></div>
+        </div>
+      </div>
+      <div class="cols gap-s">
+        <h3 class="col-h">Kiểm tra trước khi dùng</h3>
+        <div class="card soft fchk">
+          <ul class="gl">
+            <li><b>Đọc toàn bộ file:</b> hiểu Skill làm gì trước khi bật.</li>
+            <li><b>Chú ý mã và tài nguyên đi kèm:</b> đoạn mã, thư viện phụ thuộc, hình ảnh, script.</li>
+            <li><b>Cảnh giác với kết nối ra ngoài:</b> chỉ dẫn gửi dữ liệu hoặc mở trang web lạ.</li>
+            <li><b>Chạy thử trước:</b> thử một yêu cầu đơn giản trước khi dùng cho việc thật.</li>
+            <li><b>Ghi nguồn, phiên bản:</b> đưa vào thư viện của tổ sau khi đã kiểm tra.</li>
+          </ul>
+        </div>
+        <div class="callout"><i class="ph ph-arrows-left-right"></i><div><b>Chuẩn mở:</b> Skill theo chuẩn Agent Skills (agentskills.io); cùng một Skill dùng được trên Claude, ChatGPT và nhiều công cụ AI khác.</div></div>
+      </div>
+    </div>
+    <p class="src">Nguồn: Claude, Skills for organizations, partners, and the ecosystem (18/12/2025); trung tâm trợ giúp Claude, Using skills in Claude; OpenAI Help, Skills in ChatGPT</p>
+  </div>
+  <aside class="notes"><p>Nối từ demo skill-creator: ngoài tự viết hoặc nhờ skill-creator tạo, có thể dùng Skill đã được chia sẻ; trước khi tạo mới, nên tìm xem đã có Skill phù hợp chưa.</p><p>Nguồn chính thức trên Claude: "A growing collection of partner-built skills is now available at claude.com/connectors" (blog Claude, 18/12/2025). Thư mục gồm Skill của Anthropic (tạo Word, Excel, PowerPoint, PDF) và Skill của đối tác như Notion, Figma, Atlassian, Canva, Cloudflare, Stripe, Zapier. Trong ứng dụng: Customize &gt; Skills, bấm + để mở thư mục hoặc tải Skill lên (Cowork: Customize, bấm +, chọn tab Skills); Skill cần bật Code execution. Kho mã nguồn mẫu của Anthropic: github.com/anthropics/skills (skill-creator, Skill tạo file văn phòng, mẫu Skill trống).</p><p>ChatGPT (OpenAI Help, Skills in ChatGPT): "in the sidebar, select Plugins, then in the Plugin Directory, select the Skills tab"; trang Skills có các mục Installed, Created by me, Shared with me, Shared by [tên tổ chức]; tài khoản đủ điều kiện có sẵn skill-creator. Skills trên ChatGPT có ở tài khoản tổ chức, trường học khi quản trị viên bật.</p><p>Cộng đồng: skills.sh là thư mục mở do Vercel vận hành, mỗi Skill có trang thông tin kiểm tra an toàn; nhiều kho GitHub của cá nhân chưa được kiểm chứng. Chuẩn mở: "We're also publishing Agent Skills as an open standard... the same skill should work whether you're using Claude or other AI platforms" (agentskills.io).</p><p>Kiểm tra trước khi dùng, theo trung tâm trợ giúp Claude: chỉ cài Skill từ nguồn tin cậy; "review it before enabling. Start by reading the contents of the files bundled in the skill to understand what it does, paying particular attention to code dependencies and bundled resources like images or scripts." Coi việc cài Skill như cài phần mềm. Tên menu có thể thay đổi; kiểm tra lại trên tài khoản của trường trước buổi dạy.</p></aside>
+</section>
+
+<section class="slide" data-sec="4. Tinh chỉnh, cải tiến chất lượng Skill" data-title="Thực hành 3: cải tiến Skill, tạo Skill bằng skill-creator">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 4</span>Tinh chỉnh, cải tiến chất lượng Skill<span class="tag practice"><i class="ph ph-hand"></i>Thực hành 3 · 20 phút</span></div><h2 class="t">Thực hành 3: cải tiến Skill, tạo Skill bằng skill-creator</h2></div>
+  <div class="s-body">
+    <div class="cols cols-2 grow stretch">
+      <div class="card th3c"><div class="th3-h"><span class="num">A</span><h3>Cải tiến Skill tự viết</h3><span class="pill n">10 phút</span></div><p class="th3-t"><i class="ph ph-chats-circle"></i>Bất kỳ AI nào · câu lệnh review, câu lệnh sửa</p><ol class="th3-s"><li><b>Review:</b> mở cuộc trò chuyện mới, dán SKILL.md của Thực hành 1 kèm câu lệnh review.</li><li><b>Chọn góp ý:</b> ghi số các góp ý muốn nhận, bỏ góp ý không hợp với cách làm của mình.</li><li><b>Sửa:</b> dùng câu lệnh sửa với các góp ý đã chọn; nhận bản 1.1 kèm nhật ký cải tiến.</li><li><b>Kiểm thử lại:</b> chạy lại 3 yêu cầu thử của Thực hành 2, so với bản trước.</li></ol><div class="th3-eg"><p class="th3-eg-h"><i class="ph ph-list-checks"></i>Ví dụ: AI trả 4 góp ý, thầy cô nhận góp ý 1, 3, 4</p><table class="tbl compact th3-tbl"><tbody><tr><td class="c">1</td><td>Mô tả: thêm cách nói "nhận xét cuối kỳ"</td><td class="ok"><i class="ph-fill ph-check-circle"></i>Nhận</td></tr><tr><td class="c">2</td><td>Đổi sang giọng văn thân mật</td><td class="no">Bỏ: khác quy định của trường</td></tr><tr><td class="c">3</td><td>Tách bước 2 thành hai bước</td><td class="ok"><i class="ph-fill ph-check-circle"></i>Nhận</td></tr><tr><td class="c">4</td><td>Thêm một nhận xét mẫu làm ví dụ đầu ra</td><td class="ok"><i class="ph-fill ph-check-circle"></i>Nhận</td></tr></tbody></table></div><p class="th3-o"><i class="ph ph-package"></i><span><b>Sản phẩm:</b> Skill tự viết bản 1.1, kèm bảng review.</span></p></div>
+      <div class="card th3c"><div class="th3-h"><span class="num">B</span><h3>Tạo Skill thứ hai bằng skill-creator</h3><span class="pill n">10 phút</span></div><p class="th3-t"><i class="ph ph-sparkle"></i>Claude · skill-creator</p><ol class="th3-s"><li><b>Gọi skill-creator:</b> gõ /skill-creator, mô tả việc cần đóng gói, đính kèm mẫu hoặc ví dụ.</li><li><b>Trả lời câu hỏi:</b> skill-creator hỏi mục đích, đầu vào, đầu ra, lưu ý.</li><li><b>Xem lại SKILL.md:</b> đối chiếu checklist 12 mục, yêu cầu sửa chỗ chưa đúng.</li><li><b>Lưu, thử, so sánh:</b> bật Skill, chạy 3 tình huống thử ở cuộc trò chuyện mới; viết 3 dòng so sánh với Skill tự viết.</li></ol><div class="code sm" data-file="Yêu cầu mẫu"><pre>/skill-creator Hãy tạo một Skill giúp tôi [soạn thông báo gửi phụ huynh]
+theo mẫu đính kèm [Mau_thong_bao.docx].</pre></div><p class="th3-o"><i class="ph ph-package"></i><span><b>Sản phẩm:</b> Skill thứ hai, kèm 3 dòng so sánh.</span></p></div>
+    </div>
+    <div class="th3-prep"><b><i class="ph ph-folder-open"></i>Chuẩn bị</b><span>SKILL.md và 3 yêu cầu thử của Thực hành 1, 2</span><span>File cau-lenh-mau-skill.md</span><span>Checklist 12 mục của SKILL.md</span><span>Claude đã bật Code execution</span></div>
+  </div>
+  <aside class="notes"><p>Hai Skill làm ra ở đây là sản phẩm sẽ chia sẻ ở Phần 6. Phần A dùng 2 câu lệnh mẫu của slide 18 (câu lệnh review, câu lệnh sửa; file templates/cau-lenh-mau-skill.md): câu lệnh sửa ghi số các góp ý đã chọn, nâng phiên bản lên 1.1 và ghi nhật ký cải tiến. Phần B đi theo 4 bước của demo skill-creator ở slide 20; trước khi tạo, có thể tìm xem đã có Skill phù hợp chưa (slide 21). Trên ChatGPT, tài khoản đủ điều kiện cũng có sẵn skill-creator.</p><p>Sản phẩm Thực hành 3: Skill tự viết bản 1.1 kèm bảng review; Skill thứ hai tạo bằng skill-creator kèm 3 dòng so sánh (ví dụ: thời gian tạo, mức đầy đủ của các mục, chất lượng kết quả khi thử). Lớp đông: chia cặp, một người làm A, một người làm B rồi đổi.</p><p>Ví dụ ở phần A khớp câu lệnh sửa mẫu "theo các góp ý số [1, 3, 4]": góp ý 2 bị bỏ vì khác quy định của trường, cho thấy thầy cô là người quyết định nhận góp ý nào. Yêu cầu mẫu ở phần B giống demo ở slide 20; thay phần trong ngoặc vuông bằng việc của mình.</p></aside>
+</section>
+
+<section class="slide" data-sec="5. Skill, Project và cách tổ chức công việc" data-title="Project là gì? Cấu trúc 3 thành phần">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 5</span>Skill, Project và cách tổ chức công việc</div><h2 class="t">Project là gì? Cấu trúc 3 thành phần</h2></div>
+  <div class="s-body">
+    <div class="cols cols-7-5 ai-s">
+      <div class="card line-left"><p style="font-size:22px;color:var(--ink);line-height:1.45"><b>Project</b> là một không gian làm việc riêng cho một dự án, chủ đề hoặc một nhóm việc, lưu sẵn <b>ngữ cảnh (context)</b>: mọi cuộc trò chuyện trong đó dùng chung hướng dẫn và tài liệu.</p></div>
+      <div class="card soft"><h4><i class="ph ph-door-open blue"></i> Hình dung: phòng làm việc của tổ</h4><p class="small">Trên tường dán nội quy, trong tủ có sẵn tài liệu. Buổi làm việc nào trong phòng cũng theo nội quy đó, dùng tài liệu đó.</p></div>
+    </div>
+    <div class="cols cols-3 grow stretch">
+      <div class="card"><div class="ic"><i class="ph ph-scroll"></i></div><h3>Hướng dẫn chung</h3><p>Vai trò, quy tắc, giọng văn áp dụng cho <b>mọi</b> cuộc trò chuyện trong Project. Cùng bản chất với <b>rules</b> (quy tắc chung).</p><p class="xs" style="margin-top:8px"><b>Ví dụ:</b> "Bạn hỗ trợ Tổ Ngữ văn 9, bám Chương trình GDPT 2018, trả lời ngắn gọn."</p><p class="small benefit"><i class="ph ph-check-circle"></i><span><b>Lợi ích:</b> không phải nhắc lại vai trò, yêu cầu ở mỗi cuộc trò chuyện.</span></p></div>
+      <div class="card"><div class="ic"><i class="ph ph-books"></i></div><h3>Kho tài liệu</h3><p>Tài liệu nền AI tra cứu khi trả lời: chương trình, quy định, mẫu biểu.</p><p class="xs" style="margin-top:8px"><b>Ví dụ:</b> chương trình môn Ngữ văn, quy định đánh giá học sinh, mẫu biểu của trường.</p><p class="small benefit"><i class="ph ph-check-circle"></i><span><b>Lợi ích:</b> tải lên một lần, không phải tải lại tài&nbsp;liệu cho mỗi lần hỏi.</span></p></div>
+      <div class="card"><div class="ic"><i class="ph ph-chats"></i></div><h3>Các cuộc trò chuyện</h3><p>Mỗi việc một cuộc trò chuyện, tự động dùng hướng dẫn và tài liệu ở trên.</p><p class="xs" style="margin-top:8px"><b>Ví dụ:</b> "Đề giữa kỳ I", "Kế hoạch dạy học tuần 8", "Thư mời họp phụ huynh".</p><p class="small benefit"><i class="ph ph-check-circle"></i><span><b>Lợi ích:</b> mở cuộc trò chuyện mới vẫn giữ nguyên bối cảnh, không phải giải thích lại từ đầu.</span></p></div>
+    </div>
+    <div class="callout"><i class="ph ph-arrow-u-up-left"></i><div><b>Đã học ở Module 3:</b> Project Design Canvas, System Prompt 7 thành phần (chính là phần hướng dẫn chung), kết nối tài liệu từ Google Drive (chính là kho tài&nbsp;liệu).</div></div>
+  </div>
+  <aside class="notes"><p>Sau khi đã viết và nâng chất lượng Skill, phần này đặt Skill cạnh Project để chọn đúng nơi dùng. Project là khái niệm học viên đã gặp ở Module 3 (AI Project). Ở đây nhắc lại cấu trúc để so sánh với Skill ở slide sau.</p><p>Nhấn mạnh giá trị cốt lõi của Project là ngữ cảnh (context) được lưu sẵn: hướng dẫn và tài liệu nằm trong Project, nên mỗi cuộc trò chuyện mới không phải tải lại tài liệu hay giải thích lại bối cảnh. Đây là điểm khác với Skill: Project giữ bối cảnh cho một nhóm việc, Skill giữ cách làm cho một việc.</p></aside>
+</section>
+
+<section class="slide" data-sec="5. Skill, Project và cách tổ chức công việc" data-title="Skill và Project: khác nhau, khi nào dùng">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 5</span>Skill, Project và cách tổ chức công việc</div><h2 class="t">Skill và Project: So sánh</h2></div>
+  <div class="s-body">
+    <table class="tbl compact th-nowrap">
+      <thead><tr><th style="width:15%">Tiêu chí</th><th>Project</th><th style="background:#dbe5ff">Skill</th></tr></thead>
+      <tbody>
+        <tr><th>Bản chất</th><td>Là một không gian làm việc có ngữ cảnh, có lưu trữ kiến thức, chứa tập hợp tài liệu, và hướng dẫn chung về một dự án.</td><td class="hl">Là một kỹ năng, quy trình, kịch bản hoặc tập lệnh hướng dẫn AI cách thực hiện một công việc cụ thể.</td></tr>
+        <tr><th>Thành phần</th><td>Hướng dẫn chung (Instructions) áp dụng cho mọi cuộc trò chuyện trong Project; kho tài liệu (Project knowledge): PDF, Word, bảng tính.</td><td class="hl">Thư mục có file SKILL.md (tên, mô tả, các bước làm); có thể kèm tài liệu tham chiếu, mẫu đầu ra, đoạn mã.</td></tr>
+        <tr><th>Phạm vi</th><td>Phạm vi là Project được tạo.</td><td class="hl">Dùng ở mọi cuộc trò chuyện, mọi Project; chia sẻ được cho đồng nghiệp.</td></tr>
+        <tr><th>Mục đích sử dụng</th><td>Giữ bối cảnh chung cho nhiều cuộc trò chuyện: không phải tải lại tài liệu, nhắc lại yêu cầu mỗi lần.</td><td class="hl">Làm đúng một việc lặp lại theo quy trình chuẩn; AI chỉ nạp Skill khi yêu cầu khớp mô tả.</td></tr>
+      </tbody>
+    </table>
+    <div class="s-statement"><p class="big" style="font-size:28px;max-width:none">Rules cho AI biết điều <em>luôn phải theo</em>. Project cho AI biết <em>bối cảnh</em>. Skill cho AI biết <em>cách làm</em>.</p></div>
+    <div class="cols cols-6-6 gap-s ai-s">
+      <table class="tbl compact">
+        <thead><tr><th>Tình huống</th><th style="width:21%">Chọn</th></tr></thead>
+        <tbody>
+          <tr><td>Hỏi một lần rồi thôi (tóm tắt nhanh một bài báo)</td><td><span class="pill n">Prompt</span></td></tr>
+          <tr><td>Quy tắc, luật lệ AI luôn phải tuân theo (format, văn phong, cách thức)</td><td><span class="pill a"><i class="ph ph-scroll"></i>Rules</span></td></tr>
+          <tr><td>Nhiều việc chung một bối cảnh, một bộ tài liệu (hỏi đáp quy chế chuyên môn)</td><td><span class="pill"><i class="ph ph-folder-open"></i>Project</span></td></tr>
+          <tr><td>Một việc lặp lại, làm đúng quy trình (viết nhận xét cuối kỳ)</td><td><span class="pill tl"><i class="ph ph-cube"></i>Skill</span></td></tr>
+          <tr><td>Một nhóm việc của tổ, có tài liệu chung và vài quy trình chuẩn</td><td><span class="pill g"><i class="ph ph-stack"></i>Project + Skill</span></td></tr>
+        </tbody>
+      </table>
+      <div class="card soft">
+        <div class="kick" style="margin-bottom:8px"><span class="tag claude"><i class="ph ph-sparkle"></i>Ví dụ trên Claude</span></div>
+        <table class="tbl compact">
+          <tbody>
+            <tr><th style="width:18%"><span class="pill a"><i class="ph ph-scroll"></i>Rules</span></th><td><b>Quy tắc tuân theo:</b> giọng văn khích lệ, không nêu hoàn cảnh gia đình, không so sánh học sinh với nhau</td></tr>
+            <tr><th><span class="pill"><i class="ph ph-folder-open"></i>Project</span></th><td><b>"Tổ Ngữ văn 9":</b> Instructions (vai trò, quy tắc của tổ); Project knowledge (chương trình, quy định đánh giá, mẫu biểu)</td></tr>
+            <tr><th><span class="pill tl"><i class="ph ph-cube"></i>Skill</span></th><td><b>Skill kích hoạt:</b> <code class="k" style="white-space:nowrap">viet-nhan-xet-hoc-sinh</code>, <code class="k" style="white-space:nowrap">tham-dinh-nhan-xet</code></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Bảng so sánh theo 4 tiêu chí: bản chất, thành phần, phạm vi, mục đích sử dụng. Căn cứ chính thức: trung tâm trợ giúp Claude (What are skills?): "Projects provide static background knowledge that's always loaded when you start chats within them. Skills provide specialized procedures that activate dynamically when needed and work everywhere across Claude." Dòng "Project + Skill" ở bảng tình huống nghĩa là dùng cả hai: Project giữ tài liệu chung của tổ, Skill giữ từng quy trình chuẩn.</p><p>Anthropic tóm tắt trong khóa Claude 101: "Project lưu kiến thức, Skill thực hiện công việc." Bài "Skills explained" cũng phân biệt: Project là kiến thức nền, Skill là kiến thức quy trình.</p><p>Rules (quy tắc chung) là chỉ dẫn luôn có mặt: trên claude.ai là Instructions của Project và phần tùy chọn cá nhân trong Settings; ChatGPT là Custom instructions; với công cụ tác tử như Claude Code là file CLAUDE.md và thư mục .claude/rules/. Tài liệu Claude Code ghi rõ: rules được nạp vào mọi phiên; chỉ dẫn cho một việc cụ thể, không cần có mặt mọi lúc, thì nên viết thành Skill. Mẹo: điều ngắn, đúng với mọi việc thì đưa vào rules; quy trình nhiều bước thì viết thành Skill.</p><p>Cho học viên tự xếp 2 đến 3 việc của mình vào bảng bên phải. Dòng "Project + Skill" là mô hình khuyến khích cho tổ chuyên môn và là nền tảng của LO 5.2.</p><p>Ví dụ trên Claude, theo thứ tự câu chốt: Rules là các quy tắc của chính việc cần làm, AI phải theo trong mọi lần làm việc đó; Project "Tổ Ngữ văn 9" giữ bối cảnh qua Instructions và Project knowledge; Skill giữ cách làm, bật một lần là dùng được trong mọi Project. Hai thứ cùng hoạt động trong một cuộc trò chuyện, nên giáo viên chỉ cần gõ yêu cầu ngắn.</p></aside>
+</section>
+
+<section class="slide" data-sec="6. Chia sẻ Skill" data-title="Tái sử dụng Skill cho Project khác, chia sẻ cho mọi người">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 6</span>Tái sử dụng và chia sẻ Skill</div><h2 class="t">Tái sử dụng Skill cho Project khác, chia sẻ cho mọi người</h2></div>
+  <div class="s-body">
+    <div class="cols cols-2 ai-s">
+      <div class="card line-left">
+        <h3><i class="ph ph-recycle blue"></i> Tái sử dụng cho Project khác</h3>
+        <p class="small">Một Skill dùng được cho nhiều Project: Project lớp 9A, Project tổ Ngữ văn, Project dự án STEM. Cách bật trên từng nền tảng ở bảng dưới.</p>
+        <ul class="list tight small" style="margin-top:8px">
+          <li><b>Dùng lại nguyên bản:</b> khác biệt nhỏ (lớp, độ dài, giọng văn) đưa vào yêu cầu khi dùng.</li>
+          <li><b>Nhân bản khi cần biến thể:</b> đổi môn hoặc đổi quy trình thì sao chép thành Skill mới, đặt tên, phiên bản riêng.</li>
+          <li><b>Ghi rõ trong thư viện:</b> bản gốc và các biến thể, người phụ trách, bản đang dùng.</li>
+        </ul>
+      </div>
+      <div class="card line-left">
+        <h3><i class="ph ph-share-network blue"></i> Chia sẻ cho mọi người: 3 cấp</h3>
+        <div class="vflow" style="margin-top:6px">
+          <div class="vs"><span class="num sm">1</span><div><h4>Đồng nghiệp</h4><p>Gửi file SKILL.md hoặc gói .zip</p></div></div>
+          <div class="vs"><span class="num sm">2</span><div><h4>Cả tổ</h4><p>Thư viện Skill chung trên Drive</p></div></div>
+          <div class="vs"><span class="num sm">3</span><div><h4>Cả trường</h4><p>Chia sẻ trong tài khoản tổ chức của trường</p></div></div>
+        </div>
+      </div>
+    </div>
+    <table class="tbl compact">
+      <thead><tr><th style="width:13%">Nền tảng</th><th>Dùng lại ở Project khác</th><th>Chia sẻ cho người khác</th></tr></thead>
+      <tbody>
+        <tr><th>Claude</th><td>Bật một lần ở Customize &gt; Skills: dùng được trong mọi cuộc trò chuyện và mọi Project</td><td><b>Share</b> cho từng người hoặc <b>Publish to org</b> cho cả trường (tài khoản của trường); hoặc gửi file .zip để đồng nghiệp tự tải lên</td></tr>
+        <tr><th>ChatGPT</th><td>Bật trong mục Plugins &gt; Skills (tùy gói); hoặc đính kèm file vào từng Project</td><td>Chia sẻ trong không gian làm việc của trường (tùy gói); hoặc gửi file</td></tr>
+        <tr><th>Gemini</th><td>Gắn file SKILL.md bằng @, hoặc đưa vào phần kiến thức của Gem</td><td>Chia sẻ file trên Drive; hoặc chia sẻ Gem (tùy tài khoản)</td></tr>
+      </tbody>
+    </table>
+    <div class="callout warn"><i class="ph ph-shield-check"></i><div><b>Trước khi chia sẻ:</b> xóa mọi thông tin cá nhân, ghi người phụ trách và phiên bản, thêm vài dòng hướng dẫn dùng. <b>Khi nhận Skill của người khác:</b> đọc kỹ trước khi cài, như khi cài phần mềm.</div></div>
+  </div>
+  <aside class="notes"><p>Ý chính: Skill là tài sản dùng chung, dùng được cho nhiều Project. Khác biệt nhỏ đưa vào yêu cầu khi dùng; cần biến thể cho môn khác, quy trình khác thì nhân bản thành Skill mới có tên, phiên bản riêng và ghi vào thư viện của tổ để biết bản nào đang dùng.</p><p>Nguồn: trung tâm trợ giúp Claude (Using skills in Claude; Creating custom skills): Skill tạo trên claude.ai thuộc về từng tài khoản; tài khoản của tổ chức có thể chia sẻ cho người cụ thể hoặc xuất bản cho cả tổ chức (có thể có bước quản trị viên duyệt). Anthropic lưu ý Skill không tự đồng bộ giữa các nền tảng, nên giữ bản gốc trong thư viện. Định dạng Skill là chuẩn mở nên cùng một file dùng được ở nhiều công cụ. Tên nút và quyền thay đổi theo gói tài khoản: kiểm tra lại trên tài khoản của trường trước buổi dạy.</p></aside>
+</section>
+
+<section class="slide" data-sec="6. Chia sẻ Skill" data-title="Thư viện Skill của tổ và Thực hành 4">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 6</span>Tái sử dụng và chia sẻ Skill<span class="tag practice"><i class="ph ph-hand"></i>Thực hành 4 · 10 phút</span></div><h2 class="t">Thư viện Skill của tổ và Thực hành 4</h2></div>
+  <div class="s-body">
+    <div class="cols cols-6-6 grow ai-s">
+      <div class="cols gap-s">
+        <div class="tree">
+          <div><i class="ph ph-google-drive-logo"></i><span class="d">Thu_vien_Skill_To_Van9/</span> <span class="n">tủ học liệu chung của tổ</span></div>
+          <div class="i1"><i class="ph ph-list-bullets"></i><span class="f">00_DANH_MUC.md</span> <span class="n">danh mục, người phụ trách</span></div>
+          <div class="i1"><i class="ph ph-folder"></i><span class="d">viet-nhan-xet-hoc-sinh/</span> · <span class="d">tham-dinh-nhan-xet/</span></div>
+          <div class="i1"><i class="ph ph-folder"></i><span class="d">soan-phieu-hoc-tap/</span> <span class="n">Skill đang thử nghiệm</span></div>
+          <div class="i1"><i class="ph ph-archive"></i><span class="d">_luu_tru/</span> <span class="n">phiên bản cũ</span></div>
+        </div>
+        <table class="tbl compact">
+          <thead><tr><th>Skill</th><th>Phụ trách</th><th class="c">Bản</th><th>Trạng thái</th></tr></thead>
+          <tbody>
+            <tr><td><code class="k">viet-nhan-xet-hoc-sinh</code></td><td>Cô Vy</td><td class="c">1.1</td><td><span class="pill g">Đang dùng</span></td></tr>
+            <tr><td><code class="k">tham-dinh-nhan-xet</code></td><td>Thầy Nam</td><td class="c">1.0</td><td><span class="pill g">Đang dùng</span></td></tr>
+            <tr><td><code class="k">soan-phieu-hoc-tap</code></td><td>Cô Mai</td><td class="c">0.9</td><td><span class="pill a">Thử nghiệm</span></td></tr>
+          </tbody>
+        </table>
+        <div class="pills"><span class="pill"><i class="ph ph-cube"></i>Một Skill, một việc</span><span class="pill"><i class="ph ph-text-aa"></i>Tên theo việc, viết thường không dấu</span><span class="pill"><i class="ph ph-clock-counter-clockwise"></i>Sửa là tăng bản, ghi nhật ký</span></div>
+      </div>
+      <div class="card soft">
+        <div class="vflow">
+          <div class="vs"><span class="num">A</span><div><h4>Đăng ký vào thư viện · 3'</h4><p>Thêm hai Skill của Thực hành 3 vào 00_DANH_MUC.md: tên, người phụ&nbsp;trách, phiên bản, trạng thái. Chuyển bản cũ vào _luu_tru/.</p></div></div>
+          <div class="vs"><span class="num">B</span><div><h4>Chia sẻ cho đồng nghiệp · 5'</h4><p>Kiểm tra không còn thông tin học sinh, rồi gửi gói .zip (hoặc dùng Share) cho người ngồi cạnh. Đồng nghiệp tải lên, bật và chạy thử một yêu cầu.</p></div></div>
+          <div class="vs"><span class="num">C</span><div><h4>Ghi phản hồi · 2'</h4><p>Đồng nghiệp ghi 1 điểm dùng tốt, 1 điểm cần sửa vào nhật ký cải tiến của Skill.</p></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Thư viện trên Drive là bản gốc; từ đây mỗi người tải lên AI mình dùng. File 00_DANH_MUC.md giúp đồng nghiệp biết tổ đang có Skill nào, ai phụ trách, bản nào đang dùng; bản cũ chuyển vào _luu_tru/ để có thể khôi phục.</p><p>Sản phẩm Thực hành 4: danh mục thư viện đã cập nhật hai Skill, một lượt chia sẻ cho đồng nghiệp kèm phản hồi ghi trong nhật ký cải tiến. Đây là lần đầu Skill được người khác dùng: phản hồi của đồng nghiệp là nguồn cải tiến tốt nhất.</p></aside>
+</section>
+
+<section class="slide" data-sec="7. Tổng kết" data-title="Khung 4D trong vòng đời một Skill">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 7</span>Tổng kết</div><h2 class="t">Khung 4D trong vòng đời một Skill</h2></div>
+  <div class="s-body">
+    <div class="fourd">
+      <div class="dcard d1"><span class="dn">D1 · DELEGATION</span><h3>Giao việc</h3><p>Chọn việc đáng đóng gói; chọn Prompt, Project hay Skill cho đúng việc; tìm Skill có sẵn trước khi tự viết.</p><div class="subs"><span>Nhận thức vấn đề<i>Problem Awareness</i></span><span>Nhận thức nền tảng AI<i>Platform Awareness</i></span><span>Phân công nhiệm vụ<i>Task Delegation</i></span></div><div class="in"><b>Trong bài:</b> Phần 1, 4, 5</div></div>
+      <div class="dcard d2"><span class="dn">D2 · DESCRIPTION</span><h3>Mô tả</h3><p>Viết SKILL.md rõ: đầu ra, các bước, cách AI cư xử; mô tả đúng công thức.</p><div class="subs"><span>Mô tả sản phẩm<i>Product Description</i></span><span>Mô tả quy trình<i>Process Description</i></span><span>Mô tả cách ứng xử<i>Performance Description</i></span></div><div class="in"><b>Trong bài:</b> Phần 2, 3</div></div>
+      <div class="dcard d3"><span class="dn">D3 · DISCERNMENT</span><h3>Phân định</h3><p>Chạy thử, nhờ AI review và sửa; so sánh Skill viết tay với Skill do skill-creator tạo.</p><div class="subs"><span>Phân định sản phẩm<i>Product Discernment</i></span><span>Phân định quy trình<i>Process Discernment</i></span><span>Phân định cách ứng xử<i>Performance Discernment</i></span></div><div class="in"><b>Trong bài:</b> Phần 3, 4</div></div>
+      <div class="dcard d4"><span class="dn">D4 · DILIGENCE</span><h3>Cẩn trọng</h3><p>Quy tắc dữ liệu, nguồn Skill tin cậy, phiên bản, giáo viên duyệt trước khi dùng.</p><div class="subs"><span>Cẩn trọng khi tạo<i>Creation Diligence</i></span><span>Minh bạch<i>Transparency Diligence</i></span><span>Chịu trách nhiệm khi dùng<i>Deployment Diligence</i></span></div><div class="in"><b>Trong bài:</b> mục 10 đến 12 của checklist; Phần 4, 6</div></div>
+    </div>
+  </div>
+  <aside class="notes"><p>Thứ tự chuẩn của khung AI Fluency (Dakan, Feller và Anthropic): Delegation, Description, Discernment, Diligence. Thuật ngữ tiếng Việt theo bản dịch khóa AI Fluency for Educators.</p></aside>
+</section>
+
+<section class="slide" data-sec="7. Tổng kết" data-title="Kiểm tra nhanh">
+  <div class="s-head"><div class="kick"><span class="pt">Phần 7</span>Tổng kết<span class="tag activity"><i class="ph ph-question"></i>Kiểm tra nhanh</span></div><h2 class="t">Câu hỏi ôn tập</h2></div>
+  <div class="s-body">
+    <div class="cols cols-3 grow ai-s">
+      <div class="quiz" data-answer="b">
+        <p class="q">1. Với một giáo viên Toán 7, việc nào nên đóng gói thành Skill?</p>
+        <div class="opts">
+          <button class="opt" data-k="a"><span class="k">A</span><span>Lời dẫn mở đầu cho tiết dự giờ thao giảng cấp trường</span></button>
+          <button class="opt" data-k="b"><span class="k">B</span><span>Phiếu bài tập cuối mỗi bài theo mẫu chung của tổ</span></button>
+          <button class="opt" data-k="c"><span class="k">C</span><span>Hỏi AI một câu tra cứu nhanh</span></button>
+        </div>
+        <p class="fb" data-ok="Đúng. Việc lặp lại mỗi bài, theo một mẫu, có tiêu chí và cả tổ cần." data-no="Chưa đúng. Đáp án B: việc lặp lại mỗi bài, theo một mẫu, có tiêu chí và cả tổ cần."></p>
+      </div>
+      <div class="quiz" data-answer="a">
+        <p class="q">2. AI không dùng Skill dù yêu cầu đúng việc. Nên sửa phần nào trước?</p>
+        <div class="opts">
+          <button class="opt" data-k="a"><span class="k">A</span><span>Mô tả (description)</span></button>
+          <button class="opt" data-k="b"><span class="k">B</span><span>Nhật ký cải tiến</span></button>
+          <button class="opt" data-k="c"><span class="k">C</span><span>Thư mục assets/</span></button>
+        </div>
+        <p class="fb" data-ok="Đúng. AI luôn đọc mô tả để quyết định khi nào dùng Skill." data-no="Chưa đúng. Đáp án A: AI luôn đọc mô tả để quyết định khi nào dùng Skill."></p>
+      </div>
+      <div class="quiz" data-answer="b">
+        <p class="q">3. Thầy cô tìm được một Skill soạn đề trên trang chia sẻ của cộng đồng. Việc nên làm trước khi bật Skill là gì?</p>
+        <div class="opts">
+          <button class="opt" data-k="a"><span class="k">A</span><span>Bật ngay vì đã có nhiều người tải về</span></button>
+          <button class="opt" data-k="b"><span class="k">B</span><span>Đọc toàn bộ file, chú ý đoạn mã và kết nối ra ngoài, rồi chạy thử</span></button>
+          <button class="opt" data-k="c"><span class="k">C</span><span>Đổi tên Skill rồi chia sẻ cho cả tổ</span></button>
+        </div>
+        <p class="fb" data-ok="Đúng. Chỉ dùng Skill từ nguồn tin cậy và đọc kỹ các file trước khi bật, như khi cài phần mềm." data-no="Chưa đúng. Đáp án B: đọc kỹ toàn bộ file, chú ý đoạn mã, tài nguyên đi kèm và kết nối ra ngoài, rồi mới bật và chạy thử."></p>
+      </div>
+    </div>
+  </div>
+  <aside class="notes"><p>Bấm vào đáp án để xem phản hồi. Có thể cho cả lớp giơ tay chọn A, B, C trước khi bấm.</p><p>Câu 3 kiểm tra cách kiểm tra Skill có sẵn trước khi dùng (slide Tìm Skill có sẵn ở Phần 4).</p></aside>
+</section>
+
+<section class="slide" data-sec="7. Tổng kết" data-title="Tổng kết LO 5.1">
+  <div class="s-head" style="max-width:none"><div class="kick"><span class="pt">Phần 7</span>Tổng kết</div><h2 class="t">Tổng kết LO 5.1</h2><p class="sub" style="max-width:none">Hiểu cấu trúc và cơ chế hoạt động của Skill; xây dựng, kiểm thử, cải tiến Skill cho công việc chuyên môn; chia sẻ Skill cho cả tổ.</p></div>
+  <div class="s-body">
+    <div class="sum4">
+      <div class="sumc"><div class="sumc-h"><small>Phần 1, 2</small><b><i class="ph ph-cube"></i><span>Hiểu Skill</span></b></div><ul><li><i class="ph ph-check-circle"></i><span>Skill là bộ hướng dẫn đóng gói dưới dạng thư mục, có file SKILL.md.</span></li><li><i class="ph ph-check-circle"></i><span>Khác Prompt: lưu lại để dùng nhiều lần; AI tự mở Skill khi yêu cầu khớp mô tả.</span></li><li><i class="ph ph-check-circle"></i><span>Nạp theo tầng: AI đọc tên, mô tả trước, cần mới mở toàn bộ hướng dẫn.</span></li></ul></div>
+      <div class="sumc"><div class="sumc-h"><small>Phần 3</small><b><i class="ph ph-hammer"></i><span>Xây dựng, triển khai</span></b></div><ul><li><i class="ph ph-check-circle"></i><span>Bốn bước: xác định nhiệm vụ, chuẩn hóa cách làm, xây dựng Skill, kiểm thử và hoàn thiện.</span></li><li><i class="ph ph-check-circle"></i><span>Mô tả nêu Skill làm gì, khi nào dùng, năng lực chính.</span></li><li><i class="ph ph-check-circle"></i><span>Kiểm thử kích hoạt và kiểm thử kết quả trước khi dùng cho việc thật.</span></li></ul></div>
+      <div class="sumc"><div class="sumc-h"><small>Phần 4</small><b><i class="ph ph-sparkle"></i><span>Tinh chỉnh, cải tiến</span></b></div><ul><li><i class="ph ph-check-circle"></i><span>Nhờ AI review theo tiêu chí; thầy cô chọn góp ý rồi sửa, nâng phiên bản.</span></li><li><i class="ph ph-check-circle"></i><span>skill-creator hỏi thêm, viết SKILL.md và đề xuất tình huống thử.</span></li><li><i class="ph ph-check-circle"></i><span>Skill có sẵn: ưu tiên nguồn chính thức, kiểm tra kỹ trước khi dùng.</span></li></ul></div>
+      <div class="sumc"><div class="sumc-h"><small>Phần 5, 6</small><b><i class="ph ph-share-network"></i><span>Tổ chức, chia sẻ</span></b></div><ul><li><i class="ph ph-check-circle"></i><span>Project giữ bối cảnh cho một dự án; một Skill dùng được ở nhiều Project.</span></li><li><i class="ph ph-check-circle"></i><span>Chia sẻ theo 3 cấp: đồng nghiệp, cả tổ, cả trường.</span></li><li><i class="ph ph-check-circle"></i><span>Thư viện Skill của tổ ghi bản gốc, phiên bản, người phụ trách.</span></li></ul></div>
+    </div>
+    <div class="card dark sum-next"><i class="ph ph-arrow-circle-right"></i><p><b>Tiếp theo, LO 5.2:</b> thiết kế và xây dựng một Agent đảm nhận một vai trò, dùng <span class="nw">Sub-agent</span> khi cần và gọi Agent trong một bước của Workflow.</p></div>
+  </div>
+  <aside class="notes"><p>Tổng kết theo bốn nhóm, khớp các phần của bài: hiểu Skill (Phần 1, 2), xây dựng và triển khai (Phần 3), tinh chỉnh và cải tiến (Phần 4), tổ chức và chia sẻ (Phần 5, 6). Phụ đề nhắc lại phụ đề trang bìa.</p><p>Hoạt động gợi ý: mỗi học viên nêu một việc của mình sẽ đóng gói thành Skill và nơi đặt Skill đó trong thư viện của tổ. Nhắc học viên giữ lại các Skill: LO 5.2 sẽ ghép nhiều Skill của tổ (soạn câu hỏi, soạn hướng dẫn chấm, thẩm định) thành "Trợ lý Khảo thí Tổ Ngữ văn 9".</p></aside>
+</section>
+
+</div></main>
+<script src="assets/js/deck.js"></script>
+</body>
+</html>
